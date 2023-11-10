@@ -10,35 +10,53 @@ C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加
 C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
   Input.cpp
 C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  KeyConfigScene.cpp
+C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Mars-Accident\Mars-Accident\Scene\KeyConfigScene.cpp(51,23): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
   Pad.cpp
 C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
   Player.cpp
 C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-C:\Mars-Accident\Mars-Accident\Player.cpp(6,10): fatal  error C1083: include ファイルを開けません。'Shot/ShotBeam.h':No such file or directory
   Rect.cpp
 C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
   GameOverScene.cpp
 C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
 C:\Mars-Accident\Mars-Accident\Scene\GameOverScene.cpp(41,12): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
   GamePlayingScene.cpp
-C:\Mars-Accident\Mars-Accident\Scene\GamePlayingScene.cpp(15,10): fatal  error C1083: include ファイルを開けません。'../Shot/ShotBeam.h':No such file or directory
-  KeyConfingScene.cpp
-C:\Mars-Accident\Mars-Accident\Scene\KeyConfingScene.cpp(1,10): fatal  error C1083: include ファイルを開けません。'KeyConfigScene.h':No such file or directory
+C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Mars-Accident\Mars-Accident\Scene\GamePlayingScene.cpp(67,12): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
   Main.cpp
 C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
   PauseScene.cpp
-C:\Mars-Accident\Mars-Accident\Scene\PauseScene.cpp(2,10): fatal  error C1083: include ファイルを開けません。'KeyConfigScene.h':No such file or directory
+C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Mars-Accident\Mars-Accident\Scene\PauseScene.cpp(53,23): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
   Scene.cpp
   SceneManager.cpp
   TitleScene.cpp
 C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
 C:\Mars-Accident\Mars-Accident\Scene\TitleScene.cpp(48,12): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+  ShotBase.cpp
+  ShotBeam.cpp
+C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Mars-Accident\Mars-Accident\Shot\ShotBeam.cpp(42,2): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+C:\Mars-Accident\Mars-Accident\Shot\ShotBeam.cpp(89,15): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Mars-Accident\Shot\ShotBeam.cpp(90,15): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Mars-Accident\Shot\ShotBeam.cpp(91,13): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Mars-Accident\Shot\ShotBeam.cpp(92,13): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Mars-Accident\Shot\ShotBeam.cpp(97,14): warning C4244: '初期化中': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Mars-Accident\Shot\ShotBeam.cpp(98,26): warning C4244: '+=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Mars-Accident\Shot\ShotBeam.cpp(99,26): warning C4244: '+=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Mars-Accident\Shot\ShotBeam.cpp(100,24): warning C4244: '+=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Mars-Accident\Shot\ShotBeam.cpp(101,24): warning C4244: '+=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Mars-Accident\Shot\ShotBeam.cpp(103,61): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
   StringUtility.cpp
 C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
 C:\Mars-Accident\Mars-Accident\StringUtility.cpp(23,10): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
 C:\Mars-Accident\Mars-Accident\StringUtility.cpp(36,19): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
   UFO.cpp
 C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-C:\Mars-Accident\Mars-Accident\UFO.cpp(6,10): fatal  error C1083: include ファイルを開けません。'Shot/ShotBeam.h':No such file or directory
+  コードを生成中...
+  コンパイル中...
   Vec2.cpp
   コードを生成中...
+  Mars-Accident.vcxproj -> C:\Mars-Accident\Mars-Accident\x64\Debug\Mars-Accident.exe
