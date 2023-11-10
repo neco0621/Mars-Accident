@@ -1,0 +1,44 @@
+﻿  Application.cpp
+C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  EnemyBase.cpp
+C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Mars-Accident\Mars-Accident\Enemy\EnemyBase.cpp(60,47): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Mars-Accident\Enemy\EnemyBase.cpp(60,40): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+  EnemyLeft.cpp
+C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  EnemyRight.cpp
+C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  Input.cpp
+C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  Pad.cpp
+C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  Player.cpp
+C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Mars-Accident\Mars-Accident\Player.cpp(6,10): fatal  error C1083: include ファイルを開けません。'Shot/ShotBeam.h':No such file or directory
+  Rect.cpp
+C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  GameOverScene.cpp
+C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Mars-Accident\Mars-Accident\Scene\GameOverScene.cpp(41,12): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+  GamePlayingScene.cpp
+C:\Mars-Accident\Mars-Accident\Scene\GamePlayingScene.cpp(15,10): fatal  error C1083: include ファイルを開けません。'../Shot/ShotBeam.h':No such file or directory
+  KeyConfingScene.cpp
+C:\Mars-Accident\Mars-Accident\Scene\KeyConfingScene.cpp(1,10): fatal  error C1083: include ファイルを開けません。'KeyConfigScene.h':No such file or directory
+  Main.cpp
+C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  PauseScene.cpp
+C:\Mars-Accident\Mars-Accident\Scene\PauseScene.cpp(2,10): fatal  error C1083: include ファイルを開けません。'KeyConfigScene.h':No such file or directory
+  Scene.cpp
+  SceneManager.cpp
+  TitleScene.cpp
+C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Mars-Accident\Mars-Accident\Scene\TitleScene.cpp(48,12): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+  StringUtility.cpp
+C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Mars-Accident\Mars-Accident\StringUtility.cpp(23,10): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+C:\Mars-Accident\Mars-Accident\StringUtility.cpp(36,19): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+  UFO.cpp
+C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Mars-Accident\Mars-Accident\UFO.cpp(6,10): fatal  error C1083: include ファイルを開けません。'Shot/ShotBeam.h':No such file or directory
+  Vec2.cpp
+  コードを生成中...
