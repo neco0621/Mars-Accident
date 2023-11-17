@@ -25,6 +25,9 @@ private:
 	//プレイヤー
 	Player* m_pPlayer;
 
+	//UFO
+	UFO* m_pUfo;
+
 	//更新関数
 	void FadeInUpdate(Input& input);
 	void NormalUpdate(Input& input);

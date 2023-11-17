@@ -87,7 +87,6 @@ void GamePlayingScene::NormalDraw()
 		}
 	}
 	Vec2 playerPos = m_pPlayer->GetPos();
-	DrawCircle(320, 120, 10, GetColor(255, 255, 0), true);
 	DrawFormatString(8, 24, GetColor(255, 255, 255),
 		L"プレイヤーの座標(%.2f, %.2f)", playerPos.x, playerPos.y);
 	DrawFormatString(10, 10, 0xffffff, L"fps=%2.2f", fps);

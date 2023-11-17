@@ -46,6 +46,7 @@ void UFO::Update()
 
 void UFO::Draw()
 {
+	DrawCircle(320, 120, 10, GetColor(255, 255, 0), true);
 #ifdef _DEBUG
 	//“–‚½‚è”»’è‚Ì•\Ž¦
 	m_colRect.Draw(GetColor(0, 0, 255), false);
