@@ -5,10 +5,8 @@
 namespace
 {
 	constexpr float kSpeed = 4.0f;
-
-
 	//‰ŠúˆÊ’u
-	constexpr float kPosY = 369.0f;
+	constexpr float kPosY = Game::kScreenHeight- Game::kScreenHeight / 4;
 }
 
 EnemyLeft::EnemyLeft() : EnemyBase()

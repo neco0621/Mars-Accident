@@ -18,7 +18,7 @@ namespace
 	constexpr int kPosLogNum = 12;
 
 	//’e‚Ìã•ûŒü‚Ö‚ÌˆÚ“®‘¬“x
-	constexpr float kMove = 4.0f;
+	constexpr float kMove = 8.0f;
 }
 
 ShotBeam::ShotBeam()

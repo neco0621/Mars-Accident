@@ -11,7 +11,7 @@ namespace
 {
 	//UFOの表示位置
 	constexpr float kPosX = Game::kScreenWidth / 2;
-	constexpr float kPosY = 120.0f;
+	constexpr float kPosY = Game::kScreenHeight / 4;
 
 	//UFOのサイズ
 	constexpr int kWidth = 32;

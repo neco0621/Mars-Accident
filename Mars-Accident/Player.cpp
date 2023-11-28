@@ -12,7 +12,7 @@ namespace
 {
 	//プレイヤーの表示位置
 	constexpr float kPosX = Game::kScreenWidth / 2;
-	constexpr float kPosY = 369.0f;;
+	constexpr float kPosY = Game::kScreenHeight - Game::kScreenHeight / 4;
 
 	//移動速度
 	constexpr float kSpeed = 3.0f;
