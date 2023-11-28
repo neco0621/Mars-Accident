@@ -6,6 +6,7 @@
 class Player;
 class EnemyBase;
 class ShotBase;
+class UFO;
 
 class GamePlayingScene : public Scene
 {

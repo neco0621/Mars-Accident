@@ -8,8 +8,8 @@
 
 namespace
 {
-	constexpr int screen_width = 640;
-	constexpr int screen_height = 480;
+	constexpr int screen_width = 1920;
+	constexpr int screen_height = 1080;
 }
 
 int MyLoadGraph(const wchar_t* path) {
