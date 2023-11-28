@@ -73,6 +73,7 @@ void GamePlayingScene::FadeDraw()
 void GamePlayingScene::NormalDraw()
 {
 	m_pPlayer->Draw();
+	m_pUfo->Draw();
 	for (int i = 0; i < m_pShot.size(); i++)
 	{
 		if (!m_pShot[i])		continue;
@@ -106,6 +107,8 @@ GamePlayingScene::GamePlayingScene(SceneManager& mgr) : Scene(mgr)
 	//プレイヤーのメモリ確保
 	m_pPlayer = new Player{ this };
 	m_pPlayer->SetHandle(m_playerHandle);	//Playerにグラフィックハンドルを渡す
+
+	m_pUfo = new UFO{ this };
 
 	//敵の準備
 	//m_pEnemy(vector)何もしなければサイズは0

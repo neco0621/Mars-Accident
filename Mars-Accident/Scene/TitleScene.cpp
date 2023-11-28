@@ -4,6 +4,7 @@
 #include "SceneManager.h"
 #include "TitleScene.h"
 #include "GamePlayingScene.h"
+#include "../Game.h"
 
 void TitleScene::FadeInUpdate(Input&)
 {
@@ -41,20 +42,20 @@ void TitleScene::FadeOutUpdate(Input&)
 void TitleScene::FadeDraw()
 {
 	//通常の描画
-	DrawString(100, 100, L"TitleScene", 0xffffff);
-	DrawGraph(100, 100, handle_, true);
+	DrawString(Game::kScreenWidth / 2, Game::kScreenHeight / 4, L"Mars Accident", 0xffffff);
+	DrawGraph(Game::kScreenWidth / 2, Game::kScreenHeight / 4, handle_, true);
 
 	//フェード暗幕
 	int alpha = 255 * (float)frame_ / 60.0f;
 	SetDrawBlendMode(DX_BLENDMODE_MULA, alpha);
-	DrawBox(0, 0, 640, 480, 0x000000, true);
+	DrawBox(0, 0, 1920, 1080, 0x000000, true);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 }
 
 void TitleScene::NormalDraw()
 {
-	DrawString(100, 100, L"TitleScene", 0xffffff);
-	DrawGraph(100, 100, handle_, true);
+	DrawString(Game::kScreenWidth / 2, Game::kScreenHeight / 4, L"Mars Accident", 0xffffff);
+	DrawGraph(Game::kScreenWidth / 2, Game::kScreenHeight / 4, handle_, true);
 }
 
 TitleScene::TitleScene(SceneManager& manager) :

@@ -18,7 +18,7 @@ namespace
 	constexpr int kHeight = 32;
 
 	//UFO‚Ì”¼Œa
-	constexpr float kRadius = 10;
+	constexpr float kRadius = 40;
 }
 
 UFO::UFO(GamePlayingScene* pGame) :
@@ -26,7 +26,8 @@ UFO::UFO(GamePlayingScene* pGame) :
 	m_pBeam(0),
 	m_handle(-1),
 	m_pos(kPosX, kPosY),
-	m_boundFlag(false)
+	m_boundFlag(false),
+	m_radius(kRadius)
 {
 }
 
@@ -46,7 +47,7 @@ void UFO::Update()
 
 void UFO::Draw()
 {
-	DrawCircle(320, 120, 10, GetColor(255, 255, 0), true);
+	DrawCircle(m_pos.x, m_pos.y, m_radius, GetColor(255, 255, 0), true);
 #ifdef _DEBUG
 	//“–‚½‚è”»’è‚Ì•\Ž¦
 	m_colRect.Draw(GetColor(0, 0, 255), false);

@@ -27,7 +27,8 @@ private:
 
 	int m_handle;	//グラフィックのハンドル
 
-
+	//半径
+	float m_radius;
 
 	//接触したかの判定
 	bool m_boundFlag;
