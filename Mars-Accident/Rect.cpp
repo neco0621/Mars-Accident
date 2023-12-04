@@ -19,6 +19,11 @@ void Rect::Draw(unsigned int color, bool isFill)
 	DrawBox(static_cast<int> (m_left), static_cast<int>(m_top), static_cast<int> (m_right), static_cast<int>(m_bottom), color, isFill);
 }
 
+void Rect::DrawC(unsigned int color, bool isFill)
+{
+	DrawCircle(static_cast<int> (m_centerX), static_cast<int>(m_centerY), static_cast<int> (m_radius),color,isFill);
+}
+
 void Rect::SetLT(float left, float top, float width, float height)
 {
 	m_left = left;			//左上のX座標
@@ -33,6 +38,13 @@ void Rect::SetCenter(float x, float y, float width, float height)
 	m_top = y - height / 2;
 	m_right = x + width / 2;
 	m_bottom = y + height / 2;
+}
+
+void Rect::SetRadius(float x, float y, float radius)
+{
+	m_centerX = x;
+	m_centerY = y;
+	m_radius = radius;
 }
 
 float Rect::GetWidth() const
@@ -61,7 +73,7 @@ Vec2 Rect::GetCenter() const
 	return Vec2{ x,y };
 }
 
-bool Rect::IsCollision(const Rect& rect)
+bool Rect::BoxCollision(const Rect& rect)
 {
 	//絶対に当たらないパターンをはじいていく
 	if (m_left > rect.m_right)	return false;
@@ -71,4 +83,19 @@ bool Rect::IsCollision(const Rect& rect)
 
 	//当たらないパターン以外は当たっている
 	return true;
+}
+
+bool Rect::CirCleCollision(const Rect& rect)
+{
+	float dx = m_centerX - rect.m_centerX;
+	float dy = m_centerY - rect.m_centerY;
+	float dr = dx * dx + dy * dy;
+
+	float ar = m_radius + rect.m_radius;
+	float dl = ar * ar;
+	if (dr < dl)
+	{
+		return true;
+	}
+	return false;
 }

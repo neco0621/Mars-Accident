@@ -5,6 +5,8 @@
 #include "../Input.h"
 #include "../Player.h"
 #include "../UFO.h"
+#include "../Game.h"
+#include "../Rect.h"
 
 //“oê‚·‚é“G
 //#include "EnemyBase.h"
@@ -27,6 +29,20 @@ namespace
 
 	//‰æ–Ê“à‚Éˆê“x‚Éo‚Ä‚­‚é’e‚ÌÅ‘å”
 	constexpr int kShotMax = 256;
+
+	CIRCLE beamCircle
+	{
+		beamCircle.x = 960.0f,
+		beamCircle.y = 810.0f,
+		beamCircle.r = 8.0f
+	};
+
+	CIRCLE ufoCircle
+	{
+		ufoCircle.x = Game::kScreenWidth / 2,
+		ufoCircle.y = Game::kScreenHeight / 4,
+		ufoCircle.r = 80.0f
+	};
 }
 
 
@@ -74,10 +90,13 @@ void GamePlayingScene::NormalDraw()
 {
 	m_pPlayer->Draw();
 	m_pUfo->Draw();
-	for (int i = 0; i < m_pShot.size(); i++)
+	if (KEY_INPUT_SPACE)
 	{
-		if (!m_pShot[i])		continue;
-		m_pShot[i]->Draw();
+		for (int i = 0; i < m_pShot.size(); i++)
+		{
+			if (!m_pShot[i])		continue;
+			m_pShot[i]->Draw();
+		}
 	}
 
 	for (int i = 0; i < m_pEnemy.size(); i++)
@@ -180,6 +199,7 @@ void GamePlayingScene::Init()
 void GamePlayingScene::Update(Input& input)
 {
 	m_pPlayer->Update();
+	m_pUfo->Update();
 
 	for (int i = 0; i < m_pShot.size(); i++)
 	{
@@ -194,7 +214,6 @@ void GamePlayingScene::Update(Input& input)
 			m_pShot[i] = nullptr;
 		}
 	}
-
 	Rect playerRect = m_pPlayer->GetColRect();
 
 	for (int i = 0; i < m_pEnemy.size(); i++)
@@ -237,6 +256,8 @@ void GamePlayingScene::Update(Input& input)
 
 	fps = GetFPS();
 	(this->*updateFunc_)(input);
+
+	//if ();
 }
 
 void GamePlayingScene::Draw()

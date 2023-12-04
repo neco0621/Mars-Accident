@@ -28,6 +28,7 @@ public:
 	//発射位置を引数として指定する
 	virtual void Start(Vec2 pos) = 0;
 
+	
 protected:
 	//SceneMainの関数を呼び出すためにポインタを覚えておく
 	GamePlayingScene* m_pPlay;

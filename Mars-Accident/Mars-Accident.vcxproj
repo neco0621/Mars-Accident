@@ -169,6 +169,7 @@
     <ClCompile Include="Scene\TitleScene.cpp" />
     <ClCompile Include="Shot\ShotBase.cpp" />
     <ClCompile Include="Shot\ShotBeam.cpp" />
+    <ClCompile Include="Scene\StageSelectScene.cpp" />
     <ClCompile Include="StringUtility.cpp" />
     <ClCompile Include="UFO.cpp" />
     <ClCompile Include="Vec2.cpp" />
@@ -192,6 +193,7 @@
     <ClInclude Include="Scene\TitleScene.h" />
     <ClInclude Include="Shot\ShotBase.h" />
     <ClInclude Include="Shot\ShotBeam.h" />
+    <ClInclude Include="Scene\StageSelectScene.h" />
     <ClInclude Include="StringUtility.h" />
     <ClInclude Include="UFO.h" />
     <ClInclude Include="Vec2.h" />

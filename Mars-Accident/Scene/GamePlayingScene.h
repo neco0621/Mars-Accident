@@ -1,12 +1,21 @@
 #pragma once
 #include "Scene.h"
+#include "../Rect.h"
 #include "../Vec2.h"
 #include <vector>
 
 class Player;
 class EnemyBase;
 class ShotBase;
+class ShotBeam;
 class UFO;
+
+struct CIRCLE
+{
+	float x;
+	float y;
+	float r;
+};
 
 class GamePlayingScene : public Scene
 {
@@ -26,8 +35,12 @@ private:
 	//プレイヤー
 	Player* m_pPlayer;
 
+	ShotBeam* m_pBeam;
+
 	//UFO
 	UFO* m_pUfo;
+
+	Rect* m_pRect;
 
 	//更新関数
 	void FadeInUpdate(Input& input);

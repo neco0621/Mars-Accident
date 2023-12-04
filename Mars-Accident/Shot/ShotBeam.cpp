@@ -14,6 +14,8 @@ namespace
 	constexpr float kWidth = 8.0f;
 	constexpr float kHeight = 8.0f;
 
+	constexpr float kRadius = 8.0f;
+
 	//覚えておく過去の位置情報の数
 	constexpr int kPosLogNum = 12;
 
@@ -21,7 +23,8 @@ namespace
 	constexpr float kMove = 8.0f;
 }
 
-ShotBeam::ShotBeam()
+ShotBeam::ShotBeam() :
+	m_pRadius(kRadius)
 {
 	m_posLog.resize(kPosLogNum);
 }
@@ -48,7 +51,7 @@ void ShotBeam::Update()
 
 	m_pos += m_vec;
 	//当たり判定の更新
-	m_colRect.SetCenter(m_pos.x, m_pos.y, kWidth, kHeight);
+	m_colRect.SetRadius(m_pos.x,m_pos.y,m_pRadius);
 
 	//画面外に出た処理
 	//過去の表示位置も含めてすべて画面外に出たら終了
@@ -123,7 +126,7 @@ void ShotBeam::Draw()
 
 #ifdef _DEBUG
 	//弾の当たり判定デバッグ表示
-	m_colRect.Draw(GetColor(0, 0, 0), false);
+	m_colRect.DrawC(GetColor(255, 0, 0), false);
 #endif
 }
 

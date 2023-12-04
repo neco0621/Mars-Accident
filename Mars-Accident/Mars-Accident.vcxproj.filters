@@ -96,6 +96,9 @@
     <ClCompile Include="Scene\KeyConfigScene.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Scene\StageSelectScene.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy\EnemyBase.h">
@@ -159,6 +162,9 @@
       <Filter>ヘッダー ファイル\Shot</Filter>
     </ClInclude>
     <ClInclude Include="Scene\KeyConfigScene.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\StageSelectScene.h">
       <Filter>ヘッダー ファイル\Scene</Filter>
     </ClInclude>
   </ItemGroup>

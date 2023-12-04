@@ -2,6 +2,7 @@
 #include "DxLib.h"
 #include "Pad.h"
 #include "Game.h"
+#include "Rect.h"
 #include "Scene/GamePlayingScene.h"
 #include "Shot/ShotBeam.h"
 
@@ -14,8 +15,8 @@ namespace
 	constexpr float kPosY = Game::kScreenHeight / 4;
 
 	//UFOのサイズ
-	constexpr int kWidth = 32;
-	constexpr int kHeight = 32;
+	constexpr int kWidth = 40;
+	constexpr int kHeight = 40;
 
 	//UFOの半径
 	constexpr float kRadius = 40;
@@ -42,16 +43,14 @@ void UFO::Init()
 void UFO::Update()
 {
 	//当たり判定の更新
-	m_colRect.SetCenter(m_pos.x, m_pos.y, kWidth, kHeight);
+	m_colRect.SetRadius(m_pos.x,m_pos.y,m_radius);
 }
 
 void UFO::Draw()
 {
 	DrawCircle(m_pos.x, m_pos.y, m_radius, GetColor(255, 255, 0), true);
-#ifdef _DEBUG
 	//当たり判定の表示
-	m_colRect.Draw(GetColor(0, 0, 255), false);
-#endif
+	m_colRect.DrawC(GetColor(255, 0, 0), false);
 }
 
 

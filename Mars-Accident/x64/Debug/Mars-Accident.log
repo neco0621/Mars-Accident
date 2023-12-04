@@ -1,4 +1,36 @@
-﻿  TitleScene.cpp
+﻿  EnemyBase.cpp
 C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-C:\Mars-Accident\Mars-Accident\Scene\TitleScene.cpp(49,12): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Mars-Accident\Enemy\EnemyBase.cpp(60,47): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Mars-Accident\Enemy\EnemyBase.cpp(60,40): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+  EnemyLeft.cpp
+C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  EnemyRight.cpp
+C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  Player.cpp
+C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  Rect.cpp
+C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  GamePlayingScene.cpp
+C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Mars-Accident\Mars-Accident\Scene\GamePlayingScene.cpp(82,12): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+  ShotBase.cpp
+  ShotBeam.cpp
+C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Mars-Accident\Mars-Accident\Shot\ShotBeam.cpp(45,2): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+C:\Mars-Accident\Mars-Accident\Shot\ShotBeam.cpp(92,15): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Mars-Accident\Shot\ShotBeam.cpp(93,15): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Mars-Accident\Shot\ShotBeam.cpp(94,13): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Mars-Accident\Shot\ShotBeam.cpp(95,13): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Mars-Accident\Shot\ShotBeam.cpp(100,14): warning C4244: '初期化中': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Mars-Accident\Shot\ShotBeam.cpp(101,26): warning C4244: '+=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Mars-Accident\Shot\ShotBeam.cpp(102,26): warning C4244: '+=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Mars-Accident\Shot\ShotBeam.cpp(103,24): warning C4244: '+=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Mars-Accident\Shot\ShotBeam.cpp(104,24): warning C4244: '+=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Mars-Accident\Shot\ShotBeam.cpp(106,61): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
+  UFO.cpp
+C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Mars-Accident\Mars-Accident\UFO.cpp(51,31): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Mars-Accident\UFO.cpp(51,27): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Mars-Accident\UFO.cpp(51,18): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  コードを生成中...
   Mars-Accident.vcxproj -> C:\Mars-Accident\Mars-Accident\x64\Debug\Mars-Accident.exe
