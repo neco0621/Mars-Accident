@@ -12,6 +12,7 @@ struct CIRCLE
 
 class Player;
 class UFO;
+class Rocket;
 class Bg;
 class EnemyBase;
 class ShotBeam;
@@ -51,6 +52,7 @@ private:
 	int m_playerHandle;
 	int m_enemyHandle;
 	int m_bgHandle;
+	int m_rocketHandle;
 
 	
 
@@ -60,6 +62,8 @@ private:
 	UFO* m_pUfo;
 
 	Bg* m_pBg;
+
+	Rocket* m_pRocket;
 
 	std::vector<ShotBeam*> m_pBeam;
 

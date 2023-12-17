@@ -54,7 +54,7 @@ void UFO::Update()
 		F = -m * g;
 		if (m_pos.y > m_radius)
 		{
-			F += k * (m_radius - m_pos.y) - c * v;
+			F = k * (m_radius - m_pos.y);
 		}
 	}
 	a = F / m;//‰Á‘¬“x

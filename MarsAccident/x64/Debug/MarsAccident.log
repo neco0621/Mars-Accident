@@ -1,49 +1,29 @@
-﻿  Bg.cpp
-C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-  EnemyBase.cpp
-C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-C:\Mars-Accident\MarsAccident\EnemyBase.cpp(59,47): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
-C:\Mars-Accident\MarsAccident\EnemyBase.cpp(59,40): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
-  EnemyLeft.cpp
-C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-  EnemyRight.cpp
-C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-  Main.cpp
-C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-  Pad.cpp
-C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-  Player.cpp
-C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-  Rect.cpp
-C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+﻿  Player.cpp
   Rocket.cpp
   SceneMain.cpp
-C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-C:\Mars-Accident\MarsAccident\SceneMain.cpp(174,37): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-C:\Mars-Accident\MarsAccident\SceneMain.cpp(316,17): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Mars-Accident\MarsAccident\SceneMain.cpp(326,13): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Mars-Accident\MarsAccident\SceneMain.cpp(331,9): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\kane2\OneDrive\ドキュメント\GitHub\Mars-Accident\MarsAccident\Rocket.cpp(30,25): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\kane2\OneDrive\ドキュメント\GitHub\Mars-Accident\MarsAccident\Rocket.cpp(30,17): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\kane2\OneDrive\ドキュメント\GitHub\Mars-Accident\MarsAccident\SceneMain.cpp(184,36): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\kane2\OneDrive\ドキュメント\GitHub\Mars-Accident\MarsAccident\SceneMain.cpp(315,17): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\kane2\OneDrive\ドキュメント\GitHub\Mars-Accident\MarsAccident\SceneMain.cpp(325,13): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\kane2\OneDrive\ドキュメント\GitHub\Mars-Accident\MarsAccident\SceneMain.cpp(330,9): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
   SceneManager.cpp
-C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
   ShotBeam.cpp
-C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-C:\Mars-Accident\MarsAccident\ShotBeam.cpp(59,2): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
-C:\Mars-Accident\MarsAccident\ShotBeam.cpp(106,15): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Mars-Accident\MarsAccident\ShotBeam.cpp(107,15): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Mars-Accident\MarsAccident\ShotBeam.cpp(108,13): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Mars-Accident\MarsAccident\ShotBeam.cpp(109,13): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Mars-Accident\MarsAccident\ShotBeam.cpp(114,14): warning C4244: '初期化中': 'int' から 'float' への変換です。データが失われる可能性があります。
-C:\Mars-Accident\MarsAccident\ShotBeam.cpp(115,26): warning C4244: '+=': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Mars-Accident\MarsAccident\ShotBeam.cpp(116,26): warning C4244: '+=': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Mars-Accident\MarsAccident\ShotBeam.cpp(117,24): warning C4244: '+=': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Mars-Accident\MarsAccident\ShotBeam.cpp(118,24): warning C4244: '+=': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Mars-Accident\MarsAccident\ShotBeam.cpp(120,61): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\kane2\OneDrive\ドキュメント\GitHub\Mars-Accident\MarsAccident\ShotBeam.cpp(59,13): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+C:\Users\kane2\OneDrive\ドキュメント\GitHub\Mars-Accident\MarsAccident\ShotBeam.cpp(106,15): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\kane2\OneDrive\ドキュメント\GitHub\Mars-Accident\MarsAccident\ShotBeam.cpp(107,15): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\kane2\OneDrive\ドキュメント\GitHub\Mars-Accident\MarsAccident\ShotBeam.cpp(108,13): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\kane2\OneDrive\ドキュメント\GitHub\Mars-Accident\MarsAccident\ShotBeam.cpp(109,13): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\kane2\OneDrive\ドキュメント\GitHub\Mars-Accident\MarsAccident\ShotBeam.cpp(114,14): warning C4244: '初期化中': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\kane2\OneDrive\ドキュメント\GitHub\Mars-Accident\MarsAccident\ShotBeam.cpp(115,26): warning C4244: '+=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\kane2\OneDrive\ドキュメント\GitHub\Mars-Accident\MarsAccident\ShotBeam.cpp(116,26): warning C4244: '+=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\kane2\OneDrive\ドキュメント\GitHub\Mars-Accident\MarsAccident\ShotBeam.cpp(117,24): warning C4244: '+=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\kane2\OneDrive\ドキュメント\GitHub\Mars-Accident\MarsAccident\ShotBeam.cpp(118,24): warning C4244: '+=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\kane2\OneDrive\ドキュメント\GitHub\Mars-Accident\MarsAccident\ShotBeam.cpp(120,61): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
   UFO.cpp
-C:\Users\fko2347078\Downloads\DxLib_VC3_24b\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-C:\Mars-Accident\MarsAccident\UFO.cpp(62,15): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-C:\Mars-Accident\MarsAccident\UFO.cpp(89,31): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Mars-Accident\MarsAccident\UFO.cpp(89,27): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Mars-Accident\MarsAccident\UFO.cpp(89,18): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-  Vec2.cpp
+C:\Users\kane2\OneDrive\ドキュメント\GitHub\Mars-Accident\MarsAccident\UFO.cpp(62,15): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\kane2\OneDrive\ドキュメント\GitHub\Mars-Accident\MarsAccident\UFO.cpp(89,31): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\kane2\OneDrive\ドキュメント\GitHub\Mars-Accident\MarsAccident\UFO.cpp(89,27): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\kane2\OneDrive\ドキュメント\GitHub\Mars-Accident\MarsAccident\UFO.cpp(89,18): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
   コードを生成中...
-  MarsAccident.vcxproj -> C:\Mars-Accident\MarsAccident\x64\Debug\MarsAccident.exe
+  MarsAccident.vcxproj -> C:\Users\kane2\OneDrive\ドキュメント\GitHub\Mars-Accident\MarsAccident\x64\Debug\MarsAccident.exe

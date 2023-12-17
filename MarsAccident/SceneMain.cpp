@@ -4,6 +4,7 @@
 #include "UFO.h"
 #include "Pad.h"
 #include "Rect.h"
+#include "Rocket.h"
 #include "Game.h"
 #include "Bg.h"
 
@@ -48,6 +49,8 @@ SceneMain::SceneMain() :
 	assert(m_enemyHandle != -1);
 	m_bgHandle = LoadGraph("data/Bg.png");
 	assert(m_bgHandle != -1);
+	m_rocketHandle = LoadGraph("data/Rocket.png");
+	assert(m_bgHandle != -1);
 
 	//プレイヤーのメモリ確保.
 	m_pPlayer = new Player{ this };
@@ -58,6 +61,9 @@ SceneMain::SceneMain() :
 
 	m_pBg = new Bg{};
 	m_pBg->SetHandle(m_bgHandle);
+
+	m_pRocket = new Rocket{ this };
+	m_pRocket->SetHandle(m_rocketHandle);
 	//敵の準備.
 	//m_pEnemy(vector)何もしなければサイズは0
 	//resize関数でkEnemyMaxだけデータを保存できるようにする
@@ -101,6 +107,7 @@ SceneMain::~SceneMain()
 	DeleteGraph(m_bgHandle);
 	DeleteGraph(m_playerHandle);
 	DeleteGraph(m_enemyHandle);
+	DeleteGraph(m_rocketHandle);
 
 	//プレイヤーのメモリ解放.
 	delete m_pPlayer;
@@ -111,6 +118,9 @@ SceneMain::~SceneMain()
 
 	delete m_pBg;
 	m_pBg = nullptr;
+
+	delete m_pRocket;
+	m_pRocket = nullptr;
 
 	//メモリが確保されている敵を探して解放していく
 	for (int i = 0; i < m_pEnemy.size(); i++)
@@ -171,7 +181,7 @@ void SceneMain::Update()
 			Rect shotRect = m_pBeam[i]->GetColRect();
 			if (shotRect.CirCleCollision(ufoRect))
 			{
-				m_pUfo->m_pos.y +=  (-m_pUfo->v * m_pUfo->dt) ;//速度から座標
+				m_pUfo->m_pos.y -=  (m_pUfo->v * m_pUfo->dt) ;//速度から座標
 				//ターゲット位置.
 				//弾の発射位置から一番近くにいる敵の座標を取得する
 				//SceneMainに実装した関数を利用する
@@ -185,6 +195,8 @@ void SceneMain::Update()
 				m_pBeam[i]->MoveFlag = true;
 			}
 		}
+
+		
 	}
 	m_pPlayer->Update();
 	m_pUfo->Update();
@@ -203,20 +215,6 @@ void SceneMain::Update()
 				//メモリを解放する
 				delete m_pEnemy[i];
 				m_pEnemy[i] = nullptr;	//使っていないとわかるように
-			}
-			else
-			{
-				//存在している敵とプレイヤーの当たり判定
-				Rect enemyRect = m_pEnemy[i]->GetColRect();
-				if (playerRect.BoxCollision(enemyRect))
-				{
-					//test
-					//printfDx("当たっている\n");
-					m_pPlayer->OnDamage();
-					//プレイヤーがダメージを受けた瞬間、画面が揺れ始める
-					m_shakeFrame = 8;
-				}
-
 			}
 		}
 	}
@@ -265,6 +263,7 @@ void SceneMain::Draw()
 	m_pBg->Draw();
 	m_pPlayer->Draw();
 	m_pUfo->Draw();
+	m_pRocket->Draw();
 
 	for (int i = 0; i < m_pBeam.size(); i++)
 	{
