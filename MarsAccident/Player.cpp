@@ -2,7 +2,7 @@
 #include "DxLib.h"
 #include "Pad.h"
 #include "Game.h"
-#include "SceneMain.h"
+#include "Scene/SceneMain.h"
 #include "ShotBeam.h"
 
 #include <cmath>
@@ -11,7 +11,7 @@
 namespace
 {
 	//移動速度
-	constexpr float kSpeed = 3.0f;
+	constexpr float kSpeed = 5.0f;
 
 	//キャラクターのサイズ
 	constexpr int kWidth = 32;

@@ -1,6 +1,8 @@
 #include "DxLib.h"
 #include "Game.h"
-#include "SceneManager.h"
+#include "Scene/SceneManager.h"
+#include "Scene/TitleScene.h"
+#include "Input.h"
 
 // プログラムは WinMain から始まります
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
@@ -20,9 +22,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	SetDrawScreen(DX_SCREEN_BACK);
 
 	//Scene開始
-	SceneManager* pScene = new SceneManager;
-	pScene->Init();
-
+	SceneManager manager;
+	manager.ChangeScene(std::make_shared<TitleScene>(manager));
+	Input input;
 	// ゲームループ
 	while (ProcessMessage() != -1)
 	{
@@ -33,9 +35,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		ClearDrawScreen();
 
 		//ゲームの処理
-		pScene->Update();
-
-		pScene->Draw();
+		input.Update();
+		manager.Update(input);
+		manager.Draw();
 
 		// 画面が切り替わるのを待つ
 		ScreenFlip();
@@ -52,11 +54,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			//16.66ミリ秒(16667マイクロ秒)経過するまで待つ
 		}
 	}
-	pScene->End();
 
-	//メモリの解放
-	delete pScene;
-	pScene = nullptr;
 
 	DxLib_End();				// ＤＸライブラリ使用の終了処理
 

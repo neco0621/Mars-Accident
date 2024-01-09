@@ -27,7 +27,10 @@ void Rocket::Update()
 
 void Rocket::Draw()
 {
-	//DrawGraph(m_pos.x,m_pos.y,m_handle,false);
+	DrawBox(m_pos.x - 16,m_pos.y - 16,m_pos.x + 16, m_pos.y + 16, 0x0000ff,true);
+	DrawCircle(m_pos.x, m_pos.y - 40, 10, 0xff0000, true);
+	DrawCircle(m_pos.x + 30, m_pos.y - 40,10, 0xff0000, true);
+	DrawCircle(m_pos.x - 30, m_pos.y - 40,10, 0xff0000, true);
 
 #ifdef _DEBUG
 	//“–‚½‚è”»’è‚Ì•\Ž¦

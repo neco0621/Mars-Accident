@@ -3,7 +3,7 @@
 #include "Pad.h"
 #include "Game.h"
 #include "Rect.h"
-#include "SceneMain.h"
+#include "Scene/SceneMain.h"
 #include "ShotBeam.h"
 
 #include <cmath>
