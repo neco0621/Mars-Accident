@@ -27,7 +27,7 @@ void Rocket::Update()
 
 void Rocket::Draw()
 {
-	DrawGraph(m_pos.x,m_pos.y,m_handle,false);
+	//DrawGraph(m_pos.x,m_pos.y,m_handle,false);
 
 #ifdef _DEBUG
 	//“–‚½‚è”»’è‚Ì•\Ž¦

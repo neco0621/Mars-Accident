@@ -1,46 +1,39 @@
 #include "SceneManager.h"
-#include "SceneMain.h"
-
-#include "Pad.h"
-
-SceneManager::SceneManager()
-{
-	//クラスのメモリを確保する
-	m_pMain = new SceneMain;	
-}
+#include "Scene.h"
 
 SceneManager::~SceneManager()
 {
-	//クラスのメモリを解放する
-	delete m_pMain;
-	m_pMain = nullptr;
-
-	
 }
 
-void SceneManager::Init()
+void SceneManager::Update(Input& input)
 {
-	m_pMain->Init();
-	//m_pMapEdit->Init();
-}
-
-void SceneManager::End()
-{
-	m_pMain->End();
-	//m_pMapEdit->End();
-}
-
-void SceneManager::Update()
-{
-	//Pad::Update();
-
-
-	m_pMain->Update();
-	//m_pMapEdit->Update();
+	scenes_.back()->Update(input);
 }
 
 void SceneManager::Draw()
 {
-	m_pMain->Draw();
-	//m_pMapEdit->Draw();
+	for (auto& scene : scenes_) {
+		scene->Draw();
+	}
+}
+
+void SceneManager::ChangeScene(std::shared_ptr<Scene> nextScene)
+{
+	if (scenes_.empty()) {//リストが空っぽだったら入れ替えるのではなく
+		scenes_.push_back(nextScene);//末尾に追加する
+	}
+	else {
+		scenes_.back() = nextScene;//すでに1つ以上あったら末尾のものを入れ替える
+	}
+
+}
+
+void SceneManager::PushScene(std::shared_ptr<Scene> scene)
+{
+	scenes_.push_back(scene);
+}
+
+void SceneManager::PopScene()
+{
+	scenes_.pop_back();
 }

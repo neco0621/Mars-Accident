@@ -208,6 +208,7 @@ void SceneMain::Update()
 		if (m_pEnemy[i])	//nullptrではないチェック
 		{
 			m_pEnemy[i]->Update();
+			Rect enemyRect = m_pEnemy[i]->GetColRect();
 
 			//使用済みの敵キャラクタを削除する必要がある
 			if (!m_pEnemy[i]->isExist())
@@ -217,7 +218,7 @@ void SceneMain::Update()
 				m_pEnemy[i] = nullptr;	//使っていないとわかるように
 			}
 		}
-	}
+	}	
 
 	//ワイプ処理
 	m_wipeFrame++;
