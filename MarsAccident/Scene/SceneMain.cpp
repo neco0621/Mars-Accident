@@ -7,6 +7,7 @@
 #include "../Rocket.h"
 #include "../Game.h"
 #include "../Bg.h"
+#include "../Input.h"
 
 //登場する敵
 //#include "EnemyBase.h"
@@ -23,7 +24,7 @@ namespace
 	//一度に登場できる最大の数.
 	constexpr int kEnemyMax = 6;
 	//何フレーム沖に敵が登場するか.
-	constexpr int kEnemyInterval = 60;
+	constexpr int kEnemyInterval = 90;
 
 	//画面内に一度に出てくる弾の最大数.
 	constexpr int kShotMax = 256;
@@ -161,9 +162,9 @@ void SceneMain::Update(Input& input)
 	{		
 
 		//nullptrなら処理は行わない
-		if (!m_pBeam[i])		continue;
-
+		if (!m_pBeam[i])		continue;		
 		m_pBeam[i]->Update();
+		
 		//画面外に出たらメモリ解放
 		if (!m_pBeam[i]->isExist())
 		{
@@ -190,17 +191,31 @@ void SceneMain::Update(Input& input)
 				m_pBeam[i]->m_vec = toTarget * m_pBeam[i]->m_pSpeed;
 				m_pBeam[i]->MoveFlag = true;
 			}
-			/*if (shotRect.DistanceCollision(enemyRect))
-			{
-
-			}*/
+			
 		}
 	 
 	}
 	m_pPlayer->Update();
 	m_pUfo->Update();
-	
-	
+
+	for (int i = 0; i < m_pEnemy.size(); i++)
+	{
+		if (m_pEnemy[i])	//nullptrではないチェック
+		{
+			Rect enemyRect = m_pEnemy[i]->GetColRect();
+			for (int a = 0; a < m_pBeam.size(); a++)
+			{
+				
+				//nullptrなら処理は行わない
+				if (!m_pBeam[a])		continue;		
+				//画面外に出たらメモリ解放
+				Rect shotRect = m_pBeam[a]->GetColRect();
+				if (shotRect.DistanceCollision(enemyRect))
+				{					
+				}
+			}
+		}
+	}
 
 	for (int i = 0; i < m_pEnemy.size(); i++)
 	{
@@ -266,11 +281,14 @@ void SceneMain::Draw()
 	m_pUfo->Draw();
 	
 
+	
 	for (int i = 0; i < m_pBeam.size(); i++)
 	{
 		if (!m_pBeam[i])		continue;
 		m_pBeam[i]->Draw();
 	}
+	
+	
 
 	for (int i = 0; i < m_pEnemy.size(); i++)
 	{
@@ -294,6 +312,13 @@ void SceneMain::Draw()
 		if (m_pBeam[i]) shotNum++;
 	}
 	DrawFormatString(8, 40, GetColor(255, 255, 255), "ShotNum%d", shotNum);
+	
+	int enemyNum = 0;
+	for (int i = 0; i < m_pEnemy.size(); i++)
+	{
+		if (m_pEnemy[i]) enemyNum++;
+	}
+	DrawFormatString(8, 72, GetColor(255, 255, 255), "EnemyNum%d", enemyNum);
 
 	//バックバッファに書き込む設定に戻しておく
 	SetDrawScreen(DX_SCREEN_BACK);

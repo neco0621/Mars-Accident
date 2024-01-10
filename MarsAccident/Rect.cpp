@@ -119,7 +119,7 @@ bool Rect::DistanceCollision(const Rect& rect)
 		(m_centerY > rect.m_top - m_radius) &&
 		(m_centerY < rect.m_bottom + m_radius))
 	{
-		nResult = true;
+		nResult = true;                                                                                          
 		float dl = m_radius * m_radius;
 		// ¶
 		if (m_centerX < rect.m_left)

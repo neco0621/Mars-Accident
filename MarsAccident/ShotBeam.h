@@ -6,7 +6,13 @@
 class SceneMain;
 class UFO;
 class Player;
+class Input;
 
+namespace
+{
+	constexpr int ShotMax = 20;
+		
+}
 class ShotBeam
 {
 public:
@@ -27,9 +33,10 @@ public:
 	bool isExist() const { return m_isExist; }
 
 	//当たり判定の矩形を取得する
-	Rect GetColRect() const;
+	Rect GetColRect() const { return m_colRect; }
 	
-
+	bool shotFlag[ShotMax];
+	bool prevShotFlag;
 	float m_radius;
 	int m_handle;
 	float m_centerX;
@@ -43,6 +50,8 @@ public:
 	float m_pSpeed;
 	float m_pMove;
 	bool MoveFlag;
+	// ショットの生きている時間カウンタ
+	int shotLifeCounter;
 protected:
 	//SceneMainの関数を呼び出すためにポインタを覚えておく
 	SceneMain* m_pMain;

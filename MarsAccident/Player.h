@@ -30,7 +30,7 @@ public:
 	//プレイヤーの現在位置を取得する
 	Vec2 GetPos() const { return m_pos; }
 	//プレイヤーの当たり判定を取得する
-	Rect GetColRect() const;
+	Rect GetColRect() const {return m_colRect; }
 
 	//プレイヤーがダメージを受けた
 	void OnDamage();

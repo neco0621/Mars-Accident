@@ -84,6 +84,15 @@ void Player::Update()
 		isMove = true;
 	}
 
+	if (m_pos.x < kWidth / 2)
+	{
+		m_pos.x = kWidth / 2;
+	}
+	if (m_pos.x > Game::kScreenWidth - kWidth / 2)
+	{
+		m_pos.x = Game::kScreenWidth - kWidth / 2;
+	}
+
 	//斜め移動の場合も同じ速さで移動するようにする
 
 	//ベクトルの正規化
@@ -118,7 +127,6 @@ void Player::Update()
 	{
 		m_beamFrame = 0;
 		ShotBeam* m_pShot = new ShotBeam;
-		m_pShot->Init();
 		m_pShot->SetMain(m_pMain);
 		m_pShot->SetPlayer(this);
 		m_pShot->Start(GetPos());
@@ -160,11 +168,6 @@ void Player::Draw()
 	//当たり判定の表示
 	m_colRect.Draw(GetColor(0, 0, 255), false);
 #endif
-}
-
-Rect Player::GetColRect() const
-{
-	return m_colRect; ;
 }
 
 void Player::OnDamage()

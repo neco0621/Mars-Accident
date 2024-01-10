@@ -40,6 +40,8 @@ Input::Input()
 
 	commandTable_["right"] = { {InputType::keyboard, KEY_INPUT_RIGHT},
 							{InputType::pad, PAD_INPUT_RIGHT} };	//キーコンフィグボタン
+	commandTable_["shot"] = { {InputType::keyboard,KEY_INPUT_SPACE},
+							{InputType::pad, PAD_INPUT_B} };
 
 	exclusiveKeyConfigCommands_ = { "up","down","left","right" };
 }

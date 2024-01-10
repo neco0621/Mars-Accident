@@ -4,12 +4,6 @@
 
 #include <cassert>
 
-namespace
-{
-	//“G‚ÌˆÚ“®‚·‚é‘¬“x.
-	constexpr float kSpeed = 3.0f;
-}
-
 EnemyBase::EnemyBase() :
 	//‰Šú‰»
 	m_handle(-1),

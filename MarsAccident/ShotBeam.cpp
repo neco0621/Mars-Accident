@@ -161,9 +161,4 @@ void ShotBeam::Start(Vec2 pos)
 	}
 }
 
-Rect ShotBeam::GetColRect() const
-{
-	return m_colRect;
-}
-
 
