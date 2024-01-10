@@ -7,8 +7,11 @@
 EnemyBase::EnemyBase() :
 	//初期化
 	m_handle(-1),
+	m_radius(16),
 	m_isExist(false),
-	m_pos()	//省略可.
+	m_pos(),//省略可.
+	m_centerX(m_pos.x),
+	m_centerY(m_pos.y)
 {
 }
 
@@ -40,7 +43,7 @@ void EnemyBase::Draw()
 
 #ifdef _DEBUG
 	//当たり判定の表示.
-	m_colRect.Draw(GetColor(255, 0, 0), false);
+	m_colRect.DrawC(GetColor(255, 0, 0), false);
 #endif
 }
 
@@ -50,5 +53,5 @@ void EnemyBase::UpdateCollision()
 	int height = 0;
 	GetGraphSize(m_handle, &width, &height);
 	//中心座標を指定して当たり判定のRectを生成する.
-	m_colRect.SetCenter(m_pos.x, m_pos.y, width, height);
+	m_colRect.SetRadius(m_pos.x, m_pos.y, m_radius);
 }

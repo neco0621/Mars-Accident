@@ -27,7 +27,9 @@ public:
 	//敵キャラクターをスタートさせる
 	virtual void Start() = 0;
 
-
+	float m_centerX;
+	float m_centerY;
+	float m_radius;
 
 protected:
 	//m_posを左上に、m_handleのグラフィックサイズを幅高さにした

@@ -34,7 +34,8 @@ ShotBeam::ShotBeam() :
 	m_centerY(m_pos.y),
 	m_pSpeed(kSpeed),
 	m_pMove(kMove),
-	MoveFlag(false)
+	MoveFlag(false),
+	m_z(0,-25)
 {
 	m_posLog.resize(kPosLogNum);
 }
@@ -150,7 +151,7 @@ void ShotBeam::Start(Vec2 pos)
 
 	m_isExist = true;
 	//初期配置の決定
-	m_pos = pos;
+	m_pos = pos + m_z;
 	//一番近い敵の方向に移動する
 
 	//過去の位置情報を初期化時点では初期位置と同じにしてしまう

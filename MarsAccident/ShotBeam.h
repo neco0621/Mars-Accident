@@ -45,6 +45,7 @@ public:
 	Rect m_colRect;
 	//表示位置
 	Vec2 m_pos;
+	Vec2 m_z;
 	//移動量	1フレーム当たりの移動ベクトルを入れる
 	Vec2 m_vec;
 	float m_pSpeed;

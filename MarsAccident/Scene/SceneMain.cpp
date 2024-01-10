@@ -210,8 +210,11 @@ void SceneMain::Update(Input& input)
 				if (!m_pBeam[a])		continue;		
 				//‰æ–ÊŠO‚Éo‚½‚çƒƒ‚ƒŠ‰ğ•ú
 				Rect shotRect = m_pBeam[a]->GetColRect();
-				if (shotRect.DistanceCollision(enemyRect))
-				{					
+				if (shotRect.CirCleCollision(enemyRect))
+				{
+					//ƒƒ‚ƒŠ‚ğ‰ğ•ú‚·‚é
+					delete m_pEnemy[i];
+					m_pEnemy[i] = nullptr;	//g‚Á‚Ä‚¢‚È‚¢‚Æ‚í‚©‚é‚æ‚¤‚É
 				}
 			}
 		}

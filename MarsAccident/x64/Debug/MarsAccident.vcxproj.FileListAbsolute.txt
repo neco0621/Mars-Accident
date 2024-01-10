@@ -1,3 +1,4 @@
 D:\MarsAccident\x64\Debug\MarsAccident.exe
 C:\Mars-Accident\MarsAccident\x64\Debug\MarsAccident.exe
 C:\Users\kane2\OneDrive\ドキュメント\GitHub\Mars-Accident\MarsAccident\x64\Debug\MarsAccident.exe
+D:\Mars-Accident\MarsAccident\x64\Debug\MarsAccident.exe
