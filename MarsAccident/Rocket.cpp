@@ -23,6 +23,8 @@ void Rocket::Init()
 
 void Rocket::Update()
 {
+	//“–‚½‚è”»’è‚ÌXV
+	m_colRect.SetCenter(m_pos.x, m_pos.y, m_pos.x + 20, m_pos.y + 16);
 }
 
 void Rocket::Draw()

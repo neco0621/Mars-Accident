@@ -43,12 +43,10 @@ public:
 	//移動量	1フレーム当たりの移動ベクトルを入れる
 	Vec2 m_vec;
 
-	double F, a;//力と加速度
-	double v = 0;//速度
-	double m = 1.0;//質量
-	double k = 0.5;//ばね定数
-	double c = 2.5;//粘性係数
-	double dt = 0.1;//時間変化
+	float JumpPower;
+	bool isJump;
+	float Gravity = 1.0f;
+	float MaxGravity = 4.9f;
 
 	bool m_MoveFlag;
 };

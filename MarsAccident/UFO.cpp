@@ -33,7 +33,8 @@ UFO::UFO(SceneMain* pMain) :
 	m_boundFlag(false),
 	m_radius(kRadius),
 	m_vec(0,kSpeed),
-	m_MoveFlag(false)
+	m_MoveFlag(false),
+	isJump(true)
 {
 }
 
@@ -48,20 +49,35 @@ void UFO::Init()
 
 void UFO::Update()
 {
-	F = m * g;//自由落下
-	if (m_pos.y > Game::kScreenHeight - (Game::kScreenHeight / 4) - m_radius)
-	{
-		F = -m * g;
-		if (m_pos.y > m_radius)
+	if (isJump) {
+		m_pos.y -= JumpPower ;
+		// 落下量調整
+		if (JumpPower > -MaxGravity) 
 		{
-			F = k * (m_radius - m_pos.y);
+			JumpPower -= Gravity;
+		}
+		// 地面についた時
+		if (m_pos.y >= (Game::kScreenHeight - Game::kScreenHeight / 4) - m_radius)
+		{
+			m_pos.y = (Game::kScreenHeight - Game::kScreenHeight / 4) - m_radius;
+			isJump = false;			
 		}
 	}
-	a = F / m;//加速度
-	v += a * dt;//加速度から速度
-	m_pos.y += v * dt;//速度から座標
-
-
+	if (!isJump)
+	{
+		m_pos.y -= JumpPower;
+		// 落下量調整
+		if (JumpPower < MaxGravity) 
+		{
+			JumpPower += Gravity;
+		}
+		// 地面についた時
+		if (m_pos.y < Game::kScreenHeight * 0.25)
+		{
+			isJump = true;
+		}
+	}
+	
 	
 	if (m_pos.x >= Game::kScreenWidth - m_radius)
 	{

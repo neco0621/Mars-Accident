@@ -22,7 +22,7 @@
 namespace
 {
 	//一度に登場できる最大の数.
-	constexpr int kEnemyMax = 6;
+	constexpr int kEnemyMax = 4;
 	//何フレーム沖に敵が登場するか.
 	constexpr int kEnemyInterval = 90;
 
@@ -175,10 +175,9 @@ void SceneMain::Update(Input& input)
 		else
 		{
 			Rect shotRect = m_pBeam[i]->GetColRect();
-			//Rect enemyRect = m_pEnemy[a]->GetColRect();
 			if (shotRect.CirCleCollision(ufoRect))
 			{
-				m_pUfo->m_pos.y -= (m_pUfo->v * m_pUfo->dt);//速度から座標
+				//m_pUfo->m_pos.y -= (m_pUfo->v * m_pUfo->dt);//速度から座標
 				//ターゲット位置.
 				//弾の発射位置から一番近くにいる敵の座標を取得する
 				//SceneMainに実装した関数を利用する
@@ -212,6 +211,16 @@ void SceneMain::Update(Input& input)
 				Rect shotRect = m_pBeam[a]->GetColRect();
 				if (shotRect.CirCleCollision(enemyRect))
 				{
+					delete m_pBeam[a];
+					m_pBeam[a] = nullptr;
+
+					//メモリを解放する
+					delete m_pEnemy[i];
+					m_pEnemy[i] = nullptr;	//使っていないとわかるように
+				}
+				Rect ufoRect = m_pUfo->GetColRect();
+				if (ufoRect.CirCleCollision(enemyRect))
+				{
 					//メモリを解放する
 					delete m_pEnemy[i];
 					m_pEnemy[i] = nullptr;	//使っていないとわかるように
@@ -226,7 +235,6 @@ void SceneMain::Update(Input& input)
 		{
 			m_pEnemy[i]->Update();
 			Rect enemyRect = m_pEnemy[i]->GetColRect();
-
 			//使用済みの敵キャラクタを削除する必要がある
 			if (!m_pEnemy[i]->isExist())
 			{
@@ -279,6 +287,7 @@ void SceneMain::Draw()
 	ClearDrawScreen();
 
 	m_pBg->Draw();
+	DrawBox(0,Game::kScreenHeight - Game::kScreenHeight / 4 + 16,Game::kScreenWidth,Game::kScreenHeight, 0x84331F,true);
 	m_pRocket->Draw();
 	m_pPlayer->Draw();
 	m_pUfo->Draw();
@@ -381,16 +390,39 @@ Vec2 SceneMain::GetNearEnemyPos(Vec2 pos)
 
 		//すでに消えることが確定している敵はチェックしない
 		if (!m_pEnemy[i]->isExist()) continue;
-		//チェックする敵との距離
-		Vec2 toEnemy = m_pEnemy[i]->GetPos();	//posからチェック中の敵に向かうベクトル
-		//今までチェックした中で一番近い敵との距離
-		if (toEnemy.sqLength() < m_toNear.sqLength())
+
+		//pos とm_pEnemy[i]の距離をチェックする
+
+		if (isFirst)
 		{
-			m_toNear = toEnemy;	//posから暫定一位の座標に向かうベクトル
+			//1体目の敵
+			//距離がいくら離れていようとも現時点では一番近い敵
+			result = m_pEnemy[i]->GetPos();
+			isFirst = false;
+		}
+		else
+		{
+			//2体目以降の敵
+			//resultの中には一番近い敵の座標が入ってくる
+
+			//今までチェックした中で一番近い敵との距離
+			Vec2 toNear = result - pos;	//posから暫定一位の座標に向かうベクトル
+
+			//チェックする敵との距離
+			Vec2 toEnemy = m_pEnemy[i]->GetPos() - pos;	//posからチェック中の敵に向かうベクトル
+
+			//処理を軽くするため居y理の比較を行う場合は距離の2乗で比較を行う
+			if (toNear.sqLength() > toEnemy.sqLength())
+			{
+				//今チェックしている敵への距離が暫定一位よりも短い場合
+				//今チェックしている敵を暫定一位に
+				result = m_pEnemy[i]->GetPos();
+			}
+			//暫定一位の方が今チェックしている敵より近い場合は何もしない
 		}
 	}
 	//すべての敵のチェックを行ったのでこいつが一位で確定
-	return m_toNear;
+	return result;
 }
 
 bool SceneMain::AddShot(ShotBeam* pBeam)
