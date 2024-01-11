@@ -5,7 +5,7 @@
 namespace
 {
 	//“G‚ÌˆÚ“®‘¬“x.
-	constexpr float kSpeed = 1.5f;
+	constexpr float kSpeed = 1.0f;
 	//‰ŠúˆÊ’u
 	constexpr float kPosY = Game::kScreenHeight - Game::kScreenHeight / 4;
 }

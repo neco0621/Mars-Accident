@@ -6,7 +6,7 @@
 
 namespace
 {
-	constexpr float kSpeed = 1.5f;
+	constexpr float kSpeed = 1.0f;
 }
 
 EnemyRight::EnemyRight()

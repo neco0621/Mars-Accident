@@ -10,7 +10,7 @@
 namespace
 {
 	//定数の定義
-	constexpr float kSpeed = 6.0f;
+	constexpr float kSpeed = 16.0f;
 
 	//	ショットの大きさ
 	constexpr float kWidth = 8.0f;
@@ -22,7 +22,7 @@ namespace
 	constexpr int kPosLogNum = 12;
 
 	//弾の上方向への移動速度
-	constexpr float kMove = 8.0f;
+	constexpr float kMove = 16.0f;
 }
 
 ShotBeam::ShotBeam() :
@@ -100,7 +100,7 @@ void ShotBeam::Draw()
 	//残像の表示
 	//DrawCircle(m_pos.x,m_pos.y, kRadius,GetColor(255,0,0),m_handle);
 	SetDrawBlendMode(DX_BLENDMODE_ADD, 255);
-	for (int i = 0; i < m_posLog.size(); i++)
+	for (int i = 0; i < m_posLog.size() / 2; i++)
 	{
 		for (int lineNum = 0; lineNum < 16; lineNum++)
 		{
@@ -118,7 +118,7 @@ void ShotBeam::Draw()
 			endX += cosf(angle) * len;
 			endY += cosf(angle) * len;
 
-			DrawLine(startX, startY, endX, endY, GetColor(16, 2, 1), kWidth);
+			DrawLine(startX, startY, endX, endY, GetColor(26, 16,2), kWidth);
 		}
 	}
 	//表示モードを元に戻す

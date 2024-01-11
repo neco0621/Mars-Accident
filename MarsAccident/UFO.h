@@ -46,7 +46,8 @@ public:
 	float JumpPower;
 	bool isJump;
 	float Gravity = 1.0f;
-	float MaxGravity = 4.9f;
+	float MaxGravity = 10.0f;
+	bool KnockBack;
 
 	bool m_MoveFlag;
 };

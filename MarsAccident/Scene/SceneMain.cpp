@@ -22,7 +22,7 @@
 namespace
 {
 	//一度に登場できる最大の数.
-	constexpr int kEnemyMax = 4;
+	constexpr int kEnemyMax = 8;
 	//何フレーム沖に敵が登場するか.
 	constexpr int kEnemyInterval = 90;
 
@@ -177,7 +177,7 @@ void SceneMain::Update(Input& input)
 			Rect shotRect = m_pBeam[i]->GetColRect();
 			if (shotRect.CirCleCollision(ufoRect))
 			{
-				//m_pUfo->m_pos.y -= (m_pUfo->v * m_pUfo->dt);//速度から座標
+				m_pUfo->JumpPower = 12;
 				//ターゲット位置.
 				//弾の発射位置から一番近くにいる敵の座標を取得する
 				//SceneMainに実装した関数を利用する

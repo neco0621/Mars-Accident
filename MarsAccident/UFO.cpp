@@ -34,7 +34,9 @@ UFO::UFO(SceneMain* pMain) :
 	m_radius(kRadius),
 	m_vec(0,kSpeed),
 	m_MoveFlag(false),
-	isJump(true)
+	isJump(true),
+	KnockBack(false),
+	JumpPower(10)
 {
 }
 
@@ -49,32 +51,20 @@ void UFO::Init()
 
 void UFO::Update()
 {
-	if (isJump) {
-		m_pos.y -= JumpPower ;
-		// óéâ∫ó í≤êÆ
-		if (JumpPower > -MaxGravity) 
-		{
-			JumpPower -= Gravity;
-		}
-		// ínñ Ç…Ç¬Ç¢ÇΩéû
-		if (m_pos.y >= (Game::kScreenHeight - Game::kScreenHeight / 4) - m_radius)
-		{
-			m_pos.y = (Game::kScreenHeight - Game::kScreenHeight / 4) - m_radius;
-			isJump = false;			
-		}
-	}
-	if (!isJump)
+
+	if (isJump)
 	{
 		m_pos.y -= JumpPower;
 		// óéâ∫ó í≤êÆ
-		if (JumpPower < MaxGravity) 
-		{
-			JumpPower += Gravity;
+		if (JumpPower > -MaxGravity) 
+		{	 
+			JumpPower -= Gravity;
 		}
 		// ínñ Ç…Ç¬Ç¢ÇΩéû
-		if (m_pos.y < Game::kScreenHeight * 0.25)
+		if (m_pos.y >= Game::kScreenHeight - Game::kScreenHeight / 4 - m_radius / 2)
 		{
-			isJump = true;
+			m_pos.y = Game::kScreenHeight - Game::kScreenHeight / 4 - m_radius / 2;
+			JumpPower = 30;
 		}
 	}
 	
