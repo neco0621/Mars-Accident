@@ -49,6 +49,8 @@ public:
 	float MaxGravity = 10.0f;
 	bool KnockBack;
 
+	float m_tq;
+
 	bool m_MoveFlag;
 };
 

@@ -6,8 +6,6 @@ namespace
 {
 	//“G‚ÌˆÚ“®‘¬“x.
 	constexpr float kSpeed = 1.0f;
-	//‰ŠúˆÊ’u
-	constexpr float kPosY = Game::kScreenHeight - Game::kScreenHeight / 4;
 }
 
 EnemyLeft::EnemyLeft() : EnemyBase()
@@ -53,7 +51,7 @@ void EnemyLeft::Start()
 	GetGraphSize(m_handle, &width, &height);
 
 	m_pos.x = 0;
-	m_pos.y = Game::kScreenHeight - Game::kScreenHeight / 4;
+	m_pos.y = m_tq;
 
 	/*m_pos.x = static_cast<float>(0 - width / 2);
 	m_pos.y = static_cast<float>(GetRand(Game::kScreenHeight - height) + height / 2);*/

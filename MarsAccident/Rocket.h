@@ -16,6 +16,8 @@ public:
 
 	//メンバー変数にアクセスする
 	void SetHandle(int handle) { m_handle = handle; }
+
+	void LifeDecrease();
 	//UFOの現在位置を取得する
 	Vec2 GetPos() const { return m_pos; }
 	//UFOの当たり判定を取得する
@@ -28,6 +30,8 @@ public:
 	Vec2 m_pos;
 	//半径
 	float m_radius;
+
+	int m_life;
 private:
 	SceneMain* m_pMain;
 	ShotBeam* m_pBeam;

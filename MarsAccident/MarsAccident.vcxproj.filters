@@ -72,6 +72,9 @@
     <ClCompile Include="Enemy\EnemyRight.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Scene\GameOverScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Rect.h">
@@ -124,6 +127,9 @@
     </ClInclude>
     <ClInclude Include="Enemy\EnemyRight.h">
       <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\GameOverScene.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

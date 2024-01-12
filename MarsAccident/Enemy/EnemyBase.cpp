@@ -11,7 +11,8 @@ EnemyBase::EnemyBase() :
 	m_isExist(false),
 	m_pos(),//È—ª‰Â.
 	m_centerX(m_pos.x),
-	m_centerY(m_pos.y)
+	m_centerY(m_pos.y),
+	m_tq(Game::kScreenHeight * 0.75f)
 {
 }
 

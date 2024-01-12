@@ -37,8 +37,8 @@ void TitleScene::FadeOutUpdate(Input& input)
 void TitleScene::FadeDraw()
 {
 	//通常描画
-	DrawString(Game::kScreenWidth / 2 - 24, Game::kScreenHeight / 4, "MarsAccident", 0xffffff);
-	DrawString(Game::kScreenWidth / 2, Game::kScreenHeight - (Game::kScreenHeight / 4), "START", 0xffffff);
+	DrawString(Game::kScreenWidth / 2 - 24, Game::kScreenHeight * 0.25, "MarsAccident", 0xffffff);
+	DrawString(Game::kScreenWidth / 2, Game::kScreenHeight * 0.75, "START", 0xffffff);
 
 	//フェード暗幕
 	int alpha = 255 * (float)frame_ / 60.0f;
@@ -49,8 +49,8 @@ void TitleScene::FadeDraw()
 
 void TitleScene::NormalDraw()
 {
-	DrawString(Game::kScreenWidth / 2 - 24, Game::kScreenHeight / 4, "MarsAccident", 0xffffff);
-	DrawString(Game::kScreenWidth / 2, Game::kScreenHeight - (Game::kScreenHeight / 4), "START", 0xffffff);
+	DrawString(Game::kScreenWidth / 2 - 24, Game::kScreenHeight * 0.25, "MarsAccident", 0xffffff);
+	DrawString(Game::kScreenWidth / 2, Game::kScreenHeight * 0.75, "START", 0xffffff);
 }
 
 TitleScene::TitleScene(SceneManager& manager) : Scene(manager)

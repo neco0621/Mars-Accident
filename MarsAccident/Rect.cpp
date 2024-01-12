@@ -172,5 +172,5 @@ bool Rect::DistanceCollision(const Rect& rect)
 		}
 	}
 
-	return true;
+	return nResult;
 }

@@ -36,7 +36,7 @@ namespace
 Player::Player(SceneMain* pMain) :
 	m_pMain(pMain),
 	m_handle(-1),
-	m_pos(Game::kScreenWidth / 2, (Game::kScreenHeight - (Game::kScreenHeight / 4))),
+	m_pos(Game::kScreenWidth * 0.5, Game::kScreenHeight * 0.75),
 	m_dir(kDirDown),
 	m_walkAnimFrame(0),
 	m_beamFrame(0),

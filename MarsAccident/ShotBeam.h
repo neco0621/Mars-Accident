@@ -10,8 +10,7 @@ class Input;
 
 namespace
 {
-	constexpr int ShotMax = 20;
-		
+	constexpr int ShotMax = 20;		
 }
 class ShotBeam
 {

@@ -7,7 +7,6 @@
 #include "ShotBeam.h"
 
 #include <cmath>
-#define g 9.8
 
 namespace
 {
@@ -36,7 +35,8 @@ UFO::UFO(SceneMain* pMain) :
 	m_MoveFlag(false),
 	isJump(true),
 	KnockBack(false),
-	JumpPower(10)
+	JumpPower(10),
+	m_tq(Game::kScreenHeight * 0.75f)
 {
 }
 
@@ -61,9 +61,9 @@ void UFO::Update()
 			JumpPower -= Gravity;
 		}
 		// ’n–Ê‚É‚Â‚¢‚½Žž
-		if (m_pos.y >= Game::kScreenHeight - Game::kScreenHeight / 4 - m_radius / 2)
+		if (m_pos.y >= m_tq - m_radius / 2)
 		{
-			m_pos.y = Game::kScreenHeight - Game::kScreenHeight / 4 - m_radius / 2;
+			m_pos.y = m_tq - m_radius / 2;
 			JumpPower = 30;
 		}
 	}

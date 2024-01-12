@@ -49,8 +49,8 @@ void EnemyRight::Start()
 	int height = 0;
 	GetGraphSize(m_handle, &width, &height);
 
-	m_pos.x = 1280;
-	m_pos.y = Game::kScreenHeight - (Game::kScreenHeight / 4);
+	m_pos.x = Game::kScreenWidth;
+	m_pos.y = m_tq;
 
 	//1フレーム当たりの移動ベクトルを決定する
 	m_vec.x = -kSpeed;

@@ -1,4 +1,6 @@
 #include "SceneMain.h"
+#include "SceneManager.h"
+#include "GameOverScene.h"
 #include "DxLib.h"
 #include "../Player.h"
 #include "../UFO.h"
@@ -56,7 +58,6 @@ SceneMain::SceneMain(SceneManager& manager) : Scene(manager),
 	m_pPlayer->SetHandle(m_playerHandle);	//Playerにグラフィックハンドルを渡す
 
 	m_pUfo = new UFO{ this };
-
 
 	m_pBg = new Bg{};
 	m_pBg->SetHandle(m_bgHandle);
@@ -146,6 +147,7 @@ void SceneMain::Init()
 
 	m_pPlayer->Init();
 	m_pUfo->Init();
+	m_pRocket->Init();
 }
 
 void SceneMain::End()
@@ -196,6 +198,7 @@ void SceneMain::Update(Input& input)
 	}
 	m_pPlayer->Update();
 	m_pUfo->Update();
+	m_pRocket->Update();
 
 	for (int i = 0; i < m_pEnemy.size(); i++)
 	{
@@ -224,6 +227,14 @@ void SceneMain::Update(Input& input)
 					//メモリを解放する
 					delete m_pEnemy[i];
 					m_pEnemy[i] = nullptr;	//使っていないとわかるように
+				}
+				Rect rocketRect = m_pRocket->GetColRect();
+				if (enemyRect.DistanceCollision(rocketRect))
+				{
+					////メモリを解放する
+					delete m_pEnemy[i];
+					m_pEnemy[i] = nullptr;
+					m_pRocket->LifeDecrease();
 				}
 			}
 		}
@@ -274,7 +285,12 @@ void SceneMain::Update(Input& input)
 
 	//画面揺れフレームのカウントダウン
 	m_shakeFrame--;
-	
+
+
+	if (m_pRocket->m_life <= 0)
+	{
+		manager_.ChangeScene(std::make_shared<GameOverScene>(manager_));
+	}	
 }
 
 void SceneMain::Draw()
@@ -287,7 +303,7 @@ void SceneMain::Draw()
 	ClearDrawScreen();
 
 	m_pBg->Draw();
-	DrawBox(0,Game::kScreenHeight - Game::kScreenHeight / 4 + 16,Game::kScreenWidth,Game::kScreenHeight, 0x84331F,true);
+	DrawBox(0,Game::kScreenHeight * 0.75 + 16,Game::kScreenWidth,Game::kScreenHeight, 0x84331F,true);
 	m_pRocket->Draw();
 	m_pPlayer->Draw();
 	m_pUfo->Draw();
@@ -310,28 +326,28 @@ void SceneMain::Draw()
 		}
 	}
 
-	
-
-	//プレイヤーの位置をデバッグ表示する
-	Vec2 playerPos = m_pPlayer->GetPos();
-	DrawFormatString(8, 24, GetColor(255, 255, 255),
-		"プレイヤーの座標(%.2f, %.2f)", playerPos.x, playerPos.y);
-
 	//弾の数を表示する
 	int shotNum = 0;
 	for (int i = 0; i < m_pBeam.size(); i++)
 	{
 		if (m_pBeam[i]) shotNum++;
 	}
-	DrawFormatString(8, 40, GetColor(255, 255, 255), "ShotNum%d", shotNum);
 	
 	int enemyNum = 0;
 	for (int i = 0; i < m_pEnemy.size(); i++)
 	{
 		if (m_pEnemy[i]) enemyNum++;
 	}
-	DrawFormatString(8, 72, GetColor(255, 255, 255), "EnemyNum%d", enemyNum);
 
+#ifdef _DEBUG
+	//プレイヤーの位置をデバッグ表示する
+	Vec2 playerPos = m_pPlayer->GetPos();
+	DrawFormatString(8, 24, GetColor(255, 255, 255),
+		"プレイヤーの座標(%.2f, %.2f)", playerPos.x, playerPos.y);
+	DrawFormatString(8, 40, GetColor(255, 255, 255), "ShotNum%d", shotNum);
+	DrawFormatString(8, 72, GetColor(255, 255, 255), "EnemyNum%d", enemyNum);
+	DrawFormatString(8, 88, GetColor(255, 255, 255), "残りライフ%d", m_pRocket->m_life);
+#endif
 	//バックバッファに書き込む設定に戻しておく
 	SetDrawScreen(DX_SCREEN_BACK);
 

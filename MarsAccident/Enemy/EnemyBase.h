@@ -30,6 +30,7 @@ public:
 	float m_centerX;
 	float m_centerY;
 	float m_radius;
+	float m_tq;
 
 protected:
 	//m_posを左上に、m_handleのグラフィックサイズを幅高さにした
