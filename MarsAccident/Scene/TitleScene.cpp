@@ -4,7 +4,7 @@
 #include "SceneManager.h"
 #include "TitleScene.h"
 //次のシーンのクラスをインクルードしておく
-#include "SceneMain.h"
+#include "Stage1Scene.h"
 #include <cassert>
 
 
@@ -30,7 +30,7 @@ void TitleScene::FadeOutUpdate(Input& input)
 {
 	frame_++;
 	if (frame_ >= 60) {
-		manager_.ChangeScene(std::make_shared<SceneMain>(manager_));
+		manager_.ChangeScene(std::make_shared<Stage1Scene>(manager_));
 	}
 }
 

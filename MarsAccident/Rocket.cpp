@@ -16,7 +16,7 @@ namespace
 	constexpr int kDecrease = 1;
 }
 
-Rocket::Rocket(SceneMain* pMain) :
+Rocket::Rocket(Stage1Scene* pS1Scene) :
 	m_handle(-1),
 	m_pos(KPosX,KPosY),
 	m_radius(kRadius),
@@ -41,9 +41,9 @@ void Rocket::Update()
 void Rocket::Draw()
 {
 	DrawBox(m_pos.x - 20, m_pos.y - 80, m_pos.x + 20, m_pos.y + 16, 0x0000ff,true);
-	DrawCircle(m_pos.x, m_pos.y - 120, m_radius, 0xff0000, true);
+	/*DrawCircle(m_pos.x, m_pos.y - 120, m_radius, 0xff0000, true);
 	DrawCircle(m_pos.x + 30, m_pos.y - 120, m_radius, 0xff0000, true);
-	DrawCircle(m_pos.x - 30, m_pos.y - 120, m_radius, 0xff0000, true);
+	DrawCircle(m_pos.x - 30, m_pos.y - 120, m_radius, 0xff0000, true);*/
 
 #ifdef _DEBUG
 	//“–‚½‚è”»’è‚Ì•\Ž¦

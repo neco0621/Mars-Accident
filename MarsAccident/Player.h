@@ -3,7 +3,7 @@
 #include "Vec2.h"
 #include "Rect.h"
 
-class SceneMain;
+class Stage1Scene;
 class ShotBeam;
 class Player
 {
@@ -18,7 +18,7 @@ public:
 	};
 
 public:
-	Player(SceneMain* pMain);
+	Player(Stage1Scene* S1Scene);
 	~Player();
 
 	void Init();
@@ -35,15 +35,17 @@ public:
 	//プレイヤーがダメージを受けた
 	void OnDamage();
 
+	//表示位置
+	Vec2 m_pos;
+
 private:
-	SceneMain* m_pMain;
+	Stage1Scene* m_pS1Scene;
 
 	std::vector<ShotBeam> m_pBeam;
 
 	int m_handle;	//グラフィックのハンドル
 
-	//表示位置
-	Vec2 m_pos;
+	
 
 	//当たり判定用の矩形
 	Rect m_colRect;

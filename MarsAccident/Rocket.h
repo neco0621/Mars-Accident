@@ -2,12 +2,12 @@
 #include "Vec2.h"
 #include "Rect.h"
 
-class SceneMain;
+class Stage1Scene;
 class ShotBeam;
 class Rocket
 {
 public:
-	Rocket(SceneMain* pMain);
+	Rocket(Stage1Scene* pS1Scene);
 	~Rocket();
 
 	void Init();
@@ -33,7 +33,7 @@ public:
 
 	int m_life;
 private:
-	SceneMain* m_pMain;
+	Stage1Scene* m_pS1Scene;
 	ShotBeam* m_pBeam;
 
 	int m_handle;	//グラフィックのハンドル

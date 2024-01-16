@@ -2,12 +2,12 @@
 #include "Vec2.h"
 #include "Rect.h"
 
-class SceneMain;
+class Stage1Scene;
 class ShotBeam;
 class UFO
 {
 public:
-	UFO(SceneMain* pMain);
+	UFO(Stage1Scene* pS1Scene);
 	~UFO();
 
 	void Init();
@@ -29,7 +29,7 @@ public:
 	//半径
 	float m_radius;
 private:
-	SceneMain* m_pMain;
+	Stage1Scene* m_pS1Scene;
 	ShotBeam* m_pBeam;
 
 	int m_handle;	//グラフィックのハンドル

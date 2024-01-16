@@ -57,7 +57,7 @@
     <ClCompile Include="Scene\SceneManager.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\SceneMain.cpp">
+    <ClCompile Include="Scene\Stage1Scene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="Scene\Scene.cpp">
@@ -113,7 +113,7 @@
     <ClInclude Include="Scene\SceneManager.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\SceneMain.h">
+    <ClInclude Include="Scene\Stage1Scene.h">
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="Scene\Scene.h">

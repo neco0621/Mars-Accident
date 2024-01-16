@@ -3,7 +3,7 @@
 #include "Rect.h"
 #include <vector>
 
-class SceneMain;
+class Stage1Scene;
 class UFO;
 class Player;
 class Input;
@@ -25,8 +25,9 @@ public:
 	//弾をスタートさせる
 	virtual void Start(Vec2 pos);
 
-	void SetMain(SceneMain* pMain) { m_pMain = pMain; }
+	void SetMain(Stage1Scene* pS1Scene) { m_pS1Scene = pS1Scene; }
 	void SetPlayer(Player* pPlayer) { m_pPlayer = pPlayer; }
+	void SetHandle(int handle) { m_handle = handle; }
 
 
 	bool isExist() const { return m_isExist; }
@@ -34,9 +35,8 @@ public:
 	//当たり判定の矩形を取得する
 	Rect GetColRect() const { return m_colRect; }
 	
-	bool shotFlag[ShotMax];
-	bool prevShotFlag;
-	float m_radius;
+
+	int m_radius;
 	int m_handle;
 	float m_centerX;
 	float m_centerY;
@@ -50,11 +50,9 @@ public:
 	float m_pSpeed;
 	float m_pMove;
 	bool MoveFlag;
-	// ショットの生きている時間カウンタ
-	int shotLifeCounter;
 protected:
 	//SceneMainの関数を呼び出すためにポインタを覚えておく
-	SceneMain* m_pMain;
+	Stage1Scene* m_pS1Scene;
 	//ショットを撃ったプレイヤーのポインタを覚えておく
 	Player* m_pPlayer;
 	//

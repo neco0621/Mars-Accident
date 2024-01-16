@@ -3,7 +3,7 @@
 #include "Pad.h"
 #include "Game.h"
 #include "Rect.h"
-#include "Scene/SceneMain.h"
+#include "Scene/Stage1Scene.h"
 #include "ShotBeam.h"
 
 #include <cmath>
@@ -24,8 +24,8 @@ namespace
 	constexpr float kSpeed = 3.0f;
 }
 
-UFO::UFO(SceneMain* pMain) :
-	m_pMain(pMain),
+UFO::UFO(Stage1Scene* pS1Scene) :
+	m_pS1Scene(pS1Scene),
 	m_pBeam(0),
 	m_handle(-1),
 	m_pos(kPosX, kPosY),

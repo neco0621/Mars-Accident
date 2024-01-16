@@ -2,7 +2,7 @@
 #include "DxLib.h"
 #include "Pad.h"
 #include "Game.h"
-#include "Scene/SceneMain.h"
+#include "Scene/Stage1Scene.h"
 #include "ShotBeam.h"
 
 #include <cmath>
@@ -33,8 +33,8 @@ namespace
 	constexpr int kBeamFrame = 30;
 }
 
-Player::Player(SceneMain* pMain) :
-	m_pMain(pMain),
+Player::Player(Stage1Scene* S1Scene) :
+	m_pS1Scene(S1Scene),
 	m_handle(-1),
 	m_pos(Game::kScreenWidth * 0.5, Game::kScreenHeight * 0.75),
 	m_dir(kDirDown),
@@ -122,19 +122,21 @@ void Player::Update()
 	}
 
 	//ショット
-	m_beamFrame++;
-	if (m_beamFrame >= kBeamFrame)
+	//m_beamFrame++;
+	//if (m_beamFrame >= kBeamFrame)
+	//{
+	if (CheckHitKey(KEY_INPUT_SPACE))
 	{
-		m_beamFrame = 0;
 		ShotBeam* m_pShot = new ShotBeam;
-		m_pShot->SetMain(m_pMain);
+		m_pShot->SetMain(m_pS1Scene);
 		m_pShot->SetPlayer(this);
 		m_pShot->Start(GetPos());
 		//以降更新やメモリの解放はSceneMainに任せる
-		m_pMain->AddShot(m_pShot);
+		m_pS1Scene->AddShot(m_pShot);
 	}
-
-
+		//m_beamFrame = 0;
+		
+	//}
 }
 
 void Player::Draw()

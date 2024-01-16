@@ -163,7 +163,7 @@
     <ClCompile Include="Rect.cpp" />
     <ClCompile Include="Rocket.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
-    <ClCompile Include="Scene\SceneMain.cpp" />
+    <ClCompile Include="Scene\Stage1Scene.cpp" />
     <ClCompile Include="Scene\SceneManager.cpp" />
     <ClCompile Include="ShotBeam.cpp" />
     <ClCompile Include="Scene\TitleScene.cpp" />
@@ -183,7 +183,7 @@
     <ClInclude Include="Rect.h" />
     <ClInclude Include="Rocket.h" />
     <ClInclude Include="Scene\Scene.h" />
-    <ClInclude Include="Scene\SceneMain.h" />
+    <ClInclude Include="Scene\Stage1Scene.h" />
     <ClInclude Include="Scene\SceneManager.h" />
     <ClInclude Include="ShotBeam.h" />
     <ClInclude Include="Scene\TitleScene.h" />

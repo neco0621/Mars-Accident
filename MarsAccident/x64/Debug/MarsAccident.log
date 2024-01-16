@@ -1,6 +1,7 @@
-﻿  UFO.cpp
+﻿  Rocket.cpp
 C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-C:\Mars-Accident\MarsAccident\UFO.cpp(96,31): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Mars-Accident\MarsAccident\UFO.cpp(96,27): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Mars-Accident\MarsAccident\UFO.cpp(96,18): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\MarsAccident\Rocket.cpp(43,60): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\MarsAccident\Rocket.cpp(43,46): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\MarsAccident\Rocket.cpp(43,32): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\MarsAccident\Rocket.cpp(43,18): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
   MarsAccident.vcxproj -> C:\Mars-Accident\MarsAccident\x64\Debug\MarsAccident.exe
