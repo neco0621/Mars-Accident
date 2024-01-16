@@ -17,24 +17,12 @@ namespace
 }
 
 Rocket::Rocket(SceneMain* pMain) :
-	m_pMain(pMain),
 	m_handle(-1),
 	m_pos(KPosX,KPosY),
 	m_radius(kRadius),
 	m_life(kLife)
 {
 }
-
-Rocket::Rocket(StageBase* pSBase) :
-	m_pSBase(pSBase),
-	m_handle(-1),
-	m_pos(KPosX, KPosY),
-	m_radius(kRadius),
-	m_life(kLife)
-{
-}
-
-
 
 Rocket::~Rocket()
 {

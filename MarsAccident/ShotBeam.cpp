@@ -161,3 +161,5 @@ void ShotBeam::Start(Vec2 pos)
 		m_posLog[i] = m_pos;
 	}
 }
+
+

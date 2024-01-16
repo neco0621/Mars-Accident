@@ -2,7 +2,6 @@
 #include "DxLib.h"
 #include "Pad.h"
 #include "Game.h"
-#include "Scene/Scene.h"
 #include "Scene/SceneMain.h"
 #include "ShotBeam.h"
 
@@ -44,19 +43,6 @@ Player::Player(SceneMain* pMain) :
 	m_damageFrame(0)
 {
 }
-
-Player::Player(StageBase* pSBase) :
-	m_pSBase(pSBase),
-	m_handle(-1),
-	m_pos(Game::kScreenWidth * 0.5, Game::kScreenHeight * 0.75),
-	m_dir(kDirDown),
-	m_walkAnimFrame(0),
-	m_beamFrame(0),
-	m_damageFrame(0)
-{
-}
-
-
 
 Player::~Player()
 {
@@ -142,13 +128,13 @@ void Player::Update()
 		m_beamFrame = 0;
 		ShotBeam* m_pShot = new ShotBeam;
 		m_pShot->SetMain(m_pMain);
-		m_pShot->SetStage2(m_pStage2);
-		m_pShot->SetStage3(m_pStage3);
 		m_pShot->SetPlayer(this);
 		m_pShot->Start(GetPos());
 		//ˆÈ~XV‚âƒƒ‚ƒŠ‚Ì‰ð•ú‚ÍSceneMain‚É”C‚¹‚é
 		m_pMain->AddShot(m_pShot);
 	}
+
+
 }
 
 void Player::Draw()

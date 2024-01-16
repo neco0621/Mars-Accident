@@ -4,7 +4,6 @@
 #include "Game.h"
 #include "Rect.h"
 #include "Scene/SceneMain.h"
-#include "Stage/StageBase.h"
 #include "ShotBeam.h"
 
 #include <cmath>
@@ -33,22 +32,6 @@ UFO::UFO(SceneMain* pMain) :
 	m_boundFlag(false),
 	m_radius(kRadius),
 	m_vec(0,kSpeed),
-	m_MoveFlag(false),
-	isJump(true),
-	KnockBack(false),
-	JumpPower(10),
-	m_tq(Game::kScreenHeight * 0.75f)
-{
-}
-
-UFO::UFO(StageBase* pSBase) :
-	m_pSBase(pSBase),
-	m_pBeam(0),
-	m_handle(-1),
-	m_pos(kPosX, kPosY),
-	m_boundFlag(false),
-	m_radius(kRadius),
-	m_vec(0, kSpeed),
 	m_MoveFlag(false),
 	isJump(true),
 	KnockBack(false),

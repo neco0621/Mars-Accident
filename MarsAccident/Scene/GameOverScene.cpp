@@ -68,4 +68,5 @@ void GameOverScene::FadeDraw()
 void GameOverScene::NormalDraw()
 {
 	DrawString(Game::kScreenWidth / 2, Game::kScreenHeight * 0.25, "GameOver", 0xffffff);
+
 }

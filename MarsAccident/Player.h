@@ -3,10 +3,7 @@
 #include "Vec2.h"
 #include "Rect.h"
 
-class StageBase;
 class SceneMain;
-class Stage2;
-class Stage3;
 class ShotBeam;
 class Player
 {
@@ -22,7 +19,6 @@ public:
 
 public:
 	Player(SceneMain* pMain);
-	Player(StageBase* pSBase);
 	~Player();
 
 	void Init();
@@ -41,7 +37,6 @@ public:
 
 private:
 	SceneMain* m_pMain;
-	StageBase* m_pSBase;
 
 	std::vector<ShotBeam> m_pBeam;
 

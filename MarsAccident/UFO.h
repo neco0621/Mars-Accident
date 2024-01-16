@@ -3,13 +3,11 @@
 #include "Rect.h"
 
 class SceneMain;
-class StageBase;
 class ShotBeam;
 class UFO
 {
 public:
 	UFO(SceneMain* pMain);
-	UFO(StageBase* pSBase);
 	~UFO();
 
 	void Init();
@@ -32,7 +30,6 @@ public:
 	float m_radius;
 private:
 	SceneMain* m_pMain;
-	StageBase* m_pSBase;
 	ShotBeam* m_pBeam;
 
 	int m_handle;	//グラフィックのハンドル
