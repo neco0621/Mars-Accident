@@ -2,6 +2,7 @@ D:\Mars-Accident\MarsAccident\Bg.cpp;D:\Mars-Accident\MarsAccident\x64\Debug\Bg.
 D:\Mars-Accident\MarsAccident\Enemy\EnemyBase.cpp;D:\Mars-Accident\MarsAccident\x64\Debug\EnemyBase.obj
 D:\Mars-Accident\MarsAccident\Enemy\EnemyLeft.cpp;D:\Mars-Accident\MarsAccident\x64\Debug\EnemyLeft.obj
 D:\Mars-Accident\MarsAccident\Enemy\EnemyRight.cpp;D:\Mars-Accident\MarsAccident\x64\Debug\EnemyRight.obj
+D:\Mars-Accident\MarsAccident\Scene\GameOverScene.cpp;D:\Mars-Accident\MarsAccident\x64\Debug\GameOverScene.obj
 D:\Mars-Accident\MarsAccident\Input.cpp;D:\Mars-Accident\MarsAccident\x64\Debug\Input.obj
 D:\Mars-Accident\MarsAccident\Main.cpp;D:\Mars-Accident\MarsAccident\x64\Debug\Main.obj
 D:\Mars-Accident\MarsAccident\Pad.cpp;D:\Mars-Accident\MarsAccident\x64\Debug\Pad.obj
@@ -9,7 +10,7 @@ D:\Mars-Accident\MarsAccident\Player.cpp;D:\Mars-Accident\MarsAccident\x64\Debug
 D:\Mars-Accident\MarsAccident\Rect.cpp;D:\Mars-Accident\MarsAccident\x64\Debug\Rect.obj
 D:\Mars-Accident\MarsAccident\Rocket.cpp;D:\Mars-Accident\MarsAccident\x64\Debug\Rocket.obj
 D:\Mars-Accident\MarsAccident\Scene\Scene.cpp;D:\Mars-Accident\MarsAccident\x64\Debug\Scene.obj
-D:\Mars-Accident\MarsAccident\Scene\SceneMain.cpp;D:\Mars-Accident\MarsAccident\x64\Debug\SceneMain.obj
+D:\Mars-Accident\MarsAccident\Scene\Stage1Scene.cpp;D:\Mars-Accident\MarsAccident\x64\Debug\Stage1Scene.obj
 D:\Mars-Accident\MarsAccident\Scene\SceneManager.cpp;D:\Mars-Accident\MarsAccident\x64\Debug\SceneManager.obj
 D:\Mars-Accident\MarsAccident\ShotBeam.cpp;D:\Mars-Accident\MarsAccident\x64\Debug\ShotBeam.obj
 D:\Mars-Accident\MarsAccident\Scene\TitleScene.cpp;D:\Mars-Accident\MarsAccident\x64\Debug\TitleScene.obj
