@@ -34,7 +34,7 @@ ShotBeam::ShotBeam() :
 	m_centerY(m_pos.y),
 	m_pSpeed(kSpeed),
 	m_pMove(kMove),
-	MoveFlag(true),
+	MoveFlag(false),
 	m_z(0,-25)
 {
 	m_posLog.resize(kPosLogNum);
@@ -64,10 +64,6 @@ void ShotBeam::Update()
 	//画面外に出た処理
 	//過去の表示位置も含めてすべて画面外に出たら終了
 	bool isOut = false;	//チェック中の座標が画面外かどうかフラグ
-	if (CheckHitKey(KEY_INPUT_SPACE))
-	{
-		MoveFlag = false;
-	}
 	if (MoveFlag == false)
 	{
 		m_pos.y -= kMove;

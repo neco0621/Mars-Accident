@@ -4,10 +4,15 @@
 
 #include <cassert>
 
+namespace
+{
+	constexpr int kRadius = 30;
+}
+
 EnemyBase::EnemyBase() :
 	//‰Šú‰»
 	m_handle(-1),
-	m_radius(16),
+	m_radius(kRadius),
 	m_isExist(false),
 	m_pos(),//È—ª‰Â.
 	m_centerX(m_pos.x),

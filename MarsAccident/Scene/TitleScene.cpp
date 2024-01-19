@@ -53,9 +53,10 @@ void TitleScene::NormalDraw()
 	DrawString(Game::kScreenWidth / 2, Game::kScreenHeight * 0.75, "START", 0xffffff);
 }
 
-TitleScene::TitleScene(SceneManager& manager) : Scene(manager)
+TitleScene::TitleScene(SceneManager& manager) : Scene(manager),
+m_bgHandle(-1)
 {
-	//handle_ = LoadGraph("data/img/title.png");
+	m_bgHandle = LoadGraph("data/titleBg.png");
 	assert(handle_ >= 0);
 	frame_ = 60;
 	updateFunc_ = &TitleScene::FadeInUpdate;
@@ -74,5 +75,6 @@ void TitleScene::Update(Input& input)
 
 void TitleScene::Draw()
 {
+	DrawGraph(0,0,m_bgHandle,true);
 	(this->*drawFunc_)();
 }

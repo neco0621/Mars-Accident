@@ -30,6 +30,7 @@ public:
 
 	void Update(Input& input);
 	void Draw();
+	void ChangeGameOverScene();
 
 	//特定の座標から一番近くにいる敵の座標を返す関数
 	Vec2 GetNearEnemyPos(Vec2 pos);
@@ -50,11 +51,6 @@ private:
 	UpdateFunc_t updateFunc_ = nullptr;
 	DrawFunc_t drawFunc_ = nullptr;
 
-	//更新関数
-	void FadeInUpdate(Input& input);	//フェードイン状態
-	void NormalUpdate(Input& input);	//通常状態
-	void FadeOutUpdate(Input& input);	//フェードアウト状態
-
 private:
 	//敵キャラクターの生成
 	void CreateEnemyLeft();
@@ -66,10 +62,20 @@ private:
 
 	//グラフィックのハンドル
 	int m_playerHandle;
-	int m_enemyHandle;
+	int m_leftEnemyHandle;
+	int m_rightEnemyHandle;
+	int m_life1Handle;
+	int m_life2Handle;
+	int m_life3Handle;
 	int m_bgHandle;
 	int m_shotHandle;
 	int m_rocketHandle;
+	int m_ufoHandle;
+
+	int m_lifeCount;
+
+	bool m_damageFlag;
+	bool m_gameOverFlag;
 
 	int m_downEnemyCount;
 	

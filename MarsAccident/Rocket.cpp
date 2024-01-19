@@ -6,8 +6,8 @@ namespace
 	constexpr float KPosX = Game::kScreenWidth * 0.5f;
 	constexpr float KPosY = Game::kScreenHeight * 0.75f;
 
-	constexpr float kWidth = 40.0f;
-	constexpr float kHeight = 96.0f;
+	constexpr float kWidth = 80.0f;
+	constexpr float kHeight = 130.0f;
 
 	constexpr float kRadius = 10.0f;
 
@@ -35,15 +35,15 @@ void Rocket::Init()
 void Rocket::Update()
 {
 	//ìñÇΩÇËîªíËÇÃçXêV
-	m_colRect.SetCenter(m_pos.x, m_pos.y - 30, kWidth, kHeight);
+	m_colRect.SetCenter(m_pos.x, m_pos.y - kHeight / 4, kWidth, kHeight);
+
 }
 
 void Rocket::Draw()
 {
-	DrawBox(m_pos.x - 20, m_pos.y - 80, m_pos.x + 20, m_pos.y + 16, 0x0000ff,true);
-	/*DrawCircle(m_pos.x, m_pos.y - 120, m_radius, 0xff0000, true);
-	DrawCircle(m_pos.x + 30, m_pos.y - 120, m_radius, 0xff0000, true);
-	DrawCircle(m_pos.x - 30, m_pos.y - 120, m_radius, 0xff0000, true);*/
+	DrawRotaGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y) - kHeight / 4,
+		1.0, 0.0,
+		m_handle, true, false);
 
 #ifdef _DEBUG
 	//ìñÇΩÇËîªíËÇÃï\é¶

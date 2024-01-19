@@ -41,7 +41,10 @@ Stage1Scene::Stage1Scene(SceneManager& manager) : Scene(manager),
 	m_shakeFrame(0),
 	m_wipeFrame(0),
 	m_toNear(Game::kScreenWidth,Game::kScreenHeight),
-	m_downEnemyCount(0)
+	m_downEnemyCount(0),
+	m_damageFlag(false),
+	m_lifeCount(0),
+	m_gameOverFlag(false)
 {
 	//ゲーム画面描画先の生成.
 	//画面サイズと同じ大きさのグラフィックデータを作成する.
@@ -50,23 +53,38 @@ Stage1Scene::Stage1Scene(SceneManager& manager) : Scene(manager),
 	//グラフィックのロード.
 	m_playerHandle = LoadGraph("data/player.png");
 	assert(m_playerHandle != -1);
-	m_enemyHandle = LoadGraph("data/enemy.png");
-	assert(m_enemyHandle != -1);
+	m_leftEnemyHandle = LoadGraph("data/Leftenemy.png");
+	assert(m_leftEnemyHandle != -1);
+	m_rightEnemyHandle = LoadGraph("data/Rightenemy.png");
+	assert(m_rightEnemyHandle != -1);
 	m_bgHandle = LoadGraph("data/Bg.png");
 	assert(m_bgHandle != -1);
 	m_shotHandle = LoadGraph("data/Shot.png");
 	assert(m_shotHandle != -1);
+	m_ufoHandle = LoadGraph("data/UFO.png");
+	assert(m_ufoHandle != -1);
+	m_rocketHandle = LoadGraph("data/Rocket.png");
+	assert(m_rocketHandle != -1);
+	m_life1Handle = LoadGraph("data/Life.png");
+	assert(m_life1Handle != -1);
+	m_life2Handle = LoadGraph("data/Life.png");
+	assert(m_life2Handle != -1);
+	m_life3Handle = LoadGraph("data/Life.png");
+	assert(m_life3Handle != -1);
+	
 
 	//プレイヤーのメモリ確保.
 	m_pPlayer = new Player{ this };
 	m_pPlayer->SetHandle(m_playerHandle);	//Playerにグラフィックハンドルを渡す
 
 	m_pUfo = new UFO{ this };
+	m_pUfo->SetHandle(m_ufoHandle);
 
 	m_pBg = new Bg{};
 	m_pBg->SetHandle(m_bgHandle);
 
 	m_pRocket = new Rocket{ this };
+	m_pRocket->SetHandle(m_rocketHandle);
 	//敵の準備.
 	//m_pEnemy(vector)何もしなければサイズは0
 	//resize関数でkEnemyMaxだけデータを保存できるようにする
@@ -109,7 +127,8 @@ Stage1Scene::~Stage1Scene()
 	//メモリからグラフィックを削除
 	DeleteGraph(m_bgHandle);
 	DeleteGraph(m_playerHandle);
-	DeleteGraph(m_enemyHandle);
+	DeleteGraph(m_leftEnemyHandle);
+	DeleteGraph(m_rightEnemyHandle);
 
 	//プレイヤーのメモリ解放.
 	delete m_pPlayer;
@@ -120,6 +139,9 @@ Stage1Scene::~Stage1Scene()
 
 	delete m_pBg;
 	m_pBg = nullptr;
+
+	delete m_pRocket;
+	m_pRocket = nullptr;
 
 
 	//メモリが確保されている敵を探して解放していく
@@ -163,12 +185,14 @@ void Stage1Scene::Update(Input& input)
 {
 	Rect ufoRect = m_pUfo->GetColRect();
 	Rect playerRect = m_pPlayer->GetColRect();
+	m_pPlayer->Update();
+	m_pUfo->Update();
+	m_pRocket->Update();
 	
-	if (playerRect.DistanceCollision(ufoRect))
+	if (ufoRect.DistanceCollision(playerRect))
 	{
-		manager_.ChangeScene(std::make_shared<GameOverScene>(manager_));
+		m_gameOverFlag = true;
 	}
-
 	for (int i = 0; i < m_pBeam.size(); i++)
 	{	
 		//nullptrなら処理は行わない
@@ -187,7 +211,7 @@ void Stage1Scene::Update(Input& input)
 				Rect shotRect = m_pBeam[i]->GetColRect();
 				if (shotRect.CirCleCollision(ufoRect))
 				{
-					m_pUfo->JumpPower = 12;
+					m_pUfo->JumpPower = 10;
 					//ターゲット位置.
 					//弾の発射位置から一番近くにいる敵の座標を取得する
 					//SceneMainに実装した関数を利用する
@@ -204,9 +228,6 @@ void Stage1Scene::Update(Input& input)
 			}
 		}	 
 	}
-	m_pPlayer->Update();
-	m_pUfo->Update();
-	m_pRocket->Update();
 	for (int i = 0; i < m_pEnemy.size(); i++)
 	{
 		if (m_pEnemy[i])	//nullptrではないチェック
@@ -234,7 +255,6 @@ void Stage1Scene::Update(Input& input)
 					//メモリを解放する
 					delete m_pEnemy[i];
 					m_pEnemy[i] = nullptr;	//使っていないとわかるように
-					m_downEnemyCount;
 				}
 				Rect rocketRect = m_pRocket->GetColRect();
 				if (enemyRect.DistanceCollision(rocketRect))
@@ -242,7 +262,7 @@ void Stage1Scene::Update(Input& input)
 					////メモリを解放する
 					delete m_pEnemy[i];
 					m_pEnemy[i] = nullptr;
-					m_pRocket->LifeDecrease();
+					m_damageFlag = true;
 				}
 			}
 		}
@@ -293,14 +313,42 @@ void Stage1Scene::Update(Input& input)
 	//画面揺れフレームのカウントダウン
 	m_shakeFrame--;
 
-	if (m_pRocket->m_life <= 0)
-	{
-		manager_.ChangeScene(std::make_shared<GameOverScene>(manager_));
-	}	
-
-	if (m_downEnemyCount >= 10)
+	if (m_downEnemyCount == 10)
 	{
 		manager_.ChangeScene(std::make_shared<TitleScene>(manager_));
+	}
+
+	if (m_damageFlag == true)
+	{
+		m_lifeCount++;
+		m_pRocket->LifeDecrease();
+		m_damageFlag = false;
+	}
+
+	if (m_lifeCount == 1)
+	{
+		DeleteGraph(m_life3Handle);
+	}
+	else if (m_lifeCount == 2)
+	{
+		DeleteGraph(m_life2Handle);
+	}
+	else if (m_lifeCount == 3)
+	{
+		DeleteGraph(m_life1Handle);
+	}
+
+	if (m_pRocket->m_life <= 0)
+	{
+		m_gameOverFlag = true;
+	}
+
+	if (m_gameOverFlag == true)
+	{
+		frame_++;
+		if (frame_ >= 60) {
+			manager_.ChangeScene(std::make_shared<GameOverScene>(manager_));
+		}
 	}
 }
 
@@ -314,7 +362,10 @@ void Stage1Scene::Draw()
 	ClearDrawScreen();
 
 	m_pBg->Draw();
-	DrawBox(0,Game::kScreenHeight * 0.75 + 16,Game::kScreenWidth,Game::kScreenHeight, 0x84331F,true);
+	DrawGraph(Game::kScreenWidth / 2 - 96, Game::kScreenHeight / 2,m_life1Handle, true);
+	DrawGraph(Game::kScreenWidth / 2 - 32, Game::kScreenHeight / 2, m_life2Handle, true);
+	DrawGraph(Game::kScreenWidth / 2 +32, Game::kScreenHeight / 2, m_life3Handle, true);
+	DrawBox(0,Game::kScreenHeight * 0.75 + 32,Game::kScreenWidth,Game::kScreenHeight, 0x84331F,true);
 	m_pRocket->Draw();
 	m_pPlayer->Draw();
 	m_pUfo->Draw();
@@ -358,6 +409,7 @@ void Stage1Scene::Draw()
 	DrawFormatString(8, 40, GetColor(255, 255, 255), "ShotNum%d", shotNum);
 	DrawFormatString(8, 72, GetColor(255, 255, 255), "EnemyNum%d", enemyNum);
 	DrawFormatString(8, 88, GetColor(255, 255, 255), "残りライフ%d", m_pRocket->m_life);
+	DrawFormatString(8, 104, GetColor(255, 255, 255), "倒した敵の数%d", m_downEnemyCount);
 #endif
 	//バックバッファに書き込む設定に戻しておく
 	SetDrawScreen(DX_SCREEN_BACK);
@@ -479,7 +531,7 @@ void Stage1Scene::CreateEnemyLeft()
 		{
 			m_pEnemy[i] = new EnemyLeft;
 			m_pEnemy[i]->Init();
-			m_pEnemy[i]->SetHandle(m_enemyHandle);
+			m_pEnemy[i]->SetHandle(m_leftEnemyHandle);
 			m_pEnemy[i]->Start();
 			return;	//メモリを確保したら以降はチェックしない
 		}
@@ -495,7 +547,7 @@ void Stage1Scene::CreateEnemyRight()
 		{
 			m_pEnemy[i] = new EnemyRight;
 			m_pEnemy[i]->Init();
-			m_pEnemy[i]->SetHandle(m_enemyHandle);
+			m_pEnemy[i]->SetHandle(m_rightEnemyHandle);
 			m_pEnemy[i]->Start();
 			return;	//メモリを確保したら以降はチェックしない
 		}

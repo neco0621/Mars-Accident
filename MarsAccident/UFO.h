@@ -13,6 +13,7 @@ public:
 	void Init();
 	void Update();
 	void Draw();
+	void ShakeScreen();
 
 	//メンバー変数にアクセスする
 	void SetHandle(int handle) { m_handle = handle; }
@@ -48,6 +49,7 @@ public:
 	float Gravity = 1.0f;
 	float MaxGravity = 10.0f;
 	bool KnockBack;
+	float m_angle;
 
 	float m_tq;
 

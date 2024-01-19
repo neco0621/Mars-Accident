@@ -14,11 +14,11 @@ namespace
 	constexpr float kSpeed = 5.0f;
 
 	//キャラクターのサイズ
-	constexpr int kWidth = 32;
-	constexpr int kHeight = 32;
+	constexpr int kWidth = 64;
+	constexpr int kHeight = 64;
 
 	//キャラクターのアニメーション
-	constexpr int kUseFrame[] = { 0,1,2,1 };
+	constexpr int kUseFrame[] = { 1,2,1 };
 
 	//アニメーション1コマのフレーム数
 	constexpr int kAnimFrameNum = 8;
@@ -26,21 +26,17 @@ namespace
 	//アニメーション1サイクルのフレーム数
 	constexpr int kAnimFrameCycle = _countof(kUseFrame) * kAnimFrameNum;
 
-	//ダメージ演出フレーム数
-	constexpr int kDamageFrame = 60;
-
 	//魔法の杖の発射間隔
-	constexpr int kBeamFrame = 30;
+	constexpr int kBeamFrame = 10;
 }
 
 Player::Player(Stage1Scene* S1Scene) :
 	m_pS1Scene(S1Scene),
 	m_handle(-1),
 	m_pos(Game::kScreenWidth * 0.5, Game::kScreenHeight * 0.75),
-	m_dir(kDirDown),
+	m_dir(kDirRight),
 	m_walkAnimFrame(0),
-	m_beamFrame(0),
-	m_damageFrame(0)
+	m_beamFrame(0)
 {
 }
 
@@ -50,13 +46,11 @@ Player::~Player()
 
 void Player::Init()
 {
+	
 }
 
 void Player::Update()
 {
-	//ダメージ演出の進行
-	m_damageFrame--;
-	if (m_damageFrame < 0) m_damageFrame = 0;
 
 	//padの十字キーを使用してプレイヤーを移動させる
 	int pad = GetJoypadInputState(DX_INPUT_KEY_PAD1);
@@ -122,10 +116,8 @@ void Player::Update()
 	}
 
 	//ショット
-	//m_beamFrame++;
-	//if (m_beamFrame >= kBeamFrame)
-	//{
-	if (CheckHitKey(KEY_INPUT_SPACE))
+	m_beamFrame++;
+	if (m_beamFrame >= kBeamFrame)
 	{
 		ShotBeam* m_pShot = new ShotBeam;
 		m_pShot->SetMain(m_pS1Scene);
@@ -133,24 +125,14 @@ void Player::Update()
 		m_pShot->Start(GetPos());
 		//以降更新やメモリの解放はSceneMainに任せる
 		m_pS1Scene->AddShot(m_pShot);
-	}
-		//m_beamFrame = 0;
+	
+		m_beamFrame = 0;
 		
-	//}
+	}
 }
 
 void Player::Draw()
 {
-	//ダメージ演出   2フレーム間隔で表示非表示切り替え
-	//0:表示される
-	//1:表示される
-	//2:非表示
-	//3:非表示
-	//4:表示
-	//%4 することで01230123...に変換する
-	if (m_damageFrame % 4 >= 2) return;
-
-
 	int animFrame = m_walkAnimFrame / kAnimFrameNum;
 
 	int srcX = kWidth * kUseFrame[animFrame];
@@ -170,12 +152,4 @@ void Player::Draw()
 	//当たり判定の表示
 	m_colRect.Draw(GetColor(0, 0, 255), false);
 #endif
-}
-
-void Player::OnDamage()
-{
-	//ダメージ演出中は再度ダメージを食らわない
-	if (m_damageFrame > 0)	return;
-	//演出フレーム数を設定する
-	m_damageFrame = kDamageFrame;
 }

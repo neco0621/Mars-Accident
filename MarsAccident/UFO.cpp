@@ -6,6 +6,7 @@
 #include "Scene/Stage1Scene.h"
 #include "ShotBeam.h"
 
+#define PI 3.14
 #include <cmath>
 
 namespace
@@ -22,6 +23,8 @@ namespace
 	constexpr float kRadius = 40;
 
 	constexpr float kSpeed = 3.0f;
+
+	constexpr int kWipeFrame = 30;
 }
 
 UFO::UFO(Stage1Scene* pS1Scene) :
@@ -51,7 +54,6 @@ void UFO::Init()
 
 void UFO::Update()
 {
-
 	if (isJump)
 	{
 		m_pos.y -= JumpPower;
@@ -65,6 +67,7 @@ void UFO::Update()
 		{
 			m_pos.y = m_tq - m_radius / 2;
 			JumpPower = 30;
+			ShakeScreen();
 		}
 	}
 	
@@ -81,22 +84,33 @@ void UFO::Update()
 	if (m_MoveFlag == false)
 	{
 		m_pos.x += kSpeed;
+		m_angle++;
 	}
 	else if (m_MoveFlag == true)
 	{
 		m_pos.x -= kSpeed;
+		m_angle--;
 	}
 	//当たり判定の更新
 	m_colRect.SetRadius(m_pos.x, m_pos.y, m_radius);
+	
 }
 
 void UFO::Draw()
 {
-	DrawCircle(m_pos.x, m_pos.y, m_radius, GetColor(255, 255, 0), true);
 	DrawFormatString(8, 56, GetColor(255, 255, 255),
-		"UFOの座標(%.2f, %.2f)", m_pos.x, m_pos.y);
+		"%f",m_angle);
 	//当たり判定の表示
+
+	DrawRotaGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y),
+		1.0, DX_PI_F / 180.0 * m_angle,
+		m_handle, true);
 	m_colRect.DrawC(GetColor(255, 0, 0), false);
+
+}
+
+void UFO::ShakeScreen()
+{
 }
 
 

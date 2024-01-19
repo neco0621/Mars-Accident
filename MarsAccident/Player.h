@@ -11,10 +11,8 @@ public:
 	//向いている方向
 	enum Dir
 	{
-		kDirDown,	//下	= 0
-		kDirLeft,	//左	= 1
 		kDirRight,	//右	= 2
-		kDirUp,		//上	= 3
+		kDirLeft,	//左	= 1
 	};
 
 public:
@@ -45,8 +43,6 @@ private:
 
 	int m_handle;	//グラフィックのハンドル
 
-	
-
 	//当たり判定用の矩形
 	Rect m_colRect;
 
@@ -58,9 +54,4 @@ private:
 
 	//魔法の杖の発射フレームカウント
 	int m_beamFrame;
-
-	//ダメージを受けてからのフレーム数
-	//当たった時にフレーム数を設定して
-	//毎フレーム減らしていく
-	int m_damageFrame;
 };

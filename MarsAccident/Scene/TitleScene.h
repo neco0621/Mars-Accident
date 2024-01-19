@@ -23,6 +23,7 @@ private:
 	void FadeDraw();	//フェード中描画
 	void NormalDraw();	//非フェード描画
 
+	int m_bgHandle;
 
 public:
 	TitleScene(SceneManager& manager);
