@@ -7,6 +7,10 @@
 #include "ShotBeam.h"
 
 #define PI 3.14
+#define AnimExpDivX 10
+#define AnimExpDivY 8
+#define AnimExpWidth 100
+#define AnimExpHeight 100
 #include <cmath>
 
 namespace
@@ -39,8 +43,10 @@ UFO::UFO(Stage1Scene* pS1Scene) :
 	isJump(true),
 	KnockBack(false),
 	JumpPower(10),
-	m_tq(Game::kScreenHeight * 0.75f)
+	m_tq(Game::kScreenHeight * 0.75f),
+	m_animHnadle(-1)
 {
+	
 }
 
 UFO::~UFO()
@@ -67,6 +73,10 @@ void UFO::Update()
 		{
 			m_pos.y = m_tq - m_radius / 2;
 			JumpPower = 30;
+			DrawRectRotaGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y),
+				AnimExpDivX, AnimExpDivY,AnimExpWidth,AnimExpHeight,
+				1.0, 0.0,
+				m_animHnadle, true, false);
 			ShakeScreen();
 		}
 	}

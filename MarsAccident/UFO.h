@@ -17,6 +17,7 @@ public:
 
 	//メンバー変数にアクセスする
 	void SetHandle(int handle) { m_handle = handle; }
+	void SetAnimHandle(int AnimHandle) { m_animHnadle = AnimHandle; }
 	//UFOの現在位置を取得する
 	Vec2 GetPos() const { return m_pos; }
 	//UFOの当たり判定を取得する
@@ -34,7 +35,7 @@ private:
 	ShotBeam* m_pBeam;
 
 	int m_handle;	//グラフィックのハンドル
-	
+	int m_animHnadle;
 	//接触したかの判定
 	bool m_boundFlag;	
 
@@ -43,7 +44,6 @@ private:
 public:
 	//移動量	1フレーム当たりの移動ベクトルを入れる
 	Vec2 m_vec;
-
 	float JumpPower;
 	bool isJump;
 	float Gravity = 1.0f;

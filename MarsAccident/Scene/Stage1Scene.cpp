@@ -71,6 +71,9 @@ Stage1Scene::Stage1Scene(SceneManager& manager) : Scene(manager),
 	assert(m_life2Handle != -1);
 	m_life3Handle = LoadGraph("data/Life.png");
 	assert(m_life3Handle != -1);
+	m_AnimHandle = LoadGraph("data/explosion.png");
+	assert(m_AnimHandle != -1);
+
 	
 
 	//プレイヤーのメモリ確保.
@@ -79,6 +82,7 @@ Stage1Scene::Stage1Scene(SceneManager& manager) : Scene(manager),
 
 	m_pUfo = new UFO{ this };
 	m_pUfo->SetHandle(m_ufoHandle);
+	m_pUfo->SetAnimHandle(m_AnimHandle);
 
 	m_pBg = new Bg{};
 	m_pBg->SetHandle(m_bgHandle);
@@ -129,6 +133,7 @@ Stage1Scene::~Stage1Scene()
 	DeleteGraph(m_playerHandle);
 	DeleteGraph(m_leftEnemyHandle);
 	DeleteGraph(m_rightEnemyHandle);
+	DeleteGraph(m_AnimHandle);
 
 	//プレイヤーのメモリ解放.
 	delete m_pPlayer;
@@ -316,6 +321,7 @@ void Stage1Scene::Update(Input& input)
 	if (m_downEnemyCount == 10)
 	{
 		manager_.ChangeScene(std::make_shared<TitleScene>(manager_));
+		return;
 	}
 
 	if (m_damageFlag == true)
@@ -348,6 +354,7 @@ void Stage1Scene::Update(Input& input)
 		frame_++;
 		if (frame_ >= 60) {
 			manager_.ChangeScene(std::make_shared<GameOverScene>(manager_));
+			return;
 		}
 	}
 }

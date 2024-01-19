@@ -71,6 +71,7 @@ private:
 	int m_shotHandle;
 	int m_rocketHandle;
 	int m_ufoHandle;
+	int m_AnimHandle;
 
 	int m_lifeCount;
 
