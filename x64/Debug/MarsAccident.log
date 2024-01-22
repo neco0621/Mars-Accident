@@ -1,0 +1,6 @@
+﻿  Stage1Scene.cpp
+D:\Mars-Accident\Scene\Stage1Scene.cpp(380,39): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+D:\Mars-Accident\Scene\Stage1Scene.cpp(461,17): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+D:\Mars-Accident\Scene\Stage1Scene.cpp(471,13): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+D:\Mars-Accident\Scene\Stage1Scene.cpp(476,9): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+  MarsAccident.vcxproj -> D:\Mars-Accident\x64\Debug\MarsAccident.exe
