@@ -3,11 +3,13 @@
 #include "Rect.h"
 
 class Stage1Scene;
+class Stage2Scene;
 class ShotBeam;
 class Rocket
 {
 public:
 	Rocket(Stage1Scene* pS1Scene);
+	Rocket(Stage2Scene* pS2Scene);
 	~Rocket();
 
 	void Init();
@@ -34,6 +36,7 @@ public:
 	int m_life;
 private:
 	Stage1Scene* m_pS1Scene;
+	Stage2Scene* m_pS2Scene;
 	ShotBeam* m_pBeam;
 
 	int m_handle;	//グラフィックのハンドル

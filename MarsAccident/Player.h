@@ -4,6 +4,7 @@
 #include "Rect.h"
 
 class Stage1Scene;
+class Stage2Scene;
 class ShotBeam;
 class Player
 {
@@ -17,10 +18,12 @@ public:
 
 public:
 	Player(Stage1Scene* S1Scene);
+	Player(Stage2Scene* S2Scene);
 	~Player();
 
 	void Init();
 	void Update();
+	void S2Update();
 	void Draw();
 
 	//メンバー変数にアクセスする
@@ -38,6 +41,7 @@ public:
 
 private:
 	Stage1Scene* m_pS1Scene;
+	Stage2Scene* m_pS2Scene;
 
 	std::vector<ShotBeam> m_pBeam;
 

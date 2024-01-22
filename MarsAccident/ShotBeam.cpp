@@ -99,10 +99,6 @@ void ShotBeam::Draw()
 
 void ShotBeam::Start(Vec2 pos)
 {
-	//SceneMainの設定忘れチェック
-	assert(m_pS1Scene);	//m_pMain == nullptrなら止まる
-
-
 	m_isExist = true;
 	//初期配置の決定
 	m_pos = pos + m_z;

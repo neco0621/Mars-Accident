@@ -17,8 +17,18 @@ namespace
 }
 
 Rocket::Rocket(Stage1Scene* pS1Scene) :
+	m_pS1Scene(pS1Scene),
 	m_handle(-1),
 	m_pos(KPosX,KPosY),
+	m_radius(kRadius),
+	m_life(kLife)
+{
+}
+
+Rocket::Rocket(Stage2Scene* pS2Scene) :
+	m_pS2Scene(pS2Scene),
+	m_handle(-1),
+	m_pos(KPosX, KPosY),
 	m_radius(kRadius),
 	m_life(kLife)
 {

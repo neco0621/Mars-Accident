@@ -4,6 +4,7 @@
 #include <vector>
 
 class Stage1Scene;
+class Stage2Scene;
 class UFO;
 class Player;
 class Input;
@@ -25,7 +26,8 @@ public:
 	//弾をスタートさせる
 	virtual void Start(Vec2 pos);
 
-	void SetMain(Stage1Scene* pS1Scene) { m_pS1Scene = pS1Scene; }
+	void SetS1(Stage1Scene* pS1Scene) { m_pS1Scene = pS1Scene; }
+	void SetS2(Stage2Scene* pS2Scene) { m_pS2Scene = pS2Scene; }
 	void SetPlayer(Player* pPlayer) { m_pPlayer = pPlayer; }
 	void SetHandle(int handle) { m_handle = handle; }
 
@@ -53,6 +55,7 @@ public:
 protected:
 	//SceneMainの関数を呼び出すためにポインタを覚えておく
 	Stage1Scene* m_pS1Scene;
+	Stage2Scene* m_pS2Scene;
 	//ショットを撃ったプレイヤーのポインタを覚えておく
 	Player* m_pPlayer;
 	//

@@ -49,6 +49,23 @@ UFO::UFO(Stage1Scene* pS1Scene) :
 	
 }
 
+UFO::UFO(Stage2Scene* pS2Scene) :
+	m_pS2Scene(pS2Scene),
+	m_pBeam(0),
+	m_handle(-1),
+	m_pos(kPosX, kPosY),
+	m_boundFlag(false),
+	m_radius(kRadius),
+	m_vec(0, kSpeed),
+	m_MoveFlag(false),
+	isJump(true),
+	KnockBack(false),
+	JumpPower(10),
+	m_tq(Game::kScreenHeight * 0.75f),
+	m_animHnadle(-1)
+{
+}
+
 UFO::~UFO()
 {
 }
@@ -73,11 +90,10 @@ void UFO::Update()
 		{
 			m_pos.y = m_tq - m_radius / 2;
 			JumpPower = 30;
-			DrawRectRotaGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y),
+			/*DrawRectRotaGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y),
 				AnimExpDivX, AnimExpDivY,AnimExpWidth,AnimExpHeight,
 				1.0, 0.0,
-				m_animHnadle, true, false);
-			ShakeScreen();
+				m_animHnadle, true, false);*/
 		}
 	}
 	
@@ -110,17 +126,21 @@ void UFO::Draw()
 {
 	DrawFormatString(8, 56, GetColor(255, 255, 255),
 		"%f",m_angle);
-	//“–‚½‚è”»’è‚Ì•\Ž¦
 
 	DrawRotaGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y),
 		1.0, DX_PI_F / 180.0 * m_angle,
 		m_handle, true);
 	m_colRect.DrawC(GetColor(255, 0, 0), false);
-
 }
 
-void UFO::ShakeScreen()
+void UFO::S2Draw()
 {
+	
+	DrawRotaGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y),
+		1.0, DX_PI_F / 180.0 * m_angle,
+		m_handle, true);
+
+	m_colRect.DrawC(GetColor(255, 0, 0), false);
 }
 
 

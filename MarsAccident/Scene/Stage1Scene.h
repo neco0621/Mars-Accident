@@ -72,13 +72,14 @@ private:
 	int m_rocketHandle;
 	int m_ufoHandle;
 	int m_AnimHandle;
-
+	int m_downEnemyCount;
 	int m_lifeCount;
 
 	bool m_damageFlag;
 	bool m_gameOverFlag;
+	bool IsGround;
 
-	int m_downEnemyCount;
+	
 	
 
 	//ƒvƒŒƒCƒ„[

@@ -3,16 +3,19 @@
 #include "Rect.h"
 
 class Stage1Scene;
+class Stage2Scene;
 class ShotBeam;
 class UFO
 {
 public:
 	UFO(Stage1Scene* pS1Scene);
+	UFO(Stage2Scene* pS2Scene);
 	~UFO();
 
 	void Init();
 	void Update();
 	void Draw();
+	void S2Draw();
 	void ShakeScreen();
 
 	//メンバー変数にアクセスする
@@ -32,12 +35,13 @@ public:
 	float m_radius;
 private:
 	Stage1Scene* m_pS1Scene;
+	Stage2Scene* m_pS2Scene;
 	ShotBeam* m_pBeam;
 
 	int m_handle;	//グラフィックのハンドル
 	int m_animHnadle;
 	//接触したかの判定
-	bool m_boundFlag;	
+	bool m_boundFlag;
 
 	//Beamの座標
 	Vec2 m_beamPos;

@@ -1,6 +1,8 @@
 #include "Stage1Scene.h"
+#include "Stage2Scene.h"
 #include "SceneManager.h"
 #include "GameOverScene.h"
+#include "GameClearScene.h"
 #include "TitleScene.h"
 #include "DxLib.h"
 #include "../Player.h"
@@ -44,7 +46,8 @@ Stage1Scene::Stage1Scene(SceneManager& manager) : Scene(manager),
 	m_downEnemyCount(0),
 	m_damageFlag(false),
 	m_lifeCount(0),
-	m_gameOverFlag(false)
+	m_gameOverFlag(false),
+	IsGround(false)
 {
 	//ゲーム画面描画先の生成.
 	//画面サイズと同じ大きさのグラフィックデータを作成する.
@@ -318,9 +321,14 @@ void Stage1Scene::Update(Input& input)
 	//画面揺れフレームのカウントダウン
 	m_shakeFrame--;
 
-	if (m_downEnemyCount == 10)
+	if (m_pUfo->m_pos.y >= m_pUfo->m_tq - m_pUfo->m_radius / 2)
 	{
-		manager_.ChangeScene(std::make_shared<TitleScene>(manager_));
+		IsGround = true;
+	}
+
+	if (m_downEnemyCount == 5)
+	{
+		manager_.ChangeScene(std::make_shared<Stage2Scene>(manager_));
 		return;
 	}
 
@@ -351,11 +359,8 @@ void Stage1Scene::Update(Input& input)
 
 	if (m_gameOverFlag == true)
 	{
-		frame_++;
-		if (frame_ >= 60) {
-			manager_.ChangeScene(std::make_shared<GameOverScene>(manager_));
-			return;
-		}
+		manager_.ChangeScene(std::make_shared<GameOverScene>(manager_));
+		return;
 	}
 }
 
@@ -377,14 +382,25 @@ void Stage1Scene::Draw()
 	m_pPlayer->Draw();
 	m_pUfo->Draw();
 	
-
-	
 	for (int i = 0; i < m_pBeam.size(); i++)
 	{
 		if (!m_pBeam[i])		continue;
 		m_pBeam[i]->Draw();
 	}
-	
+	if (IsGround)
+	{
+		SetDrawScreen(DX_SCREEN_BACK);
+		
+		int x = GetRand(kWipeFrame) - static_cast<int>(kWipeFrame * 2);
+		int y = GetRand(kWipeFrame) - static_cast<int>(kWipeFrame * 2);
+		DrawGraph(x,y,m_gameScreenHandle,true);
+		int Count = 0;
+		Count++;
+		if (Count < 120)
+		{
+			IsGround = false;
+		}
+	}
 	
 
 	for (int i = 0; i < m_pEnemy.size(); i++)
