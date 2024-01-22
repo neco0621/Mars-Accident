@@ -328,7 +328,7 @@ void Stage1Scene::Update(Input& input)
 
 	if (m_downEnemyCount == 5)
 	{
-		manager_.ChangeScene(std::make_shared<Stage2Scene>(manager_));
+		manager_.ChangeScene(std::make_shared<GameClearScene>(manager_));
 		return;
 	}
 
