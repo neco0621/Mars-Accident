@@ -7,8 +7,6 @@
 class TitleScene : public Scene
 {
 private:
-	int handle_ = 0;
-	int frame_ = 0;
 	//更新メンバ関数ポインタ
 	void (TitleScene::* updateFunc_)(Input& input);
 	//描画メンバ関数ポインタ
@@ -23,8 +21,12 @@ private:
 	void FadeDraw();	//フェード中描画
 	void NormalDraw();	//非フェード描画
 
-	int m_bgHandle;
+	void BackScroll(const int t_areaX, const int tD_graph, const int t_winWidth, const int t_winHeight);
 
+	int m_bgHandle;
+	int frame_;
+	int areaX;
+	int speed;
 public:
 	TitleScene(SceneManager& manager);
 	~TitleScene();

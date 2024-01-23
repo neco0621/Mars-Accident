@@ -24,6 +24,23 @@ void TitleScene::NormalUpdate(Input& input)
 		updateFunc_ = &TitleScene::FadeOutUpdate;
 		drawFunc_ = &TitleScene::FadeDraw;
 	}
+	BackScroll(areaX, m_bgHandle, 640, 480);
+	if (CheckHitKey(KEY_INPUT_A))
+	{
+		areaX -= speed;
+		if (areaX < 0)
+		{
+			areaX = 640;
+		}
+	}
+	if (CheckHitKey(KEY_INPUT_D))
+	{
+		areaX += speed;
+		if (areaX > 640)
+		{
+			areaX = 0;
+		}
+	}
 }
 
 void TitleScene::FadeOutUpdate(Input& input)
@@ -53,11 +70,20 @@ void TitleScene::NormalDraw()
 	DrawString(Game::kScreenWidth / 2, Game::kScreenHeight * 0.75, "START", 0xffffff);
 }
 
-TitleScene::TitleScene(SceneManager& manager) : Scene(manager),
-m_bgHandle(-1)
+void TitleScene::BackScroll(const int t_areaX, const int tD_graph, const int t_winWidth, const int t_winHeight)
 {
-	m_bgHandle = LoadGraph("data/titleBg.png");
-	assert(handle_ >= 0);
+	DrawRectGraph(0, 0, t_areaX, 0, t_winWidth, t_winHeight, tD_graph, false);
+	DrawRectGraph(t_winWidth - t_areaX, 0, 0, 0, t_areaX, t_winHeight, tD_graph, false);
+}
+
+TitleScene::TitleScene(SceneManager& manager) : Scene(manager),
+frame_(0),
+m_bgHandle(-1),
+areaX(0),
+speed(20)
+{
+	m_bgHandle = LoadGraph("data/Title.bmp");
+	assert(m_bgHandle >= 0);
 	frame_ = 60;
 	updateFunc_ = &TitleScene::FadeInUpdate;
 	drawFunc_ = &TitleScene::FadeDraw;
@@ -65,7 +91,7 @@ m_bgHandle(-1)
 
 TitleScene::~TitleScene()
 {
-	DeleteGraph(handle_);
+	DeleteGraph(m_bgHandle);
 }
 
 void TitleScene::Update(Input& input)

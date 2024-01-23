@@ -1,6 +1,7 @@
 #pragma once
 #include "Vec2.h"
 #include "Rect.h"
+#include "Animation.h"
 
 class Stage1Scene;
 class Stage2Scene;
@@ -16,7 +17,6 @@ public:
 	void Update();
 	void Draw();
 	void S2Draw();
-	void ShakeScreen();
 
 	//メンバー変数にアクセスする
 	void SetHandle(int handle) { m_handle = handle; }

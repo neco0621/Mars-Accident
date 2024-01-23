@@ -28,7 +28,7 @@ namespace
 	constexpr int kAnimFrameCycle = _countof(kUseFrame) * kAnimFrameNum;
 
 	//–‚–@‚Ìñ‚Ì”­ËŠÔŠu
-	constexpr int kBeamFrame = 10;
+	constexpr int kBeamFrame = 20;
 }
 
 Player::Player(Stage1Scene* S1Scene) :

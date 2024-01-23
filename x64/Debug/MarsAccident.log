@@ -1,0 +1,31 @@
+﻿  graphic.cpp
+C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Mars-Accident\Animation.h(45,12): error C3646: 'g': 不明なオーバーライド指定子です
+C:\Mars-Accident\Animation.h(45,13): error C4430: 型指定子がありません - int と仮定しました。メモ: C++ は int を既定値としてサポートしていません
+C:\Mars-Accident\Animation.h(58,32): error C2065: 'Graphic': 定義されていない識別子です。
+C:\Mars-Accident\Animation.h(58,40): error C2146: 構文エラー: ')' が、識別子 'graphic' の前に必要です。
+C:\Mars-Accident\graphic.cpp(87,27): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\graphic.cpp(131,67): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\graphic.cpp(138,22): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\graphic.cpp(142,67): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\graphic.cpp(149,22): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\graphic.cpp(153,67): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\graphic.cpp(180,31): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\graphic.cpp(179,31): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\graphic.cpp(188,31): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\graphic.cpp(187,34): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\graphic.cpp(195,31): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\graphic.cpp(194,34): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\graphic.cpp(204,34): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\graphic.cpp(203,31): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\graphic.cpp(212,34): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\graphic.cpp(211,34): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\graphic.cpp(220,34): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\graphic.cpp(219,34): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\graphic.cpp(228,34): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\graphic.cpp(227,34): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\graphic.cpp(310,57): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\graphic.cpp(315,63): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+  UFO.cpp
+C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  コードを生成中...
