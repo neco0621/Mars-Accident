@@ -24,8 +24,6 @@
 
 #include <cassert>
 
-using namespace DxLib;
-
 namespace
 {
 	//一度に登場できる最大の数.
@@ -389,21 +387,19 @@ void Stage1Scene::Draw()
 		if (!m_pBeam[i])		continue;
 		m_pBeam[i]->Draw();
 	}
-	
-	SetDrawScreen(DX_SCREEN_BACK);
-	ClearDrawScreen();
-
 	if (IsGround)
 	{
+		SetDrawScreen(DX_SCREEN_BACK);
 		
-		int x = GetRand(kWipeFrame * 2) - static_cast<int>(kWipeFrame);
-		int y = GetRand(kWipeFrame * 2) - static_cast<int>(kWipeFrame);
-
-		x = 100;
-		y = 100;
-
+		int x = GetRand(kWipeFrame) - static_cast<int>(kWipeFrame * 2);
+		int y = GetRand(kWipeFrame) - static_cast<int>(kWipeFrame * 2);
 		DrawGraph(x,y,m_gameScreenHandle,true);
-		IsGround = false;
+		int Count = 0;
+		Count++;
+		if (Count < 120)
+		{
+			IsGround = false;
+		}
 	}
 	
 
@@ -439,11 +435,7 @@ void Stage1Scene::Draw()
 	DrawFormatString(8, 104, GetColor(255, 255, 255), "倒した敵の数%d", m_downEnemyCount);
 #endif
 	//バックバッファに書き込む設定に戻しておく
-	if (m_wipeFrame > kWipeFrame)
-	{
-		DrawGraph(0, 0, m_gameScreenHandle, true);
-		return;
-	}
+	SetDrawScreen(DX_SCREEN_BACK);
 
 	//ゲーム画面をバックバッファに描画する
 	int screenX = 0;
