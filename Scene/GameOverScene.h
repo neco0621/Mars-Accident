@@ -5,6 +5,7 @@ class GameOverScene : public Scene
 public:
     GameOverScene(SceneManager& mgr);
     ~GameOverScene();
+    virtual void Init();
     virtual void Update(Input& input);
     virtual void Draw();
 

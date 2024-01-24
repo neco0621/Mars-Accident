@@ -1,11 +1,11 @@
 #pragma once
 #include "Vec2.h"
 #include "Rect.h"
-#include "Animation.h"
 
 class Stage1Scene;
 class Stage2Scene;
-class ShotBeam;
+class Animation;
+class Graphic;	
 class UFO
 {
 public:
@@ -36,7 +36,8 @@ public:
 private:
 	Stage1Scene* m_pS1Scene;
 	Stage2Scene* m_pS2Scene;
-	ShotBeam* m_pBeam;
+	Animation* m_pAnimation;
+	Graphic* graphic;
 
 	int m_handle;	//グラフィックのハンドル
 	int m_animHnadle;

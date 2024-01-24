@@ -17,6 +17,7 @@ class Rocket;
 class Bg;
 class EnemyBase;
 class ShotBeam;
+class Animation;
 class Bg;
 
 class Stage1Scene : public Scene
@@ -30,7 +31,6 @@ public:
 
 	void Update(Input& input);
 	void Draw();
-	void ChangeGameOverScene();
 
 	//特定の座標から一番近くにいる敵の座標を返す関数
 	Vec2 GetNearEnemyPos(Vec2 pos);
@@ -91,12 +91,15 @@ private:
 
 	Rocket* m_pRocket;
 
+	Animation AnimExpel;
+
 	std::vector<ShotBeam*> m_pBeam;
 
 	//敵
 	std::vector<EnemyBase*> m_pEnemy;	//配列のサイズは実行時に決める(今回はコンストラクタ)
 	//EnemyBase* m_pEnemy[16];   ←今までの書き方
 
+	Animation* m_pAnim;
 
 	Rect m_pRect;
 

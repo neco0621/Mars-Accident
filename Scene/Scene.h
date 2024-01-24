@@ -18,6 +18,8 @@ public:
 	/// <param name="manager">SceneManagerの参照</param>
 	Scene(SceneManager& manager);
 
+	virtual void Init() = 0;
+
 	/// <summary>
 	/// シーンの更新
 	/// </summary>

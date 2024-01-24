@@ -23,12 +23,17 @@
 #define AnimationOnce		-11111
 
 //アニメーション構造体のコア部分
-typedef struct _AnimationCore
+class Graphic;
+class UFO;
+class Animation
 {
-	int NowHandleIndex = -1;	//現在のハンドルの要素数
+public:
+	Animation();
+	~Animation();
+	int NowHandleIndex;	//現在のハンドルの要素数
 
-	int DivX = 0;			//画像の横分割数
-	int DivY = 0;			//画像の縦分割数
+	int DivX;			//画像の横分割数
+	int DivY;			//画像の縦分割数
 
 	int FrameCnt = 0;		//アニメーションのコマ時間
 	int FrameMax = 0;		//アニメーションのコマ時間MAX
@@ -36,28 +41,29 @@ typedef struct _AnimationCore
 	int FrameByFrameCnt = 0;	//アニメのコマ送り時間
 	int FrameByFrameMax = 0;	//アニメのコマ送り時間MAX
 
-	BOOL IsAnimStractFlg = FALSE;	//アニメーション開始フラグ
+	bool IsAnimStractFlg;	//アニメーション開始フラグ
 
-}AnimationCore;
+	void SetAnimHandle(int animation) { Handle = animation; }
 
-typedef struct _Animation
-{
-	Graphic			g;	//画像
-	AnimationCore	a;	//アニメーションコア
+	Graphic	g;	//画像
 	int* Handle;		//ハンドル(メモリを動的確保)
-}Animation;
 
-//外部グローバル変数
-extern Animation AnimExpl;	//爆発アニメーション
 
-//外部プロトコル宣言
-extern BOOL Animation_Init(VOID);						//読込・ハンドル生成
-extern VOID Animation_End(VOID);						//後始末
-extern VOID AnimationLoadErrMessage(const char* path);	//読込エラーメッセージ
+	//外部グローバル変数
+	Animation* AnimExpl;	//爆発アニメーション
 
-extern Animation LoadAnimation(Graphic graphic, int XNum, int YNum);	//アニメーション読込
-extern VOID DrawAnimation(Animation* animation);						//描画
-extern VOID DeleteAnimation(Animation animation);						//解放
+	//外部プロトコル宣言
+	BOOL Animation_Init();						//読込・ハンドル生成
+	void Animation_End();						//後始末
+	void AnimationLoadErrMessage(const char* path);	//読込エラーメッセージ
 
-extern VOID AnimationStart(Animation* animation, int MillTime, int MillInterval);	//アニメーションの開始
+	Animation* LoadAnimation(Graphic graphic, int XNum, int YNum);	//アニメーション読込
+	void DrawAnimation(Animation* animation);						//描画
 
+	Animation* DeleteAnimation(Animation animation);
+
+	void AnimationStart(Animation* animation, int MillTime, int MillInterval);	//アニメーションの開始
+
+	UFO* m_pUfo;
+
+};

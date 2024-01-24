@@ -13,6 +13,9 @@
 #include "../Game.h"
 #include "../Bg.h"
 #include "../Input.h"
+#include "../graphic.h"
+#include "../Animation.h"
+
 
 //“oê‚·‚é“G
 //#include "EnemyBase.h"
@@ -85,6 +88,8 @@ Stage1Scene::Stage1Scene(SceneManager& manager) : Scene(manager),
 
 	m_pUfo = new UFO{ this };
 	m_pUfo->SetHandle(m_ufoHandle);
+
+
 	m_pUfo->SetAnimHandle(m_AnimHandle);
 
 	m_pBg = new Bg{};
@@ -182,6 +187,10 @@ void Stage1Scene::Init()
 	m_pPlayer->Init();
 	m_pUfo->Init();
 	m_pRocket->Init();
+	m_pAnim->AnimationStart(
+		&AnimExpel,
+		1000,
+		500	);
 }
 
 void Stage1Scene::End()

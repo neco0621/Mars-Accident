@@ -18,6 +18,10 @@ GameClearScene::~GameClearScene()
 {
 }
 
+void GameClearScene::Init()
+{
+}
+
 void GameClearScene::Update(Input& input)
 {
 	(this->*m_updateFunc)(input);

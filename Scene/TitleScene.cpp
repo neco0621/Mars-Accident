@@ -94,6 +94,10 @@ TitleScene::~TitleScene()
 	DeleteGraph(m_bgHandle);
 }
 
+void TitleScene::Init()
+{
+}
+
 void TitleScene::Update(Input& input)
 {
 	(this->*updateFunc_)(input);

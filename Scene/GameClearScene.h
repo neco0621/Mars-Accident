@@ -5,6 +5,7 @@ class GameClearScene : public Scene
 public:
     GameClearScene(SceneManager& mgr);
     ~GameClearScene();
+    virtual void Init();
     virtual void Update(Input& input);
     virtual void Draw();
 

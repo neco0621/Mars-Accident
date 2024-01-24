@@ -5,6 +5,8 @@
 #include "Rect.h"
 #include "Scene/Stage1Scene.h"
 #include "ShotBeam.h"
+#include "Animation.h"
+#include "graphic.h"
 
 #define PI 3.14
 #define AnimExpDivX 10
@@ -33,7 +35,6 @@ namespace
 
 UFO::UFO(Stage1Scene* pS1Scene) :
 	m_pS1Scene(pS1Scene),
-	m_pBeam(0),
 	m_handle(-1),
 	m_pos(kPosX, kPosY),
 	m_boundFlag(false),
@@ -51,7 +52,6 @@ UFO::UFO(Stage1Scene* pS1Scene) :
 
 UFO::UFO(Stage2Scene* pS2Scene) :
 	m_pS2Scene(pS2Scene),
-	m_pBeam(0),
 	m_handle(-1),
 	m_pos(kPosX, kPosY),
 	m_boundFlag(false),
@@ -73,8 +73,7 @@ UFO::~UFO()
 void UFO::Init()
 {
 	m_colRect.SetCenter(m_pos.x, m_pos.y, kWidth, kHeight);
-	AnimationStart(&AnimExpl,1000,500);
-
+	m_pAnimation->AnimationStart(m_pAnimation, 1000, 500);
 }
 
 void UFO::Update()
@@ -90,7 +89,7 @@ void UFO::Update()
 		// ’n–Ê‚É‚Â‚¢‚½Žž
 		if (m_pos.y >= m_tq - m_radius / 2)
 		{
-			DrawAnimation(&AnimExpl);
+			m_pAnimation->DrawAnimation(m_pAnimation->AnimExpl);
 			m_pos.y = m_tq - m_radius / 2;
 			JumpPower = 30;
 			/*DrawRectRotaGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y),

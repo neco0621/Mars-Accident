@@ -5,6 +5,13 @@ SceneManager::~SceneManager()
 {
 }
 
+void SceneManager::Init()
+{
+	for (auto& scene : scenes_) {
+		scene->Init();
+	}
+}
+
 void SceneManager::Update(Input& input)
 {
 	scenes_.back()->Update(input);

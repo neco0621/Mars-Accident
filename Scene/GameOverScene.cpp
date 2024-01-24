@@ -17,6 +17,10 @@ GameOverScene::~GameOverScene()
 {
 }
 
+void GameOverScene::Init()
+{
+}
+
 void GameOverScene::Update(Input& input)
 {
 	(this->*m_updateFunc)(input);

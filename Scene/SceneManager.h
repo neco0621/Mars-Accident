@@ -16,6 +16,8 @@ private:
 	std::list<std::shared_ptr<Scene>>scenes_;
 public:
 	~SceneManager();
+	void Init();
+
 	/// <summary>
 	/// ‚Á‚Ä‚¢‚éƒV[ƒ“‚ÌUpdateŠÖ”‚ğŒÄ‚Ño‚·
 	/// </summary>

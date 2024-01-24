@@ -30,6 +30,7 @@ private:
 public:
 	TitleScene(SceneManager& manager);
 	~TitleScene();
+	void Init();
 	void Update(Input& input);
 	void Draw();
 };
