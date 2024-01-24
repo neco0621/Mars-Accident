@@ -73,7 +73,7 @@ UFO::~UFO()
 void UFO::Init()
 {
 	m_colRect.SetCenter(m_pos.x, m_pos.y, kWidth, kHeight);
-	m_pAnimation->AnimationStart(m_pAnimation, 1000, 500);
+	//m_pAnimation->AnimationStart(m_pAnimation, 1000, 500);
 }
 
 void UFO::Update()
@@ -89,7 +89,7 @@ void UFO::Update()
 		// ’n–Ê‚É‚Â‚¢‚½Žž
 		if (m_pos.y >= m_tq - m_radius / 2)
 		{
-			m_pAnimation->DrawAnimation(m_pAnimation->AnimExpl);
+			//m_pAnimation->DrawAnimation(m_pAnimation->AnimExpl);
 			m_pos.y = m_tq - m_radius / 2;
 			JumpPower = 30;
 			/*DrawRectRotaGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y),

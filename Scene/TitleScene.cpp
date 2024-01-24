@@ -68,6 +68,10 @@ void TitleScene::NormalDraw()
 {
 	DrawString(Game::kScreenWidth / 2 - 24, Game::kScreenHeight * 0.25, "MarsAccident", 0xffffff);
 	DrawString(Game::kScreenWidth / 2, Game::kScreenHeight * 0.75, "START", 0xffffff);
+	for (int i = 0; i < 64; i++)
+	{
+		DrawRectGraph(100,100, i,i,i*64,i*64,m_moon,true);
+	}
 }
 
 void TitleScene::BackScroll(const int t_areaX, const int tD_graph, const int t_winWidth, const int t_winHeight)
@@ -83,6 +87,7 @@ areaX(0),
 speed(20)
 {
 	m_bgHandle = LoadGraph("data/Title.bmp");
+	m_moon = LoadGraph("data/Moon.png");
 	assert(m_bgHandle >= 0);
 	frame_ = 60;
 	updateFunc_ = &TitleScene::FadeInUpdate;

@@ -91,7 +91,7 @@ private:
 
 	Rocket* m_pRocket;
 
-	Animation AnimExpel;
+	//Animation AnimExpel;
 
 	std::vector<ShotBeam*> m_pBeam;
 

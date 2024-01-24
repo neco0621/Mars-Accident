@@ -187,10 +187,10 @@ void Stage1Scene::Init()
 	m_pPlayer->Init();
 	m_pUfo->Init();
 	m_pRocket->Init();
-	m_pAnim->AnimationStart(
+	/*m_pAnim->AnimationStart(
 		&AnimExpel,
 		1000,
-		500	);
+		500	);*/
 }
 
 void Stage1Scene::End()
@@ -396,7 +396,7 @@ void Stage1Scene::Draw()
 		if (!m_pBeam[i])		continue;
 		m_pBeam[i]->Draw();
 	}
-	if (IsGround)
+	/*if (IsGround)
 	{
 		SetDrawScreen(DX_SCREEN_BACK);
 		
@@ -409,7 +409,7 @@ void Stage1Scene::Draw()
 		{
 			IsGround = false;
 		}
-	}
+	}*/
 	
 
 	for (int i = 0; i < m_pEnemy.size(); i++)
