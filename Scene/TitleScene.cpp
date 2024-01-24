@@ -8,6 +8,20 @@
 #include <cassert>
 
 
+namespace
+{
+	// アニメーション間隔
+	constexpr int kAnimInterval = 3;
+	// 高さ・幅
+	constexpr int kAnimWidth = 48;
+	constexpr int kAnimHeight = 48;
+	// 縦横数
+	constexpr int kRow = 8;
+	constexpr int kLine = 8;
+	// アニメーション数
+	constexpr int kAnimNum = 60;
+}
+
 void TitleScene::FadeInUpdate(Input& input)
 {
 	frame_--;
@@ -25,22 +39,7 @@ void TitleScene::NormalUpdate(Input& input)
 		drawFunc_ = &TitleScene::FadeDraw;
 	}
 	BackScroll(areaX, m_bgHandle, 640, 480);
-	if (CheckHitKey(KEY_INPUT_A))
-	{
-		areaX -= speed;
-		if (areaX < 0)
-		{
-			areaX = 640;
-		}
-	}
-	if (CheckHitKey(KEY_INPUT_D))
-	{
-		areaX += speed;
-		if (areaX > 640)
-		{
-			areaX = 0;
-		}
-	}
+	AnimFrame = (AnimFrame + 1) % (kAnimNum * kAnimInterval);
 }
 
 void TitleScene::FadeOutUpdate(Input& input)
@@ -68,10 +67,14 @@ void TitleScene::NormalDraw()
 {
 	DrawString(Game::kScreenWidth / 2 - 24, Game::kScreenHeight * 0.25, "MarsAccident", 0xffffff);
 	DrawString(Game::kScreenWidth / 2, Game::kScreenHeight * 0.75, "START", 0xffffff);
-	for (int i = 0; i < 64; i++)
-	{
-		DrawRectGraph(100,100, i,i,i*64,i*64,m_moon,true);
-	}
+	int index = AnimFrame / kAnimInterval;
+	int srcX = (index % kRow) * kAnimWidth;
+	int srcY = (index / kLine) * kAnimHeight;
+
+	DrawRectRotaGraph(static_cast<int>(100), static_cast<int>(100),
+		srcX, srcY, kAnimWidth, kAnimHeight,
+		1.0, 0.0,
+		m_animHandle, true, false);
 }
 
 void TitleScene::BackScroll(const int t_areaX, const int tD_graph, const int t_winWidth, const int t_winHeight)
@@ -84,10 +87,11 @@ TitleScene::TitleScene(SceneManager& manager) : Scene(manager),
 frame_(0),
 m_bgHandle(-1),
 areaX(0),
-speed(20)
+speed(20),
+AnimFrame(0)
 {
 	m_bgHandle = LoadGraph("data/Title.bmp");
-	m_moon = LoadGraph("data/Moon.png");
+	m_animHandle = LoadGraph("data/Moon.png");
 	assert(m_bgHandle >= 0);
 	frame_ = 60;
 	updateFunc_ = &TitleScene::FadeInUpdate;

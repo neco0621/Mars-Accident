@@ -30,7 +30,16 @@ namespace
 
 	constexpr float kSpeed = 3.0f;
 
-	constexpr int kWipeFrame = 30;
+	// アニメーション間隔
+	constexpr int kAnimInterval = 3;
+	// 高さ・幅
+	constexpr int kAnimWidth = 100;
+	constexpr int kAnimHeight = 100;
+	// 縦横数
+	constexpr int kRow = 10;
+	constexpr int kLine = 8;
+	// アニメーション数
+	constexpr int kAnimNum = 71;
 }
 
 UFO::UFO(Stage1Scene* pS1Scene) :
@@ -43,6 +52,7 @@ UFO::UFO(Stage1Scene* pS1Scene) :
 	m_MoveFlag(false),
 	isJump(true),
 	KnockBack(false),
+	AnimFlag(false),
 	JumpPower(10),
 	m_tq(Game::kScreenHeight * 0.75f),
 	m_animHnadle(-1)
@@ -62,9 +72,11 @@ UFO::UFO(Stage2Scene* pS2Scene) :
 	KnockBack(false),
 	JumpPower(10),
 	m_tq(Game::kScreenHeight * 0.75f),
-	m_animHnadle(-1)
+	m_animHnadle(-1),
+	AnimPosX(0)
 {
-}
+	m_animFrame = 0;
+} 
 
 UFO::~UFO()
 {
@@ -92,11 +104,21 @@ void UFO::Update()
 			//m_pAnimation->DrawAnimation(m_pAnimation->AnimExpl);
 			m_pos.y = m_tq - m_radius / 2;
 			JumpPower = 30;
-			/*DrawRectRotaGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y),
-				AnimExpDivX, AnimExpDivY,AnimExpWidth,AnimExpHeight,
-				1.0, 0.0,
-				m_animHnadle, true, false);*/
-		}
+			AnimPosX = m_pos.x;
+			AnimFlag = true;			
+		}			
+	}
+
+	if (AnimFlag == true)
+	{
+		m_animFrame = (m_animFrame + 1) % (kAnimNum * kAnimInterval);
+		m_animFrame++;
+	}
+
+	if (m_animFrame >= 120)
+	{
+		AnimFlag = false;
+		m_animFrame = 0;
 	}
 	
 	
@@ -133,6 +155,18 @@ void UFO::Draw()
 		1.0, DX_PI_F / 180.0 * m_angle,
 		m_handle, true);
 	m_colRect.DrawC(GetColor(255, 0, 0), false);
+
+	if (AnimFlag == true)
+	{
+		int index = m_animFrame / kAnimInterval;
+		int srcX = (index % kRow) * kAnimWidth;
+		int srcY = (index / kLine) * kAnimHeight;
+
+		DrawRectRotaGraph(static_cast<int>(AnimPosX), static_cast<int>(m_tq + 25),
+			srcX, srcY, kAnimWidth, kAnimHeight,
+			1.0, 0.0,
+			m_animHnadle, true, false);
+	}	
 }
 
 void UFO::S2Draw()
@@ -144,5 +178,6 @@ void UFO::S2Draw()
 
 	m_colRect.DrawC(GetColor(255, 0, 0), false);
 }
+
 
 

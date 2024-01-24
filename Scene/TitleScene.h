@@ -24,10 +24,12 @@ private:
 	void BackScroll(const int t_areaX, const int tD_graph, const int t_winWidth, const int t_winHeight);
 
 	int m_bgHandle;
+	int m_animHandle;
 	int m_moon;
 	int frame_;
 	int areaX;
 	int speed;
+	int AnimFrame;
 public:
 	TitleScene(SceneManager& manager);
 	~TitleScene();

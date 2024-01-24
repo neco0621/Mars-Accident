@@ -36,7 +36,7 @@ public:
 private:
 	Stage1Scene* m_pS1Scene;
 	Stage2Scene* m_pS2Scene;
-	Animation* m_pAnimation;
+	//Animation* m_pAnimation;
 	Graphic* graphic;
 
 	int m_handle;	//グラフィックのハンドル
@@ -59,5 +59,9 @@ public:
 	float m_tq;
 
 	bool m_MoveFlag;
+
+	int m_animFrame;
+	bool AnimFlag;
+	int AnimPosX;
 };
 

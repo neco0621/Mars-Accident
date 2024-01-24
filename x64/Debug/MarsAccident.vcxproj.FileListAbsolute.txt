@@ -1,1 +1,2 @@
 C:\Mars-Accident\x64\Debug\MarsAccident.exe
+D:\Mars-Accident\x64\Debug\MarsAccident.exe
