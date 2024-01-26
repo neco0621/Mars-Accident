@@ -21,6 +21,7 @@ public:
 	//メンバー変数にアクセスする
 	void SetHandle(int handle) { m_handle = handle; }
 	void SetAnimHandle(int AnimHandle) { m_animHnadle = AnimHandle; }
+	void Start();
 	//UFOの現在位置を取得する
 	Vec2 GetPos() const { return m_pos; }
 	//UFOの当たり判定を取得する
@@ -63,5 +64,7 @@ public:
 	int m_animFrame;
 	bool AnimFlag;
 	int AnimPosX;
+
+	int m_ufoS2Max;
 };
 

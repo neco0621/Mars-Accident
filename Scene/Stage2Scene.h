@@ -8,6 +8,7 @@
 
 class Player;
 class UFO;
+class S2UFO;
 class Rocket;
 class Bg;
 class EnemyBase;
@@ -81,6 +82,7 @@ private:
 	Player* m_pPlayer;
 
 	UFO* m_pUfo;
+	S2UFO* m_pS2ufo;
 
 	Bg* m_pBg;
 

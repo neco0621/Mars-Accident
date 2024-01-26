@@ -6,6 +6,7 @@
 #include "DxLib.h"
 #include "../Player.h"
 #include "../UFO.h"
+#include "../S2UFO.h"
 #include "../Pad.h"
 #include "../Rect.h"
 #include "../Rocket.h"
@@ -82,12 +83,16 @@ IsGround(false)
 	m_pPlayer = new Player{ this };
 	m_pPlayer->SetHandle(m_playerHandle);	//Playerにグラフィックハンドルを渡す
 
+	m_pBg = new Bg{};
+	m_pBg->SetHandle(m_bgHandle);
+
 	m_pUfo = new UFO{ this };
 	m_pUfo->SetHandle(m_ufoHandle);
 	m_pUfo->SetAnimHandle(m_AnimHandle);
 
-	m_pBg = new Bg{};
-	m_pBg->SetHandle(m_bgHandle);
+	m_pS2ufo = new S2UFO{ this };
+	m_pS2ufo->SetHandle(m_ufoHandle);
+	m_pS2ufo->SetAnimHandle(m_AnimHandle);
 
 	m_pRocket = new Rocket{ this };
 	m_pRocket->SetHandle(m_rocketHandle);
@@ -136,13 +141,18 @@ Stage2Scene::~Stage2Scene()
 	DeleteGraph(m_leftEnemyHandle);
 	DeleteGraph(m_rightEnemyHandle);
 	DeleteGraph(m_AnimHandle);
+	DeleteGraph(m_ufoHandle);
 
 	//プレイヤーのメモリ解放.
 	delete m_pPlayer;
 	m_pPlayer = nullptr;
+
 	//UFOのメモリ開放.
 	delete m_pUfo;
 	m_pUfo = nullptr;
+
+	delete m_pS2ufo;
+	m_pS2ufo = nullptr;
 
 	delete m_pBg;
 	m_pBg = nullptr;
@@ -180,6 +190,7 @@ void Stage2Scene::Init()
 
 	m_pPlayer->Init();
 	m_pUfo->Init();
+	m_pS2ufo->Init();
 	m_pRocket->Init();
 }
 
@@ -189,22 +200,28 @@ void Stage2Scene::End()
 }
 
 void Stage2Scene::Update(Input& input)
-{
-	Rect ufoRect = m_pUfo->GetColRect();
+{	
 	Rect playerRect = m_pPlayer->GetColRect();
 	m_pPlayer->S2Update();
-	m_pUfo->Update();
 	m_pRocket->Update();
-
+	Rect ufoRect = m_pUfo->GetColRect();
+	Rect S2UfoRect = m_pS2ufo->GetColRect();
+	m_pUfo->Update();
+	m_pS2ufo->Update();
 	if (ufoRect.DistanceCollision(playerRect))
 	{
 		m_gameOverFlag = true;
 	}
+	if (S2UfoRect.DistanceCollision(playerRect))
+	{
+		m_gameOverFlag = true;
+	}
+	
 	for (int i = 0; i < m_pBeam.size(); i++)
 	{
 		//nullptrなら処理は行わない
 		if (m_pBeam[i])
-		{
+		{				
 			m_pBeam[i]->Update();
 			//画面外に出たらメモリ解放
 			if (!m_pBeam[i]->isExist())
@@ -232,6 +249,22 @@ void Stage2Scene::Update(Input& input)
 					m_pBeam[i]->MoveFlag = true;
 				}
 
+				if (shotRect.CirCleCollision(S2UfoRect))
+				{
+					m_pS2ufo->JumpPower = 10;
+					//ターゲット位置.
+					//弾の発射位置から一番近くにいる敵の座標を取得する
+					//SceneMainに実装した関数を利用する
+					const Vec2 target = GetNearEnemyPos(m_pBeam[i]->m_pos);
+					//発射位置からターゲットに向かうベクトル
+					Vec2 toTarget = target - m_pBeam[i]->m_pos;
+					//正規化　totarget自信を正規化(長さを1に)
+					toTarget.normalize();
+					//弾の速度をkSpeedに
+					m_pBeam[i]->m_vec = toTarget * m_pBeam[i]->m_pSpeed;
+					m_pBeam[i]->MoveFlag = true;
+				}
+
 			}
 		}
 	}
@@ -241,7 +274,7 @@ void Stage2Scene::Update(Input& input)
 		{
 			Rect enemyRect = m_pEnemy[i]->GetColRect();
 			for (int a = 0; a < m_pBeam.size(); a++)
-			{
+			{	
 				//nullptrなら処理は行わない
 				if (!m_pBeam[a])		continue;
 				//画面外に出たらメモリ解放
@@ -256,8 +289,13 @@ void Stage2Scene::Update(Input& input)
 					m_pEnemy[i] = nullptr;	//使っていないとわかるように
 					m_downEnemyCount++;
 				}
-				Rect ufoRect = m_pUfo->GetColRect();
 				if (ufoRect.CirCleCollision(enemyRect))
+				{
+					//メモリを解放する
+					delete m_pEnemy[i];
+					m_pEnemy[i] = nullptr;	//使っていないとわかるように
+				}
+				if (S2UfoRect.CirCleCollision(enemyRect))
 				{
 					//メモリを解放する
 					delete m_pEnemy[i];
@@ -270,8 +308,8 @@ void Stage2Scene::Update(Input& input)
 					delete m_pEnemy[i];
 					m_pEnemy[i] = nullptr;
 					m_damageFlag = true;
-				}
-			}
+				}				
+			}		
 		}
 	}
 
@@ -293,8 +331,6 @@ void Stage2Scene::Update(Input& input)
 	//ワイプ処理
 	m_wipeFrame++;
 	if (m_wipeFrame > kWipeFrame)	m_wipeFrame = kWipeFrame;
-
-
 
 	//敵キャラクターを登場させる
 	//kEnemyIntervalフレーム経過するごとにランダムに敵を登場させる
@@ -319,13 +355,12 @@ void Stage2Scene::Update(Input& input)
 
 	//画面揺れフレームのカウントダウン
 	m_shakeFrame--;
-
 	if (m_pUfo->m_pos.y >= m_pUfo->m_tq - m_pUfo->m_radius / 2)
 	{
 		IsGround = true;
 	}
-
-	if (m_downEnemyCount == 25)
+		
+	if (m_downEnemyCount == 30)
 	{
 		manager_.ChangeScene(std::make_shared<GameClearScene>(manager_));
 		return;
@@ -379,8 +414,8 @@ void Stage2Scene::Draw()
 	DrawBox(0, Game::kScreenHeight * 0.75 + 32, Game::kScreenWidth, Game::kScreenHeight, 0x84331F, true);
 	m_pRocket->Draw();
 	m_pPlayer->Draw();
-	m_pUfo->S2Draw();
-
+	m_pUfo->Draw();
+	m_pS2ufo->Draw();
 	for (int i = 0; i < m_pBeam.size(); i++)
 	{
 		if (!m_pBeam[i])		continue;
@@ -400,7 +435,6 @@ void Stage2Scene::Draw()
 			IsGround = false;
 		}
 	}
-
 
 	for (int i = 0; i < m_pEnemy.size(); i++)
 	{

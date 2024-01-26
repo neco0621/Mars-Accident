@@ -134,7 +134,6 @@ void Player::Update()
 	{
 		ShotBeam* m_pShot = new ShotBeam;
 		m_pShot->SetS1(m_pS1Scene);
-		m_pShot->SetS2(m_pS2Scene);
 		m_pShot->SetPlayer(this);
 		m_pShot->Start(GetPos());
 		//ˆÈ~XV‚âƒƒ‚ƒŠ‚Ì‰ð•ú‚ÍSceneMain‚É”C‚¹‚é
@@ -216,7 +215,6 @@ void Player::S2Update()
 	if (m_beamFrame >= kBeamFrame)
 	{
 		ShotBeam* m_pShot = new ShotBeam;
-		m_pShot->SetS1(m_pS1Scene);
 		m_pShot->SetS2(m_pS2Scene);
 		m_pShot->SetPlayer(this);
 		m_pShot->Start(GetPos());

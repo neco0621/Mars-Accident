@@ -5,8 +5,6 @@
 #include "Rect.h"
 #include "Scene/Stage1Scene.h"
 #include "ShotBeam.h"
-#include "Animation.h"
-#include "graphic.h"
 
 #define PI 3.14
 #define AnimExpDivX 10
@@ -40,6 +38,8 @@ namespace
 	constexpr int kLine = 8;
 	// アニメーション数
 	constexpr int kAnimNum = 71;
+
+	constexpr int kS2UfoMax = 2;
 }
 
 UFO::UFO(Stage1Scene* pS1Scene) :
@@ -73,9 +73,10 @@ UFO::UFO(Stage2Scene* pS2Scene) :
 	JumpPower(10),
 	m_tq(Game::kScreenHeight * 0.75f),
 	m_animHnadle(-1),
-	AnimPosX(0)
+	AnimPosX(0),
+	m_ufoS2Max(kS2UfoMax),
+	m_animFrame(0)
 {
-	m_animFrame = 0;
 } 
 
 UFO::~UFO()
@@ -149,7 +150,7 @@ void UFO::Update()
 void UFO::Draw()
 {
 	DrawFormatString(8, 56, GetColor(255, 255, 255),
-		"%f",m_angle);
+		"%f", m_angle);
 
 	DrawRotaGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y),
 		1.0, DX_PI_F / 180.0 * m_angle,
@@ -166,18 +167,5 @@ void UFO::Draw()
 			srcX, srcY, kAnimWidth, kAnimHeight,
 			1.0, 0.0,
 			m_animHnadle, true, false);
-	}	
+	}
 }
-
-void UFO::S2Draw()
-{
-	
-	DrawRotaGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y),
-		1.0, DX_PI_F / 180.0 * m_angle,
-		m_handle, true);
-
-	m_colRect.DrawC(GetColor(255, 0, 0), false);
-}
-
-
-

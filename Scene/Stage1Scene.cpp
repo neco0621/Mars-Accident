@@ -13,8 +13,6 @@
 #include "../Game.h"
 #include "../Bg.h"
 #include "../Input.h"
-#include "../graphic.h"
-#include "../Animation.h"
 
 
 //“oê‚·‚é“G
@@ -337,7 +335,7 @@ void Stage1Scene::Update(Input& input)
 
 	if (m_downEnemyCount == 5)
 	{
-		manager_.ChangeScene(std::make_shared<GameClearScene>(manager_));
+		manager_.ChangeScene(std::make_shared<Stage2Scene>(manager_));
 		return;
 	}
 
