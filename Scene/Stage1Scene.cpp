@@ -448,6 +448,7 @@ void Stage1Scene::Draw()
 	//ゲーム画面をバックバッファに描画する
 	int screenX = 0;
 	int screenY = 0;
+	
 	if (m_shakeFrame > 0)
 	{
 		//画面揺れ

@@ -13,8 +13,8 @@ namespace
 	// アニメーション間隔
 	constexpr int kAnimInterval = 3;
 	// 高さ・幅
-	constexpr int kAnimWidth = 48;
-	constexpr int kAnimHeight = 48;
+	constexpr int kAnimWidth = 400;
+	constexpr int kAnimHeight = 400;
 	// 縦横数
 	constexpr int kRow = 8;
 	constexpr int kLine = 8;
@@ -38,7 +38,8 @@ void TitleScene::NormalUpdate(Input& input)
 		updateFunc_ = &TitleScene::FadeOutUpdate;
 		drawFunc_ = &TitleScene::FadeDraw;
 	}
-	BackScroll(areaX, m_bgHandle, 640, 480);
+	m_bgFrame--;
+	//BackScroll(areaX, m_bgHandle, 640, 480);
 	AnimFrame = (AnimFrame + 1) % (kAnimNum * kAnimInterval);
 }
 
@@ -52,29 +53,35 @@ void TitleScene::FadeOutUpdate(Input& input)
 
 void TitleScene::FadeDraw()
 {
-	//通常描画
-	DrawString(Game::kScreenWidth / 2 - 24, Game::kScreenHeight * 0.25, "MarsAccident", 0xffffff);
-	DrawString(Game::kScreenWidth / 2, Game::kScreenHeight * 0.75, "START", 0xffffff);
-
+	int index = AnimFrame / kAnimInterval;
+	int srcX = (index % kRow) * kAnimWidth;
+	int srcY = (index / kLine) * kAnimHeight;
+	DrawRectRotaGraph(static_cast<int>(Game::kScreenWidth / 2), static_cast<int>(Game::kScreenHeight / 2),
+		srcX, srcY, kAnimWidth, kAnimHeight,
+		1.0, 0.0,
+		m_animHandle, true, false);
 	//フェード暗幕
 	int alpha = 255 * (float)frame_ / 60.0f;
 	SetDrawBlendMode(DX_BLENDMODE_MULA, alpha);
 	DrawBox(0, 0, 1280, 720, 0x000000, true);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+	//通常描画
+	DrawGraph(Game::kScreenWidth / 2 -225, Game::kScreenHeight * 0.25, m_titleHandle, true);
+	DrawString(Game::kScreenWidth / 2, Game::kScreenHeight * 0.75, "START", 0xffffff);	
 }
 
 void TitleScene::NormalDraw()
 {
-	DrawString(Game::kScreenWidth / 2 - 24, Game::kScreenHeight * 0.25, "MarsAccident", 0xffffff);
-	DrawString(Game::kScreenWidth / 2, Game::kScreenHeight * 0.75, "START", 0xffffff);
 	int index = AnimFrame / kAnimInterval;
 	int srcX = (index % kRow) * kAnimWidth;
 	int srcY = (index / kLine) * kAnimHeight;
 
-	DrawRectRotaGraph(static_cast<int>(100), static_cast<int>(100),
+	DrawRectRotaGraph(static_cast<int>(Game::kScreenWidth / 2), static_cast<int>(Game::kScreenHeight / 2),
 		srcX, srcY, kAnimWidth, kAnimHeight,
 		1.0, 0.0,
 		m_animHandle, true, false);
+	DrawGraph(Game::kScreenWidth / 2 - 225, Game::kScreenHeight * 0.25, m_titleHandle, true);
+	DrawString(Game::kScreenWidth / 2, Game::kScreenHeight * 0.75, "START", 0xffffff);	
 }
 
 void TitleScene::BackScroll(const int t_areaX, const int tD_graph, const int t_winWidth, const int t_winHeight)
@@ -86,12 +93,17 @@ void TitleScene::BackScroll(const int t_areaX, const int tD_graph, const int t_w
 TitleScene::TitleScene(SceneManager& manager) : Scene(manager),
 frame_(0),
 m_bgHandle(-1),
+m_titleHandle(-1),
+m_animHandle(-1),
 areaX(0),
 speed(20),
-AnimFrame(0)
+AnimFrame(0),
+m_bgFrame(1),
+m_bgPosX(0)
 {
-	m_bgHandle = LoadGraph("data/Title.bmp");
+	m_bgHandle = LoadGraph("data/Title.png");
 	m_animHandle = LoadGraph("data/Moon.png");
+	m_titleHandle = LoadGraph("data/Icon.png");
 	assert(m_bgHandle >= 0);
 	frame_ = 60;
 	updateFunc_ = &TitleScene::FadeInUpdate;
@@ -101,6 +113,8 @@ AnimFrame(0)
 TitleScene::~TitleScene()
 {
 	DeleteGraph(m_bgHandle);
+	DeleteGraph(m_animHandle);
+	DeleteGraph(m_titleHandle);
 }
 
 void TitleScene::Init()
@@ -114,6 +128,7 @@ void TitleScene::Update(Input& input)
 
 void TitleScene::Draw()
 {
-	DrawGraph(0,0,m_bgHandle,true);
+	if(m_bgFrame >)
+	DrawGraph(m_bgPosX, 0, m_bgHandle, true);	
 	(this->*drawFunc_)();
 }

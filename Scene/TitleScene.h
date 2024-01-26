@@ -25,11 +25,14 @@ private:
 
 	int m_bgHandle;
 	int m_animHandle;
+	int m_titleHandle;
 	int m_moon;
 	int frame_;
 	int areaX;
 	int speed;
 	int AnimFrame;
+	int m_bgFrame;
+	int m_bgPosX;
 public:
 	TitleScene(SceneManager& manager);
 	~TitleScene();
