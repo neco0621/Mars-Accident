@@ -440,6 +440,7 @@ void Stage1Scene::Draw()
 	DrawFormatString(8, 72, GetColor(255, 255, 255), "EnemyNum%d", enemyNum);
 	DrawFormatString(8, 88, GetColor(255, 255, 255), "残りライフ%d", m_pRocket->m_life);
 	DrawFormatString(8, 104, GetColor(255, 255, 255), "倒した敵の数%d", m_downEnemyCount);
+	DrawFormatString(8, 56, GetColor(255, 255, 255),"%f", m_pUfo->m_angle);
 #endif
 	//バックバッファに書き込む設定に戻しておく
 	SetDrawScreen(DX_SCREEN_BACK);

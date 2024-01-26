@@ -360,7 +360,7 @@ void Stage2Scene::Update(Input& input)
 		IsGround = true;
 	}
 		
-	if (m_downEnemyCount == 30)
+	if (m_downEnemyCount == 10)
 	{
 		manager_.ChangeScene(std::make_shared<GameClearScene>(manager_));
 		return;

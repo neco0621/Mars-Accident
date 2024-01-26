@@ -131,13 +131,15 @@ void S2UFO::Update()
 
 void S2UFO::Draw()
 {
-	DrawFormatString(8, 56, GetColor(255, 255, 255),
-		"%f", m_angle);
+#ifdef DEBUG
+	DrawFormatString(8, 56, GetColor(255, 255, 255),"%f", m_angle);
+	m_colRect.DrawC(GetColor(255, 0, 0), false);
+#endif 
+	
 
 	DrawRotaGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y),
 		1.0, DX_PI_F / 180.0 * m_angle,
 		m_handle, true);
-	m_colRect.DrawC(GetColor(255, 0, 0), false);
 
 	if (AnimFlag == true)
 	{

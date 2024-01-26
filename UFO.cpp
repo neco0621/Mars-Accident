@@ -149,13 +149,12 @@ void UFO::Update()
 
 void UFO::Draw()
 {
-	DrawFormatString(8, 56, GetColor(255, 255, 255),
-		"%f", m_angle);
-
 	DrawRotaGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y),
 		1.0, DX_PI_F / 180.0 * m_angle,
 		m_handle, true);
+#ifdef _DEBUG
 	m_colRect.DrawC(GetColor(255, 0, 0), false);
+#endif 
 
 	if (AnimFlag == true)
 	{
