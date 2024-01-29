@@ -16,10 +16,7 @@ class UFO;
 class Rocket;
 class Bg;
 class EnemyBase;
-class EnemyRight;
-class EnemyLeft;
 class ShotBeam;
-class Animation;
 class Bg;
 
 class Stage1Scene : public Scene
@@ -91,8 +88,9 @@ private:
 
 	bool StartFlag;
 	int StartTitle;
-public:
-	int enemyEXPFrame;
+
+	bool AnimFlag;
+	int m_animFrame;
 	
 	//プレイヤー
 	Player* m_pPlayer;
@@ -110,10 +108,6 @@ public:
 	//敵
 	std::vector<EnemyBase*> m_pEnemy;	//配列のサイズは実行時に決める(今回はコンストラクタ)
 	//EnemyBase* m_pEnemy[16];   ←今までの書き方
-	EnemyLeft* m_pLeft;
-	EnemyRight* m_pRight;
-
-	Animation* m_pAnim;
 
 	Rect m_pRect;
 

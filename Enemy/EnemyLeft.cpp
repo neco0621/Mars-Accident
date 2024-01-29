@@ -2,6 +2,8 @@
 #include "../Game.h"
 #include "DxLib.h"
 
+#include <cassert>
+
 namespace
 {
 	//“G‚ÌˆÚ“®‘¬“x.
@@ -38,7 +40,7 @@ void EnemyLeft::Update()
 
 	m_pos += m_vec;
 
-	
+
 	//“–‚½‚è”»’è‚ÌXV
 	UpdateCollision();
 
@@ -50,8 +52,6 @@ void EnemyLeft::Update()
 	{
 		m_isExist = false;
 	}
-
-
 }
 
 void EnemyLeft::Start()

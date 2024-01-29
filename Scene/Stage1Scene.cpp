@@ -65,7 +65,9 @@ Stage1Scene::Stage1Scene(SceneManager& manager) : Scene(manager),
 	m_shakeHandle(-1),
 	m_gameOverFlag(false),
 	IsGround(false),
-	StartFlag(false)
+	StartFlag(false),
+	AnimFlag(false),
+	m_animFrame(0)
 {
 	//ゲーム画面描画先の生成.
 	//画面サイズと同じ大きさのグラフィックデータを作成する.
@@ -289,6 +291,7 @@ void Stage1Scene::Update(Input& input)
 					Rect shotRect = m_pBeam[a]->GetColRect();
 					if (shotRect.CirCleCollision(enemyRect))
 					{
+						AnimFlag = true;
 						delete m_pBeam[a];
 						m_pBeam[a] = nullptr;
 
@@ -316,7 +319,17 @@ void Stage1Scene::Update(Input& input)
 			}
 		}
 		
+		if (AnimFlag == true)
+		{
+			m_animFrame = (m_animFrame + 1) % (kAnimNum * kAnimInterval);
+			m_animFrame++;
+		}
 
+		if (m_animFrame >= 120)
+		{
+			AnimFlag = false;
+			m_animFrame = 0;
+		}
 		
 
 		for (int i = 0; i < m_pEnemy.size(); i++)
@@ -461,7 +474,23 @@ void Stage1Scene::Draw()
 		}
 	}*/
 	
-	
+	for (int i = 0; i < m_pEnemy.size(); i++)
+	{
+		if (m_pEnemy[i])
+		{
+			if (AnimFlag == true)
+			{
+				int index = m_animFrame / kAnimInterval;
+				int srcX = (index % kRow) * kAnimWidth;
+				int srcY = (index / kLine) * kAnimHeight;
+
+				DrawRectRotaGraph(static_cast<int>(m_pEnemy[i]->m_pos.x), static_cast<int>(m_pEnemy[i]->m_pos.y),
+					srcX, srcY, kAnimWidth, kAnimHeight,
+					1.0, 0.0,
+					m_AnimHandle, true, false);
+			}
+		}
+	}
 	
 
 	if (IsGround == true)

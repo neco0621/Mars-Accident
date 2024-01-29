@@ -122,7 +122,6 @@ void UFO::Update()
 		m_animFrame = 0;
 	}
 	
-	
 	if (m_pos.x >= Game::kScreenWidth - m_radius)
 	{
 		m_MoveFlag = true;
