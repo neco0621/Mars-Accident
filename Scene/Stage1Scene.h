@@ -16,6 +16,8 @@ class UFO;
 class Rocket;
 class Bg;
 class EnemyBase;
+class EnemyRight;
+class EnemyLeft;
 class ShotBeam;
 class Animation;
 class Bg;
@@ -38,6 +40,8 @@ public:
 	//登録できなかった場合はfalseを返す
 	//登録できなかった場合は内部でpShot解放する
 	bool AddShot(ShotBeam* pBeam);
+
+	void ShakeScreen(int a, int b);
 
 	Vec2 m_toNear;
 
@@ -72,6 +76,7 @@ private:
 	int m_rocketHandle;
 	int m_ufoHandle;
 	int m_AnimHandle;
+	int m_enemyEXP;
 	int m_downEnemyCount;
 	int m_lifeCount;
 
@@ -79,9 +84,16 @@ private:
 	bool m_gameOverFlag;
 	bool IsGround;
 
-	
-	
+	bool m_isShake;
+	int m_shakeHandle;
+	int m_shakeSize;
+	int m_shakeFrame;
 
+	bool StartFlag;
+	int StartTitle;
+public:
+	int enemyEXPFrame;
+	
 	//プレイヤー
 	Player* m_pPlayer;
 
@@ -98,6 +110,8 @@ private:
 	//敵
 	std::vector<EnemyBase*> m_pEnemy;	//配列のサイズは実行時に決める(今回はコンストラクタ)
 	//EnemyBase* m_pEnemy[16];   ←今までの書き方
+	EnemyLeft* m_pLeft;
+	EnemyRight* m_pRight;
 
 	Animation* m_pAnim;
 
@@ -108,7 +122,4 @@ private:
 
 	//敵の登場間隔
 	int m_enemyInterval;
-
-	//ダメージを受けたときの画面揺れ演出
-	int m_shakeFrame;
 };

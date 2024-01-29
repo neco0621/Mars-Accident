@@ -106,7 +106,7 @@ void UFO::Update()
 			m_pos.y = m_tq - m_radius / 2;
 			JumpPower = 30;
 			AnimPosX = m_pos.x;
-			AnimFlag = true;			
+			AnimFlag = true;
 		}			
 	}
 

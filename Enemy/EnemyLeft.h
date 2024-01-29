@@ -17,6 +17,5 @@ public:
 	virtual void Update() override;
 
 	virtual void Start() override;
-
 };
 

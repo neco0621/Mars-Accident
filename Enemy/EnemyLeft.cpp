@@ -6,6 +6,17 @@ namespace
 {
 	//敵の移動速度.
 	constexpr float kSpeed = 1.0f;
+
+	// アニメーション間隔
+	constexpr int kAnimInterval = 3;
+	// 高さ・幅
+	constexpr int kAnimWidth = 100;
+	constexpr int kAnimHeight = 100;
+	// 縦横数
+	constexpr int kRow = 10;
+	constexpr int kLine = 7;
+	// アニメーション数
+	constexpr int kAnimNum = 65;
 }
 
 EnemyLeft::EnemyLeft() : EnemyBase()
@@ -39,6 +50,8 @@ void EnemyLeft::Update()
 	{
 		m_isExist = false;
 	}
+
+
 }
 
 void EnemyLeft::Start()

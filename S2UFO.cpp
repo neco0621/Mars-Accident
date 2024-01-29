@@ -131,7 +131,7 @@ void S2UFO::Update()
 
 void S2UFO::Draw()
 {
-#ifdef DEBUG
+#ifdef _DEBUG
 	DrawFormatString(8, 56, GetColor(255, 255, 255),"%f", m_angle);
 	m_colRect.DrawC(GetColor(255, 0, 0), false);
 #endif 

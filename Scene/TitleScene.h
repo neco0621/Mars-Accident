@@ -26,6 +26,7 @@ private:
 	int m_bgHandle;
 	int m_animHandle;
 	int m_titleHandle;
+	int m_titleButton;
 	int m_moon;
 	int frame_;
 	int areaX;
@@ -33,11 +34,16 @@ private:
 	int AnimFrame;
 	int m_bgFrame;
 	int m_bgPosX;
+	bool m_isShake;
+	int m_shakeHandle;
+	int m_shakeSize;
+	int m_shakeFrame;
 public:
 	TitleScene(SceneManager& manager);
 	~TitleScene();
 	void Init();
 	void Update(Input& input);
 	void Draw();
+	void ShakeScreen(int a, int b);
 };
 

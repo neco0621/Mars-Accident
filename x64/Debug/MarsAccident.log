@@ -1,1 +1,20 @@
-﻿  MarsAccident.vcxproj -> C:\Mars-Accident\x64\Debug\MarsAccident.exe
+﻿  EnemyBase.cpp
+C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  EnemyLeft.cpp
+C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  EnemyRight.cpp
+C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  Stage1Scene.cpp
+C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Mars-Accident\Scene\Stage1Scene.cpp(430,39): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Scene\Stage1Scene.cpp(507,17): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Scene\Stage1Scene.cpp(517,13): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Scene\Stage1Scene.cpp(522,9): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+  Stage2Scene.cpp
+C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Mars-Accident\Scene\Stage2Scene.cpp(414,40): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Scene\Stage2Scene.cpp(488,17): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Scene\Stage2Scene.cpp(498,13): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Scene\Stage2Scene.cpp(503,9): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+  コードを生成中...
+  MarsAccident.vcxproj -> C:\Mars-Accident\x64\Debug\MarsAccident.exe

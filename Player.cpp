@@ -76,14 +76,14 @@ void Player::Update()
 
 	//à⁄ìÆó ÇéùÇ¬ÇÊÇ§Ç…Ç∑ÇÈ
 	Vec2 move{ 0.0f,0.0f };
-	if ((pad & PAD_INPUT_LEFT) != 0)
+	if (((pad & PAD_INPUT_LEFT) | (pad & PAD_INPUT_4)) != 0)
 	{
 		//m_pos.x -= kSpeed;
 		move.x -= kSpeed;
 		m_dir = kDirLeft;
 		isMove = true;
 	}
-	if ((pad & PAD_INPUT_RIGHT) != 0)
+	if (((pad & PAD_INPUT_RIGHT) | (pad & PAD_INPUT_6)) != 0)
 	{
 		//m_pos.x += kSpeed;
 		move.x += kSpeed;
@@ -158,14 +158,14 @@ void Player::S2Update()
 
 	//à⁄ìÆó ÇéùÇ¬ÇÊÇ§Ç…Ç∑ÇÈ
 	Vec2 move{ 0.0f,0.0f };
-	if ((pad & PAD_INPUT_LEFT) != 0)
+	if (((pad & PAD_INPUT_LEFT) | (pad & PAD_INPUT_4)) != 0)
 	{
 		//m_pos.x -= kSpeed;
 		move.x -= kSpeed;
 		m_dir = kDirLeft;
 		isMove = true;
 	}
-	if ((pad & PAD_INPUT_RIGHT) != 0)
+	if (((pad & PAD_INPUT_RIGHT) | (pad & PAD_INPUT_6)) != 0)
 	{
 		//m_pos.x += kSpeed;
 		move.x += kSpeed;

@@ -1,12 +1,24 @@
 #include "EnemyBase.h"
 #include "DxLib.h"
 #include "../Game.h"
+#include "../Scene/Stage1Scene.h"
 
 #include <cassert>
 
 namespace
 {
 	constexpr int kRadius = 30;
+
+	// アニメーション間隔
+	constexpr int kAnimInterval = 3;
+	// 高さ・幅
+	constexpr int kAnimWidth = 100;
+	constexpr int kAnimHeight = 100;
+	// 縦横数
+	constexpr int kRow = 10;
+	constexpr int kLine = 7;
+	// アニメーション数
+	constexpr int kAnimNum = 65;
 }
 
 EnemyBase::EnemyBase() :
@@ -17,7 +29,9 @@ EnemyBase::EnemyBase() :
 	m_pos(),//省略可.
 	m_centerX(m_pos.x),
 	m_centerY(m_pos.y),
-	m_tq(Game::kScreenHeight * 0.75f)
+	m_tq(Game::kScreenHeight * 0.75f),
+	m_animFrame(0),
+	enemyEXPFlag(false)
 {
 }
 
@@ -46,7 +60,7 @@ void EnemyBase::Draw()
 	DrawRotaGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y),
 		1.0, 0.0,
 		m_handle, true, false);
-
+	
 #ifdef _DEBUG
 	//当たり判定の表示.
 	m_colRect.DrawC(GetColor(255, 0, 0), false);
