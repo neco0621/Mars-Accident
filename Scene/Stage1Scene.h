@@ -41,7 +41,7 @@ public:
 	void ShakeScreen(int a, int b);
 
 	Vec2 m_toNear;
-
+	Vec2 pos;
 private:
 	int handle_ = 0;
 	int frame_ = 0;

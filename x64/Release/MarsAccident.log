@@ -1,13 +1,52 @@
-﻿  TitleScene.cpp
-C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-C:\Mars-Accident\Scene\TitleScene.cpp(64,12): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Mars-Accident\Scene\TitleScene.cpp(69,61): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-C:\Mars-Accident\Scene\TitleScene.cpp(70,57): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-C:\Mars-Accident\Scene\TitleScene.cpp(83,62): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-C:\Mars-Accident\Scene\TitleScene.cpp(84,57): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+﻿  Bg.cpp
+  EnemyBase.cpp
+  EnemyLeft.cpp
+  EnemyRight.cpp
+  S2UFO.cpp
+D:\Mars-Accident\S2UFO.cpp(90,20): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+  GameClearScene.cpp
+D:\Mars-Accident\Scene\GameClearScene.cpp(65,57): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+D:\Mars-Accident\Scene\GameClearScene.cpp(75,57): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+  GameOverScene.cpp
+D:\Mars-Accident\Scene\GameOverScene.cpp(64,57): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+D:\Mars-Accident\Scene\GameOverScene.cpp(74,57): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+  Input.cpp
+  Main.cpp
+  Pad.cpp
+  Player.cpp
+  Rect.cpp
+  Rocket.cpp
+D:\Mars-Accident\Rocket.cpp(54,69): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  Scene.cpp
+  Stage1Scene.cpp
+D:\Mars-Accident\Scene\Stage1Scene.cpp(443,39): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+D:\Mars-Accident\Scene\Stage1Scene.cpp(536,17): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+D:\Mars-Accident\Scene\Stage1Scene.cpp(546,13): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+D:\Mars-Accident\Scene\Stage1Scene.cpp(551,9): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+  SceneManager.cpp
+  ShotBeam.cpp
+D:\Mars-Accident\ShotBeam.cpp(31,10): warning C4244: '初期化中': 'const float' から 'int' への変換です。データが失われる可能性があります。
+D:\Mars-Accident\ShotBeam.cpp(72,40): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+D:\Mars-Accident\ShotBeam.cpp(80,31): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
+D:\Mars-Accident\ShotBeam.cpp(80,27): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+D:\Mars-Accident\ShotBeam.cpp(80,18): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  TitleScene.cpp
+D:\Mars-Accident\Scene\TitleScene.cpp(78,12): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+D:\Mars-Accident\Scene\TitleScene.cpp(83,61): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+D:\Mars-Accident\Scene\TitleScene.cpp(84,69): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+D:\Mars-Accident\Scene\TitleScene.cpp(103,62): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+D:\Mars-Accident\Scene\TitleScene.cpp(104,68): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+  Stage2Scene.cpp
+D:\Mars-Accident\Scene\Stage2Scene.cpp(414,40): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+D:\Mars-Accident\Scene\Stage2Scene.cpp(488,17): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+D:\Mars-Accident\Scene\Stage2Scene.cpp(498,13): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+D:\Mars-Accident\Scene\Stage2Scene.cpp(503,9): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+  UFO.cpp
+D:\Mars-Accident\UFO.cpp(108,20): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+  コンパイル中...
+  Vec2.cpp
   コード生成しています。
-  1 of 973 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  Previous IPDB was built with incompatible compiler, fall back to full compilation.
+  All 966 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   コード生成が終了しました。
-  MarsAccident.vcxproj -> C:\Mars-Accident\x64\Release\MarsAccident.exe
+  MarsAccident.vcxproj -> D:\Mars-Accident\x64\Release\MarsAccident.exe

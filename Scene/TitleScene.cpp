@@ -55,6 +55,7 @@ void TitleScene::NormalUpdate(Input& input)
 			m_isShake = false;
 		}
 	}
+	m_loopFrame++;
 }
 
 void TitleScene::FadeOutUpdate(Input& input)
@@ -111,6 +112,11 @@ void TitleScene::NormalDraw()
 		int y = GetRand(m_shakeSize) - static_cast<int>(m_shakeSize * 0.5f);
 		DrawGraph(x, y, m_shakeHandle, true);
 	}
+	if (m_loopFrame > 120)
+	{
+		ShakeScreen(frame_, kShakeSize);
+		m_loopFrame = 0;
+	}
 }
 
 void TitleScene::BackScroll(const int t_areaX, const int tD_graph, const int t_winWidth, const int t_winHeight)
@@ -132,8 +138,10 @@ m_bgPosX(0),
 m_isShake(false),
 m_shakeHandle(-1),
 m_shakeFrame(0),
-m_shakeSize(kShakeSize)
+m_shakeSize(kShakeSize),
+m_loopFrame(0)
 {
+	m_shakeHandle = MakeScreen(Game::kScreenWidth, Game::kScreenHeight);
 	m_bgHandle = LoadGraph("data/Title.png");
 	m_animHandle = LoadGraph("data/Moon.png");
 	m_titleHandle = LoadGraph("data/Icon.png");
@@ -142,7 +150,6 @@ m_shakeSize(kShakeSize)
 	frame_ = 60;
 	updateFunc_ = &TitleScene::FadeInUpdate;
 	drawFunc_ = &TitleScene::FadeDraw;
-	m_shakeHandle = MakeScreen(Game::kScreenWidth, Game::kScreenHeight);
 }
 
 TitleScene::~TitleScene()

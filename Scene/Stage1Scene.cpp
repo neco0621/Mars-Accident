@@ -38,7 +38,7 @@ namespace
 	//画面がワイプするのにかかるフレーム数.
 	constexpr int kWipeFrame = 30;
 
-	constexpr int kShakeSize = 10;
+	constexpr int kShakeSize = 20;
 
 	// アニメーション間隔
 	constexpr int kAnimInterval = 3;
@@ -47,9 +47,9 @@ namespace
 	constexpr int kAnimHeight = 100;
 	// 縦横数
 	constexpr int kRow = 10;
-	constexpr int kLine = 7;
+	constexpr int kLine = 9;
 	// アニメーション数
-	constexpr int kAnimNum = 65;
+	constexpr int kAnimNum = 82;
 }
 
 Stage1Scene::Stage1Scene(SceneManager& manager) : Scene(manager),
@@ -71,8 +71,7 @@ Stage1Scene::Stage1Scene(SceneManager& manager) : Scene(manager),
 {
 	//ゲーム画面描画先の生成.
 	//画面サイズと同じ大きさのグラフィックデータを作成する.
-	m_gameScreenHandle = MakeScreen(Game::kScreenWidth, Game::kScreenHeight, true);
-	m_shakeHandle = MakeScreen(Game::kScreenWidth, Game::kScreenHeight);
+	m_shakeHandle = MakeScreen(Game::kScreenWidth, Game::kScreenHeight,true);
 	//グラフィックのロード.
 	m_playerHandle = LoadGraph("data/player.png");
 	assert(m_playerHandle != -1);
@@ -160,8 +159,9 @@ Stage1Scene::Stage1Scene(SceneManager& manager) : Scene(manager),
 
 Stage1Scene::~Stage1Scene()
 {
+	
 	//MakeScreenで生成したグラフィックを削除する
-	DeleteGraph(m_gameScreenHandle);
+	DeleteGraph(m_shakeHandle);
 	//メモリからグラフィックを削除
 	DeleteGraph(m_bgHandle);
 	DeleteGraph(m_playerHandle);
@@ -170,6 +170,7 @@ Stage1Scene::~Stage1Scene()
 	DeleteGraph(m_AnimHandle);
 	DeleteGraph(m_shakeHandle);
 	DeleteGraph(StartTitle);
+	DeleteGraph(m_enemyEXP);
 
 	//プレイヤーのメモリ解放.
 	delete m_pPlayer;
@@ -291,6 +292,7 @@ void Stage1Scene::Update(Input& input)
 					Rect shotRect = m_pBeam[a]->GetColRect();
 					if (shotRect.CirCleCollision(enemyRect))
 					{
+						pos = m_pEnemy[i]->m_pos;
 						AnimFlag = true;
 						delete m_pBeam[a];
 						m_pBeam[a] = nullptr;
@@ -385,7 +387,7 @@ void Stage1Scene::Update(Input& input)
 			IsGround = true;
 		}
 
-		if (m_downEnemyCount == 5)
+		if (m_downEnemyCount == 100)
 		{
 			manager_.ChangeScene(std::make_shared<Stage2Scene>(manager_));
 			return;
@@ -429,9 +431,12 @@ void Stage1Scene::Update(Input& input)
 
 void Stage1Scene::Draw()
 {	
+	//描画先スクリーンをクリアする
+	ClearDrawScreen();
+
 	//バックバッファに直接書き込むのではなく、
 	//自分で生成したグラフィックデータに対して書き込みを行う
-	SetDrawScreen(m_gameScreenHandle);
+	SetDrawScreen(m_shakeHandle);
 
 	//描画先スクリーンをクリアする
 	ClearDrawScreen();
@@ -444,6 +449,8 @@ void Stage1Scene::Draw()
 	m_pRocket->Draw();
 	m_pPlayer->Draw();
 	m_pUfo->Draw();
+
+
 	if (StartFlag == false)
 	{
 		DrawGraph(Game::kScreenWidth / 2 - 450 / 2, Game::kScreenHeight / 2 - 371 / 2, StartTitle, true);
@@ -484,10 +491,10 @@ void Stage1Scene::Draw()
 				int srcX = (index % kRow) * kAnimWidth;
 				int srcY = (index / kLine) * kAnimHeight;
 
-				DrawRectRotaGraph(static_cast<int>(m_pEnemy[i]->m_pos.x), static_cast<int>(m_pEnemy[i]->m_pos.y),
+				DrawRectRotaGraph(static_cast<int>(pos.x), static_cast<int>(pos.y),
 					srcX, srcY, kAnimWidth, kAnimHeight,
 					1.0, 0.0,
-					m_AnimHandle, true, false);
+					m_enemyEXP, true, false);
 			}
 		}
 	}
@@ -551,12 +558,12 @@ void Stage1Scene::Draw()
 		int x = sinf(y * 0.05f) * offset;
 		DrawRectGraph(x, y,
 			0, y, Game::kScreenWidth, 1,
-			m_gameScreenHandle, true, false);
+			m_shakeHandle, true, false);
 	}
 
+	SetDrawScreen(DX_SCREEN_BACK);
 	if (m_isShake)
 	{
-		SetDrawScreen(DX_SCREEN_BACK);
 
 		int x = GetRand(m_shakeSize) - static_cast<int>(m_shakeSize * 0.5f);
 		int y = GetRand(m_shakeSize) - static_cast<int>(m_shakeSize * 0.5f);
