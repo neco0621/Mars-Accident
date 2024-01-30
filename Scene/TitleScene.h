@@ -39,6 +39,7 @@ private:
 	int m_shakeSize;
 	int m_shakeFrame;
 	int m_loopFrame;
+	int m_bgm;
 public:
 	TitleScene(SceneManager& manager);
 	~TitleScene();

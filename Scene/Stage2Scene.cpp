@@ -27,9 +27,9 @@
 namespace
 {
 	//一度に登場できる最大の数.
-	constexpr int kEnemyMax = 8;
+	constexpr int kEnemyMax = 20;
 	//何フレーム沖に敵が登場するか.
-	constexpr int kEnemyInterval = 90;
+	constexpr int kEnemyInterval = 30;
 
 	//画面内に一度に出てくる弾の最大数.
 	constexpr int kShotMax = 256;
@@ -66,7 +66,10 @@ m_gameOverFlag(false),
 IsGround(false),
 StartFlag(false),
 AnimFlag(false),
-m_animFrame(0)
+m_animFrame(0),
+m_destoryEnemy(-1),
+m_bgm(-1),
+m_hitHandle(-1)
 {
 	//ゲーム画面描画先の生成.
 	//画面サイズと同じ大きさのグラフィックデータを作成する.
@@ -99,6 +102,16 @@ m_animFrame(0)
 	assert(StartTitle != -1);
 	m_enemyEXP = LoadGraph("data/enemyEXP.png");
 	assert(m_enemyEXP != -1);
+	m_destoryEnemy = LoadSoundMem("data/Sound/DestoryEnemy.mp3");
+	assert(m_destoryEnemy != -1);
+	m_bgm = LoadSoundMem("data/Sound/Stage1BGM.mp3");
+	assert(m_bgm != -1);
+	m_hitHandle = LoadSoundMem("data/Sound/UFODamage.mp3");
+	assert(m_hitHandle != -1);
+	m_damageHandle = LoadSoundMem("data/Sound/Damage.mp3");
+	assert(m_damageHandle != -1);
+	m_gameover = LoadSoundMem("data/Sound/GameOver.mp3");
+	assert(m_gameover != -1);
 
 
 
@@ -367,7 +380,7 @@ void Stage2Scene::Update(Input& input)
 		{
 			if (m_pEnemy[i])	//nullptrではないチェック
 			{
-				m_pEnemy[i]->Update();
+				m_pEnemy[i]->S2Update();
 				Rect enemyRect = m_pEnemy[i]->GetColRect();
 				//使用済みの敵キャラクタを削除する必要がある
 				if (!m_pEnemy[i]->isExist())
@@ -416,7 +429,7 @@ void Stage2Scene::Update(Input& input)
 			IsGround = true;
 		}
 
-		if (m_downEnemyCount == 10)
+		if (m_downEnemyCount == 25)
 		{
 			manager_.ChangeScene(std::make_shared<GameClearScene>(manager_));
 			return;
@@ -562,7 +575,7 @@ void Stage2Scene::Draw()
 	DrawFormatString(8, 40, GetColor(255, 255, 255), "ShotNum%d", shotNum);
 	DrawFormatString(8, 72, GetColor(255, 255, 255), "EnemyNum%d", enemyNum);
 	DrawFormatString(8, 88, GetColor(255, 255, 255), "残りライフ%d", m_pRocket->m_life);
-	DrawFormatString(8, 104, GetColor(255, 255, 255), "倒した敵の数%d", m_downEnemyCount);
+	DrawFormatString(Game::kScreenWidth / 2, 40, GetColor(255, 255, 255), "%d / 25", m_downEnemyCount);
 #endif
 	//バックバッファに書き込む設定に戻しておく
 	SetDrawScreen(DX_SCREEN_BACK);

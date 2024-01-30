@@ -73,21 +73,23 @@ private:
 	int m_enemyEXP;
 	int m_downEnemyCount;
 	int m_lifeCount;
+	int m_shakeHandle;
+	int m_shakeSize;
+	int m_shakeFrame;
+	int StartTitle;
+	int m_animFrame;
+	int m_bgm;
+	int m_hitHandle;
+	int m_damageHandle;
+	int m_gameover;
+	int m_destoryEnemy;
 
 	bool m_damageFlag;
 	bool m_gameOverFlag;
 	bool IsGround;
-
 	bool m_isShake;
-	int m_shakeHandle;
-	int m_shakeSize;
-	int m_shakeFrame;
-
 	bool StartFlag;
-	int StartTitle;
-
 	bool AnimFlag;
-	int m_animFrame;
 
 	//ÉvÉåÉCÉÑÅ[
 	Player* m_pPlayer;

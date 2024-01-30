@@ -81,7 +81,7 @@ void TitleScene::FadeDraw()
 	DrawBox(0, 0, 1280, 720, 0x000000, true);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 	//’Êí•`‰æ
-	DrawGraph(Game::kScreenWidth / 2 -225, Game::kScreenHeight * 0.25, m_titleHandle, true);
+	DrawGraph(Game::kScreenWidth / 2 - 225, Game::kScreenHeight * 0.25, m_titleHandle, true);
 	DrawGraph(Game::kScreenWidth / 2 - 225, Game::kScreenHeight * 0.75 - 125, m_titleButton, true);
 
 	ShakeScreen(frame_, kShakeSize);
@@ -102,7 +102,7 @@ void TitleScene::NormalDraw()
 		ClearDrawScreen();
 	}
 	DrawGraph(Game::kScreenWidth / 2 - 225, Game::kScreenHeight * 0.25, m_titleHandle, true);
-	DrawGraph(Game::kScreenWidth / 2 - 225, Game::kScreenHeight * 0.75- 125, m_titleButton, true);	
+	DrawGraph(Game::kScreenWidth / 2 - 225, Game::kScreenHeight * 0.75 - 125, m_titleButton, true);	
 
 	if (m_isShake)
 	{
@@ -139,7 +139,8 @@ m_isShake(false),
 m_shakeHandle(-1),
 m_shakeFrame(0),
 m_shakeSize(kShakeSize),
-m_loopFrame(0)
+m_loopFrame(0),
+m_bgm(-1)
 {
 	m_shakeHandle = MakeScreen(Game::kScreenWidth, Game::kScreenHeight);
 	m_bgHandle = LoadGraph("data/Title.png");
@@ -147,9 +148,11 @@ m_loopFrame(0)
 	m_titleHandle = LoadGraph("data/Icon.png");
 	assert(m_bgHandle >= 0);
 	m_titleButton = LoadGraph("data/StartButton.png");
+	m_bgm = LoadSoundMem("data/Sound/TitleBGM.mp3");
 	frame_ = 60;
 	updateFunc_ = &TitleScene::FadeInUpdate;
 	drawFunc_ = &TitleScene::FadeDraw;
+	PlaySoundMem(m_bgm, DX_PLAYTYPE_LOOP);
 }
 
 TitleScene::~TitleScene()
@@ -158,6 +161,7 @@ TitleScene::~TitleScene()
 	DeleteGraph(m_animHandle);
 	DeleteGraph(m_titleHandle);
 	DeleteGraph(m_shakeHandle);
+	StopSoundMem(m_bgm);
 }
 
 void TitleScene::Init()

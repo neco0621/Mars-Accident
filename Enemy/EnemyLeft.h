@@ -15,6 +15,7 @@ public:
 	//void Draw();
 
 	virtual void Update() override;
+	virtual void S2Update() override;
 
 	virtual void Start() override;
 };

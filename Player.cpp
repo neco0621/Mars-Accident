@@ -78,26 +78,31 @@ void Player::Update()
 	Vec2 move{ 0.0f,0.0f };
 	if (((pad & PAD_INPUT_LEFT) | (pad & PAD_INPUT_4)) != 0)
 	{
-		//m_pos.x -= kSpeed;
-		move.x -= kSpeed;
+
 		m_dir = kDirLeft;
 		isMove = true;
+		if (m_pos.x <= kWidth / 2 - 10)
+		{
+			m_pos.x = kWidth / 2 - 10;
+		}
+		else
+		{
+			move.x -= kSpeed;
+		}		
 	}
 	if (((pad & PAD_INPUT_RIGHT) | (pad & PAD_INPUT_6)) != 0)
 	{
-		//m_pos.x += kSpeed;
-		move.x += kSpeed;
+
 		m_dir = kDirRight;
 		isMove = true;
-	}
-
-	if (m_pos.x < kWidth / 2)
-	{
-		m_pos.x = kWidth / 2;
-	}
-	if (m_pos.x > Game::kScreenWidth - kWidth / 2)
-	{
-		m_pos.x = Game::kScreenWidth - kWidth / 2;
+		if (m_pos.x >= Game::kScreenWidth - kWidth / 2 + 10)
+		{
+			m_pos.x = Game::kScreenWidth - kWidth / 2 + 10;
+		}
+		else
+		{
+			move.x += kSpeed;
+		}		
 	}
 
 	//Î‚ßˆÚ“®‚Ìê‡‚à“¯‚¶‘¬‚³‚ÅˆÚ“®‚·‚é‚æ‚¤‚É‚·‚é
@@ -173,13 +178,13 @@ void Player::S2Update()
 		isMove = true;
 	}
 
-	if (m_pos.x < kWidth / 2)
+	if (m_pos.x < kWidth / 2 - 20)
 	{
-		m_pos.x = kWidth / 2;
+		m_pos.x = kWidth / 2 - 20;
 	}
-	if (m_pos.x > Game::kScreenWidth - kWidth / 2)
+	if (m_pos.x > Game::kScreenWidth - kWidth / 2 + 20)
 	{
-		m_pos.x = Game::kScreenWidth - kWidth / 2;
+		m_pos.x = Game::kScreenWidth - kWidth / 2 + 20;
 	}
 
 	//Î‚ßˆÚ“®‚Ìê‡‚à“¯‚¶‘¬‚³‚ÅˆÚ“®‚·‚é‚æ‚¤‚É‚·‚é

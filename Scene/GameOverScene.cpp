@@ -9,7 +9,8 @@
 GameOverScene::GameOverScene(SceneManager& mgr) : Scene(mgr),
 m_gameOver(-1),
 m_titleBack(-1),
-m_bg(-1)
+m_bg(-1),
+m_bgm(-1)
 {
 	m_updateFunc = &GameOverScene::FadeInUpdate;
 	m_drawFunc = &GameOverScene::FadeDraw;
@@ -18,10 +19,14 @@ m_bg(-1)
 	m_gameOver = LoadGraph("data/GameOver.png");
 	m_titleBack = LoadGraph("data/TitleBack.png");
 	m_bg = LoadGraph("data/GameOverBg.png");
+	m_bgm = LoadSoundMem("data/Sound/GameOverBgm.mp3");
+
+	PlaySoundMem(m_bgm, DX_PLAYTYPE_LOOP);
 }
 
 GameOverScene::~GameOverScene()
 {
+	StopSoundMem(m_bgm);
 }
 
 void GameOverScene::Init()

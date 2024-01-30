@@ -4,8 +4,6 @@
 
 class Stage1Scene;
 class Stage2Scene;
-class Animation;
-class Graphic;	
 class UFO
 {
 public:
@@ -16,7 +14,6 @@ public:
 	void Init();
 	void Update();
 	void Draw();
-	void S2Draw();
 
 	//メンバー変数にアクセスする
 	void SetHandle(int handle) { m_handle = handle; }
@@ -37,8 +34,6 @@ public:
 private:
 	Stage1Scene* m_pS1Scene;
 	Stage2Scene* m_pS2Scene;
-	//Animation* m_pAnimation;
-	Graphic* graphic;
 
 	int m_handle;	//グラフィックのハンドル
 	int m_animHnadle;
@@ -51,20 +46,20 @@ public:
 	//移動量	1フレーム当たりの移動ベクトルを入れる
 	Vec2 m_vec;
 	float JumpPower;
-	bool isJump;
 	float Gravity = 1.0f;
 	float MaxGravity = 10.0f;
-	bool KnockBack;
 	float m_angle;
-
 	float m_tq;
-
+	
+	bool KnockBack;
+	bool isJump;
 	bool m_MoveFlag;
+	bool AnimFlag;
 
 	int m_animFrame;
-	bool AnimFlag;
 	int AnimPosX;
-
 	int m_ufoS2Max;
+	int m_soundHandle;
+
 };
 

@@ -39,6 +39,7 @@ public:
 	bool AddShot(ShotBeam* pBeam);
 
 	void ShakeScreen(int a, int b);
+	void CreateAnimation();
 
 	Vec2 m_toNear;
 	Vec2 pos;
@@ -76,21 +77,24 @@ private:
 	int m_enemyEXP;
 	int m_downEnemyCount;
 	int m_lifeCount;
+	int m_destoryEnemy;
+	int m_shakeHandle;
+	int m_shakeSize;
+	int m_shakeFrame;
+	int StartTitle;
+	int m_animFrame;
+	int m_bgm;
+	int m_hitHandle;
+	int m_damageHandle;
+	int m_gameover;
 
 	bool m_damageFlag;
 	bool m_gameOverFlag;
 	bool IsGround;
-
 	bool m_isShake;
-	int m_shakeHandle;
-	int m_shakeSize;
-	int m_shakeFrame;
-
 	bool StartFlag;
-	int StartTitle;
-
 	bool AnimFlag;
-	int m_animFrame;
+
 	
 	//プレイヤー
 	Player* m_pPlayer;
@@ -108,6 +112,8 @@ private:
 	//敵
 	std::vector<EnemyBase*> m_pEnemy;	//配列のサイズは実行時に決める(今回はコンストラクタ)
 	//EnemyBase* m_pEnemy[16];   ←今までの書き方
+
+	std::vector<Stage1Scene*> m_pAnimation;
 
 	Rect m_pRect;
 

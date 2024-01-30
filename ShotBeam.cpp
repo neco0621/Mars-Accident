@@ -35,9 +35,11 @@ ShotBeam::ShotBeam() :
 	m_pSpeed(kSpeed),
 	m_pMove(kMove),
 	MoveFlag(false),
-	m_z(0,-25)
+	m_z(0,-25),
+	m_soundHandle(-1)
 {
 	m_posLog.resize(kPosLogNum);
+	m_soundHandle = LoadSoundMem("data/Sound/ShotBeam.mp3");
 }
 
 ShotBeam::~ShotBeam()
@@ -99,6 +101,7 @@ void ShotBeam::Draw()
 
 void ShotBeam::Start(Vec2 pos)
 {
+	PlaySoundMem(m_soundHandle, DX_PLAYTYPE_BACK);
 	m_isExist = true;
 	//èâä˙îzíuÇÃåàíË
 	m_pos = pos + m_z;
@@ -110,6 +113,11 @@ void ShotBeam::Start(Vec2 pos)
 	{
 		m_posLog[i] = m_pos;
 	}
+}
+
+void ShotBeam::Sound()
+{
+	
 }
 
 

@@ -67,7 +67,10 @@ Stage1Scene::Stage1Scene(SceneManager& manager) : Scene(manager),
 	IsGround(false),
 	StartFlag(false),
 	AnimFlag(false),
-	m_animFrame(0)
+	m_animFrame(0),
+	m_destoryEnemy(-1),
+	m_bgm(-1),
+	m_hitHandle(-1)
 {
 	//ゲーム画面描画先の生成.
 	//画面サイズと同じ大きさのグラフィックデータを作成する.
@@ -99,8 +102,18 @@ Stage1Scene::Stage1Scene(SceneManager& manager) : Scene(manager),
 	assert(StartTitle != -1);
 	m_enemyEXP = LoadGraph("data/enemyEXP.png");
 	assert(m_enemyEXP != -1);
-	
+	m_destoryEnemy = LoadSoundMem("data/Sound/DestoryEnemy.mp3");
+	assert(m_destoryEnemy != -1);
+	m_bgm = LoadSoundMem("data/Sound/Stage1BGM.mp3");
+	assert(m_bgm != -1);
+	m_hitHandle = LoadSoundMem("data/Sound/UFODamage.mp3");
+	assert(m_hitHandle != -1);
+	m_damageHandle = LoadSoundMem("data/Sound/Damage.mp3");
+	assert(m_damageHandle != -1);
+	m_gameover = LoadSoundMem("data/Sound/GameOver.mp3");
+	assert(m_gameover != -1);
 
+	PlaySoundMem(m_bgm, DX_PLAYTYPE_LOOP);
 	//プレイヤーのメモリ確保.
 	m_pPlayer = new Player{ this };
 	m_pPlayer->SetHandle(m_playerHandle);	//Playerにグラフィックハンドルを渡す
@@ -158,8 +171,7 @@ Stage1Scene::Stage1Scene(SceneManager& manager) : Scene(manager),
 }
 
 Stage1Scene::~Stage1Scene()
-{
-	
+{	
 	//MakeScreenで生成したグラフィックを削除する
 	DeleteGraph(m_shakeHandle);
 	//メモリからグラフィックを削除
@@ -172,6 +184,7 @@ Stage1Scene::~Stage1Scene()
 	DeleteGraph(StartTitle);
 	DeleteGraph(m_enemyEXP);
 
+	StopSoundMem(m_bgm);
 	//プレイヤーのメモリ解放.
 	delete m_pPlayer;
 	m_pPlayer = nullptr;
@@ -263,6 +276,7 @@ void Stage1Scene::Update(Input& input)
 					Rect shotRect = m_pBeam[i]->GetColRect();
 					if (shotRect.CirCleCollision(ufoRect))
 					{
+						PlaySoundMem(m_hitHandle,DX_PLAYTYPE_BACK);
 						m_pUfo->JumpPower = 10;
 						//ターゲット位置.
 						//弾の発射位置から一番近くにいる敵の座標を取得する
@@ -292,8 +306,10 @@ void Stage1Scene::Update(Input& input)
 					Rect shotRect = m_pBeam[a]->GetColRect();
 					if (shotRect.CirCleCollision(enemyRect))
 					{
+						PlaySoundMem(m_destoryEnemy, DX_PLAYTYPE_BACK);
 						pos = m_pEnemy[i]->m_pos;
-						AnimFlag = true;
+						AnimFlag = true;	
+						CreateAnimation();
 						delete m_pBeam[a];
 						m_pBeam[a] = nullptr;
 
@@ -305,6 +321,7 @@ void Stage1Scene::Update(Input& input)
 					Rect ufoRect = m_pUfo->GetColRect();
 					if (ufoRect.CirCleCollision(enemyRect))
 					{
+						PlaySoundMem(m_destoryEnemy, DX_PLAYTYPE_BACK);
 						//メモリを解放する
 						delete m_pEnemy[i];
 						m_pEnemy[i] = nullptr;	//使っていないとわかるように
@@ -312,7 +329,8 @@ void Stage1Scene::Update(Input& input)
 					Rect rocketRect = m_pRocket->GetColRect();
 					if (enemyRect.DistanceCollision(rocketRect))
 					{
-						////メモリを解放する
+						PlaySoundMem(m_damageHandle,DX_PLAYTYPE_BACK);
+						//メモリを解放する
 						delete m_pEnemy[i];
 						m_pEnemy[i] = nullptr;
 						m_damageFlag = true;
@@ -387,7 +405,7 @@ void Stage1Scene::Update(Input& input)
 			IsGround = true;
 		}
 
-		if (m_downEnemyCount == 5)
+		if (m_downEnemyCount == 15)
 		{
 			manager_.ChangeScene(std::make_shared<Stage2Scene>(manager_));
 			return;
@@ -420,6 +438,7 @@ void Stage1Scene::Update(Input& input)
 
 		if (m_gameOverFlag == true)
 		{
+			PlaySoundMem(m_gameover,DX_PLAYTYPE_BACK);
 			manager_.ChangeScene(std::make_shared<GameOverScene>(manager_));
 			return;
 		}
@@ -480,24 +499,6 @@ void Stage1Scene::Draw()
 			IsGround = false;
 		}
 	}*/
-	
-	for (int i = 0; i < m_pEnemy.size(); i++)
-	{
-		if (m_pEnemy[i])
-		{
-			if (AnimFlag == true)
-			{
-				int index = m_animFrame / kAnimInterval;
-				int srcX = (index % kRow) * kAnimWidth;
-				int srcY = (index / kLine) * kAnimHeight;
-
-				DrawRectRotaGraph(static_cast<int>(pos.x), static_cast<int>(pos.y),
-					srcX, srcY, kAnimWidth, kAnimHeight,
-					1.0, 0.0,
-					m_enemyEXP, true, false);
-			}
-		}
-	}
 	
 
 	if (IsGround == true)
@@ -577,7 +578,7 @@ void Stage1Scene::Draw()
 	DrawFormatString(8, 40, GetColor(255, 255, 255), "ShotNum%d", shotNum);
 	DrawFormatString(8, 72, GetColor(255, 255, 255), "EnemyNum%d", enemyNum);
 	DrawFormatString(8, 88, GetColor(255, 255, 255), "残りライフ%d", m_pRocket->m_life);
-	DrawFormatString(8, 104, GetColor(255, 255, 255), "倒した敵の数%d", m_downEnemyCount);
+	DrawFormatString(Game::kScreenWidth / 2, 40, GetColor(255, 255, 255), "%d / 15", m_downEnemyCount);
 	DrawFormatString(8, 56, GetColor(255, 255, 255),"%f", m_pUfo->m_angle);
 #endif
 }
@@ -658,6 +659,21 @@ void Stage1Scene::ShakeScreen(int frame, int size = kShakeSize)
 	m_shakeFrame = frame;
 	m_shakeSize = size;
 	m_isShake = true;
+}
+
+void Stage1Scene::CreateAnimation()
+{
+	for (int i = 0; i < m_pAnimation.size(); i++)
+	{
+		int index = m_animFrame / kAnimInterval;
+		int srcX = (index % kRow) * kAnimWidth;
+		int srcY = (index / kLine) * kAnimHeight;
+
+		DrawRectRotaGraph(static_cast<int>(pos.x), static_cast<int>(pos.y),
+			srcX, srcY, kAnimWidth, kAnimHeight,
+			1.0, 0.0,
+			m_enemyEXP, true, false);
+	}
 }
 
 void Stage1Scene::CreateEnemyLeft()

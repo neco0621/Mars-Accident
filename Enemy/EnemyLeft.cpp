@@ -8,6 +8,7 @@ namespace
 {
 	//敵の移動速度.
 	constexpr float kSpeed = 1.0f;
+	constexpr float s2Speed = 2.0f;
 
 	// アニメーション間隔
 	constexpr int kAnimInterval = 3;
@@ -37,6 +38,29 @@ void EnemyLeft::Update()
 {
 	//存在しない敵の処理はしない.
 	if (!m_isExist)		return;
+
+	m_pos += m_vec;
+
+
+	//当たり判定の更新
+	UpdateCollision();
+
+	int width = 0;
+	int height = 0;
+	GetGraphSize(m_handle, &width, &height);
+
+	if (m_pos.x > Game::kScreenWidth + width / 2)
+	{
+		m_isExist = false;
+	}
+}
+
+void EnemyLeft::S2Update()
+{
+	//存在しない敵の処理はしない.
+	if (!m_isExist)		return;
+
+	m_vec.x = s2Speed;
 
 	m_pos += m_vec;
 

@@ -30,7 +30,7 @@ public:
 	void SetS2(Stage2Scene* pS2Scene) { m_pS2Scene = pS2Scene; }
 	void SetPlayer(Player* pPlayer) { m_pPlayer = pPlayer; }
 	void SetHandle(int handle) { m_handle = handle; }
-
+	void Sound();
 
 	bool isExist() const { return m_isExist; }
 
@@ -40,6 +40,7 @@ public:
 
 	int m_radius;
 	int m_handle;
+	int m_soundHandle;
 	float m_centerX;
 	float m_centerY;
 	//“–‚½‚è”»’è‚Ì‹éŒ`

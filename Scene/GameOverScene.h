@@ -14,6 +14,7 @@ private:
     int m_gameOver;
     int m_titleBack;
     int m_bg;
+    int m_bgm;
     // メンバ関数ポインタの宣言
     using UpdateFunc_t = void (GameOverScene::*)(Input&);
     using DrawFunc_t = void (GameOverScene::*)();

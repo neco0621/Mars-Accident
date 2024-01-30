@@ -55,9 +55,10 @@ UFO::UFO(Stage1Scene* pS1Scene) :
 	AnimFlag(false),
 	JumpPower(10),
 	m_tq(Game::kScreenHeight * 0.75f),
-	m_animHnadle(-1)
+	m_animHnadle(-1),
+	m_soundHandle(-1)
 {
-	
+	m_soundHandle = LoadSoundMem("data/Sound/UFO.mp3");
 }
 
 UFO::UFO(Stage2Scene* pS2Scene) :
@@ -75,8 +76,10 @@ UFO::UFO(Stage2Scene* pS2Scene) :
 	m_animHnadle(-1),
 	AnimPosX(0),
 	m_ufoS2Max(kS2UfoMax),
-	m_animFrame(0)
+	m_animFrame(0),
+	m_soundHandle(-1)
 {
+	m_soundHandle = LoadSoundMem("data/Sound/UFO.mp3");
 } 
 
 UFO::~UFO()
@@ -86,7 +89,6 @@ UFO::~UFO()
 void UFO::Init()
 {
 	m_colRect.SetCenter(m_pos.x, m_pos.y, kWidth, kHeight);
-	//m_pAnimation->AnimationStart(m_pAnimation, 1000, 500);
 }
 
 void UFO::Update()
@@ -102,7 +104,7 @@ void UFO::Update()
 		// ’n–Ê‚É‚Â‚¢‚½Žž
 		if (m_pos.y >= m_tq - m_radius / 2)
 		{
-			//m_pAnimation->DrawAnimation(m_pAnimation->AnimExpl);
+			PlaySoundMem(m_soundHandle, DX_PLAYTYPE_BACK);
 			m_pos.y = m_tq - m_radius / 2;
 			JumpPower = 30;
 			AnimPosX = m_pos.x;

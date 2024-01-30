@@ -49,6 +49,12 @@ void EnemyBase::Update()
 	if (!m_isExist)		return;
 }
 
+void EnemyBase::S2Update()
+{
+	//‘¶İ‚µ‚È‚¢“G‚Ìˆ—‚Í‚µ‚È‚¢.
+	if (!m_isExist)		return;
+}
+
 void EnemyBase::Draw()
 {
 	//‘¶İ‚µ‚È‚¢“G‚Ìˆ—‚Í‚µ‚È‚¢.

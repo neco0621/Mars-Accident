@@ -15,6 +15,7 @@ public:
 
 	virtual void Init();
 	virtual void Update();
+	virtual void S2Update();
 	virtual void Draw();
 
 	//メンバー変数にアクセスする
