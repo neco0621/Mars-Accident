@@ -31,6 +31,8 @@ public:
 	//敵キャラクターをスタートさせる
 	virtual void Start() = 0;
 
+	virtual void CreateAnimation();
+
 	float m_centerX;
 	float m_centerY;
 	float m_radius;

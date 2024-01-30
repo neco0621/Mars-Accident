@@ -97,3 +97,4 @@ void EnemyLeft::Start()
 	m_vec.x = kSpeed;
 	m_vec.y = 0.0f;
 }
+

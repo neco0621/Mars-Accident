@@ -93,6 +93,8 @@ private:
 	bool IsGround;
 	bool m_isShake;
 	bool StartFlag;
+
+public:
 	bool AnimFlag;
 
 	

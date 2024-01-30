@@ -65,12 +65,25 @@ void EnemyBase::Draw()
 	//“G‚Ì•`‰æˆ—.
 	DrawRotaGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y),
 		1.0, 0.0,
-		m_handle, true, false);
+		m_handle, true, false);	
 	
+
 #ifdef _DEBUG
 	//“–‚½‚è”»’è‚Ì•\¦.
 	m_colRect.DrawC(GetColor(255, 0, 0), false);
 #endif
+}
+
+void EnemyBase::CreateAnimation()
+{
+	int index = m_animFrame / kAnimInterval;
+	int srcX = (index % kRow) * kAnimWidth;
+	int srcY = (index / kLine) * kAnimHeight;
+
+	DrawRectRotaGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y),
+		srcX, srcY, kAnimWidth, kAnimHeight,
+		1.0, 0.0,
+		m_animHandle, true, false);
 }
 
 void EnemyBase::UpdateCollision()

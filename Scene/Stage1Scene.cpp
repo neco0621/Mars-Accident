@@ -29,6 +29,10 @@ namespace
 {
 	//一度に登場できる最大の数.
 	constexpr int kEnemyMax = 8;
+	
+	//一度に登場できるアニメーションの最大数.
+	constexpr int kAnimationMax = 8;
+
 	//何フレーム沖に敵が登場するか.
 	constexpr int kEnemyInterval = 90;
 
@@ -162,6 +166,12 @@ Stage1Scene::Stage1Scene(SceneManager& manager) : Scene(manager),
 	for (int i = 0; i < m_pBeam.size(); i++)
 	{		
 		m_pBeam[i] = nullptr;	//未使用
+	}
+
+	m_pAnimation.resize(kAnimationMax);
+	for (int i = 0; i < m_pAnimation.size(); i++)
+	{
+		m_pAnimation[i] = nullptr;
 	}
 
 	//m_pShot = new ShotBeam;
@@ -308,8 +318,7 @@ void Stage1Scene::Update(Input& input)
 					{
 						PlaySoundMem(m_destoryEnemy, DX_PLAYTYPE_BACK);
 						pos = m_pEnemy[i]->m_pos;
-						AnimFlag = true;	
-						CreateAnimation();
+						AnimFlag = true;
 						delete m_pBeam[a];
 						m_pBeam[a] = nullptr;
 
@@ -500,6 +509,23 @@ void Stage1Scene::Draw()
 		}
 	}*/
 	
+	if (AnimFlag == true)
+	{
+		for (int i = 0; i < m_pEnemy.size(); i++)
+		{	
+			if (m_pEnemy[i])
+			{
+				int index = m_animFrame / kAnimInterval;
+				int srcX = (index % kRow) * kAnimWidth;
+				int srcY = (index / kLine) * kAnimHeight;
+
+				DrawRectRotaGraph(static_cast<int>(pos.x), static_cast<int>(pos.y),
+					srcX, srcY, kAnimWidth, kAnimHeight,
+					1.0, 0.0,
+					m_enemyEXP, true, false);
+			}			
+		}
+	}
 
 	if (IsGround == true)
 	{
@@ -663,7 +689,7 @@ void Stage1Scene::ShakeScreen(int frame, int size = kShakeSize)
 
 void Stage1Scene::CreateAnimation()
 {
-	for (int i = 0; i < m_pAnimation.size(); i++)
+	for (int i = 0; i < m_pEnemy.size(); i++)
 	{
 		int index = m_animFrame / kAnimInterval;
 		int srcX = (index % kRow) * kAnimWidth;
