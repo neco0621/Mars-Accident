@@ -36,18 +36,37 @@ namespace
 
 	//画面がワイプするのにかかるフレーム数.
 	constexpr int kWipeFrame = 30;
+
+	constexpr int kShakeSize = 20;
+
+	// アニメーション間隔
+	constexpr int kAnimInterval = 3;
+	// 高さ・幅
+	constexpr int kAnimWidth = 100;
+	constexpr int kAnimHeight = 100;
+	// 縦横数
+	constexpr int kRow = 10;
+	constexpr int kLine = 9;
+	// アニメーション数
+	constexpr int kAnimNum = 82;
 }
 
 Stage2Scene::Stage2Scene(SceneManager& manager) : Scene(manager),
 m_enemyInterval(0),
-m_shakeFrame(0),
+m_S2shakeFrame(0),
 m_wipeFrame(0),
 m_toNear(Game::kScreenWidth, Game::kScreenHeight),
 m_downEnemyCount(0),
 m_damageFlag(false),
 m_lifeCount(0),
+m_isShake(false),
+m_shakeSize(kShakeSize),
+m_shakeHandle(-1),
 m_gameOverFlag(false),
-IsGround(false)
+IsGround(false),
+StartFlag(false),
+AnimFlag(false),
+m_animFrame(0)
 {
 	//ゲーム画面描画先の生成.
 	//画面サイズと同じ大きさのグラフィックデータを作成する.
@@ -76,6 +95,10 @@ IsGround(false)
 	assert(m_life3Handle != -1);
 	m_AnimHandle = LoadGraph("data/explosion.png");
 	assert(m_AnimHandle != -1);
+	StartTitle = LoadGraph("data/Start.png");
+	assert(StartTitle != -1);
+	m_enemyEXP = LoadGraph("data/enemyEXP.png");
+	assert(m_enemyEXP != -1);
 
 
 
@@ -93,6 +116,11 @@ IsGround(false)
 	m_pS2ufo = new S2UFO{ this };
 	m_pS2ufo->SetHandle(m_ufoHandle);
 	m_pS2ufo->SetAnimHandle(m_AnimHandle);
+
+	for (int i = 0; i < m_pEnemy.size(); i++)
+	{
+		m_pEnemy[i]->SetAnimHandle(m_enemyEXP);
+	}
 
 	m_pRocket = new Rocket{ this };
 	m_pRocket->SetHandle(m_rocketHandle);
@@ -134,7 +162,7 @@ IsGround(false)
 Stage2Scene::~Stage2Scene()
 {
 	//MakeScreenで生成したグラフィックを削除する
-	DeleteGraph(m_gameScreenHandle);
+	DeleteGraph(m_shakeHandle);
 	//メモリからグラフィックを削除
 	DeleteGraph(m_bgHandle);
 	DeleteGraph(m_playerHandle);
@@ -142,6 +170,9 @@ Stage2Scene::~Stage2Scene()
 	DeleteGraph(m_rightEnemyHandle);
 	DeleteGraph(m_AnimHandle);
 	DeleteGraph(m_ufoHandle);
+	DeleteGraph(m_shakeHandle);
+	DeleteGraph(StartTitle);
+	DeleteGraph(m_enemyEXP);
 
 	//プレイヤーのメモリ解放.
 	delete m_pPlayer;
@@ -201,208 +232,239 @@ void Stage2Scene::End()
 
 void Stage2Scene::Update(Input& input)
 {	
-	Rect playerRect = m_pPlayer->GetColRect();
-	m_pPlayer->S2Update();
 	m_pRocket->Update();
 	Rect ufoRect = m_pUfo->GetColRect();
 	Rect S2UfoRect = m_pS2ufo->GetColRect();
-	m_pUfo->Update();
-	m_pS2ufo->Update();
-	if (ufoRect.DistanceCollision(playerRect))
+	Rect playerRect = m_pPlayer->GetColRect();
+	if (input.IsTriggered("space"))
 	{
-		m_gameOverFlag = true;
+		StartFlag = true;
 	}
-	if (S2UfoRect.DistanceCollision(playerRect))
+	if (StartFlag)
 	{
-		m_gameOverFlag = true;
-	}
-	
-	for (int i = 0; i < m_pBeam.size(); i++)
-	{
-		//nullptrなら処理は行わない
-		if (m_pBeam[i])
-		{				
-			m_pBeam[i]->Update();
-			//画面外に出たらメモリ解放
-			if (!m_pBeam[i]->isExist())
-			{
-				//ビームのメモリ解放.
-				delete m_pBeam[i];
-				m_pBeam[i] = nullptr;
-			}
-			else
-			{
-				Rect shotRect = m_pBeam[i]->GetColRect();
-				if (shotRect.CirCleCollision(ufoRect))
-				{
-					m_pUfo->JumpPower = 10;
-					//ターゲット位置.
-					//弾の発射位置から一番近くにいる敵の座標を取得する
-					//SceneMainに実装した関数を利用する
-					const Vec2 target = GetNearEnemyPos(m_pBeam[i]->m_pos);
-					//発射位置からターゲットに向かうベクトル
-					Vec2 toTarget = target - m_pBeam[i]->m_pos;
-					//正規化　totarget自信を正規化(長さを1に)
-					toTarget.normalize();
-					//弾の速度をkSpeedに
-					m_pBeam[i]->m_vec = toTarget * m_pBeam[i]->m_pSpeed;
-					m_pBeam[i]->MoveFlag = true;
-				}
-
-				if (shotRect.CirCleCollision(S2UfoRect))
-				{
-					m_pS2ufo->JumpPower = 10;
-					//ターゲット位置.
-					//弾の発射位置から一番近くにいる敵の座標を取得する
-					//SceneMainに実装した関数を利用する
-					const Vec2 target = GetNearEnemyPos(m_pBeam[i]->m_pos);
-					//発射位置からターゲットに向かうベクトル
-					Vec2 toTarget = target - m_pBeam[i]->m_pos;
-					//正規化　totarget自信を正規化(長さを1に)
-					toTarget.normalize();
-					//弾の速度をkSpeedに
-					m_pBeam[i]->m_vec = toTarget * m_pBeam[i]->m_pSpeed;
-					m_pBeam[i]->MoveFlag = true;
-				}
-
-			}
-		}
-	}
-	for (int i = 0; i < m_pEnemy.size(); i++)
-	{
-		if (m_pEnemy[i])	//nullptrではないチェック
+		m_pPlayer->S2Update();
+		m_pUfo->Update();
+		m_pS2ufo->Update();
+		if (ufoRect.DistanceCollision(playerRect))
 		{
-			Rect enemyRect = m_pEnemy[i]->GetColRect();
-			for (int a = 0; a < m_pBeam.size(); a++)
-			{	
-				//nullptrなら処理は行わない
-				if (!m_pBeam[a])		continue;
+			m_gameOverFlag = true;
+		}
+		if (S2UfoRect.DistanceCollision(playerRect))
+		{
+			m_gameOverFlag = true;
+		}
+
+		for (int i = 0; i < m_pBeam.size(); i++)
+		{
+			//nullptrなら処理は行わない
+			if (m_pBeam[i])
+			{
+				m_pBeam[i]->Update();
 				//画面外に出たらメモリ解放
-				Rect shotRect = m_pBeam[a]->GetColRect();
-				if (shotRect.CirCleCollision(enemyRect))
+				if (!m_pBeam[i]->isExist())
 				{
-					delete m_pBeam[a];
-					m_pBeam[a] = nullptr;
+					//ビームのメモリ解放.
+					delete m_pBeam[i];
+					m_pBeam[i] = nullptr;
+				}
+				else
+				{
+					Rect shotRect = m_pBeam[i]->GetColRect();
+					if (shotRect.CirCleCollision(ufoRect))
+					{
+						m_pUfo->JumpPower = 10;
+						//ターゲット位置.
+						//弾の発射位置から一番近くにいる敵の座標を取得する
+						//SceneMainに実装した関数を利用する
+						const Vec2 target = GetNearEnemyPos(m_pBeam[i]->m_pos);
+						//発射位置からターゲットに向かうベクトル
+						Vec2 toTarget = target - m_pBeam[i]->m_pos;
+						//正規化　totarget自信を正規化(長さを1に)
+						toTarget.normalize();
+						//弾の速度をkSpeedに
+						m_pBeam[i]->m_vec = toTarget * m_pBeam[i]->m_pSpeed;
+						m_pBeam[i]->MoveFlag = true;
+					}
 
-					//メモリを解放する
-					delete m_pEnemy[i];
-					m_pEnemy[i] = nullptr;	//使っていないとわかるように
-					m_downEnemyCount++;
-				}
-				if (ufoRect.CirCleCollision(enemyRect))
-				{
-					//メモリを解放する
-					delete m_pEnemy[i];
-					m_pEnemy[i] = nullptr;	//使っていないとわかるように
-				}
-				if (S2UfoRect.CirCleCollision(enemyRect))
-				{
-					//メモリを解放する
-					delete m_pEnemy[i];
-					m_pEnemy[i] = nullptr;	//使っていないとわかるように
-				}
-				Rect rocketRect = m_pRocket->GetColRect();
-				if (enemyRect.DistanceCollision(rocketRect))
-				{
-					////メモリを解放する
-					delete m_pEnemy[i];
-					m_pEnemy[i] = nullptr;
-					m_damageFlag = true;
-				}				
-			}		
-		}
-	}
+					if (shotRect.CirCleCollision(S2UfoRect))
+					{
+						m_pS2ufo->JumpPower = 10;
+						//ターゲット位置.
+						//弾の発射位置から一番近くにいる敵の座標を取得する
+						//SceneMainに実装した関数を利用する
+						const Vec2 target = GetNearEnemyPos(m_pBeam[i]->m_pos);
+						//発射位置からターゲットに向かうベクトル
+						Vec2 toTarget = target - m_pBeam[i]->m_pos;
+						//正規化　totarget自信を正規化(長さを1に)
+						toTarget.normalize();
+						//弾の速度をkSpeedに
+						m_pBeam[i]->m_vec = toTarget * m_pBeam[i]->m_pSpeed;
+						m_pBeam[i]->MoveFlag = true;
+					}
 
-	for (int i = 0; i < m_pEnemy.size(); i++)
-	{
-		if (m_pEnemy[i])	//nullptrではないチェック
-		{
-			m_pEnemy[i]->Update();
-			Rect enemyRect = m_pEnemy[i]->GetColRect();
-			//使用済みの敵キャラクタを削除する必要がある
-			if (!m_pEnemy[i]->isExist())
-			{
-				//メモリを解放する
-				delete m_pEnemy[i];
-				m_pEnemy[i] = nullptr;	//使っていないとわかるように
+				}
 			}
 		}
+		for (int i = 0; i < m_pEnemy.size(); i++)
+		{
+			if (m_pEnemy[i])	//nullptrではないチェック
+			{
+				Rect enemyRect = m_pEnemy[i]->GetColRect();
+				for (int a = 0; a < m_pBeam.size(); a++)
+				{
+					//nullptrなら処理は行わない
+					if (!m_pBeam[a])		continue;
+					//画面外に出たらメモリ解放
+					Rect shotRect = m_pBeam[a]->GetColRect();
+					if (shotRect.CirCleCollision(enemyRect))
+					{
+						pos = m_pEnemy[i]->m_pos;
+						AnimFlag = true;
+						delete m_pBeam[a];
+						m_pBeam[a] = nullptr;
+
+						//メモリを解放する
+						delete m_pEnemy[i];
+						m_pEnemy[i] = nullptr;	//使っていないとわかるように
+						m_downEnemyCount++;
+					}
+					if (ufoRect.CirCleCollision(enemyRect))
+					{
+						//メモリを解放する
+						delete m_pEnemy[i];
+						m_pEnemy[i] = nullptr;	//使っていないとわかるように
+					}
+					if (S2UfoRect.CirCleCollision(enemyRect))
+					{
+						//メモリを解放する
+						delete m_pEnemy[i];
+						m_pEnemy[i] = nullptr;	//使っていないとわかるように
+					}
+					Rect rocketRect = m_pRocket->GetColRect();
+					if (enemyRect.DistanceCollision(rocketRect))
+					{
+						////メモリを解放する
+						delete m_pEnemy[i];
+						m_pEnemy[i] = nullptr;
+						m_damageFlag = true;
+					}
+				}
+			}
+		}
+
+		if (AnimFlag == true)
+		{
+			m_animFrame = (m_animFrame + 1) % (kAnimNum * kAnimInterval);
+			m_animFrame++;
+		}
+
+		if (m_animFrame >= 120)
+		{
+			AnimFlag = false;
+			m_animFrame = 0;
+		}
+		for (int i = 0; i < m_pEnemy.size(); i++)
+		{
+			if (m_pEnemy[i])	//nullptrではないチェック
+			{
+				m_pEnemy[i]->Update();
+				Rect enemyRect = m_pEnemy[i]->GetColRect();
+				//使用済みの敵キャラクタを削除する必要がある
+				if (!m_pEnemy[i]->isExist())
+				{
+					//メモリを解放する
+					delete m_pEnemy[i];
+					m_pEnemy[i] = nullptr;	//使っていないとわかるように
+				}
+			}
+		}
+
+		//敵キャラクターを登場させる
+		//kEnemyIntervalフレーム経過するごとにランダムに敵を登場させる
+		m_enemyInterval++;
+		if (m_enemyInterval >= kEnemyInterval)
+		{
+			m_enemyInterval = 0;
+
+			//ランダムに敵を選択
+			switch (GetRand(2))		//0 or 1 or 2
+			{
+			case 0:		//Left
+				CreateEnemyLeft();
+
+				break;
+			case 1:		//Right
+				CreateEnemyRight();
+
+				break;
+			}
+		}
+
+		//画面揺れフレームのカウントダウン
+		if (m_isShake)
+		{
+			m_S2shakeFrame--;
+
+			if (m_S2shakeFrame < 0)
+			{
+				m_isShake = false;
+			}
+		}
+
+		if (m_pUfo->m_pos.y >= m_pUfo->m_tq - m_pUfo->m_radius / 2)
+		{
+			IsGround = true;
+		}
+
+		if (m_downEnemyCount == 10)
+		{
+			manager_.ChangeScene(std::make_shared<GameClearScene>(manager_));
+			return;
+		}
+
+		if (m_damageFlag == true)
+		{
+			m_lifeCount++;
+			m_pRocket->LifeDecrease();
+			m_damageFlag = false;
+		}
+
+		if (m_lifeCount == 1)
+		{
+			DeleteGraph(m_life3Handle);
+		}
+		else if (m_lifeCount == 2)
+		{
+			DeleteGraph(m_life2Handle);
+		}
+		else if (m_lifeCount == 3)
+		{
+			DeleteGraph(m_life1Handle);
+		}
+
+		if (m_pRocket->m_life <= 0)
+		{
+			m_gameOverFlag = true;
+		}
+
+		if (m_gameOverFlag == true)
+		{
+			manager_.ChangeScene(std::make_shared<GameOverScene>(manager_));
+			return;
+		}
 	}
+
 	//ワイプ処理
 	m_wipeFrame++;
 	if (m_wipeFrame > kWipeFrame)	m_wipeFrame = kWipeFrame;
-
-	//敵キャラクターを登場させる
-	//kEnemyIntervalフレーム経過するごとにランダムに敵を登場させる
-	m_enemyInterval++;
-	if (m_enemyInterval >= kEnemyInterval)
-	{
-		m_enemyInterval = 0;
-
-		//ランダムに敵を選択
-		switch (GetRand(2))		//0 or 1 or 2
-		{
-		case 0:		//Left
-			CreateEnemyLeft();
-
-			break;
-		case 1:		//Right
-			CreateEnemyRight();
-
-			break;
-		}
-	}
-
-	//画面揺れフレームのカウントダウン
-	m_shakeFrame--;
-	if (m_pUfo->m_pos.y >= m_pUfo->m_tq - m_pUfo->m_radius / 2)
-	{
-		IsGround = true;
-	}
-		
-	if (m_downEnemyCount == 10)
-	{
-		manager_.ChangeScene(std::make_shared<GameClearScene>(manager_));
-		return;
-	}
-
-	if (m_damageFlag == true)
-	{
-		m_lifeCount++;
-		m_pRocket->LifeDecrease();
-		m_damageFlag = false;
-	}
-
-	if (m_lifeCount == 1)
-	{
-		DeleteGraph(m_life3Handle);
-	}
-	else if (m_lifeCount == 2)
-	{
-		DeleteGraph(m_life2Handle);
-	}
-	else if (m_lifeCount == 3)
-	{
-		DeleteGraph(m_life1Handle);
-	}
-
-	if (m_pRocket->m_life <= 0)
-	{
-		m_gameOverFlag = true;
-	}
-
-	if (m_gameOverFlag == true)
-	{
-		manager_.ChangeScene(std::make_shared<GameOverScene>(manager_));
-		return;
-	}
 }
 
 void Stage2Scene::Draw()
 {
+	ClearDrawScreen();
 	//バックバッファに直接書き込むのではなく、
 	//自分で生成したグラフィックデータに対して書き込みを行う
-	SetDrawScreen(m_gameScreenHandle);
+	SetDrawScreen(m_shakeHandle);
 
 	//描画先スクリーンをクリアする
 	ClearDrawScreen();
@@ -416,12 +478,23 @@ void Stage2Scene::Draw()
 	m_pPlayer->Draw();
 	m_pUfo->Draw();
 	m_pS2ufo->Draw();
+
+	if (StartFlag == false)
+	{
+		DrawGraph(Game::kScreenWidth / 2 - 450 / 2, Game::kScreenHeight / 2 - 371 / 2, StartTitle, true);
+	}
+	if (m_isShake)
+	{
+		SetDrawScreen(m_shakeHandle);
+		ClearDrawScreen();
+	}
+
 	for (int i = 0; i < m_pBeam.size(); i++)
 	{
 		if (!m_pBeam[i])		continue;
 		m_pBeam[i]->Draw();
 	}
-	if (IsGround)
+	/*if (IsGround)
 	{
 		SetDrawScreen(DX_SCREEN_BACK);
 
@@ -434,6 +507,30 @@ void Stage2Scene::Draw()
 		{
 			IsGround = false;
 		}
+	}*/
+
+	for (int i = 0; i < m_pEnemy.size(); i++)
+	{
+		if (m_pEnemy[i])
+		{
+			if (AnimFlag == true)
+			{
+				int index = m_animFrame / kAnimInterval;
+				int srcX = (index % kRow) * kAnimWidth;
+				int srcY = (index / kLine) * kAnimHeight;
+
+				DrawRectRotaGraph(static_cast<int>(pos.x), static_cast<int>(pos.y),
+					srcX, srcY, kAnimWidth, kAnimHeight,
+					1.0, 0.0,
+					m_enemyEXP, true, false);
+			}
+		}
+	}
+
+	if (IsGround == true)
+	{
+		ShakeScreen(m_S2shakeFrame, kShakeSize);
+		IsGround = false;
 	}
 
 	for (int i = 0; i < m_pEnemy.size(); i++)
@@ -473,7 +570,7 @@ void Stage2Scene::Draw()
 	//ゲーム画面をバックバッファに描画する
 	int screenX = 0;
 	int screenY = 0;
-	if (m_shakeFrame > 0)
+	if (m_S2shakeFrame > 0)
 	{
 		//画面揺れ
 		screenX = GetRand(8) - 4;
@@ -504,6 +601,26 @@ void Stage2Scene::Draw()
 		DrawRectGraph(x, y,
 			0, y, Game::kScreenWidth, 1,
 			m_gameScreenHandle, true, false);
+	}
+
+	SetDrawScreen(DX_SCREEN_BACK);
+	if (m_isShake)
+	{
+
+		int x = GetRand(m_shakeSize) - static_cast<int>(m_shakeSize * 0.5f);
+		int y = GetRand(m_shakeSize) - static_cast<int>(m_shakeSize * 0.5f);
+		DrawGraph(x, y, m_shakeHandle, true);
+#ifdef _DEBUG
+		//プレイヤーの位置をデバッグ表示する
+		Vec2 playerPos = m_pPlayer->GetPos();
+		DrawFormatString(8, 24, GetColor(255, 255, 255),
+			"プレイヤーの座標(%.2f, %.2f)", playerPos.x, playerPos.y);
+		DrawFormatString(8, 40, GetColor(255, 255, 255), "ShotNum%d", shotNum);
+		DrawFormatString(8, 72, GetColor(255, 255, 255), "EnemyNum%d", enemyNum);
+		DrawFormatString(8, 88, GetColor(255, 255, 255), "残りライフ%d", m_pRocket->m_life);
+		DrawFormatString(8, 104, GetColor(255, 255, 255), "倒した敵の数%d", m_downEnemyCount);
+		DrawFormatString(8, 56, GetColor(255, 255, 255), "%f", m_pUfo->m_angle);
+#endif
 	}
 }
 
@@ -576,6 +693,13 @@ bool Stage2Scene::AddShot(ShotBeam* pBeam)
 	//ここに来た、ということはm_pShotにポインタを登録できなかった
 	delete pBeam;
 	return false;
+}
+
+void Stage2Scene::ShakeScreen(int frame, int size = kShakeSize)
+{
+	m_S2shakeFrame = frame;
+	m_shakeSize = size;
+	m_isShake = true;
 }
 
 void Stage2Scene::CreateEnemyLeft()

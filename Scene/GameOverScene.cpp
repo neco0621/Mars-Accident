@@ -6,11 +6,18 @@
 #include "TitleScene.h"
 #include "../Game.h"
 
-GameOverScene::GameOverScene(SceneManager& mgr) : Scene(mgr)
+GameOverScene::GameOverScene(SceneManager& mgr) : Scene(mgr),
+m_gameOver(-1),
+m_titleBack(-1),
+m_bg(-1)
 {
 	m_updateFunc = &GameOverScene::FadeInUpdate;
 	m_drawFunc = &GameOverScene::FadeDraw;
 	frame_ = 60;
+
+	m_gameOver = LoadGraph("data/GameOver.png");
+	m_titleBack = LoadGraph("data/TitleBack.png");
+	m_bg = LoadGraph("data/GameOverBg.png");
 }
 
 GameOverScene::~GameOverScene()
@@ -61,8 +68,9 @@ void GameOverScene::FadeOutUpdate(Input&)
 
 void GameOverScene::FadeDraw()
 {
-	DrawString(Game::kScreenWidth / 2, Game::kScreenHeight * 0.25, "GameOver", 0xffffff);
-	
+	DrawGraph(0,0,m_bg,true);
+	DrawGraph(Game::kScreenWidth / 2 - 225, Game::kScreenHeight * 0.25 - 127, m_gameOver, true);
+	DrawGraph(Game::kScreenWidth / 2 - 225, Game::kScreenHeight * 0.75 - 127, m_titleBack, true);
 	int alpha = static_cast<int>(255 * (static_cast<float>(frame_) / 60.0f));
 	SetDrawBlendMode(DX_BLENDMODE_MULA, alpha);
 	DrawBox(0, 0, Game::kScreenWidth, Game::kScreenWidth, 0x000000, true);
@@ -71,6 +79,7 @@ void GameOverScene::FadeDraw()
 
 void GameOverScene::NormalDraw()
 {
-	DrawString(Game::kScreenWidth / 2, Game::kScreenHeight * 0.25, "GameOver", 0xffffff);
-
+	DrawGraph(0, 0, m_bg, true);
+	DrawGraph(Game::kScreenWidth / 2 - 225, Game::kScreenHeight * 0.25 - 127, m_gameOver, true);
+	DrawGraph(Game::kScreenWidth / 2 - 225, Game::kScreenHeight * 0.75 - 127, m_titleBack, true);
 }

@@ -26,7 +26,6 @@ public:
 
 	void Update(Input& input);
 	void Draw();
-	void ChangeGameOverScene();
 
 	//特定の座標から一番近くにいる敵の座標を返す関数
 	Vec2 GetNearEnemyPos(Vec2 pos);
@@ -35,8 +34,11 @@ public:
 	//登録できなかった場合は内部でpShot解放する
 	bool AddShot(ShotBeam* pBeam);
 
-	Vec2 m_toNear;
+	void ShakeScreen(int a, int b);
+	void EXPAnim();
 
+	Vec2 m_toNear;
+	Vec2 pos;
 private:
 	int handle_ = 0;
 	int frame_ = 0;
@@ -68,6 +70,7 @@ private:
 	int m_rocketHandle;
 	int m_ufoHandle;
 	int m_AnimHandle;
+	int m_enemyEXP;
 	int m_downEnemyCount;
 	int m_lifeCount;
 
@@ -75,8 +78,16 @@ private:
 	bool m_gameOverFlag;
 	bool IsGround;
 
+	bool m_isShake;
+	int m_shakeHandle;
+	int m_shakeSize;
+	int m_shakeFrame;
 
+	bool StartFlag;
+	int StartTitle;
 
+	bool AnimFlag;
+	int m_animFrame;
 
 	//プレイヤー
 	Player* m_pPlayer;
@@ -104,5 +115,5 @@ private:
 	int m_enemyInterval;
 
 	//ダメージを受けたときの画面揺れ演出
-	int m_shakeFrame;
+	int m_S2shakeFrame;
 };
