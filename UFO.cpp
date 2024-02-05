@@ -42,6 +42,25 @@ namespace
 	constexpr int kS2UfoMax = 2;
 }
 
+UFO::UFO(TutorialScene* pTuScene) :
+	m_pTuScene(pTuScene),
+	m_handle(-1),
+	m_pos(kPosX, kPosY),
+	m_boundFlag(false),
+	m_radius(kRadius),
+	m_vec(0, kSpeed),
+	m_MoveFlag(false),
+	isJump(true),
+	KnockBack(false),
+	AnimFlag(false),
+	JumpPower(10),
+	m_tq(Game::kScreenHeight * 0.75f),
+	m_animHnadle(-1),
+	m_soundHandle(-1)
+{
+	m_soundHandle = LoadSoundMem("data/Sound/UFO.mp3");
+}
+
 UFO::UFO(Stage1Scene* pS1Scene) :
 	m_pS1Scene(pS1Scene),
 	m_handle(-1),

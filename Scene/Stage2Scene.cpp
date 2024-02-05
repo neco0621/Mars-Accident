@@ -249,7 +249,7 @@ void Stage2Scene::Update(Input& input)
 	Rect ufoRect = m_pUfo->GetColRect();
 	Rect S2UfoRect = m_pS2ufo->GetColRect();
 	Rect playerRect = m_pPlayer->GetColRect();
-	if (input.IsTriggered("space"))
+	if (input.IsTriggered("OK"))
 	{
 		StartFlag = true;
 	}

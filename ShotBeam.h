@@ -3,6 +3,7 @@
 #include "Rect.h"
 #include <vector>
 
+class TutorialScene;
 class Stage1Scene;
 class Stage2Scene;
 class UFO;
@@ -26,6 +27,7 @@ public:
 	//弾をスタートさせる
 	virtual void Start(Vec2 pos);
 
+	void SetTutorial(TutorialScene* pTuScene) { m_pTuScene = pTuScene; }
 	void SetS1(Stage1Scene* pS1Scene) { m_pS1Scene = pS1Scene; }
 	void SetS2(Stage2Scene* pS2Scene) { m_pS2Scene = pS2Scene; }
 	void SetPlayer(Player* pPlayer) { m_pPlayer = pPlayer; }
@@ -55,6 +57,7 @@ public:
 	bool MoveFlag;
 protected:
 	//SceneMainの関数を呼び出すためにポインタを覚えておく
+	TutorialScene* m_pTuScene;
 	Stage1Scene* m_pS1Scene;
 	Stage2Scene* m_pS2Scene;
 	//ショットを撃ったプレイヤーのポインタを覚えておく

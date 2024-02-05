@@ -16,6 +16,15 @@ namespace
 	constexpr int kDecrease = 1;
 }
 
+Rocket::Rocket(TutorialScene* pTuScene) :
+	m_pTuScene(pTuScene),
+	m_handle(-1),
+	m_pos(KPosX, KPosY),
+	m_radius(kRadius),
+	m_life(kLife)
+{
+}
+
 Rocket::Rocket(Stage1Scene* pS1Scene) :
 	m_pS1Scene(pS1Scene),
 	m_handle(-1),

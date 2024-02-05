@@ -2,12 +2,14 @@
 #include "Vec2.h"
 #include "Rect.h"
 
+class TutorialScene;
 class Stage1Scene;
 class Stage2Scene;
 class ShotBeam;
 class Rocket
 {
 public:
+	Rocket(TutorialScene* pTuScene);
 	Rocket(Stage1Scene* pS1Scene);
 	Rocket(Stage2Scene* pS2Scene);
 	~Rocket();
@@ -35,6 +37,7 @@ public:
 
 	int m_life;
 private:
+	TutorialScene* m_pTuScene;
 	Stage1Scene* m_pS1Scene;
 	Stage2Scene* m_pS2Scene;
 	ShotBeam* m_pBeam;

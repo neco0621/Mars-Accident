@@ -5,6 +5,7 @@
 //敵の継承クラス
 //継承元となるクラスを基底クラスと呼ぶ
 
+class TutorialScene;
 class Stage1Scene;
 class Stage2Scene;
 class EnemyBase
@@ -40,7 +41,9 @@ public:
 
 	//表示位置
 	Vec2 m_pos;
+	TutorialScene* m_pTuScene;
 	Stage1Scene* m_pS1Scene;
+	Stage2Scene* m_pS2Scene;
 
 	int m_animFrame;
 	bool enemyEXPFlag;

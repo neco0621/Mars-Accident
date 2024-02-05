@@ -1,6 +1,7 @@
 #include "ShotBeam.h"
 #include "Game.h"
 #include "DxLib.h"
+#include "Scene/TutorialScene.h"
 #include "Scene/Stage1Scene.h"
 #include "UFO.h"
 #include "Player.h"

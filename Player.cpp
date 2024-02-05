@@ -2,6 +2,7 @@
 #include "DxLib.h"
 #include "Pad.h"
 #include "Game.h"
+#include "Scene/TutorialScene.h"
 #include "Scene/Stage1Scene.h"
 #include "Scene/Stage2Scene.h"
 #include "ShotBeam.h"
@@ -29,6 +30,16 @@ namespace
 
 	//魔法の杖の発射間隔
 	constexpr int kBeamFrame = 20;
+}
+
+Player::Player(TutorialScene* pTuScene) :
+	m_pTuScene(pTuScene),
+	m_handle(-1),
+	m_pos(Game::kScreenWidth * 0.5, Game::kScreenHeight * 0.75),
+	m_dir(kDirRight),
+	m_walkAnimFrame(0),
+	m_beamFrame(0)
+{
 }
 
 Player::Player(Stage1Scene* S1Scene) :
@@ -61,9 +72,94 @@ void Player::Init()
 	
 }
 
+void Player::TuUpdate()
+{
+	//padの十字キーを使用してプレイヤーを移動させる
+	int pad = GetJoypadInputState(DX_INPUT_KEY_PAD1);
+
+
+	/* (pad & PAD_INPUT_UP) == 0 の原理*/
+	//0000 0000 0000 0000 0000 0000 0000 0000　基本
+	//0000 0000 0000 0000 0000 0000 0000 1000　上キーが押されたとき
+
+	bool isMove = false;	//移動しているかどうか
+
+	//移動量を持つようにする
+	Vec2 move{ 0.0f,0.0f };
+	if (((pad & PAD_INPUT_LEFT) | (pad & PAD_INPUT_4)) != 0)
+	{
+
+		m_dir = kDirLeft;
+		isMove = true;
+		if (m_pos.x <= kWidth / 2 - 10)
+		{
+			m_pos.x = kWidth / 2 - 10;
+		}
+		else
+		{
+			move.x -= kSpeed;
+		}
+	}
+	if (((pad & PAD_INPUT_RIGHT) | (pad & PAD_INPUT_6)) != 0)
+	{
+
+		m_dir = kDirRight;
+		isMove = true;
+		if (m_pos.x >= Game::kScreenWidth - kWidth / 2 + 10)
+		{
+			m_pos.x = Game::kScreenWidth - kWidth / 2 + 10;
+		}
+		else
+		{
+			move.x += kSpeed;
+		}
+	}
+
+	//斜め移動の場合も同じ速さで移動するようにする
+
+	//ベクトルの正規化
+	move.normalize();
+
+	//ベクトルの長さをkspeedにする
+	move *= kSpeed;
+
+	//座標とベクトルの足し算
+	m_pos += move;
+
+	//中心座標を指定して当たり判定のRectを生成する.
+	m_colRect.SetCenter(m_pos.x, m_pos.y, kWidth - 20, kHeight);
+
+	if (isMove)
+	{
+		//歩きアニメーション
+		m_walkAnimFrame++;
+		if (m_walkAnimFrame >= kAnimFrameCycle)
+		{
+			m_walkAnimFrame = 0;
+		}
+	}
+	else
+	{
+		m_walkAnimFrame = kAnimFrameNum;
+	}
+
+	//ショット
+	m_beamFrame++;
+	if (m_beamFrame >= kBeamFrame)
+	{
+		ShotBeam* m_pShot = new ShotBeam;
+		m_pShot->SetTutorial(m_pTuScene);
+		m_pShot->SetPlayer(this);
+		m_pShot->Start(GetPos());
+		//以降更新やメモリの解放はSceneMainに任せる
+		m_pTuScene->AddShot(m_pShot);
+
+		m_beamFrame = 0;
+	}
+}
+
 void Player::Update()
 {
-
 	//padの十字キーを使用してプレイヤーを移動させる
 	int pad = GetJoypadInputState(DX_INPUT_KEY_PAD1);
 

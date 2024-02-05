@@ -74,7 +74,8 @@ Stage1Scene::Stage1Scene(SceneManager& manager) : Scene(manager),
 	m_animFrame(0),
 	m_destoryEnemy(-1),
 	m_bgm(-1),
-	m_hitHandle(-1)
+	m_hitHandle(-1),
+	CheckSE(-1)
 {
 	//ゲーム画面描画先の生成.
 	//画面サイズと同じ大きさのグラフィックデータを作成する.
@@ -116,6 +117,11 @@ Stage1Scene::Stage1Scene(SceneManager& manager) : Scene(manager),
 	assert(m_damageHandle != -1);
 	m_gameover = LoadSoundMem("data/Sound/GameOver.mp3");
 	assert(m_gameover != -1);
+	CheckSE = LoadSoundMem("data/Sound/Check.mp3");
+	assert(CheckSE != -1);
+	m_clearHandle = LoadGraph("data/Stage1Clear.png");
+	assert(m_clearHandle != -1);
+	m_clearSE = LoadSoundMem("data/Sound/clear.mp3");
 
 	PlaySoundMem(m_bgm, DX_PLAYTYPE_LOOP);
 	//プレイヤーのメモリ確保.
@@ -193,6 +199,7 @@ Stage1Scene::~Stage1Scene()
 	DeleteGraph(m_shakeHandle);
 	DeleteGraph(StartTitle);
 	DeleteGraph(m_enemyEXP);
+	DeleteGraph(m_clearHandle);
 
 	StopSoundMem(m_bgm);
 	//プレイヤーのメモリ解放.
@@ -254,9 +261,10 @@ void Stage1Scene::Update(Input& input)
 {
 	Rect ufoRect = m_pUfo->GetColRect();
 	Rect playerRect = m_pPlayer->GetColRect();
-	if(input.IsTriggered("space"))
+	if(input.IsTriggered("OK"))
 	{
 		StartFlag = true;
+		PlaySoundMem(CheckSE,DX_PLAYTYPE_BACK);
 	}
 	if (StartFlag)
 	{
@@ -416,8 +424,15 @@ void Stage1Scene::Update(Input& input)
 
 		if (m_downEnemyCount == 15)
 		{
-			manager_.ChangeScene(std::make_shared<Stage2Scene>(manager_));
-			return;
+			StopSoundMem(m_bgm);
+			PlaySoundMem(m_clearSE, DX_PLAYTYPE_BACK);
+			StartFlag = false;
+			m_clearFlag = true;
+			if(input.IsTriggered("OK"))
+			{
+				manager_.ChangeScene(std::make_shared<Stage2Scene>(manager_));
+				return;
+			}
 		}
 
 		if (m_damageFlag == true)
@@ -595,6 +610,10 @@ void Stage1Scene::Draw()
 		int x = GetRand(m_shakeSize) - static_cast<int>(m_shakeSize * 0.5f);
 		int y = GetRand(m_shakeSize) - static_cast<int>(m_shakeSize * 0.5f);
 		DrawGraph(x, y, m_shakeHandle, true);
+	}
+	if (m_clearFlag == true)
+	{
+		DrawGraph(Game::kScreenWidth / 2 - 450 / 2, Game::kScreenHeight / 2 - 371 / 2, m_clearHandle, true);
 	}
 #ifdef _DEBUG
 	//プレイヤーの位置をデバッグ表示する

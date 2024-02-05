@@ -26,20 +26,23 @@ private:
 	int m_bgHandle;
 	int m_animHandle;
 	int m_titleHandle;
+	int m_shakeHandle;
 	int m_titleButton;
 	int m_moon;
 	int frame_;
 	int areaX;
 	int speed;
+	int m_bgPosX;
+	int m_shakeSize;
 	int AnimFrame;
 	int m_bgFrame;
-	int m_bgPosX;
-	bool m_isShake;
-	int m_shakeHandle;
-	int m_shakeSize;
 	int m_shakeFrame;
 	int m_loopFrame;
 	int m_bgm;
+	int CheckSE;
+	
+	bool m_isShake;
+
 public:
 	TitleScene(SceneManager& manager);
 	~TitleScene();

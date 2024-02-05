@@ -170,6 +170,7 @@
     <ClCompile Include="ShotBeam.cpp" />
     <ClCompile Include="Scene\TitleScene.cpp" />
     <ClCompile Include="Scene\Stage2Scene.cpp" />
+    <ClCompile Include="Scene\TutorialScene.cpp" />
     <ClCompile Include="UFO.cpp" />
     <ClCompile Include="Vec2.cpp" />
   </ItemGroup>
@@ -193,6 +194,7 @@
     <ClInclude Include="ShotBeam.h" />
     <ClInclude Include="Scene\TitleScene.h" />
     <ClInclude Include="Scene\Stage2Scene.h" />
+    <ClInclude Include="Scene\TutorialScene.h" />
     <ClInclude Include="UFO.h" />
     <ClInclude Include="Vec2.h" />
   </ItemGroup>

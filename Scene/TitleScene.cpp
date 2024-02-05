@@ -4,6 +4,7 @@
 #include "SceneManager.h"
 #include "TitleScene.h"
 //次のシーンのクラスをインクルードしておく
+#include "TutorialScene.h"
 #include "Stage1Scene.h"
 #include <cassert>
 
@@ -37,13 +38,14 @@ void TitleScene::NormalUpdate(Input& input)
 {
 	if (input.IsTriggered("OK"))
 	{
+		PlaySoundMem(CheckSE,DX_PLAYTYPE_BACK);
 		updateFunc_ = &TitleScene::FadeOutUpdate;
 		drawFunc_ = &TitleScene::FadeDraw;
 		DeleteGraph(m_titleButton);
 		DeleteGraph(m_titleHandle);
 	}
+
 	m_bgFrame--;
-	//BackScroll(areaX, m_bgHandle, 640, 480);
 	AnimFrame = (AnimFrame + 1) % (kAnimNum * kAnimInterval);
 	
 	if (m_isShake)
@@ -62,7 +64,7 @@ void TitleScene::FadeOutUpdate(Input& input)
 {
 	frame_++;
 	if (frame_ >= 60) {
-		manager_.ChangeScene(std::make_shared<Stage1Scene>(manager_));
+		manager_.ChangeScene(std::make_shared<TutorialScene>(manager_));
 	}
 }
 
@@ -135,20 +137,28 @@ speed(20),
 AnimFrame(0),
 m_bgFrame(1),
 m_bgPosX(0),
-m_isShake(false),
 m_shakeHandle(-1),
 m_shakeFrame(0),
 m_shakeSize(kShakeSize),
 m_loopFrame(0),
-m_bgm(-1)
+m_bgm(-1),
+CheckSE(-1),
+m_isShake(false)
 {
 	m_shakeHandle = MakeScreen(Game::kScreenWidth, Game::kScreenHeight);
 	m_bgHandle = LoadGraph("data/Title.png");
+	assert(m_bgHandle != -1);
 	m_animHandle = LoadGraph("data/Moon.png");
+	assert(m_animHandle != -1);
 	m_titleHandle = LoadGraph("data/Icon.png");
-	assert(m_bgHandle >= 0);
+	assert(m_bgHandle != -1);
 	m_titleButton = LoadGraph("data/StartButton.png");
+	assert(m_titleButton != -1);
 	m_bgm = LoadSoundMem("data/Sound/TitleBGM.mp3");
+	assert(m_bgm != -1);
+	CheckSE = LoadSoundMem("data/Sound/Check.mp3");
+	assert(CheckSE != -1);
+
 	frame_ = 60;
 	updateFunc_ = &TitleScene::FadeInUpdate;
 	drawFunc_ = &TitleScene::FadeDraw;

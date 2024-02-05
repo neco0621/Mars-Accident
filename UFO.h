@@ -2,11 +2,13 @@
 #include "Vec2.h"
 #include "Rect.h"
 
+class TutorialScene;
 class Stage1Scene;
 class Stage2Scene;
 class UFO
 {
 public:
+	UFO(TutorialScene* pTuScene);
 	UFO(Stage1Scene* pS1Scene);
 	UFO(Stage2Scene* pS2Scene);
 	~UFO();
@@ -32,6 +34,7 @@ public:
 	//”¼Œa
 	float m_radius;
 private:
+	TutorialScene* m_pTuScene;
 	Stage1Scene* m_pS1Scene;
 	Stage2Scene* m_pS2Scene;
 
