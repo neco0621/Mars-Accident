@@ -89,7 +89,13 @@ RightHandle(-1),
 RightArrowHandle(-1),
 m_clearHandle(-1),
 m_clearFlag(false),
-m_clearSE(-1)
+m_clearSE(-1),
+m_skipHandle(-1),
+TutorialExplanation(-1),
+TutorialExplanation2(-1),
+TutorialExplanation3(-1),
+TutorialExplanation4(-1),
+m_tutorialCount(0)
 {
 	//ゲーム画面描画先の生成.
 	//画面サイズと同じ大きさのグラフィックデータを作成する.
@@ -144,6 +150,17 @@ m_clearSE(-1)
 	m_clearHandle = LoadGraph("data/TutorialClear.png");
 	assert(m_clearHandle != -1);
 	m_clearSE = LoadSoundMem("data/Sound/clear.mp3");
+	assert(m_clearSE != -1);
+	m_skipHandle = LoadGraph("data/Skip.png");
+	assert(m_skipHandle != -1);
+	TutorialExplanation = LoadGraph("data/TutorialExplanation.png");
+	assert(TutorialExplanation != -1);
+	TutorialExplanation2 = LoadGraph("data/TutorialExplanation2.png");
+	assert(TutorialExplanation2 != -1);
+	TutorialExplanation3 = LoadGraph("data/TutorialExplanation3.png");
+	assert(TutorialExplanation3 != -1);
+	TutorialExplanation4 = LoadGraph("data/TutorialExplanation4.png");
+	assert(TutorialExplanation4 != -1);
 
 	PlaySoundMem(m_bgm, DX_PLAYTYPE_LOOP);
 	//プレイヤーのメモリ確保.
@@ -226,6 +243,10 @@ TutorialScene::~TutorialScene()
 	DeleteGraph(RightHandle);
 	DeleteGraph(RightArrowHandle);
 	DeleteGraph(m_clearHandle);
+	DeleteGraph(TutorialExplanation);
+	DeleteGraph(TutorialExplanation2);
+	DeleteGraph(TutorialExplanation3);
+	DeleteGraph(TutorialExplanation4);
 
 	StopSoundMem(m_bgm);
 	//プレイヤーのメモリ解放.
@@ -289,9 +310,15 @@ void TutorialScene::Update(Input& input)
 	Rect playerRect = m_pPlayer->GetColRect();
 	if (input.IsTriggered("OK"))
 	{
-		m_startFlag = true;
+		m_tutorialCount++;
 		PlaySoundMem(CheckSE, DX_PLAYTYPE_BACK);
 	}
+
+	if (CheckHitKey(KEY_INPUT_BACK))
+	{
+		m_tutorialCount - 1;
+	}
+
 	if (m_startFlag)
 	{
 		m_pPlayer->TuUpdate();
@@ -516,23 +543,47 @@ void TutorialScene::Draw()
 	ClearDrawScreen();
 
 	m_pBg->Draw();
-	DrawGraph(Game::kScreenWidth / 2 - 96, Game::kScreenHeight / 2, m_life1Handle, true);
-	DrawGraph(Game::kScreenWidth / 2 - 32, Game::kScreenHeight / 2, m_life2Handle, true);
-	DrawGraph(Game::kScreenWidth / 2 + 32, Game::kScreenHeight / 2, m_life3Handle, true);
+	DrawGraph(Game::kScreenWidth * 0.5 - 96, Game::kScreenHeight * 0.5, m_life1Handle, true);
+	DrawGraph(Game::kScreenWidth * 0.5 - 32, Game::kScreenHeight * 0.5, m_life2Handle, true);
+	DrawGraph(Game::kScreenWidth * 0.5 + 32, Game::kScreenHeight * 0.5, m_life3Handle, true);
 	DrawBox(0, Game::kScreenHeight * 0.75 + 32, Game::kScreenWidth, Game::kScreenHeight, 0x84331F, true);
 	DrawGraph(Game::kScreenWidth * 0.25 - 100, Game::kScreenHeight - 175, LeftHandle, true);
 	DrawGraph(Game::kScreenWidth * 0.25 - 300, Game::kScreenHeight - 175, LeftArrowHandle, true);
 	DrawGraph(Game::kScreenWidth * 0.75 - 100, Game::kScreenHeight - 175, RightHandle, true);
 	DrawGraph(Game::kScreenWidth * 0.75 + 100, Game::kScreenHeight - 175, RightArrowHandle, true);
+	DrawGraph(Game::kScreenWidth * 0.5 - 225, Game::kScreenHeight - 206, m_skipHandle, true);
 
 	m_pRocket->Draw();
 	m_pPlayer->Draw();
 	m_pUfo->Draw();
 
-
-	if (m_startFlag == false && m_clearFlag == false)
+	if (m_tutorialCount == 0)
+	{
+		DrawGraph(0, 0, TutorialExplanation, true);
+	}
+	else if (m_tutorialCount == 1)
+	{
+		DrawGraph(0, 0, TutorialExplanation2, true);
+	}
+	else if (m_tutorialCount == 2)
+	{
+		DrawGraph(0, 0, TutorialExplanation3, true);
+	}
+	else if (m_tutorialCount == 3)
+	{
+		DrawGraph(0, 0, TutorialExplanation4, true);
+	}
+	else if (m_tutorialCount == 4)
 	{
 		DrawGraph(Game::kScreenWidth / 2 - 450 / 2, Game::kScreenHeight / 2 - 371 / 2, m_tutorialHandle, true);
+	}
+	else if (m_tutorialCount >= 5)
+	{
+		DeleteGraph(TutorialExplanation);
+		DeleteGraph(TutorialExplanation2);
+		DeleteGraph(TutorialExplanation3);
+		DeleteGraph(TutorialExplanation4);
+		m_startFlag = true;
 	}
 	
 
@@ -662,7 +713,7 @@ void TutorialScene::Draw()
 	DrawFormatString(8, 40, GetColor(255, 255, 255), "ShotNum%d", shotNum);
 	DrawFormatString(8, 72, GetColor(255, 255, 255), "EnemyNum%d", enemyNum);
 	DrawFormatString(8, 88, GetColor(255, 255, 255), "残りライフ%d", m_pRocket->m_life);
-	DrawFormatString(Game::kScreenWidth / 2, 40, GetColor(255, 255, 255), "%d / 15", m_downEnemyCount);
+	DrawFormatString(Game::kScreenWidth / 2, 40, GetColor(255, 255, 255), "%d / 5", m_downEnemyCount);
 	DrawFormatString(8, 56, GetColor(255, 255, 255), "%f", m_pUfo->m_angle);
 #endif
 }

@@ -74,6 +74,10 @@ Stage1Scene::Stage1Scene(SceneManager& manager) : Scene(manager),
 	m_animFrame(0),
 	m_destoryEnemy(-1),
 	m_bgm(-1),
+	LeftHandle(-1),
+	LeftArrowHandle(-1),
+	RightHandle(-1),
+	RightArrowHandle(-1),
 	m_hitHandle(-1),
 	CheckSE(-1)
 {
@@ -119,6 +123,14 @@ Stage1Scene::Stage1Scene(SceneManager& manager) : Scene(manager),
 	assert(m_gameover != -1);
 	CheckSE = LoadSoundMem("data/Sound/Check.mp3");
 	assert(CheckSE != -1);
+	LeftHandle = LoadGraph("data/A.png");
+	assert(LeftHandle != -1);
+	LeftArrowHandle = LoadGraph("data/LeftArrow.png");
+	assert(LeftArrowHandle != -1);
+	RightHandle = LoadGraph("data/D.png");
+	assert(RightHandle != -1);
+	RightArrowHandle = LoadGraph("data/RightArrow.png");
+	assert(RightArrowHandle != -1);
 	m_clearHandle = LoadGraph("data/Stage1Clear.png");
 	assert(m_clearHandle != -1);
 	m_clearSE = LoadSoundMem("data/Sound/clear.mp3");
@@ -199,6 +211,10 @@ Stage1Scene::~Stage1Scene()
 	DeleteGraph(m_shakeHandle);
 	DeleteGraph(StartTitle);
 	DeleteGraph(m_enemyEXP);
+	DeleteGraph(LeftHandle);
+	DeleteGraph(LeftArrowHandle);
+	DeleteGraph(RightHandle);
+	DeleteGraph(RightArrowHandle);
 	DeleteGraph(m_clearHandle);
 
 	StopSoundMem(m_bgm);
@@ -488,7 +504,11 @@ void Stage1Scene::Draw()
 	DrawGraph(Game::kScreenWidth / 2 - 96, Game::kScreenHeight / 2,m_life1Handle, true);
 	DrawGraph(Game::kScreenWidth / 2 - 32, Game::kScreenHeight / 2, m_life2Handle, true);
 	DrawGraph(Game::kScreenWidth / 2 +32, Game::kScreenHeight / 2, m_life3Handle, true);
-	DrawBox(0,Game::kScreenHeight * 0.75 + 32,Game::kScreenWidth,Game::kScreenHeight, 0x84331F,true);
+	DrawBox(0,Game::kScreenHeight * 0.75 + 32, Game::kScreenWidth, Game::kScreenHeight, 0x84331F, true);
+	DrawGraph(Game::kScreenWidth * 0.25 - 100, Game::kScreenHeight - 175, LeftHandle, true);
+	DrawGraph(Game::kScreenWidth * 0.25 - 300, Game::kScreenHeight - 175, LeftArrowHandle, true);
+	DrawGraph(Game::kScreenWidth * 0.75 - 100, Game::kScreenHeight - 175, RightHandle, true);
+	DrawGraph(Game::kScreenWidth * 0.75 + 100, Game::kScreenHeight - 175, RightArrowHandle, true);
 	m_pRocket->Draw();
 	m_pPlayer->Draw();
 	m_pUfo->Draw();

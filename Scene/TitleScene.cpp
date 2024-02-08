@@ -70,13 +70,13 @@ void TitleScene::FadeOutUpdate(Input& input)
 
 void TitleScene::FadeDraw()
 {
-	int index = AnimFrame / kAnimInterval;
+	/*int index = AnimFrame / kAnimInterval;
 	int srcX = (index % kRow) * kAnimWidth;
 	int srcY = (index / kLine) * kAnimHeight;
 	DrawRectRotaGraph(static_cast<int>(Game::kScreenWidth / 2), static_cast<int>(Game::kScreenHeight / 2),
 		srcX, srcY, kAnimWidth, kAnimHeight,
 		1.0, 0.0,
-		m_animHandle, true, false);
+		m_animHandle, true, false);*/
 	//フェード暗幕
 	int alpha = 255 * (float)frame_ / 60.0f;
 	SetDrawBlendMode(DX_BLENDMODE_MULA, alpha);
@@ -90,14 +90,15 @@ void TitleScene::FadeDraw()
 }
 
 void TitleScene::NormalDraw()
-{
-	int index = AnimFrame / kAnimInterval;
+{	
+	/*int index = AnimFrame / kAnimInterval;
 	int srcX = (index % kRow) * kAnimWidth;
 	int srcY = (index / kLine) * kAnimHeight;
 	DrawRectRotaGraph(static_cast<int>(Game::kScreenWidth / 2), static_cast<int>(Game::kScreenHeight / 2),
 		srcX, srcY, kAnimWidth, kAnimHeight,
 		1.0, 0.0,
-		m_animHandle, true, false);
+		m_animHandle, true, false);*/
+	
 	if (m_isShake)
 	{
 		SetDrawScreen(m_shakeHandle);

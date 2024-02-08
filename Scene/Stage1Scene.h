@@ -72,6 +72,10 @@ private:
 	int m_hitHandle;
 	int m_damageHandle;
 	int m_clearHandle;
+	int LeftHandle;
+	int LeftArrowHandle;
+	int RightHandle;
+	int RightArrowHandle;
 
 	int m_enemyEXP;
 	int m_downEnemyCount;

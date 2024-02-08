@@ -78,10 +78,16 @@ private:
 	int RightArrowHandle;
 	int m_tutorialHandle;
 	int m_clearHandle;
+	int m_skipHandle;
+	int TutorialExplanation;
+	int TutorialExplanation2;
+	int TutorialExplanation3;
+	int TutorialExplanation4;
 
 	int m_enemyEXP;
 	int m_downEnemyCount;
 	int m_lifeCount;
+	int m_tutorialCount;
 	int m_destoryEnemy;
 	int m_shakeSize;
 	int m_shakeFrame;
