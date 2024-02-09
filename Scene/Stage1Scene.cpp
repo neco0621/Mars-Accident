@@ -134,8 +134,10 @@ Stage1Scene::Stage1Scene(SceneManager& manager) : Scene(manager),
 	m_clearHandle = LoadGraph("data/Stage1Clear.png");
 	assert(m_clearHandle != -1);
 	m_clearSE = LoadSoundMem("data/Sound/clear.mp3");
+	assert(m_clearSE != -1);
 
 	PlaySoundMem(m_bgm, DX_PLAYTYPE_LOOP);
+	ChangeVolumeSoundMem(100, m_bgm);
 	//プレイヤーのメモリ確保.
 	m_pPlayer = new Player{ this };
 	m_pPlayer->SetHandle(m_playerHandle);	//Playerにグラフィックハンドルを渡す
@@ -262,6 +264,7 @@ void Stage1Scene::Init()
 	m_pPlayer->Init();
 	m_pUfo->Init();
 	m_pRocket->Init();
+
 	/*m_pAnim->AnimationStart(
 		&AnimExpel,
 		1000,
@@ -280,7 +283,13 @@ void Stage1Scene::Update(Input& input)
 	if(input.IsTriggered("OK"))
 	{
 		StartFlag = true;
+		ChangeVolumeSoundMem(100, CheckSE);
 		PlaySoundMem(CheckSE,DX_PLAYTYPE_BACK);
+		if (m_downEnemyCount == 1)
+		{
+			manager_.ChangeScene(std::make_shared<Stage2Scene>(manager_));
+			return;
+		}
 	}
 	if (StartFlag)
 	{
@@ -310,6 +319,7 @@ void Stage1Scene::Update(Input& input)
 					Rect shotRect = m_pBeam[i]->GetColRect();
 					if (shotRect.CirCleCollision(ufoRect))
 					{
+						ChangeVolumeSoundMem(100, m_hitHandle);
 						PlaySoundMem(m_hitHandle,DX_PLAYTYPE_BACK);
 						m_pUfo->JumpPower = 10;
 						//ターゲット位置.
@@ -340,6 +350,7 @@ void Stage1Scene::Update(Input& input)
 					Rect shotRect = m_pBeam[a]->GetColRect();
 					if (shotRect.CirCleCollision(enemyRect))
 					{
+						ChangeVolumeSoundMem(100, m_destoryEnemy);
 						PlaySoundMem(m_destoryEnemy, DX_PLAYTYPE_BACK);
 						pos = m_pEnemy[i]->m_pos;
 						AnimFlag = true;
@@ -354,6 +365,7 @@ void Stage1Scene::Update(Input& input)
 					Rect ufoRect = m_pUfo->GetColRect();
 					if (ufoRect.CirCleCollision(enemyRect))
 					{
+						ChangeVolumeSoundMem(100, m_destoryEnemy);
 						PlaySoundMem(m_destoryEnemy, DX_PLAYTYPE_BACK);
 						//メモリを解放する
 						delete m_pEnemy[i];
@@ -362,6 +374,7 @@ void Stage1Scene::Update(Input& input)
 					Rect rocketRect = m_pRocket->GetColRect();
 					if (enemyRect.DistanceCollision(rocketRect))
 					{
+						ChangeVolumeSoundMem(100, m_damageHandle);
 						PlaySoundMem(m_damageHandle,DX_PLAYTYPE_BACK);
 						//メモリを解放する
 						delete m_pEnemy[i];
@@ -438,17 +451,13 @@ void Stage1Scene::Update(Input& input)
 			IsGround = true;
 		}
 
-		if (m_downEnemyCount == 15)
+		if (m_downEnemyCount == 1)
 		{
 			StopSoundMem(m_bgm);
+			ChangeVolumeSoundMem(100, m_clearSE);
 			PlaySoundMem(m_clearSE, DX_PLAYTYPE_BACK);
 			StartFlag = false;
-			m_clearFlag = true;
-			if(input.IsTriggered("OK"))
-			{
-				manager_.ChangeScene(std::make_shared<Stage2Scene>(manager_));
-				return;
-			}
+			m_clearFlag = true;	
 		}
 
 		if (m_damageFlag == true)

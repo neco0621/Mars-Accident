@@ -57,8 +57,10 @@ S2UFO::S2UFO(Stage2Scene* pS2Scene) :
 	m_animHnadle(-1),
 	AnimPosX(0),
 	m_ufoS2Max(kS2UfoMax),
-	m_animFrame(0)
+	m_animFrame(0),
+	m_soundHandle(-1)
 {
+	m_soundHandle = LoadSoundMem("data/Sound/UFO.mp3");
 }
 
 S2UFO::~S2UFO()
@@ -84,7 +86,8 @@ void S2UFO::Update()
 		// ’n–Ê‚É‚Â‚¢‚½Žž
 		if (m_pos.y >= m_tq - m_radius / 2)
 		{
-			//m_pAnimation->DrawAnimation(m_pAnimation->AnimExpl);
+			ChangeVolumeSoundMem(100, m_soundHandle);
+			PlaySoundMem(m_soundHandle, DX_PLAYTYPE_BACK);
 			m_pos.y = m_tq - m_radius / 2;
 			JumpPower = 30;
 			AnimPosX = m_pos.x;

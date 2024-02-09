@@ -163,6 +163,7 @@ m_tutorialCount(0)
 	assert(TutorialExplanation4 != -1);
 
 	PlaySoundMem(m_bgm, DX_PLAYTYPE_LOOP);
+	ChangeVolumeSoundMem(100, m_bgm);
 	//プレイヤーのメモリ確保.
 	m_pPlayer = new Player{ this };
 	m_pPlayer->SetHandle(m_playerHandle);	//Playerにグラフィックハンドルを渡す
@@ -312,14 +313,19 @@ void TutorialScene::Update(Input& input)
 	{
 		m_tutorialCount++;
 		PlaySoundMem(CheckSE, DX_PLAYTYPE_BACK);
+		if (m_tutorialCount == 5)
+		{
+			m_startFlag = true;	
+		}
+
+		if (m_downEnemyCount >= 5)
+		{
+			manager_.ChangeScene(std::make_shared<Stage1Scene>(manager_));
+			return;
+		}
 	}
 
-	if (CheckHitKey(KEY_INPUT_BACK))
-	{
-		m_tutorialCount - 1;
-	}
-
-	if (m_startFlag)
+	if (m_startFlag == true)
 	{
 		m_pPlayer->TuUpdate();
 		m_pUfo->Update();
@@ -347,6 +353,7 @@ void TutorialScene::Update(Input& input)
 					Rect shotRect = m_pBeam[i]->GetColRect();
 					if (shotRect.CirCleCollision(ufoRect))
 					{
+						ChangeVolumeSoundMem(100, m_hitHandle);
 						PlaySoundMem(m_hitHandle, DX_PLAYTYPE_BACK);
 						m_pUfo->JumpPower = 10;
 						//ターゲット位置.
@@ -377,6 +384,7 @@ void TutorialScene::Update(Input& input)
 					Rect shotRect = m_pBeam[a]->GetColRect();
 					if (shotRect.CirCleCollision(enemyRect))
 					{
+						ChangeVolumeSoundMem(100, m_destoryEnemy);
 						PlaySoundMem(m_destoryEnemy, DX_PLAYTYPE_BACK);
 						pos = m_pEnemy[i]->m_pos;
 						AnimFlag = true;
@@ -391,6 +399,7 @@ void TutorialScene::Update(Input& input)
 					Rect ufoRect = m_pUfo->GetColRect();
 					if (ufoRect.CirCleCollision(enemyRect))
 					{
+						ChangeVolumeSoundMem(100, m_destoryEnemy);
 						PlaySoundMem(m_destoryEnemy, DX_PLAYTYPE_BACK);
 						//メモリを解放する
 						delete m_pEnemy[i];
@@ -399,6 +408,7 @@ void TutorialScene::Update(Input& input)
 					Rect rocketRect = m_pRocket->GetColRect();
 					if (enemyRect.DistanceCollision(rocketRect))
 					{
+						ChangeVolumeSoundMem(100, m_damageHandle);
 						PlaySoundMem(m_damageHandle, DX_PLAYTYPE_BACK);
 						//メモリを解放する
 						delete m_pEnemy[i];
@@ -438,6 +448,7 @@ void TutorialScene::Update(Input& input)
 			}
 		}
 
+		
 
 		//敵キャラクターを登場させる
 		//kEnemyIntervalフレーム経過するごとにランダムに敵を登場させる
@@ -475,17 +486,13 @@ void TutorialScene::Update(Input& input)
 			IsGround = true;
 		}
 
-		if (m_downEnemyCount == 5)
+		if (m_downEnemyCount >= 5)
 		{
 			StopSoundMem(m_bgm);
+			ChangeVolumeSoundMem(100, m_clearSE);
 			PlaySoundMem(m_clearSE, DX_PLAYTYPE_BACK);
 			m_startFlag = false;
 			m_clearFlag = true;
-			if (input.IsTriggered("OK"))
-			{
-				manager_.ChangeScene(std::make_shared<Stage1Scene>(manager_));
-				return;
-			}
 		}
 
 		if (m_damageFlag == true)
@@ -515,6 +522,7 @@ void TutorialScene::Update(Input& input)
 
 		if (m_gameOverFlag == true)
 		{
+			ChangeVolumeSoundMem(100, m_gameover);
 			PlaySoundMem(m_gameover, DX_PLAYTYPE_BACK);
 			manager_.ChangeScene(std::make_shared<GameOverScene>(manager_));
 			return;
@@ -583,7 +591,6 @@ void TutorialScene::Draw()
 		DeleteGraph(TutorialExplanation2);
 		DeleteGraph(TutorialExplanation3);
 		DeleteGraph(TutorialExplanation4);
-		m_startFlag = true;
 	}
 	
 

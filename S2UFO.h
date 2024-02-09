@@ -63,5 +63,6 @@ public:
 	int AnimPosX;
 
 	int m_ufoS2Max;
+	int m_soundHandle;
 };
 

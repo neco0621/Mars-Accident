@@ -112,8 +112,13 @@ m_hitHandle(-1)
 	assert(m_damageHandle != -1);
 	m_gameover = LoadSoundMem("data/Sound/GameOver.mp3");
 	assert(m_gameover != -1);
+	CheckSE = LoadSoundMem("data/Sound/Check.mp3");
+	assert(CheckSE != -1);
+	m_clearSE = LoadSoundMem("data/Sound/clear.mp3");
+	assert(m_clearSE != -1);
 
-
+	PlaySoundMem(m_bgm, DX_PLAYTYPE_LOOP);
+	ChangeVolumeSoundMem(100, m_bgm);
 
 	//プレイヤーのメモリ確保.
 	m_pPlayer = new Player{ this };
@@ -252,6 +257,8 @@ void Stage2Scene::Update(Input& input)
 	if (input.IsTriggered("OK"))
 	{
 		StartFlag = true;
+		ChangeVolumeSoundMem(100, CheckSE);
+		PlaySoundMem(CheckSE,DX_PLAYTYPE_BACK);
 	}
 	if (StartFlag)
 	{
@@ -285,6 +292,8 @@ void Stage2Scene::Update(Input& input)
 					Rect shotRect = m_pBeam[i]->GetColRect();
 					if (shotRect.CirCleCollision(ufoRect))
 					{
+						ChangeVolumeSoundMem(100, m_hitHandle);
+						PlaySoundMem(m_hitHandle, DX_PLAYTYPE_BACK);
 						m_pUfo->JumpPower = 10;
 						//ターゲット位置.
 						//弾の発射位置から一番近くにいる敵の座標を取得する
@@ -331,6 +340,8 @@ void Stage2Scene::Update(Input& input)
 					Rect shotRect = m_pBeam[a]->GetColRect();
 					if (shotRect.CirCleCollision(enemyRect))
 					{
+						ChangeVolumeSoundMem(100, m_destoryEnemy);
+						PlaySoundMem(m_destoryEnemy, DX_PLAYTYPE_BACK);
 						pos = m_pEnemy[i]->m_pos;
 						AnimFlag = true;
 						delete m_pBeam[a];
@@ -343,12 +354,16 @@ void Stage2Scene::Update(Input& input)
 					}
 					if (ufoRect.CirCleCollision(enemyRect))
 					{
+						ChangeVolumeSoundMem(100, m_destoryEnemy);
+						PlaySoundMem(m_destoryEnemy, DX_PLAYTYPE_BACK);
 						//メモリを解放する
 						delete m_pEnemy[i];
 						m_pEnemy[i] = nullptr;	//使っていないとわかるように
 					}
 					if (S2UfoRect.CirCleCollision(enemyRect))
 					{
+						ChangeVolumeSoundMem(100, m_destoryEnemy);
+						PlaySoundMem(m_destoryEnemy, DX_PLAYTYPE_BACK);
 						//メモリを解放する
 						delete m_pEnemy[i];
 						m_pEnemy[i] = nullptr;	//使っていないとわかるように
@@ -356,6 +371,8 @@ void Stage2Scene::Update(Input& input)
 					Rect rocketRect = m_pRocket->GetColRect();
 					if (enemyRect.DistanceCollision(rocketRect))
 					{
+						ChangeVolumeSoundMem(100, m_damageHandle);
+						PlaySoundMem(m_damageHandle, DX_PLAYTYPE_BACK);
 						////メモリを解放する
 						delete m_pEnemy[i];
 						m_pEnemy[i] = nullptr;

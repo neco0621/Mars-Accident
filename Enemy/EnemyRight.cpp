@@ -58,7 +58,7 @@ void EnemyRight::S2Update()
 	//‘¶Ý‚µ‚È‚¢“G‚Ìˆ—‚Í‚µ‚È‚¢.
 	if (!m_isExist)		return;
 
-	m_vec.x = s2Speed;
+	m_vec.x = -s2Speed;
 
 	m_pos += m_vec;
 
@@ -70,7 +70,7 @@ void EnemyRight::S2Update()
 	int height = 0;
 	GetGraphSize(m_handle, &width, &height);
 
-	if (m_pos.x > Game::kScreenWidth + width / 2)
+	if (m_pos.x < 0.0f - width / 2)
 	{
 		m_isExist = false;
 	}

@@ -83,6 +83,8 @@ private:
 	int m_damageHandle;
 	int m_gameover;
 	int m_destoryEnemy;
+	int m_clearSE;
+	int CheckSE;
 
 	bool m_damageFlag;
 	bool m_gameOverFlag;
