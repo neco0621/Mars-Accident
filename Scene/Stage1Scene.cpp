@@ -318,7 +318,7 @@ void Stage1Scene::Update(Input& input)
 					if (shotRect.CirCleCollision(ufoRect))
 					{
 						PlaySoundMem(m_hitHandle,DX_PLAYTYPE_BACK);
-						m_pUfo->JumpPower = 10;
+						m_pUfo->JumpPower = 5;
 						//ターゲット位置.
 						//弾の発射位置から一番近くにいる敵の座標を取得する
 						//SceneMainに実装した関数を利用する

@@ -7,7 +7,7 @@
 namespace
 {
 	constexpr float kSpeed = 1.0f;
-	constexpr float s2Speed = 2.0f;
+	constexpr float s2Speed = 1.3f;
 
 	// アニメーション間隔
 	constexpr int kAnimInterval = 3;

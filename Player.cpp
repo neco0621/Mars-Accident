@@ -127,7 +127,7 @@ void Player::TuUpdate()
 	m_pos += move;
 
 	//中心座標を指定して当たり判定のRectを生成する.
-	m_colRect.SetCenter(m_pos.x, m_pos.y, kWidth - 20, kHeight);
+	m_colRect.SetCenter(m_pos.x, m_pos.y + 5, kWidth - 35, kHeight - 5);
 
 	if (isMove)
 	{
@@ -213,7 +213,7 @@ void Player::Update()
 	m_pos += move;
 
 	//中心座標を指定して当たり判定のRectを生成する.
-	m_colRect.SetCenter(m_pos.x, m_pos.y, kWidth - 20, kHeight);
+	m_colRect.SetCenter(m_pos.x, m_pos.y + 5, kWidth - 35, kHeight - 5);
 
 	if (isMove)
 	{
@@ -295,7 +295,7 @@ void Player::S2Update()
 	m_pos += move;
 
 	//中心座標を指定して当たり判定のRectを生成する.
-	m_colRect.SetCenter(m_pos.x, m_pos.y, kWidth - 20, kHeight);
+	m_colRect.SetCenter(m_pos.x, m_pos.y + 5, kWidth - 35, kHeight - 5);
 
 	if (isMove)
 	{
