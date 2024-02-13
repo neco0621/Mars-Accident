@@ -118,14 +118,14 @@ void UFO::Update()
 		// —Ž‰º—Ê’²®
 		if (JumpPower > -MaxGravity) 
 		{	 
-			JumpPower -= Gravity;
+			JumpPower -= Gravity / 2;
 		}
 		// ’n–Ê‚É‚Â‚¢‚½Žž
 		if (m_pos.y >= m_tq - m_radius / 2)
 		{
 			PlaySoundMem(m_soundHandle, DX_PLAYTYPE_BACK);
 			m_pos.y = m_tq - m_radius / 2;
-			JumpPower = 30;
+			JumpPower = 20;
 			AnimPosX = m_pos.x;
 			AnimFlag = true;
 		}			

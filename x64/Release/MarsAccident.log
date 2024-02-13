@@ -1,34 +1,11 @@
 ﻿  ShotBeam.cpp
-C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-C:\Mars-Accident\ShotBeam.cpp(32,10): warning C4244: '初期化中': 'const float' から 'int' への変換です。データが失われる可能性があります。
-C:\Mars-Accident\ShotBeam.cpp(77,40): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
-C:\Mars-Accident\ShotBeam.cpp(86,29): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Mars-Accident\ShotBeam.cpp(86,19): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+D:\Mars-Accident\ShotBeam.cpp(32,10): warning C4244: '初期化中': 'const float' から 'int' への変換です。データが失われる可能性があります。
+D:\Mars-Accident\ShotBeam.cpp(77,45): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+D:\Mars-Accident\ShotBeam.cpp(86,31): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+D:\Mars-Accident\ShotBeam.cpp(86,20): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
   コード生成しています。
-  1 of 1106 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  2 of 1093 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   コード生成が終了しました。
-Bg.obj : warning LNK4204: '' に参照するモジュールのデバッグ情報がありません。デバッグ情報を無視してオブジェクトをリンクします。
-Input.obj : warning LNK4204: '' に参照するモジュールのデバッグ情報がありません。デバッグ情報を無視してオブジェクトをリンクします。
-Main.obj : warning LNK4204: '' に参照するモジュールのデバッグ情報がありません。デバッグ情報を無視してオブジェクトをリンクします。
-Pad.obj : warning LNK4204: '' に参照するモジュールのデバッグ情報がありません。デバッグ情報を無視してオブジェクトをリンクします。
-Rect.obj : warning LNK4204: '' に参照するモジュールのデバッグ情報がありません。デバッグ情報を無視してオブジェクトをリンクします。
-Rocket.obj : warning LNK4204: '' に参照するモジュールのデバッグ情報がありません。デバッグ情報を無視してオブジェクトをリンクします。
-Scene.obj : warning LNK4204: '' に参照するモジュールのデバッグ情報がありません。デバッグ情報を無視してオブジェクトをリンクします。
-SceneManager.obj : warning LNK4204: '' に参照するモジュールのデバッグ情報がありません。デバッグ情報を無視してオブジェクトをリンクします。
-Vec2.obj : warning LNK4204: '' に参照するモジュールのデバッグ情報がありません。デバッグ情報を無視してオブジェクトをリンクします。
-EnemyBase.obj : warning LNK4020: '' の型レコードは破損しています。一部のシンボルおよび型は、デバッガーからはアクセスできない可能性があります。
-GameOverScene.obj : warning LNK4020: '' の型レコードは破損しています。一部のシンボルおよび型は、デバッガーからはアクセスできない可能性があります。
-GameOverScene.obj : warning LNK4020: '' の型レコードは破損しています。一部のシンボルおよび型は、デバッガーからはアクセスできない可能性があります。
-GameOverScene.obj : warning LNK4020: '' の型レコードは破損しています。一部のシンボルおよび型は、デバッガーからはアクセスできない可能性があります。
-Player.obj : warning LNK4020: '' の型レコードは破損しています。一部のシンボルおよび型は、デバッガーからはアクセスできない可能性があります。
-GameOverScene.obj : warning LNK4020: '' の型レコードは破損しています。一部のシンボルおよび型は、デバッガーからはアクセスできない可能性があります。
-Player.obj : warning LNK4020: '' の型レコードは破損しています。一部のシンボルおよび型は、デバッガーからはアクセスできない可能性があります。
-ShotBeam.obj : warning LNK4020: '' の型レコードは破損しています。一部のシンボルおよび型は、デバッガーからはアクセスできない可能性があります。
-TitleScene.obj : warning LNK4020: '' の型レコードは破損しています。一部のシンボルおよび型は、デバッガーからはアクセスできない可能性があります。
-TitleScene.obj : warning LNK4020: '' の型レコードは破損しています。一部のシンボルおよび型は、デバッガーからはアクセスできない可能性があります。
-Stage2Scene.obj : warning LNK4020: '' の型レコードは破損しています。一部のシンボルおよび型は、デバッガーからはアクセスできない可能性があります。
-UFO.obj : warning LNK4020: '' の型レコードは破損しています。一部のシンボルおよび型は、デバッガーからはアクセスできない可能性があります。
-UFO.obj : warning LNK4020: '' の型レコードは破損しています。一部のシンボルおよび型は、デバッガーからはアクセスできない可能性があります。
-  MarsAccident.vcxproj -> C:\Mars-Accident\x64\Release\MarsAccident.exe
+  MarsAccident.vcxproj -> D:\Mars-Accident\x64\Release\MarsAccident.exe
