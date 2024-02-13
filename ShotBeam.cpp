@@ -102,7 +102,6 @@ void ShotBeam::Draw()
 
 void ShotBeam::Start(Vec2 pos)
 {
-	ChangeVolumeSoundMem(100, m_soundHandle);
 	PlaySoundMem(m_soundHandle, DX_PLAYTYPE_BACK);
 	m_isExist = true;
 	//‰Šú”z’u‚ÌŒˆ’è

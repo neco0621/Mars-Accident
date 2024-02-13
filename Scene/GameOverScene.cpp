@@ -22,7 +22,6 @@ m_bgm(-1)
 	m_bgm = LoadSoundMem("data/Sound/GameOverBgm.mp3");
 
 	PlaySoundMem(m_bgm, DX_PLAYTYPE_LOOP);
-	ChangeVolumeSoundMem(100, m_bgm);
 }
 
 GameOverScene::~GameOverScene()

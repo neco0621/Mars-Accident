@@ -164,7 +164,6 @@ m_isShake(false)
 	updateFunc_ = &TitleScene::FadeInUpdate;
 	drawFunc_ = &TitleScene::FadeDraw;
 	PlaySoundMem(m_bgm, DX_PLAYTYPE_LOOP);
-	ChangeVolumeSoundMem(100, m_bgm);
 }
 
 TitleScene::~TitleScene()

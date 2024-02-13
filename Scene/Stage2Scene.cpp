@@ -29,7 +29,7 @@ namespace
 	//一度に登場できる最大の数.
 	constexpr int kEnemyMax = 20;
 	//何フレーム沖に敵が登場するか.
-	constexpr int kEnemyInterval = 30;
+	constexpr int kEnemyInterval = 60;
 
 	//画面内に一度に出てくる弾の最大数.
 	constexpr int kShotMax = 256;
@@ -118,7 +118,6 @@ m_hitHandle(-1)
 	assert(m_clearSE != -1);
 
 	PlaySoundMem(m_bgm, DX_PLAYTYPE_LOOP);
-	ChangeVolumeSoundMem(100, m_bgm);
 
 	//プレイヤーのメモリ確保.
 	m_pPlayer = new Player{ this };
@@ -191,6 +190,7 @@ Stage2Scene::~Stage2Scene()
 	DeleteGraph(m_shakeHandle);
 	DeleteGraph(StartTitle);
 	DeleteGraph(m_enemyEXP);
+	StopSoundMem(m_bgm);
 
 	//プレイヤーのメモリ解放.
 	delete m_pPlayer;
@@ -257,7 +257,6 @@ void Stage2Scene::Update(Input& input)
 	if (input.IsTriggered("OK"))
 	{
 		StartFlag = true;
-		ChangeVolumeSoundMem(100, CheckSE);
 		PlaySoundMem(CheckSE,DX_PLAYTYPE_BACK);
 	}
 	if (StartFlag)
@@ -292,7 +291,6 @@ void Stage2Scene::Update(Input& input)
 					Rect shotRect = m_pBeam[i]->GetColRect();
 					if (shotRect.CirCleCollision(ufoRect))
 					{
-						ChangeVolumeSoundMem(100, m_hitHandle);
 						PlaySoundMem(m_hitHandle, DX_PLAYTYPE_BACK);
 						m_pUfo->JumpPower = 10;
 						//ターゲット位置.
@@ -340,7 +338,6 @@ void Stage2Scene::Update(Input& input)
 					Rect shotRect = m_pBeam[a]->GetColRect();
 					if (shotRect.CirCleCollision(enemyRect))
 					{
-						ChangeVolumeSoundMem(100, m_destoryEnemy);
 						PlaySoundMem(m_destoryEnemy, DX_PLAYTYPE_BACK);
 						pos = m_pEnemy[i]->m_pos;
 						AnimFlag = true;
@@ -351,27 +348,10 @@ void Stage2Scene::Update(Input& input)
 						delete m_pEnemy[i];
 						m_pEnemy[i] = nullptr;	//使っていないとわかるように
 						m_downEnemyCount++;
-					}
-					if (ufoRect.CirCleCollision(enemyRect))
-					{
-						ChangeVolumeSoundMem(100, m_destoryEnemy);
-						PlaySoundMem(m_destoryEnemy, DX_PLAYTYPE_BACK);
-						//メモリを解放する
-						delete m_pEnemy[i];
-						m_pEnemy[i] = nullptr;	//使っていないとわかるように
-					}
-					if (S2UfoRect.CirCleCollision(enemyRect))
-					{
-						ChangeVolumeSoundMem(100, m_destoryEnemy);
-						PlaySoundMem(m_destoryEnemy, DX_PLAYTYPE_BACK);
-						//メモリを解放する
-						delete m_pEnemy[i];
-						m_pEnemy[i] = nullptr;	//使っていないとわかるように
-					}
+					}					
 					Rect rocketRect = m_pRocket->GetColRect();
 					if (enemyRect.DistanceCollision(rocketRect))
 					{
-						ChangeVolumeSoundMem(100, m_damageHandle);
 						PlaySoundMem(m_damageHandle, DX_PLAYTYPE_BACK);
 						////メモリを解放する
 						delete m_pEnemy[i];
@@ -504,6 +484,8 @@ void Stage2Scene::Draw()
 	DrawGraph(Game::kScreenWidth / 2 - 32, Game::kScreenHeight / 2, m_life2Handle, true);
 	DrawGraph(Game::kScreenWidth / 2 + 32, Game::kScreenHeight / 2, m_life3Handle, true);
 	DrawBox(0, Game::kScreenHeight * 0.75 + 32, Game::kScreenWidth, Game::kScreenHeight, 0x84331F, true);
+	SetFontSize(64);
+	DrawFormatString(Game::kScreenWidth / 2 - 64, 40, GetColor(232, 1, 164), "%d / 25", m_downEnemyCount);
 	m_pRocket->Draw();
 	m_pPlayer->Draw();
 	m_pUfo->Draw();
@@ -592,7 +574,6 @@ void Stage2Scene::Draw()
 	DrawFormatString(8, 40, GetColor(255, 255, 255), "ShotNum%d", shotNum);
 	DrawFormatString(8, 72, GetColor(255, 255, 255), "EnemyNum%d", enemyNum);
 	DrawFormatString(8, 88, GetColor(255, 255, 255), "残りライフ%d", m_pRocket->m_life);
-	DrawFormatString(Game::kScreenWidth / 2, 40, GetColor(255, 255, 255), "%d / 25", m_downEnemyCount);
 #endif
 	//バックバッファに書き込む設定に戻しておく
 	SetDrawScreen(DX_SCREEN_BACK);

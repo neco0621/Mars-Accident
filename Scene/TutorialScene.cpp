@@ -163,7 +163,6 @@ m_tutorialCount(0)
 	assert(TutorialExplanation4 != -1);
 
 	PlaySoundMem(m_bgm, DX_PLAYTYPE_LOOP);
-	ChangeVolumeSoundMem(100, m_bgm);
 	//プレイヤーのメモリ確保.
 	m_pPlayer = new Player{ this };
 	m_pPlayer->SetHandle(m_playerHandle);	//Playerにグラフィックハンドルを渡す
@@ -353,7 +352,6 @@ void TutorialScene::Update(Input& input)
 					Rect shotRect = m_pBeam[i]->GetColRect();
 					if (shotRect.CirCleCollision(ufoRect))
 					{
-						ChangeVolumeSoundMem(100, m_hitHandle);
 						PlaySoundMem(m_hitHandle, DX_PLAYTYPE_BACK);
 						m_pUfo->JumpPower = 10;
 						//ターゲット位置.
@@ -384,7 +382,6 @@ void TutorialScene::Update(Input& input)
 					Rect shotRect = m_pBeam[a]->GetColRect();
 					if (shotRect.CirCleCollision(enemyRect))
 					{
-						ChangeVolumeSoundMem(100, m_destoryEnemy);
 						PlaySoundMem(m_destoryEnemy, DX_PLAYTYPE_BACK);
 						pos = m_pEnemy[i]->m_pos;
 						AnimFlag = true;
@@ -396,19 +393,9 @@ void TutorialScene::Update(Input& input)
 						m_pEnemy[i] = nullptr;	//使っていないとわかるように
 						m_downEnemyCount++;
 					}
-					Rect ufoRect = m_pUfo->GetColRect();
-					if (ufoRect.CirCleCollision(enemyRect))
-					{
-						ChangeVolumeSoundMem(100, m_destoryEnemy);
-						PlaySoundMem(m_destoryEnemy, DX_PLAYTYPE_BACK);
-						//メモリを解放する
-						delete m_pEnemy[i];
-						m_pEnemy[i] = nullptr;	//使っていないとわかるように
-					}
 					Rect rocketRect = m_pRocket->GetColRect();
 					if (enemyRect.DistanceCollision(rocketRect))
 					{
-						ChangeVolumeSoundMem(100, m_damageHandle);
 						PlaySoundMem(m_damageHandle, DX_PLAYTYPE_BACK);
 						//メモリを解放する
 						delete m_pEnemy[i];
@@ -425,7 +412,7 @@ void TutorialScene::Update(Input& input)
 			m_animFrame++;
 		}
 
-		if (m_animFrame >= 120)
+		if (m_animFrame >= 60)
 		{
 			AnimFlag = false;
 			m_animFrame = 0;
@@ -489,7 +476,6 @@ void TutorialScene::Update(Input& input)
 		if (m_downEnemyCount >= 5)
 		{
 			StopSoundMem(m_bgm);
-			ChangeVolumeSoundMem(100, m_clearSE);
 			PlaySoundMem(m_clearSE, DX_PLAYTYPE_BACK);
 			m_startFlag = false;
 			m_clearFlag = true;
@@ -522,7 +508,6 @@ void TutorialScene::Update(Input& input)
 
 		if (m_gameOverFlag == true)
 		{
-			ChangeVolumeSoundMem(100, m_gameover);
 			PlaySoundMem(m_gameover, DX_PLAYTYPE_BACK);
 			manager_.ChangeScene(std::make_shared<GameOverScene>(manager_));
 			return;
@@ -559,7 +544,10 @@ void TutorialScene::Draw()
 	DrawGraph(Game::kScreenWidth * 0.25 - 300, Game::kScreenHeight - 175, LeftArrowHandle, true);
 	DrawGraph(Game::kScreenWidth * 0.75 - 100, Game::kScreenHeight - 175, RightHandle, true);
 	DrawGraph(Game::kScreenWidth * 0.75 + 100, Game::kScreenHeight - 175, RightArrowHandle, true);
-	DrawGraph(Game::kScreenWidth * 0.5 - 225, Game::kScreenHeight - 206, m_skipHandle, true);
+	DrawGraph(Game::kScreenWidth * 0.5 - 112, Game::kScreenHeight - 150, m_skipHandle, true);
+	ChangeFont("ドットゴシック16");
+	SetFontSize(100);
+	DrawFormatString(Game::kScreenWidth / 2 - 120 , 40, GetColor(232, 1, 164), "%d / 5", m_downEnemyCount);
 
 	m_pRocket->Draw();
 	m_pPlayer->Draw();
@@ -712,6 +700,7 @@ void TutorialScene::Draw()
 	{
 		DrawGraph(Game::kScreenWidth / 2 - 450 / 2, Game::kScreenHeight / 2 - 371 / 2, m_clearHandle, true);
 	}
+
 #ifdef _DEBUG
 	//プレイヤーの位置をデバッグ表示する
 	Vec2 playerPos = m_pPlayer->GetPos();
@@ -720,7 +709,6 @@ void TutorialScene::Draw()
 	DrawFormatString(8, 40, GetColor(255, 255, 255), "ShotNum%d", shotNum);
 	DrawFormatString(8, 72, GetColor(255, 255, 255), "EnemyNum%d", enemyNum);
 	DrawFormatString(8, 88, GetColor(255, 255, 255), "残りライフ%d", m_pRocket->m_life);
-	DrawFormatString(Game::kScreenWidth / 2, 40, GetColor(255, 255, 255), "%d / 5", m_downEnemyCount);
 	DrawFormatString(8, 56, GetColor(255, 255, 255), "%f", m_pUfo->m_angle);
 #endif
 }

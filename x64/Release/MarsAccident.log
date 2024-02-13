@@ -1,19 +1,38 @@
-﻿  コード生成しています。
-c:\mars-accident\vec2.cpp : fatal error C1001: 内部コンパイラ エラーが発生しました。
-  (コンパイラ ファイル 'D:\a\_work\1\s\src\vctools\Compiler\Utc\src\p2\main.c'、行 224)
-   この問題を回避するには、上記の場所付近のプログラムを単純化するか変更してください。
-  可能な場合、再現手順をこちらに入力してください: https://developercommunity.visualstudio.com 
-  詳細については、Visual C++ ヘルプ メニューのサポート情報コマンドを
-  選択するか、サポート情報ヘルプ ファイルを参照してください
-    link!InvokeCompilerPass()+0x57b11
-    link!InvokeCompilerPass()+0x57b11
-    link!InvokeCompilerPass()+0x46873
-    link!InvokeCompilerPass()+0x44348
-    link!InvokeCompilerPass()+0x5092f
-    link!InvokeCompilerPass()+0x5134c
-    link!InvokeCompilerPass()+0x51503
-    link!InvokeCompilerPass()+0x5029b
-    link!InvokeCompilerPass()+0x50617
-    link!InvokeCompilerPassW()+0x145176
-  
-LINK : fatal error LNK1000: Internal error during IMAGE::BuildImage
+﻿  Stage1Scene.cpp
+C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3344,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Mars-Accident\Scene\Stage1Scene.cpp(501,39): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Scene\Stage1Scene.cpp(502,38): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Scene\Stage1Scene.cpp(503,38): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Scene\Stage1Scene.cpp(504,38): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Scene\Stage1Scene.cpp(505,38): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Scene\Stage1Scene.cpp(601,17): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Scene\Stage1Scene.cpp(611,13): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Mars-Accident\Scene\Stage1Scene.cpp(616,9): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+  コード生成しています。
+  1 of 1106 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  コード生成が終了しました。
+Bg.obj : warning LNK4204: '' に参照するモジュールのデバッグ情報がありません。デバッグ情報を無視してオブジェクトをリンクします。
+Input.obj : warning LNK4204: '' に参照するモジュールのデバッグ情報がありません。デバッグ情報を無視してオブジェクトをリンクします。
+Main.obj : warning LNK4204: '' に参照するモジュールのデバッグ情報がありません。デバッグ情報を無視してオブジェクトをリンクします。
+Pad.obj : warning LNK4204: '' に参照するモジュールのデバッグ情報がありません。デバッグ情報を無視してオブジェクトをリンクします。
+Rect.obj : warning LNK4204: '' に参照するモジュールのデバッグ情報がありません。デバッグ情報を無視してオブジェクトをリンクします。
+Rocket.obj : warning LNK4204: '' に参照するモジュールのデバッグ情報がありません。デバッグ情報を無視してオブジェクトをリンクします。
+Scene.obj : warning LNK4204: '' に参照するモジュールのデバッグ情報がありません。デバッグ情報を無視してオブジェクトをリンクします。
+SceneManager.obj : warning LNK4204: '' に参照するモジュールのデバッグ情報がありません。デバッグ情報を無視してオブジェクトをリンクします。
+Vec2.obj : warning LNK4204: '' に参照するモジュールのデバッグ情報がありません。デバッグ情報を無視してオブジェクトをリンクします。
+GameClearScene.obj : warning LNK4020: '' の型レコードは破損しています。一部のシンボルおよび型は、デバッガーからはアクセスできない可能性があります。
+GameClearScene.obj : warning LNK4020: '' の型レコードは破損しています。一部のシンボルおよび型は、デバッガーからはアクセスできない可能性があります。
+GameClearScene.obj : warning LNK4020: '' の型レコードは破損しています。一部のシンボルおよび型は、デバッガーからはアクセスできない可能性があります。
+GameClearScene.obj : warning LNK4020: '' の型レコードは破損しています。一部のシンボルおよび型は、デバッガーからはアクセスできない可能性があります。
+Player.obj : warning LNK4020: '' の型レコードは破損しています。一部のシンボルおよび型は、デバッガーからはアクセスできない可能性があります。
+Player.obj : warning LNK4020: '' の型レコードは破損しています。一部のシンボルおよび型は、デバッガーからはアクセスできない可能性があります。
+Player.obj : warning LNK4020: '' の型レコードは破損しています。一部のシンボルおよび型は、デバッガーからはアクセスできない可能性があります。
+TitleScene.obj : warning LNK4020: '' の型レコードは破損しています。一部のシンボルおよび型は、デバッガーからはアクセスできない可能性があります。
+TitleScene.obj : warning LNK4020: '' の型レコードは破損しています。一部のシンボルおよび型は、デバッガーからはアクセスできない可能性があります。
+TitleScene.obj : warning LNK4020: '' の型レコードは破損しています。一部のシンボルおよび型は、デバッガーからはアクセスできない可能性があります。
+UFO.obj : warning LNK4020: '' の型レコードは破損しています。一部のシンボルおよび型は、デバッガーからはアクセスできない可能性があります。
+UFO.obj : warning LNK4020: '' の型レコードは破損しています。一部のシンボルおよび型は、デバッガーからはアクセスできない可能性があります。
+UFO.obj : warning LNK4020: '' の型レコードは破損しています。一部のシンボルおよび型は、デバッガーからはアクセスできない可能性があります。
+  MarsAccident.vcxproj -> C:\Mars-Accident\x64\Release\MarsAccident.exe

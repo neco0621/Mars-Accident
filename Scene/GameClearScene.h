@@ -25,5 +25,11 @@ private:
     // •`‰æó‘Ô‚ğ•\‚·ŠÖ”
     void FadeDraw();
     void NormalDraw();
+
+    int m_clearSE;
+    int m_bgm;
+    int m_bg;
+    int m_gameClear;
+    int m_titleBack;
 };
 

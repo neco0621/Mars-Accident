@@ -86,7 +86,6 @@ void S2UFO::Update()
 		// ’n–Ê‚É‚Â‚¢‚½Žž
 		if (m_pos.y >= m_tq - m_radius / 2)
 		{
-			ChangeVolumeSoundMem(100, m_soundHandle);
 			PlaySoundMem(m_soundHandle, DX_PLAYTYPE_BACK);
 			m_pos.y = m_tq - m_radius / 2;
 			JumpPower = 30;

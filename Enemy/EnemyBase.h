@@ -46,7 +46,9 @@ public:
 	Stage2Scene* m_pS2Scene;
 
 	int m_animFrame;
+	int m_count;
 	bool enemyEXPFlag;
+	bool AnimFlag;
 protected:
 	//m_posを左上に、m_handleのグラフィックサイズを幅高さにした
 	//当たり判定を設定する
