@@ -37,10 +37,12 @@ ShotBeam::ShotBeam() :
 	m_pMove(kMove),
 	MoveFlag(false),
 	m_z(0,-25),
-	m_soundHandle(-1)
+	m_soundHandle(-1),
+	m_shotHandle(-1)
 {
 	m_posLog.resize(kPosLogNum);
 	m_soundHandle = LoadSoundMem("data/Sound/ShotBeam.mp3");
+	m_shotHandle = LoadGraph("data/shot.png");
 }
 
 ShotBeam::~ShotBeam()
@@ -80,7 +82,8 @@ void ShotBeam::Draw()
 {
 	if (!m_isExist) return;	
 	//Žc‘œ‚Ì•\Ž¦
-	DrawCircle(m_pos.x, m_pos.y, kRadius, GetColor(255, 0, 0), true);
+	//DrawCircle(m_pos.x, m_pos.y, kRadius, GetColor(255, 0, 0), true);
+	DrawGraph(m_pos.x-20, m_pos.y, m_shotHandle, true);
 	//int alpha = 255;
 	//SetDrawBlendMode(DX_BLENDMODE_ALPHA, alpha);
 	//DrawLine(m_pos.x,m_pos.y, m_posLog[0].x, m_posLog[1].y,GetColor(255,255,0),kWidth);

@@ -43,6 +43,7 @@ public:
 	int m_radius;
 	int m_handle;
 	int m_soundHandle;
+	int m_shotHandle;
 	float m_centerX;
 	float m_centerY;
 	//“–‚½‚è”»’è‚Ì‹éŒ`
