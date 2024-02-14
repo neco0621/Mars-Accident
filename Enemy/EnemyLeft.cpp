@@ -8,6 +8,7 @@ namespace
 {
 	//敵の移動速度.
 	constexpr float kSpeed = 1.0f;
+	//Stage2での移動速度
 	constexpr float s2Speed = 1.3f;
 
 	// アニメーション間隔
@@ -39,55 +40,66 @@ void EnemyLeft::Update()
 	//存在しない敵の処理はしない.
 	if (!m_isExist)		return;
 
+	//現在位置に移動量を追加
 	m_pos += m_vec;
-
 
 	//当たり判定の更新
 	UpdateCollision();
 
+	//グラフのサイズの取得
 	int width = 0;
 	int height = 0;
 	GetGraphSize(m_handle, &width, &height);
 
+	//敵が画面外に行ったら生存フラグをfalseにする
 	if (m_pos.x > Game::kScreenWidth + width / 2)
 	{
 		m_isExist = false;
 	}
 }
 
+//Stage2での更新処理
 void EnemyLeft::S2Update()
 {
 	//存在しない敵の処理はしない.
 	if (!m_isExist)		return;
-
+	
+	//移動量をStage2のものに変更
 	m_vec.x = s2Speed;
-
+	
+	//現在位置に移動量を追加
 	m_pos += m_vec;
 
 
 	//当たり判定の更新
 	UpdateCollision();
 
+	//グラフのサイズを取得
 	int width = 0;
 	int height = 0;
 	GetGraphSize(m_handle, &width, &height);
 
+	//敵が画面外に行ったら生存フラグをfalseにする
 	if (m_pos.x > Game::kScreenWidth + width / 2)
 	{
 		m_isExist = false;
 	}
 }
 
+//敵の登場処理
 void EnemyLeft::Start()
 {
 	//画面中央に敵キャラクターを登場させる
 	m_isExist = true;
 
+	//グラフのサイズを取得
 	int width = 0;
 	int height = 0;
 	GetGraphSize(m_handle, &width, &height);
 
+	//X座標を0に設定
 	m_pos.x = 0;
+	//Y座標の位置を調整
 	m_pos.y = m_tq;
 
 	/*m_pos.x = static_cast<float>(0 - width / 2);

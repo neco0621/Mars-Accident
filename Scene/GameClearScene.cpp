@@ -91,3 +91,4 @@ void GameClearScene::NormalDraw()
 	DrawGraph(Game::kScreenWidth / 2 - 225, Game::kScreenHeight * 0.25 - 127, m_gameClear, true);
 	DrawGraph(Game::kScreenWidth / 2 - 225, Game::kScreenHeight * 0.75 - 127, m_titleBack, true);
 }
+// <a href = "https://jp.freepik.com/free-vector/pixel-art-mystical-background_29019077.htm#query=pixel%20art&position=0&from_view=keyword&track=ais&uuid=acea7397-7e5c-4d2b-8020-153b3f30c072">íòçÏé“ÅFpikisuperstar< / a>Å^èoìTÅFFreepik

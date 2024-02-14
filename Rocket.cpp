@@ -54,13 +54,13 @@ void Rocket::Init()
 void Rocket::Update()
 {
 	//ìñÇΩÇËîªíËÇÃçXêV
-	m_colRect.SetCenter(m_pos.x, m_pos.y - kHeight / 4, kWidth, kHeight);
+	m_colRect.SetCenter(m_pos.x, m_pos.y - kHeight / 4 + 10, kWidth, kHeight);
 
 }
 
 void Rocket::Draw()
 {
-	DrawRotaGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y) - kHeight / 4,
+	DrawRotaGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y + 10) - kHeight / 4,
 		1.0, 0.0,
 		m_handle, true, false);
 

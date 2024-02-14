@@ -539,13 +539,8 @@ void TutorialScene::Draw()
 	DrawGraph(Game::kScreenWidth * 0.5 - 96, Game::kScreenHeight * 0.5, m_life1Handle, true);
 	DrawGraph(Game::kScreenWidth * 0.5 - 32, Game::kScreenHeight * 0.5, m_life2Handle, true);
 	DrawGraph(Game::kScreenWidth * 0.5 + 32, Game::kScreenHeight * 0.5, m_life3Handle, true);
-	DrawBox(0, Game::kScreenHeight * 0.75 + 32, Game::kScreenWidth, Game::kScreenHeight, 0x84331F, true);
-	DrawGraph(Game::kScreenWidth * 0.25 - 100, Game::kScreenHeight - 175, LeftHandle, true);
-	DrawGraph(Game::kScreenWidth * 0.25 - 300, Game::kScreenHeight - 175, LeftArrowHandle, true);
-	DrawGraph(Game::kScreenWidth * 0.75 - 100, Game::kScreenHeight - 175, RightHandle, true);
-	DrawGraph(Game::kScreenWidth * 0.75 + 100, Game::kScreenHeight - 175, RightArrowHandle, true);
 	DrawGraph(Game::kScreenWidth * 0.5 - 112, Game::kScreenHeight - 150, m_skipHandle, true);
-	ChangeFont("ドットゴシック16");
+	ChangeFont("DotGothic16");
 	SetFontSize(100);
 	DrawFormatString(Game::kScreenWidth / 2 - 120 , 40, GetColor(232, 1, 164), "%d / 5", m_downEnemyCount);
 

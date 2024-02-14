@@ -54,9 +54,9 @@ private:
 	//向いている方向
 	Dir m_dir;
 
-	//歩きアニメーション
+	//歩きアニメーションフレームカウント
 	int m_walkAnimFrame;
 
-	//魔法の杖の発射フレームカウント
+	//Shotの発射フレームカウント
 	int m_beamFrame;
 };

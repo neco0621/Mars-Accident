@@ -483,7 +483,6 @@ void Stage2Scene::Draw()
 	DrawGraph(Game::kScreenWidth / 2 - 96, Game::kScreenHeight / 2, m_life1Handle, true);
 	DrawGraph(Game::kScreenWidth / 2 - 32, Game::kScreenHeight / 2, m_life2Handle, true);
 	DrawGraph(Game::kScreenWidth / 2 + 32, Game::kScreenHeight / 2, m_life3Handle, true);
-	DrawBox(0, Game::kScreenHeight * 0.75 + 32, Game::kScreenWidth, Game::kScreenHeight, 0x84331F, true);
 	SetFontSize(64);
 	DrawFormatString(Game::kScreenWidth / 2 - 64, 40, GetColor(232, 1, 164), "%d / 25", m_downEnemyCount);
 	m_pRocket->Draw();

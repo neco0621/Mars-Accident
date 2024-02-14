@@ -4,6 +4,7 @@
 #include "../Input.h"
 #include "SceneManager.h"
 #include "TitleScene.h"
+#include "Stage1Scene.h"
 #include "../Game.h"
 
 GameOverScene::GameOverScene(SceneManager& mgr) : Scene(mgr),
@@ -61,6 +62,11 @@ void GameOverScene::NormalUpdate(Input& input)
 		m_updateFunc = &GameOverScene::FadeOutUpdate;
 		m_drawFunc = &GameOverScene::FadeDraw;
 	}
+
+	if (input.IsTriggered("space"))
+	{
+		manager_.ChangeScene(std::make_shared<Stage1Scene>(manager_));
+	}
 }
 
 void GameOverScene::FadeOutUpdate(Input&)
@@ -77,6 +83,7 @@ void GameOverScene::FadeDraw()
 	DrawGraph(0,0,m_bg,true);
 	DrawGraph(Game::kScreenWidth / 2 - 225, Game::kScreenHeight * 0.25 - 127, m_gameOver, true);
 	DrawGraph(Game::kScreenWidth / 2 - 225, Game::kScreenHeight * 0.75 - 127, m_titleBack, true);
+	DrawFormatString(Game::kScreenWidth / 2 - 250, Game::kScreenHeight * 0.75 + 64 ,GetColor(255,0,0),"SPACEでリトライ");
 	int alpha = static_cast<int>(255 * (static_cast<float>(frame_) / 60.0f));
 	SetDrawBlendMode(DX_BLENDMODE_MULA, alpha);
 	DrawBox(0, 0, Game::kScreenWidth, Game::kScreenWidth, 0x000000, true);
@@ -88,4 +95,5 @@ void GameOverScene::NormalDraw()
 	DrawGraph(0, 0, m_bg, true);
 	DrawGraph(Game::kScreenWidth / 2 - 225, Game::kScreenHeight * 0.25 - 127, m_gameOver, true);
 	DrawGraph(Game::kScreenWidth / 2 - 225, Game::kScreenHeight * 0.75 - 127, m_titleBack, true);
+	DrawFormatString(Game::kScreenWidth / 2 - 250, Game::kScreenHeight * 0.75 + 64, GetColor(255, 0, 0), "SPACEでリトライ");
 }

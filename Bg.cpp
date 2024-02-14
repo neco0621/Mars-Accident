@@ -2,23 +2,19 @@
 #include "Game.h"
 
 Bg::Bg() :
+//‰Šú‰»
 m_handle(-1)
 {
 }
 
 Bg::~Bg()
 {
-}
-
-void Bg::Init()
-{
-}
-
-void Bg::Update()
-{
+	//ƒƒ‚ƒŠ‚ÌŠJ•ú
+	DeleteGraph(m_handle);
 }
 
 void Bg::Draw()
 {
-	DrawGraph(0,0,m_handle,false);
+	//”wŒi‚Ì•`‰æ
+	DrawGraph(0,0 - 133,m_handle,false);
 }

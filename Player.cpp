@@ -28,11 +28,12 @@ namespace
 	//アニメーション1サイクルのフレーム数
 	constexpr int kAnimFrameCycle = _countof(kUseFrame) * kAnimFrameNum;
 
-	//魔法の杖の発射間隔
+	//Shotの発射間隔
 	constexpr int kBeamFrame = 20;
 }
 
 Player::Player(TutorialScene* pTuScene) :
+	//初期化
 	m_pTuScene(pTuScene),
 	m_handle(-1),
 	m_pos(Game::kScreenWidth * 0.5, Game::kScreenHeight * 0.75),
@@ -43,6 +44,7 @@ Player::Player(TutorialScene* pTuScene) :
 }
 
 Player::Player(Stage1Scene* S1Scene) :
+	//初期化
 	m_pS1Scene(S1Scene),
 	m_handle(-1),
 	m_pos(Game::kScreenWidth * 0.5, Game::kScreenHeight * 0.75),
@@ -53,6 +55,7 @@ Player::Player(Stage1Scene* S1Scene) :
 }
 
 Player::Player(Stage2Scene* S2Scene) :
+	//初期化
 	m_pS2Scene(S2Scene),
 	m_handle(-1),
 	m_pos(Game::kScreenWidth * 0.5, Game::kScreenHeight * 0.75),
@@ -72,9 +75,10 @@ void Player::Init()
 	
 }
 
+//チュートリアルシーンでの更新処理
 void Player::TuUpdate()
 {
-	//padの十字キーを使用してプレイヤーを移動させる
+	//padの十字キーを使用してPlayerを移動させる
 	int pad = GetJoypadInputState(DX_INPUT_KEY_PAD1);
 
 
@@ -82,35 +86,50 @@ void Player::TuUpdate()
 	//0000 0000 0000 0000 0000 0000 0000 0000　基本
 	//0000 0000 0000 0000 0000 0000 0000 1000　上キーが押されたとき
 
-	bool isMove = false;	//移動しているかどうか
+	//移動しているかどうか
+	bool isMove = false;	
 
 	//移動量を持つようにする
 	Vec2 move{ 0.0f,0.0f };
+	
+	//Aもしくは左を入力しているとき
 	if (((pad & PAD_INPUT_LEFT) | (pad & PAD_INPUT_4)) != 0)
 	{
-
+		//Playerが左を向くようにする
 		m_dir = kDirLeft;
+
+		//移動しているか
 		isMove = true;
+
+		//画面買いに行かないようにする
 		if (m_pos.x <= kWidth / 2 - 10)
 		{
 			m_pos.x = kWidth / 2 - 10;
 		}
 		else
 		{
+			//左に移動する
 			move.x -= kSpeed;
 		}
 	}
+
+	//Dもしくは右を入力しているとき
 	if (((pad & PAD_INPUT_RIGHT) | (pad & PAD_INPUT_6)) != 0)
 	{
-
+		//Playerが右を向くようにする
 		m_dir = kDirRight;
+
+		//移動しているか
 		isMove = true;
+
+		//画面買いに行かないようにする
 		if (m_pos.x >= Game::kScreenWidth - kWidth / 2 + 10)
 		{
 			m_pos.x = Game::kScreenWidth - kWidth / 2 + 10;
 		}
 		else
 		{
+			//右に移動する
 			move.x += kSpeed;
 		}
 	}
@@ -127,40 +146,49 @@ void Player::TuUpdate()
 	m_pos += move;
 
 	//中心座標を指定して当たり判定のRectを生成する.
-	m_colRect.SetCenter(m_pos.x, m_pos.y + 5, kWidth - 35, kHeight - 5);
+	m_colRect.SetCenter(m_pos.x, m_pos.y + 15, kWidth - 35, kHeight - 5);
 
+	//Playerが移動している時にアニメーションを開始させる
 	if (isMove)
 	{
-		//歩きアニメーション
+		//歩きアニメーションフレームカウント加算
 		m_walkAnimFrame++;
+		//歩きアニメーションフレームカウントが
 		if (m_walkAnimFrame >= kAnimFrameCycle)
 		{
+			//歩きアニメーションフレームカウントをリセットする
 			m_walkAnimFrame = 0;
 		}
 	}
 	else
 	{
+		//歩きアニメーションフレームカウントを1コマのフレームカウントに合わせる
 		m_walkAnimFrame = kAnimFrameNum;
 	}
 
-	//ショット
+	//ショットのフレームカウントの加算
 	m_beamFrame++;
+	//Shotの発射フレームカウントが発射間隔を上回ったとき
 	if (m_beamFrame >= kBeamFrame)
 	{
+		//Shotのメモリを確保
 		ShotBeam* m_pShot = new ShotBeam;
+		//ShotのSceneをチュートリアルに設定する
 		m_pShot->SetTutorial(m_pTuScene);
+		//プレイヤーの位置情報を設定する
 		m_pShot->SetPlayer(this);
+		//Shotをスタートさせる
 		m_pShot->Start(GetPos());
 		//以降更新やメモリの解放はSceneMainに任せる
 		m_pTuScene->AddShot(m_pShot);
-
+		//Shotの発射フレームカウントをリセットする
 		m_beamFrame = 0;
 	}
 }
 
 void Player::Update()
 {
-	//padの十字キーを使用してプレイヤーを移動させる
+	//padの十字キーを使用してPlayerを移動させる
 	int pad = GetJoypadInputState(DX_INPUT_KEY_PAD1);
 
 
@@ -172,31 +200,39 @@ void Player::Update()
 
 	//移動量を持つようにする
 	Vec2 move{ 0.0f,0.0f };
+	//Aもしくは左を入力しているとき
 	if (((pad & PAD_INPUT_LEFT) | (pad & PAD_INPUT_4)) != 0)
 	{
-
+		//Playerが左を向くようにする
 		m_dir = kDirLeft;
+		//動いているかどうか
 		isMove = true;
+		//Playerが画面外に行かないようにする
 		if (m_pos.x <= kWidth / 2 - 10)
 		{
 			m_pos.x = kWidth / 2 - 10;
 		}
 		else
 		{
+			//左に移動する
 			move.x -= kSpeed;
 		}		
 	}
+	//Dもしくは右を入力しているとき
 	if (((pad & PAD_INPUT_RIGHT) | (pad & PAD_INPUT_6)) != 0)
 	{
-
+		//Playerが右を向くようにしている
 		m_dir = kDirRight;
+		//動いているかどうか
 		isMove = true;
+		//Playerが画面外に行かないようにする
 		if (m_pos.x >= Game::kScreenWidth - kWidth / 2 + 10)
 		{
 			m_pos.x = Game::kScreenWidth - kWidth / 2 + 10;
 		}
 		else
 		{
+			//右に移動する
 			move.x += kSpeed;
 		}		
 	}
@@ -213,8 +249,9 @@ void Player::Update()
 	m_pos += move;
 
 	//中心座標を指定して当たり判定のRectを生成する.
-	m_colRect.SetCenter(m_pos.x, m_pos.y + 5, kWidth - 35, kHeight - 5);
+	m_colRect.SetCenter(m_pos.x, m_pos.y + 15, kWidth - 35, kHeight - 5);
 
+	//Playerが移動している時にアニメーションを開始させる
 	if (isMove)
 	{
 		//歩きアニメーション
@@ -247,7 +284,7 @@ void Player::Update()
 void Player::S2Update()
 {
 
-	//padの十字キーを使用してプレイヤーを移動させる
+	//padの十字キーを使用してPlayerを移動させる
 	int pad = GetJoypadInputState(DX_INPUT_KEY_PAD1);
 
 
@@ -255,7 +292,8 @@ void Player::S2Update()
 	//0000 0000 0000 0000 0000 0000 0000 0000　基本
 	//0000 0000 0000 0000 0000 0000 0000 1000　上キーが押されたとき
 
-	bool isMove = false;	//移動しているかどうか
+	//移動しているかどうか
+	bool isMove = false;	
 
 	//移動量を持つようにする
 	Vec2 move{ 0.0f,0.0f };
@@ -295,7 +333,7 @@ void Player::S2Update()
 	m_pos += move;
 
 	//中心座標を指定して当たり判定のRectを生成する.
-	m_colRect.SetCenter(m_pos.x, m_pos.y + 5, kWidth - 35, kHeight - 5);
+	m_colRect.SetCenter(m_pos.x, m_pos.y + 15, kWidth - 35, kHeight - 5);
 
 	if (isMove)
 	{
@@ -338,7 +376,7 @@ void Player::Draw()
 
 	//DXライブラリにはリファレンスページに書かれてない関数が多数存在する
 	//DxLib.hを確認してそれっぽい関数を探したり検索したりしてみよう
-	DrawRectRotaGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y),
+	DrawRectRotaGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y + 10),
 		srcX, srcY, kWidth, kHeight,
 		1.0, 0.0,
 		m_handle, true, false);

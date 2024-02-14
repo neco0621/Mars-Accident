@@ -498,13 +498,8 @@ void Stage1Scene::Draw()
 	DrawGraph(Game::kScreenWidth / 2 - 96, Game::kScreenHeight / 2,m_life1Handle, true);
 	DrawGraph(Game::kScreenWidth / 2 - 32, Game::kScreenHeight / 2, m_life2Handle, true);
 	DrawGraph(Game::kScreenWidth / 2 +32, Game::kScreenHeight / 2, m_life3Handle, true);
-	DrawBox(0,Game::kScreenHeight * 0.75 + 32, Game::kScreenWidth, Game::kScreenHeight, 0x84331F, true);
-	DrawGraph(Game::kScreenWidth * 0.25 - 100, Game::kScreenHeight - 175, LeftHandle, true);
-	DrawGraph(Game::kScreenWidth * 0.25 - 300, Game::kScreenHeight - 175, LeftArrowHandle, true);
-	DrawGraph(Game::kScreenWidth * 0.75 - 100, Game::kScreenHeight - 175, RightHandle, true);
-	DrawGraph(Game::kScreenWidth * 0.75 + 100, Game::kScreenHeight - 175, RightArrowHandle, true);
 	SetFontSize(64);
-	DrawFormatString(Game::kScreenWidth / 2 - 64, 40, GetColor(232, 1, 164), "%d / 15", m_downEnemyCount);
+	DrawFormatString(Game::kScreenWidth / 2 - 80, 40, GetColor(232, 1, 164), "%d / 15", m_downEnemyCount);
 	m_pRocket->Draw();
 	m_pPlayer->Draw();
 	m_pUfo->Draw();

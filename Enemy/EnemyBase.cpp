@@ -5,6 +5,7 @@
 
 #include <cassert>
 
+//Enemyで使用する定数
 namespace
 {
 	constexpr int kRadius = 30;
@@ -63,7 +64,7 @@ void EnemyBase::Draw()
 
 	assert(m_handle != -1);
 	//敵の描画処理.
-	DrawRotaGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y),
+	DrawRotaGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y + 10),
 		1.0, 0.0,
 		m_handle, true, false);	
 	
@@ -74,23 +75,14 @@ void EnemyBase::Draw()
 #endif
 }
 
-void EnemyBase::CreateAnimation()
-{
-	int index = m_animFrame / kAnimInterval;
-	int srcX = (index % kRow) * kAnimWidth;
-	int srcY = (index / kLine) * kAnimHeight;
-
-	DrawRectRotaGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y),
-		srcX, srcY, kAnimWidth, kAnimHeight,
-		1.0, 0.0,
-		m_animHandle, true, false);
-}
-
+//敵かやらの更新処理
 void EnemyBase::UpdateCollision()
 {
+	//縦のサイズと横のサイズを取得
 	int width = 0;
 	int height = 0;
+	//グラフのサイズを取得
 	GetGraphSize(m_handle, &width, &height);
 	//中心座標を指定して当たり判定のRectを生成する.
-	m_colRect.SetRadius(m_pos.x, m_pos.y, m_radius);
+	m_colRect.SetRadius(m_pos.x, m_pos.y + 10, m_radius);
 }

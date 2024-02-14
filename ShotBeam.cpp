@@ -74,7 +74,7 @@ void ShotBeam::Update()
 		m_pos.y -= kMove;
 	}
 	//“–‚½‚è”»’è‚ÌXV
-	m_colRect.SetRadius(m_pos.x, m_pos.y - 20, m_radius);
+	m_colRect.SetRadius(m_pos.x, m_pos.y -10, m_radius);
 	m_colRect.SetCenter(m_centerX, m_centerY, kWidth, kHeight);
 }
 
