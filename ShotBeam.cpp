@@ -74,7 +74,7 @@ void ShotBeam::Update()
 		m_pos.y -= kMove;
 	}
 	//当たり判定の更新
-	m_colRect.SetRadius(m_pos.x, m_pos.y -10, m_radius);
+	m_colRect.SetRadius(m_pos.x, m_pos.y - 10, m_radius);
 	m_colRect.SetCenter(m_centerX, m_centerY, kWidth, kHeight);
 }
 
@@ -83,7 +83,7 @@ void ShotBeam::Draw()
 	if (!m_isExist) return;	
 	//残像の表示
 	//DrawCircle(m_pos.x, m_pos.y, kRadius, GetColor(255, 0, 0), true);
-	DrawGraph(m_pos.x - 20, m_pos.y, m_shotHandle, true);
+	DrawGraph(m_pos.x - 20, m_pos.y - 20, m_shotHandle, true);
 	//int alpha = 255;
 	//SetDrawBlendMode(DX_BLENDMODE_ALPHA, alpha);
 	//DrawLine(m_pos.x,m_pos.y, m_posLog[0].x, m_posLog[1].y,GetColor(255,255,0),kWidth);

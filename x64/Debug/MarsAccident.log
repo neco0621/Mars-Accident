@@ -1,9 +1,7 @@
-﻿  GameOverScene.cpp
+﻿  ShotBeam.cpp
 C:\DxLib_VC3_24d\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3964,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-C:\Users\fko2347078\Documents\GitHub\Mars-Accident\Scene\GameOverScene.cpp(84,69): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\fko2347078\Documents\GitHub\Mars-Accident\Scene\GameOverScene.cpp(85,69): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\fko2347078\Documents\GitHub\Mars-Accident\Scene\GameOverScene.cpp(86,76): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\fko2347078\Documents\GitHub\Mars-Accident\Scene\GameOverScene.cpp(96,69): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\fko2347078\Documents\GitHub\Mars-Accident\Scene\GameOverScene.cpp(97,69): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\fko2347078\Documents\GitHub\Mars-Accident\Scene\GameOverScene.cpp(98,76): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\fko2347078\Documents\GitHub\Mars-Accident\ShotBeam.cpp(32,10): warning C4244: '初期化中': 'const float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\fko2347078\Documents\GitHub\Mars-Accident\ShotBeam.cpp(77,45): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\fko2347078\Documents\GitHub\Mars-Accident\ShotBeam.cpp(86,34): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\fko2347078\Documents\GitHub\Mars-Accident\ShotBeam.cpp(86,20): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
   MarsAccident.vcxproj -> C:\Users\fko2347078\Documents\GitHub\Mars-Accident\x64\Debug\MarsAccident.exe

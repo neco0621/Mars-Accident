@@ -620,6 +620,7 @@ void Stage2Scene::Draw()
 		int x = GetRand(m_shakeSize) - static_cast<int>(m_shakeSize * 0.5f);
 		int y = GetRand(m_shakeSize) - static_cast<int>(m_shakeSize * 0.5f);
 		DrawGraph(x, y, m_shakeHandle, true);
+	}
 #ifdef _DEBUG
 		//プレイヤーの位置をデバッグ表示する
 		Vec2 playerPos = m_pPlayer->GetPos();
@@ -631,7 +632,6 @@ void Stage2Scene::Draw()
 		DrawFormatString(8, 104, GetColor(255, 255, 255), "倒した敵の数%d", m_downEnemyCount);
 		DrawFormatString(8, 56, GetColor(255, 255, 255), "%f", m_pUfo->m_angle);
 #endif
-	}
 }
 
 Vec2 Stage2Scene::GetNearEnemyPos(Vec2 pos)
@@ -640,7 +640,6 @@ Vec2 Stage2Scene::GetNearEnemyPos(Vec2 pos)
 	Vec2 result{ 0,0 };
 	//最初の敵チェック済みフラグ
 	bool isFirst = false;
-
 
 	//一番近い敵キャラクターの座標をresultに入れる
 	for (int i = 0; i < m_pEnemy.size(); i++)
