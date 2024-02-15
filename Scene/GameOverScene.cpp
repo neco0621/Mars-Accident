@@ -11,7 +11,8 @@ GameOverScene::GameOverScene(SceneManager& mgr) : Scene(mgr),
 m_gameOver(-1),
 m_titleBack(-1),
 m_bg(-1),
-m_bgm(-1)
+m_bgm(-1),
+m_retry(-1)
 {
 	m_updateFunc = &GameOverScene::FadeInUpdate;
 	m_drawFunc = &GameOverScene::FadeDraw;
@@ -21,6 +22,7 @@ m_bgm(-1)
 	m_titleBack = LoadGraph("data/TitleBack.png");
 	m_bg = LoadGraph("data/GameOverBg.png");
 	m_bgm = LoadSoundMem("data/Sound/GameOverBgm.mp3");
+	m_retry = LoadGraph("data/Retry.png");
 
 	PlaySoundMem(m_bgm, DX_PLAYTYPE_LOOP);
 }
@@ -63,7 +65,7 @@ void GameOverScene::NormalUpdate(Input& input)
 		m_drawFunc = &GameOverScene::FadeDraw;
 	}
 
-	if (input.IsTriggered("space"))
+	if (CheckHitKey(KEY_INPUT_R))
 	{
 		manager_.ChangeScene(std::make_shared<Stage1Scene>(manager_));
 	}
@@ -83,7 +85,8 @@ void GameOverScene::FadeDraw()
 	DrawGraph(0,0,m_bg,true);
 	DrawGraph(Game::kScreenWidth / 2 - 225, Game::kScreenHeight * 0.25 - 127, m_gameOver, true);
 	DrawGraph(Game::kScreenWidth / 2 - 225, Game::kScreenHeight * 0.75 - 127, m_titleBack, true);
-	DrawFormatString(Game::kScreenWidth / 2 - 250, Game::kScreenHeight * 0.75 + 64 ,GetColor(255,0,0),"SPACEでリトライ");
+	//DrawFormatString(Game::kScreenWidth / 2 - 250, Game::kScreenHeight * 0.75 + 64 ,GetColor(255,0,0),"SPACEでリトライ");
+	DrawGraph(Game::kScreenWidth / 2 - 235, Game::kScreenHeight * 0.75 - 10, m_retry, true);
 	int alpha = static_cast<int>(255 * (static_cast<float>(frame_) / 60.0f));
 	SetDrawBlendMode(DX_BLENDMODE_MULA, alpha);
 	DrawBox(0, 0, Game::kScreenWidth, Game::kScreenWidth, 0x000000, true);
@@ -95,5 +98,6 @@ void GameOverScene::NormalDraw()
 	DrawGraph(0, 0, m_bg, true);
 	DrawGraph(Game::kScreenWidth / 2 - 225, Game::kScreenHeight * 0.25 - 127, m_gameOver, true);
 	DrawGraph(Game::kScreenWidth / 2 - 225, Game::kScreenHeight * 0.75 - 127, m_titleBack, true);
-	DrawFormatString(Game::kScreenWidth / 2 - 250, Game::kScreenHeight * 0.75 + 64, GetColor(255, 0, 0), "SPACEでリトライ");
+	DrawGraph(Game::kScreenWidth / 2 - 235, Game::kScreenHeight * 0.75 - 10, m_retry, true);
+	//DrawFormatString(Game::kScreenWidth / 2 - 250, Game::kScreenHeight * 0.75 + 64, GetColor(255, 0, 0), "SPACEでリトライ");
 }
