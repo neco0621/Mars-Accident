@@ -41,6 +41,7 @@ namespace
 
 	//画面がワイプするのにかかるフレーム数.
 	constexpr int kWipeFrame = 30;
+
 	constexpr int kShakeSize = 20;
 
 	// アニメーション間隔
@@ -73,6 +74,10 @@ Stage1Scene::Stage1Scene(SceneManager& manager) : Scene(manager),
 	m_animFrame(0),
 	m_destoryEnemy(-1),
 	m_bgm(-1),
+	LeftHandle(-1),
+	LeftArrowHandle(-1),
+	RightHandle(-1),
+	RightArrowHandle(-1),
 	m_hitHandle(-1),
 	CheckSE(-1)
 {
@@ -118,6 +123,14 @@ Stage1Scene::Stage1Scene(SceneManager& manager) : Scene(manager),
 	assert(m_gameover != -1);
 	CheckSE = LoadSoundMem("data/Sound/Check.mp3");
 	assert(CheckSE != -1);
+	LeftHandle = LoadGraph("data/A.png");
+	assert(LeftHandle != -1);
+	LeftArrowHandle = LoadGraph("data/LeftArrow.png");
+	assert(LeftArrowHandle != -1);
+	RightHandle = LoadGraph("data/D.png");
+	assert(RightHandle != -1);
+	RightArrowHandle = LoadGraph("data/RightArrow.png");
+	assert(RightArrowHandle != -1);
 	m_clearHandle = LoadGraph("data/Stage1Clear.png");
 	assert(m_clearHandle != -1);
 	m_clearSE = LoadSoundMem("data/Sound/clear.mp3");
@@ -199,6 +212,10 @@ Stage1Scene::~Stage1Scene()
 	DeleteGraph(m_shakeHandle);
 	DeleteGraph(StartTitle);
 	DeleteGraph(m_enemyEXP);
+	DeleteGraph(LeftHandle);
+	DeleteGraph(LeftArrowHandle);
+	DeleteGraph(RightHandle);
+	DeleteGraph(RightArrowHandle);
 	DeleteGraph(m_clearHandle);
 
 	StopSoundMem(m_bgm);
