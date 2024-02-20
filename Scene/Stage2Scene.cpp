@@ -75,76 +75,109 @@ m_hitHandle(-1)
 	//画面サイズと同じ大きさのグラフィックデータを作成する.
 	m_gameScreenHandle = MakeScreen(Game::kScreenWidth, Game::kScreenHeight, true);
 
-	//グラフィックのロード.
+	//プレイヤーのグラフィックのロード.
 	m_playerHandle = LoadGraph("data/player.png");
 	assert(m_playerHandle != -1);
+	//敵のグラフィックのロード
 	m_leftEnemyHandle = LoadGraph("data/Leftenemy.png");
 	assert(m_leftEnemyHandle != -1);
 	m_rightEnemyHandle = LoadGraph("data/Rightenemy.png");
 	assert(m_rightEnemyHandle != -1);
+	//背景のグラフィックのロード
 	m_bgHandle = LoadGraph("data/Bg.png");
 	assert(m_bgHandle != -1);
+	//ショットのグラフィックのロード
 	m_shotHandle = LoadGraph("data/Shot.png");
 	assert(m_shotHandle != -1);
+	//UFOのグラフィックのロード
 	m_ufoHandle = LoadGraph("data/UFO.png");
 	assert(m_ufoHandle != -1);
+	//Rocketのグラフィックのロード
 	m_rocketHandle = LoadGraph("data/Rocket.png");
 	assert(m_rocketHandle != -1);
+	//Rocketの体力のグラフィックのロード
 	m_life1Handle = LoadGraph("data/Life.png");
 	assert(m_life1Handle != -1);
 	m_life2Handle = LoadGraph("data/Life.png");
 	assert(m_life2Handle != -1);
 	m_life3Handle = LoadGraph("data/Life.png");
 	assert(m_life3Handle != -1);
+	//爆発のアニメーションのグラフィックのロード
 	m_AnimHandle = LoadGraph("data/explosion.png");
 	assert(m_AnimHandle != -1);
+	//ゲームスタート時のボタンのグラフィックのロード
 	StartTitle = LoadGraph("data/Start.png");
 	assert(StartTitle != -1);
+	//敵の爆発アニメーションのグラフィックのロード
 	m_enemyEXP = LoadGraph("data/enemyEXP.png");
 	assert(m_enemyEXP != -1);
+	//敵撃破時の音声のグラフィックのロード
 	m_destoryEnemy = LoadSoundMem("data/Sound/DestoryEnemy.mp3");
 	assert(m_destoryEnemy != -1);
+	//BGMの音声のグラフィックのロード
 	m_bgm = LoadSoundMem("data/Sound/Stage1BGM.mp3");
 	assert(m_bgm != -1);
+	//UFOと弾の衝突時の音声グラフィックのロード
 	m_hitHandle = LoadSoundMem("data/Sound/UFODamage.mp3");
 	assert(m_hitHandle != -1);
+	//被弾時の音声のグラフィックのロード
 	m_damageHandle = LoadSoundMem("data/Sound/Damage.mp3");
 	assert(m_damageHandle != -1);
+	//ゲームオーバー時の音声のグラフィックのロード
 	m_gameover = LoadSoundMem("data/Sound/GameOver.mp3");
 	assert(m_gameover != -1);
+	//決定時の音声のグラフィックのロード
 	CheckSE = LoadSoundMem("data/Sound/Check.mp3");
 	assert(CheckSE != -1);
+	//ゲームクリア時の音声のグラフィックのロード
 	m_clearSE = LoadSoundMem("data/Sound/clear.mp3");
 	assert(m_clearSE != -1);
 
+	//BGMの再生
 	PlaySoundMem(m_bgm, DX_PLAYTYPE_LOOP);
 
 	//プレイヤーのメモリ確保.
 	m_pPlayer = new Player{ this };
-	m_pPlayer->SetHandle(m_playerHandle);	//Playerにグラフィックハンドルを渡す
+	//Playerにグラフィックハンドルを渡す
+	m_pPlayer->SetHandle(m_playerHandle);
 
+	//背景のメモリ確保
 	m_pBg = new Bg{};
+	//背景にグラフィックハンドルを渡す
 	m_pBg->SetHandle(m_bgHandle);
 
+	//UFOのメモリ確保
 	m_pUfo = new UFO{ this };
+	//UFOにグラフィックハンドルを渡す
 	m_pUfo->SetHandle(m_ufoHandle);
+	//UFO落下時のアニメーションのグラフィックハンドルを渡す
 	m_pUfo->SetAnimHandle(m_AnimHandle);
 
+	//ステージ2のUFOのメモリ確保
 	m_pS2ufo = new S2UFO{ this };
+	//ステージ2のUFOにグラフィックハンドルを渡す
 	m_pS2ufo->SetHandle(m_ufoHandle);
+	//ステージ2のUFO落下時のアニメーションのグラフィックハンドルを渡す
 	m_pS2ufo->SetAnimHandle(m_AnimHandle);
 
+	//現在存在する敵の数だけ処理を回す
 	for (int i = 0; i < m_pEnemy.size(); i++)
 	{
+		//敵にグラフィックハンドルを渡す
 		m_pEnemy[i]->SetAnimHandle(m_enemyEXP);
 	}
 
+	//Rocketのメモリ確保
 	m_pRocket = new Rocket{ this };
+	//UFOにグラフィックハンドルを渡す
 	m_pRocket->SetHandle(m_rocketHandle);
+
+
 	//敵の準備.
 	//m_pEnemy(vector)何もしなければサイズは0
 	//resize関数でkEnemyMaxだけデータを保存できるようにする
 	m_pEnemy.resize(kEnemyMax);
+
 
 	//いつもはコンストラクタでメモリを確保して
 	//デストラクタで解放してた
@@ -180,16 +213,24 @@ Stage2Scene::~Stage2Scene()
 {
 	//MakeScreenで生成したグラフィックを削除する
 	DeleteGraph(m_shakeHandle);
-	//メモリからグラフィックを削除
+	//メモリから背景のグラフィックを削除
 	DeleteGraph(m_bgHandle);
+	//メモリからPlayerのグラフィックを削除
 	DeleteGraph(m_playerHandle);
+	//メモリから敵のグラフィックを削除
 	DeleteGraph(m_leftEnemyHandle);
 	DeleteGraph(m_rightEnemyHandle);
+	//メモリからアニメーションのグラフィックを削除
 	DeleteGraph(m_AnimHandle);
+	//メモリからUFOのグラフィックを削除
 	DeleteGraph(m_ufoHandle);
+	//メモリから画面揺れのグラフィックを削除
 	DeleteGraph(m_shakeHandle);
+	//メモリからスタートボタンのグラフィックを削除
 	DeleteGraph(StartTitle);
+	//メモリから敵の爆発アニメーションのグラフィックを削除
 	DeleteGraph(m_enemyEXP);
+	//BGMを止める
 	StopSoundMem(m_bgm);
 
 	//プレイヤーのメモリ解放.
