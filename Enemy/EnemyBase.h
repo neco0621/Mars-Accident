@@ -2,15 +2,19 @@
 #include "../Vec2.h"
 #include "../Rect.h"
 
-//敵の継承クラス
-//継承元となるクラスを基底クラスと呼ぶ
 
+
+//プロトタイプ宣言
 class TutorialScene;
 class Stage1Scene;
 class Stage2Scene;
+
+//敵の継承クラス
+//継承元となるクラスを基底クラスと呼ぶ
 class EnemyBase
 {
 public:
+
 	EnemyBase();
 	virtual ~EnemyBase();
 
@@ -23,6 +27,7 @@ public:
 	void SetHandle(int handle) { m_handle = handle; }
 	void SetAnimHandle(int animHandle) { m_animHandle = animHandle; }
 
+	//生存フラグ
 	bool isExist() const { return m_isExist; }
 	//位置の取得
 	Vec2 GetPos() const { return m_pos; }
@@ -32,32 +37,44 @@ public:
 	//敵キャラクターをスタートさせる
 	virtual void Start() = 0;
 
+	//中心位置
 	float m_centerX;
 	float m_centerY;
+	
+	//半径
 	float m_radius;
+
+	//画面の4分の3の位置
 	float m_tq;
 
 	//表示位置
 	Vec2 m_pos;
+
+
 	TutorialScene* m_pTuScene;
 	Stage1Scene* m_pS1Scene;
 	Stage2Scene* m_pS2Scene;
 
-	int m_animFrame;
-	int m_count;
-	bool enemyEXPFlag;
-	bool AnimFlag;
+	//継承先から参照できる
 protected:
 	//m_posを左上に、m_handleのグラフィックサイズを幅高さにした
 	//当たり判定を設定する
 	virtual void UpdateCollision();
 	
-	//private:	//継承先からも参照できない
-protected:	//継承先から参照できる
-	int m_handle;	//グラフィックのハンドル
+//private:	//継承先からも参照できない
+	
+
+//継承先から参照できる
+protected:	
+
+	//グラフィックのハンドル
+	int m_handle;
+
+	//アニメーションのハンドル
 	int m_animHandle;
 
-	bool m_isExist;	//存在するかフラグ(使用中かどうか)
+	//存在するかフラグ(使用中かどうか)
+	bool m_isExist;
 
 
 	//当たり判定の矩形

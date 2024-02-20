@@ -10,12 +10,19 @@ public:
     virtual void Draw();
 
 private:
+    //Fadeに関するフレーム数
     int frame_;
+    //ゲームオーバーの文字表示
     int m_gameOver;
+    //タイトルに戻るボタン
     int m_titleBack;
-    int m_bg;
-    int m_bgm;
+    //リトライの文字表示
     int m_retry;
+    //背景
+    int m_bg;
+    //BGM
+    int m_bgm;
+
     // メンバ関数ポインタの宣言
     using UpdateFunc_t = void (GameOverScene::*)(Input&);
     using DrawFunc_t = void (GameOverScene::*)();

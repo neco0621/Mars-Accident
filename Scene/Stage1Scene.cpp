@@ -79,84 +79,118 @@ Stage1Scene::Stage1Scene(SceneManager& manager) : Scene(manager),
 	RightHandle(-1),
 	RightArrowHandle(-1),
 	m_hitHandle(-1),
-	CheckSE(-1)
+	CheckSE(-1),
+	m_clearFlag(-1),
+	m_gameScreenHandle(-1)
 {
 	//ゲーム画面描画先の生成.
 	//画面サイズと同じ大きさのグラフィックデータを作成する.
 	m_shakeHandle = MakeScreen(Game::kScreenWidth, Game::kScreenHeight,true);
-	//グラフィックのロード.
+	//プレイヤーのグラフィックのロード.
 	m_playerHandle = LoadGraph("data/player.png");
 	assert(m_playerHandle != -1);
+	//敵のグラフィックのロード.
 	m_leftEnemyHandle = LoadGraph("data/Leftenemy.png");
 	assert(m_leftEnemyHandle != -1);
 	m_rightEnemyHandle = LoadGraph("data/Rightenemy.png");
 	assert(m_rightEnemyHandle != -1);
+	//背景のグラフィックのロード.
 	m_bgHandle = LoadGraph("data/Bg.png");
 	assert(m_bgHandle != -1);
+	//弾のグラフィックのロード
 	m_shotHandle = LoadGraph("data/Shot.png");
 	assert(m_shotHandle != -1);
+	//UFOのグラフィックのロード
 	m_ufoHandle = LoadGraph("data/UFO.png");
 	assert(m_ufoHandle != -1);
+	//ロケットのグラフィックのロード
 	m_rocketHandle = LoadGraph("data/Rocket.png");
 	assert(m_rocketHandle != -1);
+	//宇宙船の体力のグラフィックのロード
 	m_life1Handle = LoadGraph("data/Life.png");
 	assert(m_life1Handle != -1);
 	m_life2Handle = LoadGraph("data/Life.png");
 	assert(m_life2Handle != -1);
 	m_life3Handle = LoadGraph("data/Life.png");
 	assert(m_life3Handle != -1);
-	m_AnimHandle = LoadGraph("data/explosion.png");
-	assert(m_AnimHandle != -1);
+	//スタートボタンのグラフィックのロード
 	StartTitle = LoadGraph("data/Start.png");
 	assert(StartTitle != -1);
-	m_enemyEXP = LoadGraph("data/enemyEXP.png");
-	assert(m_enemyEXP != -1);
-	m_destoryEnemy = LoadSoundMem("data/Sound/DestoryEnemy.mp3");
-	assert(m_destoryEnemy != -1);
-	m_bgm = LoadSoundMem("data/Sound/Stage1BGM.mp3");
-	assert(m_bgm != -1);
-	m_hitHandle = LoadSoundMem("data/Sound/UFODamage.mp3");
-	assert(m_hitHandle != -1);
-	m_damageHandle = LoadSoundMem("data/Sound/Damage.mp3");
-	assert(m_damageHandle != -1);
-	m_gameover = LoadSoundMem("data/Sound/GameOver.mp3");
-	assert(m_gameover != -1);
-	CheckSE = LoadSoundMem("data/Sound/Check.mp3");
-	assert(CheckSE != -1);
 	LeftHandle = LoadGraph("data/A.png");
+	//Aキーのグラフィックのロード
 	assert(LeftHandle != -1);
+	//左矢印のグラフィックのロード
 	LeftArrowHandle = LoadGraph("data/LeftArrow.png");
 	assert(LeftArrowHandle != -1);
+	//Dキーのグラフィックのロード
 	RightHandle = LoadGraph("data/D.png");
 	assert(RightHandle != -1);
+	//右矢印のグラフィックのロード
 	RightArrowHandle = LoadGraph("data/RightArrow.png");
 	assert(RightArrowHandle != -1);
+	//ゲームクリアじのグラフィックのロード
 	m_clearHandle = LoadGraph("data/Stage1Clear.png");
 	assert(m_clearHandle != -1);
+	
+	//アニメーションのロード
+	m_AnimHandle = LoadGraph("data/explosion.png");
+	assert(m_AnimHandle != -1);
+	//敵の爆発アニメーション
+	m_enemyEXP = LoadGraph("data/enemyEXP.png");
+	assert(m_enemyEXP != -1);
+	
+	//敵撃破時のサウンドのロード
+	m_destoryEnemy = LoadSoundMem("data/Sound/DestoryEnemy.mp3");
+	assert(m_destoryEnemy != -1);
+	//BGMのサウンドのロード
+	m_bgm = LoadSoundMem("data/Sound/Stage1BGM.mp3");
+	assert(m_bgm != -1);
+	//UFOと地面の接触時のサウンドのロード
+	m_hitHandle = LoadSoundMem("data/Sound/UFODamage.mp3");
+	assert(m_hitHandle != -1);
+	//宇宙船と敵の衝突時のサウンドのロード
+	m_damageHandle = LoadSoundMem("data/Sound/Damage.mp3");
+	assert(m_damageHandle != -1);
+	//ゲームオーバー時のサウンドのロード
+	m_gameover = LoadSoundMem("data/Sound/GameOver.mp3");
+	assert(m_gameover != -1);
+	//決定時のサウンドのロード
+	CheckSE = LoadSoundMem("data/Sound/Check.mp3");
+	assert(CheckSE != -1);
+	//ゲームクリア時のサウンドのロード
 	m_clearSE = LoadSoundMem("data/Sound/clear.mp3");
 	assert(m_clearSE != -1);
 
+	//BGMの再生
 	PlaySoundMem(m_bgm, DX_PLAYTYPE_LOOP);
 	//プレイヤーのメモリ確保.
 	m_pPlayer = new Player{ this };
-	m_pPlayer->SetHandle(m_playerHandle);	//Playerにグラフィックハンドルを渡す
+	//Playerにグラフィックハンドルを渡す
+	m_pPlayer->SetHandle(m_playerHandle);
 
+	//UFOのメモリ確保
 	m_pUfo = new UFO{ this };
+	//UFOにグラフィックハンドルを渡す
 	m_pUfo->SetHandle(m_ufoHandle);
-
-
+	//UFOにアニメーションハンドルを渡す
 	m_pUfo->SetAnimHandle(m_AnimHandle);
 
+	//背景のメモリ確保
 	m_pBg = new Bg{};
+	//背景にグラフィックハンドルを渡す
 	m_pBg->SetHandle(m_bgHandle);
 
+	//ロケットのメモリ確保
+	m_pRocket = new Rocket{ this };
+	//ロケットにグラフィックハンドルを渡す
+	m_pRocket->SetHandle(m_rocketHandle);
+
+	//size()で現在使用可能な要素数を取得可能
 	for (int i = 0; i < m_pEnemy.size(); i++)
 	{
+		//敵にグラフィックハンドルを渡す
 		m_pEnemy[i]->SetAnimHandle(m_enemyEXP);
 	}
-
-	m_pRocket = new Rocket{ this };
-	m_pRocket->SetHandle(m_rocketHandle);
 
 	//敵の準備.
 	//m_pEnemy(vector)何もしなければサイズは0
@@ -187,6 +221,7 @@ Stage1Scene::Stage1Scene(SceneManager& manager) : Scene(manager),
 		m_pBeam[i] = nullptr;	//未使用
 	}
 
+	//アニメーションの準備
 	m_pAnimation.resize(kAnimationMax);
 	for (int i = 0; i < m_pAnimation.size(); i++)
 	{
@@ -201,6 +236,8 @@ Stage1Scene::Stage1Scene(SceneManager& manager) : Scene(manager),
 
 Stage1Scene::~Stage1Scene()
 {	
+	//BGMを止める
+	StopSoundMem(m_bgm);
 	//MakeScreenで生成したグラフィックを削除する
 	DeleteGraph(m_shakeHandle);
 	//メモリからグラフィックを削除
@@ -208,6 +245,9 @@ Stage1Scene::~Stage1Scene()
 	DeleteGraph(m_playerHandle);
 	DeleteGraph(m_leftEnemyHandle);
 	DeleteGraph(m_rightEnemyHandle);
+	DeleteGraph(m_ufoHandle);
+	DeleteGraph(m_rocketHandle);
+	DeleteGraph(m_shotHandle);
 	DeleteGraph(m_AnimHandle);
 	DeleteGraph(m_shakeHandle);
 	DeleteGraph(StartTitle);
@@ -217,8 +257,11 @@ Stage1Scene::~Stage1Scene()
 	DeleteGraph(RightHandle);
 	DeleteGraph(RightArrowHandle);
 	DeleteGraph(m_clearHandle);
+	DeleteGraph(m_life1Handle);
+	DeleteGraph(m_life2Handle);
+	DeleteGraph(m_life3Handle);
+	DeleteGraph(m_hitHandle);
 
-	StopSoundMem(m_bgm);
 	//プレイヤーのメモリ解放.
 	delete m_pPlayer;
 	m_pPlayer = nullptr;
@@ -226,9 +269,11 @@ Stage1Scene::~Stage1Scene()
 	delete m_pUfo;
 	m_pUfo = nullptr;
 
+	//背景のメモリ開放
 	delete m_pBg;
 	m_pBg = nullptr;
 
+	//ロケットのメモリ開放
 	delete m_pRocket;
 	m_pRocket = nullptr;
 

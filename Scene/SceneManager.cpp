@@ -7,6 +7,7 @@ SceneManager::~SceneManager()
 
 void SceneManager::Init()
 {
+	//現在進行中のシーンのInit()処理
 	for (auto& scene : scenes_) {
 		scene->Init();
 	}
@@ -14,11 +15,13 @@ void SceneManager::Init()
 
 void SceneManager::Update(Input& input)
 {
+	//現在進行中のシーンのUpdate()処理
 	scenes_.back()->Update(input);
 }
 
 void SceneManager::Draw()
 {
+	//現在進行中のDraw処理
 	for (auto& scene : scenes_) {
 		scene->Draw();
 	}
@@ -26,7 +29,8 @@ void SceneManager::Draw()
 
 void SceneManager::ChangeScene(std::shared_ptr<Scene> nextScene)
 {
-	if (scenes_.empty()) {//リストが空っぽだったら入れ替えるのではなく
+	if (scenes_.empty()) {
+		//リストが空っぽだったら入れ替えるのではなく
 		scenes_.push_back(nextScene);//末尾に追加する
 	}
 	else {

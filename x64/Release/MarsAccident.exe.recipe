@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\fko2347078\Documents\GitHub\Mars-Accident\x64\Release\MarsAccident.exe</FullPath>
+      <FullPath>C:\Mars-Accident\x64\Release\MarsAccident.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

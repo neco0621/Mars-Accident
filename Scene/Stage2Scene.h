@@ -35,7 +35,6 @@ public:
 	bool AddShot(ShotBeam* pBeam);
 
 	void ShakeScreen(int a, int b);
-	void EXPAnim();
 
 	Vec2 m_toNear;
 	Vec2 pos;
