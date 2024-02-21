@@ -82,11 +82,12 @@ private:
 	int m_enemyEXP;					//敵の爆発アニメーション			
 
 	int m_downEnemyCount;			//敵の撃破数カウント
+	int m_downEnemy;				//倒すべき敵の数
 	int m_lifeCount;				//宇宙船の残り体力カウント
 	int m_shakeSize;				//画面揺れのサイズ
 	int m_shakeFrame;				//画面揺れフレーム
 	int m_animFrame;				//アニメーションのフレーム
-	
+
 	int m_bgm;						//BGM
 	int m_destoryEnemy;				//敵撃破時の音声
 	int m_gameover;					//ゲームオーバー時のSE

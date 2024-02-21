@@ -27,6 +27,8 @@
 
 namespace
 {
+	constexpr int kDownEnemy = 15;
+
 	//一度に登場できる最大の数.
 	constexpr int kEnemyMax = 8;
 	
@@ -81,7 +83,8 @@ Stage1Scene::Stage1Scene(SceneManager& manager) : Scene(manager),
 	m_hitHandle(-1),
 	CheckSE(-1),
 	m_clearFlag(-1),
-	m_gameScreenHandle(-1)
+	m_gameScreenHandle(-1),
+	m_downEnemy(kDownEnemy)
 {
 	//ゲーム画面描画先の生成.
 	//画面サイズと同じ大きさのグラフィックデータを作成する.
@@ -308,11 +311,6 @@ void Stage1Scene::Init()
 	m_pPlayer->Init();
 	m_pUfo->Init();
 	m_pRocket->Init();
-
-	/*m_pAnim->AnimationStart(
-		&AnimExpel,
-		1000,
-		500	);*/
 }
 
 void Stage1Scene::End()
@@ -322,33 +320,45 @@ void Stage1Scene::End()
 
 void Stage1Scene::Update(Input& input)
 {
+	//当たり判定の取得
 	Rect ufoRect = m_pUfo->GetColRect();
 	Rect playerRect = m_pPlayer->GetColRect();
+	//OKキー
 	if(input.IsTriggered("OK"))
 	{
+		//ゲームをスタートさせる
 		StartFlag = true;
+		//決定音を鳴らす
 		PlaySoundMem(CheckSE,DX_PLAYTYPE_BACK);
-		if (m_downEnemyCount == 15)
+		//敵を15体倒していたら
+		if (m_downEnemyCount == m_downEnemy)
 		{
+			//Stage2に移行する
 			manager_.ChangeScene(std::make_shared<Stage2Scene>(manager_));
 			return;
 		}
 	}
 	if (StartFlag)
 	{
+		//更新処理
 		m_pPlayer->Update();
 		m_pUfo->Update();
 		m_pRocket->Update();
 
+		//UFOとPlayerがぶつかったとき
 		if (ufoRect.DistanceCollision(playerRect))
 		{
+			//ゲームオーバーにする
 			m_gameOverFlag = true;
 		}
+
+		//ビームの処理
 		for (int i = 0; i < m_pBeam.size(); i++)
 		{
 			//nullptrなら処理は行わない
 			if (m_pBeam[i])
 			{
+				//更新処理
 				m_pBeam[i]->Update();
 				//画面外に出たらメモリ解放
 				if (!m_pBeam[i]->isExist())
@@ -359,10 +369,15 @@ void Stage1Scene::Update(Input& input)
 				}
 				else
 				{
+					//当たり判定の取得
 					Rect shotRect = m_pBeam[i]->GetColRect();
+					
+					//ビームとUFOにぶつかったとき
 					if (shotRect.CirCleCollision(ufoRect))
 					{
+						//衝突音を鳴らす
 						PlaySoundMem(m_hitHandle,DX_PLAYTYPE_BACK);
+						//UFOをノックバックさせる
 						m_pUfo->JumpPower = 5;
 						//ターゲット位置.
 						//弾の発射位置から一番近くにいる敵の座標を取得する
@@ -379,10 +394,13 @@ void Stage1Scene::Update(Input& input)
 				}
 			}
 		}
+
+		//敵の処理
 		for (int i = 0; i < m_pEnemy.size(); i++)
 		{
 			if (m_pEnemy[i])	//nullptrではないチェック
 			{
+				//当たり判定の取得
 				Rect enemyRect = m_pEnemy[i]->GetColRect();
 				for (int a = 0; a < m_pBeam.size(); a++)
 				{
@@ -390,40 +408,55 @@ void Stage1Scene::Update(Input& input)
 					if (!m_pBeam[a])		continue;
 					//画面外に出たらメモリ解放
 					Rect shotRect = m_pBeam[a]->GetColRect();
+					//ビームと敵がぶつかったとき
 					if (shotRect.CirCleCollision(enemyRect))
 					{
+						//撃破音を鳴らす
 						PlaySoundMem(m_destoryEnemy, DX_PLAYTYPE_BACK);
+						
 						pos = m_pEnemy[i]->m_pos;
+						//アニメーションを再生させる
 						AnimFlag = true;
+						
+						//メモリを解放する
 						delete m_pBeam[a];
 						m_pBeam[a] = nullptr;
 
 						//メモリを解放する
 						delete m_pEnemy[i];
-						m_pEnemy[i] = nullptr;	//使っていないとわかるように
+						//使っていないとわかるように
+						m_pEnemy[i] = nullptr;
+						//倒した敵の数を増やす
 						m_downEnemyCount++;						
 					}
+					//当たり判定の取得
 					Rect rocketRect = m_pRocket->GetColRect();
+					//敵とロケットが衝突したとき
 					if (enemyRect.DistanceCollision(rocketRect))
 					{
+						//衝突音を鳴らす
 						PlaySoundMem(m_damageHandle,DX_PLAYTYPE_BACK);
 						//メモリを解放する
 						delete m_pEnemy[i];
 						m_pEnemy[i] = nullptr;
+						//ダメージのアニメーションの開始
 						m_damageFlag = true;
 					}
 				}
 			}
 		}
 		
+		//アニメーションの開始
 		if (AnimFlag == true)
 		{
 			m_animFrame = (m_animFrame + 1) % (kAnimNum * kAnimInterval);
 			m_animFrame++;
 		}
 
+		//一定時間経過したら
 		if (m_animFrame >= 120)
 		{
+			//アニメーション終了
 			AnimFlag = false;
 			m_animFrame = 0;
 		}
@@ -433,6 +466,7 @@ void Stage1Scene::Update(Input& input)
 		{
 			if (m_pEnemy[i])	//nullptrではないチェック
 			{
+				//更新処理
 				m_pEnemy[i]->Update();
 				Rect enemyRect = m_pEnemy[i]->GetColRect();
 				//使用済みの敵キャラクタを削除する必要がある
@@ -467,12 +501,14 @@ void Stage1Scene::Update(Input& input)
 			}
 		}
 
+		//画面揺れ開始
 		if (m_isShake)
 		{
 			m_shakeFrame--;
 
 			if (m_shakeFrame < 0)
 			{
+				//画面揺れ終了
 				m_isShake = false;
 			}
 		}
@@ -482,31 +518,43 @@ void Stage1Scene::Update(Input& input)
 			IsGround = true;
 		}
 
-		if (m_downEnemyCount == 15)
+		//敵を15体倒したら
+		if (m_downEnemyCount == m_downEnemy)
 		{
+			//BGMを止める
 			StopSoundMem(m_bgm);
+			//クリア時SEを鳴らす
 			PlaySoundMem(m_clearSE, DX_PLAYTYPE_BACK);
+			//処理を止める
 			StartFlag = false;
+			//次のシーンに移行する
 			m_clearFlag = true;	
 		}
 
+		//ロケットがダメージを受けたとき
 		if (m_damageFlag == true)
 		{
+			//体力の表示数を変える
 			m_lifeCount++;
+			//残り体力を減らす
 			m_pRocket->LifeDecrease();
+			//ダメージを受けてない状態に戻す
 			m_damageFlag = false;
 		}
 
 		if (m_lifeCount == 1)
 		{
+			//体力のグラフィックの1つ目消す
 			DeleteGraph(m_life3Handle);
 		}
 		else if (m_lifeCount == 2)
 		{
+			//体力のグラフィックを2つ目消す
 			DeleteGraph(m_life2Handle);
 		}
 		else if (m_lifeCount == 3)
 		{
+			//体力のグラフィックを3つ目消す
 			DeleteGraph(m_life1Handle);
 		}
 
