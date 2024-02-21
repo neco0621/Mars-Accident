@@ -56,6 +56,9 @@ namespace
 	constexpr int kLine = 9;
 	// アニメーション数
 	constexpr int kAnimNum = 82;
+
+	//宇宙船の体力の描画位置の調整
+	constexpr int kDrawLifePositionAdjustment = 32;
 }
 
 Stage1Scene::Stage1Scene(SceneManager& manager) : Scene(manager),
@@ -596,11 +599,11 @@ void Stage1Scene::Draw()
 
 	//主な描画処理
 	m_pBg->Draw();
-	DrawGraph(Game::kScreenWidth / 2 - 96, Game::kScreenHeight / 2,m_life1Handle, true);
-	DrawGraph(Game::kScreenWidth / 2 - 32, Game::kScreenHeight / 2, m_life2Handle, true);
-	DrawGraph(Game::kScreenWidth / 2 +32, Game::kScreenHeight / 2, m_life3Handle, true);
+	DrawGraph(Game::kScreenWidth * 0.5f - kDrawLifePositionAdjustment * 3, Game::kScreenHeight * 0.5f ,m_life1Handle, true);
+	DrawGraph(Game::kScreenWidth * 0.5f - kDrawLifePositionAdjustment, Game::kScreenHeight * 0.5f, m_life2Handle, true);
+	DrawGraph(Game::kScreenWidth * 0.5f + kDrawLifePositionAdjustment, Game::kScreenHeight * 0.5f, m_life3Handle, true);
 	SetFontSize(64);
-	DrawFormatString(Game::kScreenWidth / 2 - 80, 40, GetColor(232, 1, 164), "%d / 15", m_downEnemyCount);
+	DrawFormatString(Game::kScreenWidth * 0.5f - 80, 40, GetColor(232, 1, 164), "%d / 15", m_downEnemyCount);
 	m_pRocket->Draw();
 	m_pPlayer->Draw();
 	m_pUfo->Draw();
@@ -608,7 +611,7 @@ void Stage1Scene::Draw()
 	//スタート処理が行われていない場合
 	if (StartFlag == false)
 	{
-		DrawGraph(Game::kScreenWidth / 2 - 450 / 2, Game::kScreenHeight / 2 - 371 / 2, StartTitle, true);
+		DrawGraph(Game::kScreenWidth * 0.5f - 450 * 0.5f, Game::kScreenHeight * 0.5f  - 371 * 0.5f, StartTitle, true);
 	}
 	if (m_isShake)
 	{
@@ -621,20 +624,6 @@ void Stage1Scene::Draw()
 		if (!m_pBeam[i])		continue;
 		m_pBeam[i]->Draw();
 	}
-	/*if (IsGround)
-	{
-		SetDrawScreen(DX_SCREEN_BACK);
-		
-		int x = GetRand(kWipeFrame) - static_cast<int>(kWipeFrame * 2);
-		int y = GetRand(kWipeFrame) - static_cast<int>(kWipeFrame * 2);
-		DrawGraph(x,y,m_gameScreenHandle,true);
-		int Count = 0;
-		Count++;
-		if (Count < 120)
-		{
-			IsGround = false;
-		}
-	}*/
 	
 	if (AnimFlag == true)
 	{
@@ -725,7 +714,7 @@ void Stage1Scene::Draw()
 	}
 	if (m_clearFlag == true)
 	{
-		DrawGraph(Game::kScreenWidth / 2 - 450 / 2, Game::kScreenHeight / 2 - 371 / 2, m_clearHandle, true);
+		DrawGraph(Game::kScreenWidth * 0.5f - 450 * 0.5f, Game::kScreenHeight * 0.5f - 371 * 0.5f, m_clearHandle, true);
 	}
 #ifdef _DEBUG
 	//プレイヤーの位置をデバッグ表示する

@@ -88,6 +88,7 @@ private:
 	int m_shakeFrame;				//画面揺れフレーム
 	int m_animFrame;				//アニメーションのフレーム
 
+
 	int m_bgm;						//BGM
 	int m_destoryEnemy;				//敵撃破時の音声
 	int m_gameover;					//ゲームオーバー時のSE
