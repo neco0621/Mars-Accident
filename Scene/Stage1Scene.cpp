@@ -82,7 +82,7 @@ Stage1Scene::Stage1Scene(SceneManager& manager) : Scene(manager),
 	RightArrowHandle(-1),
 	m_hitHandle(-1),
 	CheckSE(-1),
-	m_clearFlag(-1),
+	m_clearFlag(false),
 	m_gameScreenHandle(-1),
 	m_downEnemy(kDownEnemy)
 {
@@ -542,30 +542,37 @@ void Stage1Scene::Update(Input& input)
 			m_damageFlag = false;
 		}
 
+		//1回目ダメージを受けたとき
 		if (m_lifeCount == 1)
 		{
 			//体力のグラフィックの1つ目消す
 			DeleteGraph(m_life3Handle);
 		}
+		//2回目ダメージを受けたとき
 		else if (m_lifeCount == 2)
 		{
 			//体力のグラフィックを2つ目消す
 			DeleteGraph(m_life2Handle);
 		}
+		//3回目ダメージを受けたとき
 		else if (m_lifeCount == 3)
 		{
 			//体力のグラフィックを3つ目消す
 			DeleteGraph(m_life1Handle);
 		}
 
+		//体力が0以下になったとき
 		if (m_pRocket->m_life <= 0)
 		{
+			//ゲームオーバーシーンに移行する
 			m_gameOverFlag = true;
 		}
 
 		if (m_gameOverFlag == true)
 		{
+			//ゲームオーバー時のSEを鳴らす
 			PlaySoundMem(m_gameover,DX_PLAYTYPE_BACK);
+			//ゲームオーバーシーンに移行する
 			manager_.ChangeScene(std::make_shared<GameOverScene>(manager_));
 			return;
 		}
@@ -587,6 +594,7 @@ void Stage1Scene::Draw()
 	//描画先スクリーンをクリアする
 	ClearDrawScreen();
 
+	//主な描画処理
 	m_pBg->Draw();
 	DrawGraph(Game::kScreenWidth / 2 - 96, Game::kScreenHeight / 2,m_life1Handle, true);
 	DrawGraph(Game::kScreenWidth / 2 - 32, Game::kScreenHeight / 2, m_life2Handle, true);
@@ -597,7 +605,7 @@ void Stage1Scene::Draw()
 	m_pPlayer->Draw();
 	m_pUfo->Draw();
 
-
+	//スタート処理が行われていない場合
 	if (StartFlag == false)
 	{
 		DrawGraph(Game::kScreenWidth / 2 - 450 / 2, Game::kScreenHeight / 2 - 371 / 2, StartTitle, true);
