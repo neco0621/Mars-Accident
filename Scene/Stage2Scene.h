@@ -34,13 +34,14 @@ public:
 	//登録できなかった場合は内部でpShot解放する
 	bool AddShot(ShotBeam* pBeam);
 
+	//画面揺れの関数
 	void ShakeScreen(int a, int b);
 
+	//最も近い敵の座標
 	Vec2 m_toNear;
+	//現在座標
 	Vec2 pos;
 private:
-	int handle_ = 0;
-	int frame_ = 0;
 
 	//状態遷移用メンバ関数ポインタの宣言
 	using UpdateFunc_t = void (Stage2Scene::*)(Input&);
@@ -55,28 +56,31 @@ private:
 
 private:
 	//グラフィックのハンドル
-	int m_gameScreenHandle; //ゲーム画面
+	int m_gameScreenHandle;			//ゲーム画面
+	int m_playerHandle;				//プレイヤー
+	int m_leftEnemyHandle;			//敵
+	int m_rightEnemyHandle;			//敵
+	int m_life1Handle;				//宇宙船の体力
+	int m_life2Handle;				//宇宙船の体力
+	int m_life3Handle;				//宇宙船の体力
+	int m_bgHandle;					//背景
+	int m_shotHandle;				//弾
+	int m_rocketHandle;				//ロケット
+	int m_ufoHandle;				//UFO
+	int m_shakeHandle;				//画面揺れ
+	int m_startTitle;				//スタートボタン
 
-	//グラフィックのハンドル
-	int m_playerHandle;
-	int m_leftEnemyHandle;
-	int m_rightEnemyHandle;
-	int m_life1Handle;
-	int m_life2Handle;
-	int m_life3Handle;
-	int m_bgHandle;
-	int m_shotHandle;
-	int m_rocketHandle;
-	int m_ufoHandle;
+	//アニメーションのハンドル
 	int m_AnimHandle;
 	int m_enemyEXP;
+
 	int m_downEnemyCount;
 	int m_lifeCount;
-	int m_shakeHandle;
 	int m_shakeSize;
 	int m_shakeFrame;
-	int StartTitle;
 	int m_animFrame;
+	
+	//音声のハンドル
 	int m_bgm;
 	int m_hitHandle;
 	int m_damageHandle;
@@ -84,6 +88,7 @@ private:
 	int m_destoryEnemy;
 	int m_clearSE;
 	int CheckSE;
+	int frame_ = 0;
 
 	bool m_damageFlag;
 	bool m_gameOverFlag;

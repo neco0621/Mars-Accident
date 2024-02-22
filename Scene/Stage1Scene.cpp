@@ -788,6 +788,7 @@ Vec2 Stage1Scene::GetNearEnemyPos(Vec2 pos)
 	return result;
 }
 
+//追加Shotの生成
 bool Stage1Scene::AddShot(ShotBeam* pBeam)
 {
 	for (int i = 0; i < m_pBeam.size(); i++)
@@ -806,6 +807,7 @@ bool Stage1Scene::AddShot(ShotBeam* pBeam)
 	return false;
 }
 
+//画面揺れの関数
 void Stage1Scene::ShakeScreen(int frame, int size = kShakeSize)
 {
 	m_shakeFrame = frame;
@@ -813,6 +815,7 @@ void Stage1Scene::ShakeScreen(int frame, int size = kShakeSize)
 	m_isShake = true;
 }
 
+//アニメーションの生成
 void Stage1Scene::CreateAnimation()
 {
 	for (int i = 0; i < m_pEnemy.size(); i++)
@@ -828,6 +831,7 @@ void Stage1Scene::CreateAnimation()
 	}
 }
 
+//左からくる敵の追加
 void Stage1Scene::CreateEnemyLeft()
 {
 	//使われていない箱を探してそこにアドレスを保存する
@@ -844,6 +848,7 @@ void Stage1Scene::CreateEnemyLeft()
 	}
 }
 
+//右からくる敵の生成
 void Stage1Scene::CreateEnemyRight()
 {
 	//使われていない箱を探してそこにアドレスを保存する

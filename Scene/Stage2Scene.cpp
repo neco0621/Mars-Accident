@@ -69,7 +69,8 @@ AnimFlag(false),
 m_animFrame(0),
 m_destoryEnemy(-1),
 m_bgm(-1),
-m_hitHandle(-1)
+m_hitHandle(-1),
+m_shakeFrame(0)
 {
 	//ゲーム画面描画先の生成.
 	//画面サイズと同じ大きさのグラフィックデータを作成する.
@@ -106,7 +107,7 @@ m_hitHandle(-1)
 	m_AnimHandle = LoadGraph("data/explosion.png");
 	assert(m_AnimHandle != -1);
 	//ゲームスタート時のボタンのグラフィックのロード
-	StartTitle = LoadGraph("data/Start.png");
+	m_startTitle = LoadGraph("data/Start.png");
 	assert(StartTitle != -1);
 	//敵の爆発アニメーションのグラフィックのロード
 	m_enemyEXP = LoadGraph("data/enemyEXP.png");
@@ -227,7 +228,7 @@ Stage2Scene::~Stage2Scene()
 	//メモリから画面揺れのグラフィックを削除
 	DeleteGraph(m_shakeHandle);
 	//メモリからスタートボタンのグラフィックを削除
-	DeleteGraph(StartTitle);
+	DeleteGraph(m_startTitle);
 	//メモリから敵の爆発アニメーションのグラフィックを削除
 	DeleteGraph(m_enemyEXP);
 	//BGMを止める
@@ -295,20 +296,25 @@ void Stage2Scene::Update(Input& input)
 	Rect ufoRect = m_pUfo->GetColRect();
 	Rect S2UfoRect = m_pS2ufo->GetColRect();
 	Rect playerRect = m_pPlayer->GetColRect();
+	//OKキー(Enterキー)を押したらゲーム開始
 	if (input.IsTriggered("OK"))
 	{
 		StartFlag = true;
 		PlaySoundMem(CheckSE,DX_PLAYTYPE_BACK);
 	}
+	//ゲームの処理
 	if (StartFlag)
 	{
 		m_pPlayer->S2Update();
 		m_pUfo->Update();
 		m_pS2ufo->Update();
+		//UFOとプレイヤーがぶつかったとき
 		if (ufoRect.DistanceCollision(playerRect))
 		{
+			//ゲームオーバーにする
 			m_gameOverFlag = true;
 		}
+
 		if (S2UfoRect.DistanceCollision(playerRect))
 		{
 			m_gameOverFlag = true;
@@ -520,6 +526,7 @@ void Stage2Scene::Draw()
 	//描画先スクリーンをクリアする
 	ClearDrawScreen();
 
+	//主な描画処理
 	m_pBg->Draw();
 	DrawGraph(Game::kScreenWidth / 2 - 96, Game::kScreenHeight / 2, m_life1Handle, true);
 	DrawGraph(Game::kScreenWidth / 2 - 32, Game::kScreenHeight / 2, m_life2Handle, true);
@@ -531,36 +538,27 @@ void Stage2Scene::Draw()
 	m_pUfo->Draw();
 	m_pS2ufo->Draw();
 
+	//スタートボタンの描画
 	if (StartFlag == false)
 	{
-		DrawGraph(Game::kScreenWidth / 2 - 450 / 2, Game::kScreenHeight / 2 - 371 / 2, StartTitle, true);
+		DrawGraph(Game::kScreenWidth / 2 - 450 / 2, Game::kScreenHeight / 2 - 371 / 2, m_startTitle, true);
 	}
+
+	//画面揺れの描画処理
 	if (m_isShake)
 	{
 		SetDrawScreen(m_shakeHandle);
 		ClearDrawScreen();
 	}
 
+	//弾の描画処理
 	for (int i = 0; i < m_pBeam.size(); i++)
 	{
 		if (!m_pBeam[i])		continue;
 		m_pBeam[i]->Draw();
 	}
-	/*if (IsGround)
-	{
-		SetDrawScreen(DX_SCREEN_BACK);
 
-		int x = GetRand(kWipeFrame) - static_cast<int>(kWipeFrame * 2);
-		int y = GetRand(kWipeFrame) - static_cast<int>(kWipeFrame * 2);
-		DrawGraph(x, y, m_gameScreenHandle, true);
-		int Count = 0;
-		Count++;
-		if (Count < 120)
-		{
-			IsGround = false;
-		}
-	}*/
-
+	//アニメーション生成
 	for (int i = 0; i < m_pEnemy.size(); i++)
 	{
 		if (m_pEnemy[i])
