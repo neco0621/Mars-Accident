@@ -613,20 +613,25 @@ void Stage1Scene::Draw()
 	{
 		DrawGraph(Game::kScreenWidth * 0.5f - 450 * 0.5f, Game::kScreenHeight * 0.5f  - 371 * 0.5f, StartTitle, true);
 	}
+
+	//画面揺れのための描画準備
 	if (m_isShake)
 	{
 		SetDrawScreen(m_shakeHandle);
 		ClearDrawScreen();
 	}
 
+	//弾の描画処理
 	for (int i = 0; i < m_pBeam.size(); i++)
 	{
 		if (!m_pBeam[i])		continue;
 		m_pBeam[i]->Draw();
 	}
 	
+	//アニメーション生成
 	if (AnimFlag == true)
 	{
+		//敵の数分アニメーションを生成する
 		for (int i = 0; i < m_pEnemy.size(); i++)
 		{	
 			if (m_pEnemy[i])
@@ -643,12 +648,14 @@ void Stage1Scene::Draw()
 		}
 	}
 
+	//UFOが地面についたとき画面を揺らす
 	if (IsGround == true)
 	{
 		ShakeScreen(m_shakeFrame, kShakeSize);
 		IsGround = false;
 	}
 
+	//敵のDraw処理
 	for (int i = 0; i < m_pEnemy.size(); i++)
 	{
 		if (m_pEnemy[i])	//nullptrではないチェック
@@ -664,6 +671,7 @@ void Stage1Scene::Draw()
 		if (m_pBeam[i]) shotNum++;
 	}
 	
+	//敵の数を表示する
 	int enemyNum = 0;
 	for (int i = 0; i < m_pEnemy.size(); i++)
 	{
@@ -707,7 +715,6 @@ void Stage1Scene::Draw()
 	SetDrawScreen(DX_SCREEN_BACK);
 	if (m_isShake)
 	{
-
 		int x = GetRand(m_shakeSize) - static_cast<int>(m_shakeSize * 0.5f);
 		int y = GetRand(m_shakeSize) - static_cast<int>(m_shakeSize * 0.5f);
 		DrawGraph(x, y, m_shakeHandle, true);
