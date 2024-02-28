@@ -21,7 +21,10 @@ Rocket::Rocket(TutorialScene* pTuScene) :
 	m_handle(-1),
 	m_pos(KPosX, KPosY),
 	m_radius(kRadius),
-	m_life(kLife)
+	m_life(kLife),
+	m_pBeam(nullptr),
+	m_pS1Scene(nullptr),
+	m_pS2Scene(nullptr)
 {
 }
 
@@ -30,7 +33,10 @@ Rocket::Rocket(Stage1Scene* pS1Scene) :
 	m_handle(-1),
 	m_pos(KPosX,KPosY),
 	m_radius(kRadius),
-	m_life(kLife)
+	m_life(kLife),
+	m_pBeam(nullptr),
+	m_pTuScene(nullptr),
+	m_pS2Scene(nullptr)
 {
 }
 
@@ -39,7 +45,10 @@ Rocket::Rocket(Stage2Scene* pS2Scene) :
 	m_handle(-1),
 	m_pos(KPosX, KPosY),
 	m_radius(kRadius),
-	m_life(kLife)
+	m_life(kLife),
+	m_pBeam(nullptr),
+	m_pTuScene(nullptr),
+	m_pS1Scene(nullptr)
 {
 }
 

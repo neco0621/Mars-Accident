@@ -58,7 +58,7 @@ namespace
 	constexpr int kAnimNum = 82;
 
 	//宇宙船の体力の描画位置の調整
-	constexpr int kDrawLifePositionAdjustment = 32;
+	constexpr float kDrawLifePositionAdjustment = 32;
 }
 
 Stage1Scene::Stage1Scene(SceneManager& manager) : Scene(manager),
@@ -93,78 +93,78 @@ Stage1Scene::Stage1Scene(SceneManager& manager) : Scene(manager),
 	//画面サイズと同じ大きさのグラフィックデータを作成する.
 	m_shakeHandle = MakeScreen(Game::kScreenWidth, Game::kScreenHeight,true);
 	//プレイヤーのグラフィックのロード.
-	m_playerHandle = LoadGraph("data/player.png");
+	m_playerHandle = LoadGraph(L"data/player.png");
 	assert(m_playerHandle != -1);
 	//敵のグラフィックのロード.
-	m_leftEnemyHandle = LoadGraph("data/Leftenemy.png");
+	m_leftEnemyHandle = LoadGraph(L"data/Leftenemy.png");
 	assert(m_leftEnemyHandle != -1);
-	m_rightEnemyHandle = LoadGraph("data/Rightenemy.png");
+	m_rightEnemyHandle = LoadGraph(L"data/Rightenemy.png");
 	assert(m_rightEnemyHandle != -1);
 	//背景のグラフィックのロード.
-	m_bgHandle = LoadGraph("data/Bg.png");
+	m_bgHandle = LoadGraph(L"data/Bg.png");
 	assert(m_bgHandle != -1);
 	//弾のグラフィックのロード
-	m_shotHandle = LoadGraph("data/Shot.png");
+	m_shotHandle = LoadGraph(L"data/Shot.png");
 	assert(m_shotHandle != -1);
 	//UFOのグラフィックのロード
-	m_ufoHandle = LoadGraph("data/UFO.png");
+	m_ufoHandle = LoadGraph(L"data/UFO.png");
 	assert(m_ufoHandle != -1);
 	//ロケットのグラフィックのロード
-	m_rocketHandle = LoadGraph("data/Rocket.png");
+	m_rocketHandle = LoadGraph(L"data/Rocket.png");
 	assert(m_rocketHandle != -1);
 	//宇宙船の体力のグラフィックのロード
-	m_life1Handle = LoadGraph("data/Life.png");
+	m_life1Handle = LoadGraph(L"data/Life.png");
 	assert(m_life1Handle != -1);
-	m_life2Handle = LoadGraph("data/Life.png");
+	m_life2Handle = LoadGraph(L"data/Life.png");
 	assert(m_life2Handle != -1);
-	m_life3Handle = LoadGraph("data/Life.png");
+	m_life3Handle = LoadGraph(L"data/Life.png");
 	assert(m_life3Handle != -1);
 	//スタートボタンのグラフィックのロード
-	StartTitle = LoadGraph("data/Start.png");
+	StartTitle = LoadGraph(L"data/Start.png");
 	assert(StartTitle != -1);
-	LeftHandle = LoadGraph("data/A.png");
+	LeftHandle = LoadGraph(L"data/A.png");
 	//Aキーのグラフィックのロード
 	assert(LeftHandle != -1);
 	//左矢印のグラフィックのロード
-	LeftArrowHandle = LoadGraph("data/LeftArrow.png");
+	LeftArrowHandle = LoadGraph(L"data/LeftArrow.png");
 	assert(LeftArrowHandle != -1);
 	//Dキーのグラフィックのロード
-	RightHandle = LoadGraph("data/D.png");
+	RightHandle = LoadGraph(L"data/D.png");
 	assert(RightHandle != -1);
 	//右矢印のグラフィックのロード
-	RightArrowHandle = LoadGraph("data/RightArrow.png");
+	RightArrowHandle = LoadGraph(L"data/RightArrow.png");
 	assert(RightArrowHandle != -1);
 	//ゲームクリアじのグラフィックのロード
-	m_clearHandle = LoadGraph("data/Stage1Clear.png");
+	m_clearHandle = LoadGraph(L"data/Stage1Clear.png");
 	assert(m_clearHandle != -1);
 	
 	//アニメーションのロード
-	m_AnimHandle = LoadGraph("data/explosion.png");
+	m_AnimHandle = LoadGraph(L"data/explosion.png");
 	assert(m_AnimHandle != -1);
 	//敵の爆発アニメーション
-	m_enemyEXP = LoadGraph("data/enemyEXP.png");
+	m_enemyEXP = LoadGraph(L"data/enemyEXP.png");
 	assert(m_enemyEXP != -1);
 	
 	//敵撃破時のサウンドのロード
-	m_destoryEnemy = LoadSoundMem("data/Sound/DestoryEnemy.mp3");
+	m_destoryEnemy = LoadSoundMem(L"data/Sound/DestoryEnemy.mp3");
 	assert(m_destoryEnemy != -1);
 	//BGMのサウンドのロード
-	m_bgm = LoadSoundMem("data/Sound/Stage1BGM.mp3");
+	m_bgm = LoadSoundMem(L"data/Sound/Stage1BGM.mp3");
 	assert(m_bgm != -1);
 	//UFOと地面の接触時のサウンドのロード
-	m_hitHandle = LoadSoundMem("data/Sound/UFODamage.mp3");
+	m_hitHandle = LoadSoundMem(L"data/Sound/UFODamage.mp3");
 	assert(m_hitHandle != -1);
 	//宇宙船と敵の衝突時のサウンドのロード
-	m_damageHandle = LoadSoundMem("data/Sound/Damage.mp3");
+	m_damageHandle = LoadSoundMem(L"data/Sound/Damage.mp3");
 	assert(m_damageHandle != -1);
 	//ゲームオーバー時のサウンドのロード
-	m_gameover = LoadSoundMem("data/Sound/GameOver.mp3");
+	m_gameover = LoadSoundMem(L"data/Sound/GameOver.mp3");
 	assert(m_gameover != -1);
 	//決定時のサウンドのロード
-	CheckSE = LoadSoundMem("data/Sound/Check.mp3");
+	CheckSE = LoadSoundMem(L"data/Sound/Check.mp3");
 	assert(CheckSE != -1);
 	//ゲームクリア時のサウンドのロード
-	m_clearSE = LoadSoundMem("data/Sound/clear.mp3");
+	m_clearSE = LoadSoundMem(L"data/Sound/clear.mp3");
 	assert(m_clearSE != -1);
 
 	//BGMの再生
@@ -603,7 +603,7 @@ void Stage1Scene::Draw()
 	DrawGraph(Game::kScreenWidth * 0.5f - kDrawLifePositionAdjustment, Game::kScreenHeight * 0.5f, m_life2Handle, true);
 	DrawGraph(Game::kScreenWidth * 0.5f + kDrawLifePositionAdjustment, Game::kScreenHeight * 0.5f, m_life3Handle, true);
 	SetFontSize(64);
-	DrawFormatString(Game::kScreenWidth * 0.5f - 80, 40, GetColor(232, 1, 164), "%d / 15", m_downEnemyCount);
+	DrawFormatString(Game::kScreenWidth * 0.5f - 80, 40, GetColor(232, 1, 164), L"%d / 15", m_downEnemyCount);
 	m_pRocket->Draw();
 	m_pPlayer->Draw();
 	m_pUfo->Draw();
@@ -691,7 +691,7 @@ void Stage1Scene::Draw()
 	//毎フレーム加算されてkWipeFrame(30)まで変化する
 	//wipeRateはm_wipeFrameの変化に合わせて0.0->1.0に変化する
 	float wipeRate = static_cast<float>(m_wipeFrame) / static_cast<float>(kWipeFrame);
-	int wipeHeight = Game::kScreenHeight * wipeRate;
+	float wipeHeight = Game::kScreenHeight * wipeRate;
 
 	/*DrawRectGraph(screenX,screenY,
 		0,0,Game::kScreenWidth, wipeHeight,
@@ -701,12 +701,12 @@ void Stage1Scene::Draw()
 
 		//0->320に変化させるのはわかりやすい  320*wipeRate
 
-	int offset = 320 * (1.0f - wipeRate);
+	float offset = 320 * (1.0f - wipeRate);
 
 	//画面の上から1ラインずつ描画を行っている
 	for (int y = 0; y < Game::kScreenHeight; y++)
 	{
-		int x = sinf(y * 0.05f) * offset;
+		float x = sinf(y * 0.05f) * offset;
 		DrawRectGraph(x, y,
 			0, y, Game::kScreenWidth, 1,
 			m_shakeHandle, true, false);

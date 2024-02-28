@@ -35,15 +35,15 @@ m_heightAdjustment(kHeightAdjustment)
 	frame_ = kFrame;
 	
 	//ゲームクリアの文字表示のグラフィックをロード
-	m_gameClear = LoadGraph("data/GameClear.png");
+	m_gameClear = LoadGraph(L"data/GameClear.png");
 	//背景のグラフィックをロード
-	m_bg = LoadGraph("data/GameClearBg.png");
+	m_bg = LoadGraph(L"data/GameClearBg.png");
 	//タイトルへ戻るのボタンのハンドルのロード
-	m_titleBack = LoadGraph("data/TitleBack.png");
+	m_titleBack = LoadGraph(L"data/TitleBack.png");
 	//ゲームクリア時のサウンドをロード
-	m_clearSE = LoadSoundMem("data/Sound/ClearSE.mp3");
+	m_clearSE = LoadSoundMem(L"data/Sound/ClearSE.mp3");
 	//BGMのサウンドをロード
-	m_bgm = LoadSoundMem("data/Sound/ClearSceneBgm.mp3");
+	m_bgm = LoadSoundMem(L"data/Sound/ClearSceneBgm.mp3");
 
 	//BGMの再生
 	PlaySoundMem(m_bgm, DX_PLAYTYPE_LOOP);
@@ -123,10 +123,10 @@ void GameClearScene::FadeDraw()
 	//背景の描画
 	DrawGraph(0,0,m_bg,true);
 	//ゲームクリアボタンの描画
-	DrawGraph(Game::kScreenWidth / 2 - m_widthAdjustment,
+	DrawGraph(Game::kScreenWidth * 0.5 - m_widthAdjustment,
 		Game::kScreenHeight * 0.25 - m_heightAdjustment, m_gameClear, true);
 	//タイトルへ戻るのボタン描画
-	DrawGraph(Game::kScreenWidth / 2 - m_widthAdjustment,
+	DrawGraph(Game::kScreenWidth * 0.5 - m_widthAdjustment,
 		Game::kScreenHeight * 0.75 - m_heightAdjustment, m_titleBack, true);
 	//Fade時の暗幕の描画
 	int alpha = static_cast<int>(255 * (static_cast<float>(frame_) / 60.0f));
@@ -140,10 +140,10 @@ void GameClearScene::NormalDraw()
 	//背景の描画
 	DrawGraph(0, 0, m_bg, true);
 	//ゲームクリアボタンの描画
-	DrawGraph(Game::kScreenWidth / 2 - m_widthAdjustment, 
+	DrawGraph(Game::kScreenWidth * 0.5 - m_widthAdjustment, 
 		Game::kScreenHeight * 0.25 - m_heightAdjustment, m_gameClear, true);
 	//タイトルへ戻るのボタン描画
-	DrawGraph(Game::kScreenWidth / 2 - m_widthAdjustment, 
+	DrawGraph(Game::kScreenWidth * 0.5 - m_widthAdjustment, 
 		Game::kScreenHeight * 0.75 - m_heightAdjustment, m_titleBack, true);
 }
 // <a href = "https://jp.freepik.com/free-vector/pixel-art-mystical-background_29019077.htm#query=pixel%20art&position=0&from_view=keyword&track=ais&uuid=acea7397-7e5c-4d2b-8020-153b3f30c072">著作者：pikisuperstar< / a>／出典：Freepik

@@ -27,8 +27,7 @@ private:
 	int m_animHandle;
 	int m_titleHandle;
 	int m_shakeHandle;
-	int m_titleButton;
-	int m_moon;
+	int m_titleButton;	
 	int frame_;
 	int areaX;
 	int speed;

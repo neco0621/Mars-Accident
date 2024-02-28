@@ -58,9 +58,12 @@ S2UFO::S2UFO(Stage2Scene* pS2Scene) :
 	AnimPosX(0),
 	m_ufoS2Max(kS2UfoMax),
 	m_animFrame(0),
-	m_soundHandle(-1)
+	m_soundHandle(-1),
+	AnimFlag(false),
+	graphic(nullptr),
+	m_angle(0)
 {
-	m_soundHandle = LoadSoundMem("data/Sound/UFO.mp3");
+	m_soundHandle = LoadSoundMem(L"data/Sound/UFO.mp3");
 }
 
 S2UFO::~S2UFO()

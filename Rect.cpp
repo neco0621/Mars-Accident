@@ -7,7 +7,10 @@ Rect::Rect() :
 	m_left(0.0f),
 	m_top(0.0f),
 	m_right(0.0f),
-	m_bottom(0.0f)
+	m_bottom(0.0f),
+	m_centerX(0.0f),
+	m_centerY(0.0f),
+	m_radius(0.0f)
 {
 }
 

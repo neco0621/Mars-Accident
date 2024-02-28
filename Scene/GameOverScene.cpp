@@ -29,15 +29,15 @@ m_retry(-1)
 	frame_ = kFrame;
 
 	//ゲームオ－バーの文字のロード
-	m_gameOver = LoadGraph("data/GameOver.png");
+	m_gameOver = LoadGraph(L"data/GameOver.png");
 	//タイトルに戻るの文字のロード
-	m_titleBack = LoadGraph("data/TitleBack.png");
+	m_titleBack = LoadGraph(L"data/TitleBack.png");
 	//背景のグラフィックのロード
-	m_bg = LoadGraph("data/GameOverBg.png");
+	m_bg = LoadGraph(L"data/GameOverBg.png");
 	//リトライの文字のロード
-	m_retry = LoadGraph("data/Retry.png");
+	m_retry = LoadGraph(L"data/Retry.png");
 	//BGMのロード
-	m_bgm = LoadSoundMem("data/Sound/GameOverBgm.mp3");
+	m_bgm = LoadSoundMem(L"data/Sound/GameOverBgm.mp3");
 
 	//BGMの再生
 	PlaySoundMem(m_bgm, DX_PLAYTYPE_LOOP);

@@ -3,7 +3,8 @@
 
 Bg::Bg() :
 //‰Šú‰»
-m_handle(-1)
+m_handle(-1),
+m_pMain(nullptr)
 {
 }
 

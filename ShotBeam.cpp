@@ -38,11 +38,15 @@ ShotBeam::ShotBeam() :
 	MoveFlag(false),
 	m_z(0,-25),
 	m_soundHandle(-1),
-	m_shotHandle(-1)
+	m_shotHandle(-1),
+	m_pS1Scene(nullptr),
+	m_pS2Scene(nullptr),
+	m_pTuScene(nullptr),
+	m_pUfo(nullptr)
 {
 	m_posLog.resize(kPosLogNum);
-	m_soundHandle = LoadSoundMem("data/Sound/ShotBeam.mp3");
-	m_shotHandle = LoadGraph("data/shot.png");
+	m_soundHandle = LoadSoundMem(L"data/Sound/ShotBeam.mp3");
+	m_shotHandle = LoadGraph(L"data/shot.png");
 }
 
 ShotBeam::~ShotBeam()

@@ -78,7 +78,7 @@ void TitleScene::FadeDraw()
 		1.0, 0.0,
 		m_animHandle, true, false);*/
 	//フェード暗幕
-	int alpha = 255 * (float)frame_ / 60.0f;
+	float alpha = 255 * (float)frame_ / 60.0f;
 	SetDrawBlendMode(DX_BLENDMODE_MULA, alpha);
 	DrawBox(0, 0, 1280, 720, 0x000000, true);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
@@ -147,17 +147,17 @@ CheckSE(-1),
 m_isShake(false)
 {
 	m_shakeHandle = MakeScreen(Game::kScreenWidth, Game::kScreenHeight);
-	m_bgHandle = LoadGraph("data/Title.png");
+	m_bgHandle = LoadGraph(L"data/Title.png");
 	assert(m_bgHandle != -1);
-	m_animHandle = LoadGraph("data/Moon.png");
+	m_animHandle = LoadGraph(L"data/Moon.png");
 	assert(m_animHandle != -1);
-	m_titleHandle = LoadGraph("data/Icon.png");
+	m_titleHandle = LoadGraph(L"data/Icon.png");
 	assert(m_bgHandle != -1);
-	m_titleButton = LoadGraph("data/StartButton.png");
+	m_titleButton = LoadGraph(L"data/StartButton.png");
 	assert(m_titleButton != -1);
-	m_bgm = LoadSoundMem("data/Sound/TitleBGM.mp3");
+	m_bgm = LoadSoundMem(L"data/Sound/TitleBGM.mp3");
 	assert(m_bgm != -1);
-	CheckSE = LoadSoundMem("data/Sound/Check.mp3");
+	CheckSE = LoadSoundMem(L"data/Sound/Check.mp3");
 	assert(CheckSE != -1);
 
 	frame_ = 60;

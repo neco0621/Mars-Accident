@@ -60,7 +60,7 @@ public:
 	bool AnimFlag;
 
 	int m_animFrame;
-	int AnimPosX;
+	float AnimPosX;
 	int m_ufoS2Max;
 	int m_soundHandle;
 

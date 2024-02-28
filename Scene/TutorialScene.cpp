@@ -95,71 +95,72 @@ TutorialExplanation(-1),
 TutorialExplanation2(-1),
 TutorialExplanation3(-1),
 TutorialExplanation4(-1),
-m_tutorialCount(0)
+m_tutorialCount(0),
+m_gameScreenHandle(-1)
 {
 	//ゲーム画面描画先の生成.
 	//画面サイズと同じ大きさのグラフィックデータを作成する.
 	m_shakeHandle = MakeScreen(Game::kScreenWidth, Game::kScreenHeight, true);
 	//グラフィックのロード.
-	m_playerHandle = LoadGraph("data/player.png");
+	m_playerHandle = LoadGraph(L"data/player.png");
 	assert(m_playerHandle != -1);
-	m_leftEnemyHandle = LoadGraph("data/Leftenemy.png");
+	m_leftEnemyHandle = LoadGraph(L"data/Leftenemy.png");
 	assert(m_leftEnemyHandle != -1);
-	m_rightEnemyHandle = LoadGraph("data/Rightenemy.png");
+	m_rightEnemyHandle = LoadGraph(L"data/Rightenemy.png");
 	assert(m_rightEnemyHandle != -1);
-	m_bgHandle = LoadGraph("data/Bg.png");
+	m_bgHandle = LoadGraph(L"data/Bg.png");
 	assert(m_bgHandle != -1);
-	m_shotHandle = LoadGraph("data/Shot.png");
+	m_shotHandle = LoadGraph(L"data/Shot.png");
 	assert(m_shotHandle != -1);
-	m_ufoHandle = LoadGraph("data/UFO.png");
+	m_ufoHandle = LoadGraph(L"data/UFO.png");
 	assert(m_ufoHandle != -1);
-	m_rocketHandle = LoadGraph("data/Rocket.png");
+	m_rocketHandle = LoadGraph(L"data/Rocket.png");
 	assert(m_rocketHandle != -1);
-	m_life1Handle = LoadGraph("data/Life.png");
+	m_life1Handle = LoadGraph(L"data/Life.png");
 	assert(m_life1Handle != -1);
-	m_life2Handle = LoadGraph("data/Life.png");
+	m_life2Handle = LoadGraph(L"data/Life.png");
 	assert(m_life2Handle != -1);
-	m_life3Handle = LoadGraph("data/Life.png");
+	m_life3Handle = LoadGraph(L"data/Life.png");
 	assert(m_life3Handle != -1);
-	m_AnimHandle = LoadGraph("data/explosion.png");
+	m_AnimHandle = LoadGraph(L"data/explosion.png");
 	assert(m_AnimHandle != -1);
-	m_tutorialHandle = LoadGraph("data/Tutorial.png");
+	m_tutorialHandle = LoadGraph(L"data/Tutorial.png");
 	assert(m_tutorialHandle != -1);
-	m_enemyEXP = LoadGraph("data/enemyEXP.png");
+	m_enemyEXP = LoadGraph(L"data/enemyEXP.png");
 	assert(m_enemyEXP != -1);
-	m_destoryEnemy = LoadSoundMem("data/Sound/DestoryEnemy.mp3");
+	m_destoryEnemy = LoadSoundMem(L"data/Sound/DestoryEnemy.mp3");
 	assert(m_destoryEnemy != -1);
-	m_bgm = LoadSoundMem("data/Sound/Stage1BGM.mp3");
+	m_bgm = LoadSoundMem(L"data/Sound/Stage1BGM.mp3");
 	assert(m_bgm != -1);
-	m_hitHandle = LoadSoundMem("data/Sound/UFODamage.mp3");
+	m_hitHandle = LoadSoundMem(L"data/Sound/UFODamage.mp3");
 	assert(m_hitHandle != -1);
-	m_damageHandle = LoadSoundMem("data/Sound/Damage.mp3");
+	m_damageHandle = LoadSoundMem(L"data/Sound/Damage.mp3");
 	assert(m_damageHandle != -1);
-	m_gameover = LoadSoundMem("data/Sound/GameOver.mp3");
+	m_gameover = LoadSoundMem(L"data/Sound/GameOver.mp3");
 	assert(m_gameover != -1);
-	CheckSE = LoadSoundMem("data/Sound/Check.mp3");
+	CheckSE = LoadSoundMem(L"data/Sound/Check.mp3");
 	assert(CheckSE != -1);
-	LeftHandle = LoadGraph("data/A.png");
+	LeftHandle = LoadGraph(L"data/A.png");
 	assert(LeftHandle != -1);
-	LeftArrowHandle = LoadGraph("data/LeftArrow.png");
+	LeftArrowHandle = LoadGraph(L"data/LeftArrow.png");
 	assert(LeftArrowHandle != -1);
-	RightHandle = LoadGraph("data/D.png");
+	RightHandle = LoadGraph(L"data/D.png");
 	assert(RightHandle != -1);
-	RightArrowHandle = LoadGraph("data/RightArrow.png");
+	RightArrowHandle = LoadGraph(L"data/RightArrow.png");
 	assert(RightArrowHandle != -1);
-	m_clearHandle = LoadGraph("data/TutorialClear.png");
+	m_clearHandle = LoadGraph(L"data/TutorialClear.png");
 	assert(m_clearHandle != -1);
-	m_clearSE = LoadSoundMem("data/Sound/clear.mp3");
+	m_clearSE = LoadSoundMem(L"data/Sound/clear.mp3");
 	assert(m_clearSE != -1);
-	m_skipHandle = LoadGraph("data/Skip.png");
+	m_skipHandle = LoadGraph(L"data/Skip.png");
 	assert(m_skipHandle != -1);
-	TutorialExplanation = LoadGraph("data/TutorialExplanation.png");
+	TutorialExplanation = LoadGraph(L"data/TutorialExplanation.png");
 	assert(TutorialExplanation != -1);
-	TutorialExplanation2 = LoadGraph("data/TutorialExplanation2.png");
+	TutorialExplanation2 = LoadGraph(L"data/TutorialExplanation2.png");
 	assert(TutorialExplanation2 != -1);
-	TutorialExplanation3 = LoadGraph("data/TutorialExplanation3.png");
+	TutorialExplanation3 = LoadGraph(L"data/TutorialExplanation3.png");
 	assert(TutorialExplanation3 != -1);
-	TutorialExplanation4 = LoadGraph("data/TutorialExplanation4.png");
+	TutorialExplanation4 = LoadGraph(L"data/TutorialExplanation4.png");
 	assert(TutorialExplanation4 != -1);
 
 	PlaySoundMem(m_bgm, DX_PLAYTYPE_LOOP);
@@ -540,9 +541,9 @@ void TutorialScene::Draw()
 	DrawGraph(Game::kScreenWidth * 0.5 - 32, Game::kScreenHeight * 0.5, m_life2Handle, true);
 	DrawGraph(Game::kScreenWidth * 0.5 + 32, Game::kScreenHeight * 0.5, m_life3Handle, true);
 	DrawGraph(Game::kScreenWidth * 0.5 - 112, Game::kScreenHeight - 150, m_skipHandle, true);
-	ChangeFont("DotGothic16");
+	ChangeFont(L"DotGothic16");
 	SetFontSize(100);
-	DrawFormatString(Game::kScreenWidth / 2 - 120 , 40, GetColor(232, 1, 164), "%d / 5", m_downEnemyCount);
+	DrawFormatString(Game::kScreenWidth / 2 - 120 , 40, GetColor(232, 1, 164), L"%d / 5", m_downEnemyCount);
 
 	m_pRocket->Draw();
 	m_pPlayer->Draw();
@@ -661,7 +662,7 @@ void TutorialScene::Draw()
 	//毎フレーム加算されてkWipeFrame(30)まで変化する
 	//wipeRateはm_wipeFrameの変化に合わせて0.0->1.0に変化する
 	float wipeRate = static_cast<float>(m_wipeFrame) / static_cast<float>(kWipeFrame);
-	int wipeHeight = Game::kScreenHeight * wipeRate;
+	float wipeHeight = Game::kScreenHeight * wipeRate;
 
 	/*DrawRectGraph(screenX,screenY,
 		0,0,Game::kScreenWidth, wipeHeight,
@@ -671,12 +672,12 @@ void TutorialScene::Draw()
 
 		//0->320に変化させるのはわかりやすい  320*wipeRate
 
-	int offset = 320 * (1.0f - wipeRate);
+	float offset = 320 * (1.0f - wipeRate);
 
 	//画面の上から1ラインずつ描画を行っている
 	for (int y = 0; y < Game::kScreenHeight; y++)
 	{
-		int x = sinf(y * 0.05f) * offset;
+		double x = sinf(y * 0.05f) * offset;
 		DrawRectGraph(x, y,
 			0, y, Game::kScreenWidth, 1,
 			m_shakeHandle, true, false);

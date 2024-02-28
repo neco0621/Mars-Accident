@@ -56,9 +56,15 @@ UFO::UFO(TutorialScene* pTuScene) :
 	JumpPower(10),
 	m_tq(Game::kScreenHeight * 0.75f),
 	m_animHnadle(-1),
-	m_soundHandle(-1)
+	m_soundHandle(-1),
+	AnimPosX(0),
+	m_angle(0),
+	m_pS1Scene(nullptr),
+	m_pS2Scene(nullptr),
+	m_animFrame(0),
+	m_ufoS2Max(0)
 {
-	m_soundHandle = LoadSoundMem("data/Sound/UFO.mp3");
+	m_soundHandle = LoadSoundMem(L"data/Sound/UFO.mp3");
 }
 
 UFO::UFO(Stage1Scene* pS1Scene) :
@@ -75,9 +81,15 @@ UFO::UFO(Stage1Scene* pS1Scene) :
 	JumpPower(10),
 	m_tq(Game::kScreenHeight * 0.75f),
 	m_animHnadle(-1),
-	m_soundHandle(-1)
+	m_soundHandle(-1),
+	AnimPosX(0),
+	m_angle(0),
+	m_pS2Scene(nullptr),
+	m_animFrame(0),
+	m_ufoS2Max(0),
+	m_pTuScene(nullptr)
 {
-	m_soundHandle = LoadSoundMem("data/Sound/UFO.mp3");
+	m_soundHandle = LoadSoundMem(L"data/Sound/UFO.mp3");
 }
 
 UFO::UFO(Stage2Scene* pS2Scene) :
@@ -96,9 +108,13 @@ UFO::UFO(Stage2Scene* pS2Scene) :
 	AnimPosX(0),
 	m_ufoS2Max(kS2UfoMax),
 	m_animFrame(0),
-	m_soundHandle(-1)
+	m_soundHandle(-1),
+	AnimFlag(false),
+	m_angle(0),
+	m_pS1Scene(nullptr),
+	m_pTuScene(nullptr)
 {
-	m_soundHandle = LoadSoundMem("data/Sound/UFO.mp3");
+	m_soundHandle = LoadSoundMem(L"data/Sound/UFO.mp3");
 } 
 
 UFO::~UFO()

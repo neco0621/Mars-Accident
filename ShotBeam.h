@@ -40,7 +40,7 @@ public:
 	Rect GetColRect() const { return m_colRect; }
 	
 
-	int m_radius;
+	float m_radius;
 	int m_handle;
 	int m_soundHandle;
 	int m_shotHandle;

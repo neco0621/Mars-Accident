@@ -39,7 +39,9 @@ Player::Player(TutorialScene* pTuScene) :
 	m_pos(Game::kScreenWidth * 0.5, Game::kScreenHeight * 0.75),
 	m_dir(kDirRight),
 	m_walkAnimFrame(0),
-	m_beamFrame(0)
+	m_beamFrame(0),
+	m_pS1Scene(nullptr),
+	m_pS2Scene(nullptr)
 {
 }
 
@@ -50,7 +52,9 @@ Player::Player(Stage1Scene* S1Scene) :
 	m_pos(Game::kScreenWidth * 0.5, Game::kScreenHeight * 0.75),
 	m_dir(kDirRight),
 	m_walkAnimFrame(0),
-	m_beamFrame(0)
+	m_beamFrame(0),
+	m_pTuScene(nullptr),
+	m_pS2Scene(nullptr)
 {
 }
 
@@ -61,7 +65,9 @@ Player::Player(Stage2Scene* S2Scene) :
 	m_pos(Game::kScreenWidth * 0.5, Game::kScreenHeight * 0.75),
 	m_dir(kDirRight),
 	m_walkAnimFrame(0),
-	m_beamFrame(0)
+	m_beamFrame(0),
+	m_pTuScene(nullptr),
+	m_pS1Scene(nullptr)
 
 {
 }

@@ -36,7 +36,10 @@ EnemyBase::EnemyBase() :
 	m_pos(),
 	m_centerX(m_pos.x),
 	m_centerY(m_pos.y),
-	m_tq(kTq)
+	m_tq(kTq),
+	m_pTuScene(nullptr),
+	m_pS1Scene(nullptr),
+	m_pS2Scene(nullptr)
 {
 }
 
