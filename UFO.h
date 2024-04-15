@@ -61,7 +61,6 @@ public:
 
 	int m_animFrame;
 	float AnimPosX;
-	int m_ufoS2Max;
 	int m_soundHandle;
 
 };

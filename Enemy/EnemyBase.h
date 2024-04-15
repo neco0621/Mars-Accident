@@ -50,22 +50,17 @@ public:
 	//表示位置
 	Vec2 m_pos;
 
-
+	//チュートリアルシーン
 	TutorialScene* m_pTuScene;
+	//ステージ1シーン
 	Stage1Scene* m_pS1Scene;
+	//ステージ2シーン
 	Stage2Scene* m_pS2Scene;
 
-	//継承先から参照できる
 protected:
 	//m_posを左上に、m_handleのグラフィックサイズを幅高さにした
 	//当たり判定を設定する
 	virtual void UpdateCollision();
-	
-//private:	//継承先からも参照できない
-	
-
-//継承先から参照できる
-protected:	
 
 	//グラフィックのハンドル
 	int m_handle;

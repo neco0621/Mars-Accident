@@ -7,10 +7,6 @@
 #include "ShotBeam.h"
 
 #define PI 3.14
-#define AnimExpDivX 10
-#define AnimExpDivY 8
-#define AnimExpWidth 100
-#define AnimExpHeight 100
 #include <cmath>
 
 namespace
@@ -26,6 +22,7 @@ namespace
 	//UFOの半径
 	constexpr float kRadius = 40;
 
+	//UFOの動くスピード
 	constexpr float kSpeed = 3.0f;
 
 	// アニメーション間隔
@@ -38,8 +35,6 @@ namespace
 	constexpr int kLine = 8;
 	// アニメーション数
 	constexpr int kAnimNum = 71;
-
-	constexpr int kS2UfoMax = 2;
 }
 
 UFO::UFO(TutorialScene* pTuScene) :
@@ -61,8 +56,7 @@ UFO::UFO(TutorialScene* pTuScene) :
 	m_angle(0),
 	m_pS1Scene(nullptr),
 	m_pS2Scene(nullptr),
-	m_animFrame(0),
-	m_ufoS2Max(0)
+	m_animFrame(0)
 {
 	m_soundHandle = LoadSoundMem(L"data/Sound/UFO.mp3");
 }
@@ -86,7 +80,6 @@ UFO::UFO(Stage1Scene* pS1Scene) :
 	m_angle(0),
 	m_pS2Scene(nullptr),
 	m_animFrame(0),
-	m_ufoS2Max(0),
 	m_pTuScene(nullptr)
 {
 	m_soundHandle = LoadSoundMem(L"data/Sound/UFO.mp3");
@@ -106,7 +99,6 @@ UFO::UFO(Stage2Scene* pS2Scene) :
 	m_tq(Game::kScreenHeight * 0.75f),
 	m_animHnadle(-1),
 	AnimPosX(0),
-	m_ufoS2Max(kS2UfoMax),
 	m_animFrame(0),
 	m_soundHandle(-1),
 	AnimFlag(false),
@@ -128,6 +120,7 @@ void UFO::Init()
 
 void UFO::Update()
 {
+	//UFOが地面についていない時
 	if (isJump)
 	{
 		m_pos.y -= JumpPower;
@@ -185,6 +178,7 @@ void UFO::Update()
 
 void UFO::Draw()
 {
+	//UFOを回転させながら描画
 	DrawRotaGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y),
 		1.0, DX_PI_F / 180.0 * m_angle,
 		m_handle, true);
@@ -192,6 +186,7 @@ void UFO::Draw()
 	m_colRect.DrawC(GetColor(255, 0, 0), false);
 #endif 
 
+	//アニメーションの再生
 	if (AnimFlag == true)
 	{
 		int index = m_animFrame / kAnimInterval;

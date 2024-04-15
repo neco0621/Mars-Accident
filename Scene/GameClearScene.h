@@ -13,18 +13,25 @@ private:
     
     //フェイドに関するフレーム数
     int frame_;    
+
     //ゲームクリア時のSE
     int m_clearSE;    
+
     //BGM
-    int m_bgm;    
+    int m_bgm; 
+
     //背景
-    int m_bg;    
+    int m_bg; 
+
     //ゲームクリアの文字表示
     int m_gameClear;    
+
     //タイトルに戻るボタン
     int m_titleBack;    
+
     //描画時のX軸の調整値
     int m_widthAdjustment;    
+
     //描画時のY軸の調整値
     int m_heightAdjustment;
 

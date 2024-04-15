@@ -116,23 +116,26 @@ public:
 
 	//プレイヤー
 	Player* m_pPlayer;
-
+	
+	//UFO
 	UFO* m_pUfo;
 
+	//背景
 	Bg* m_pBg;
 
+	//ロケット
 	Rocket* m_pRocket;
 
-	//Animation AnimExpel;
-
+	//弾
 	std::vector<ShotBeam*> m_pBeam;
 
 	//敵
 	std::vector<EnemyBase*> m_pEnemy;	//配列のサイズは実行時に決める(今回はコンストラクタ)
-	//EnemyBase* m_pEnemy[16];   ←今までの書き方
 
+	//アニメーション
 	std::vector<TutorialScene*> m_pAnimation;
 
+	//当たり判定
 	Rect m_pRect;
 
 	//画面ワイプ処理

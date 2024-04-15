@@ -473,7 +473,7 @@ void Stage2Scene::Update(Input& input)
 			IsGround = true;
 		}
 
-		if (m_downEnemyCount == 1)
+		if (m_downEnemyCount == 25)
 		{
 			manager_.ChangeScene(std::make_shared<GameClearScene>(manager_));
 			return;

@@ -163,28 +163,35 @@ m_gameScreenHandle(-1)
 	TutorialExplanation4 = LoadGraph(L"data/TutorialExplanation4.png");
 	assert(TutorialExplanation4 != -1);
 
+	//BGMの再生
 	PlaySoundMem(m_bgm, DX_PLAYTYPE_LOOP);
+
 	//プレイヤーのメモリ確保.
 	m_pPlayer = new Player{ this };
-	m_pPlayer->SetHandle(m_playerHandle);	//Playerにグラフィックハンドルを渡す
+	//Playerにグラフィックハンドルを渡す
+	m_pPlayer->SetHandle(m_playerHandle);
 
+	//UFOのメモリ確保
 	m_pUfo = new UFO{ this };
-	m_pUfo->SetHandle(m_ufoHandle);
-
-
+	//UFOにグラフィックハンドルを渡す
+	m_pUfo->SetHandle(m_ufoHandle);			
+	//UFOにアニメーションハンドルを渡す
 	m_pUfo->SetAnimHandle(m_AnimHandle);
 
+	//背景のメモリ確保
 	m_pBg = new Bg{};
+	//背景にグラフィックハンドルを渡す
 	m_pBg->SetHandle(m_bgHandle);
+
+	//ロケットのメモリ確保
+	m_pRocket = new Rocket{ this };
+	//ロケットにグラフィックハンドルを渡す
+	m_pRocket->SetHandle(m_rocketHandle);
 
 	for (int i = 0; i < m_pEnemy.size(); i++)
 	{
 		m_pEnemy[i]->SetAnimHandle(m_enemyEXP);
 	}
-
-	m_pRocket = new Rocket{ this };
-	m_pRocket->SetHandle(m_rocketHandle);
-
 	//敵の準備.
 	//m_pEnemy(vector)何もしなければサイズは0
 	//resize関数でkEnemyMaxだけデータを保存できるようにする
@@ -249,6 +256,7 @@ TutorialScene::~TutorialScene()
 	DeleteGraph(TutorialExplanation3);
 	DeleteGraph(TutorialExplanation4);
 
+	//BGMを止める
 	StopSoundMem(m_bgm);
 	//プレイヤーのメモリ解放.
 	delete m_pPlayer;
@@ -256,10 +264,10 @@ TutorialScene::~TutorialScene()
 	//UFOのメモリ開放.
 	delete m_pUfo;
 	m_pUfo = nullptr;
-
+	//背景のメモリ開放
 	delete m_pBg;
 	m_pBg = nullptr;
-
+	//ロケットのメモリ解放
 	delete m_pRocket;
 	m_pRocket = nullptr;
 

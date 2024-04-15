@@ -6,6 +6,15 @@
 /// </summary>
 class TitleScene : public Scene
 {
+
+public:
+	TitleScene(SceneManager& manager);
+	~TitleScene();
+	void Init();
+	void Update(Input& input);
+	void Draw();
+	void ShakeScreen(int a, int b);
+
 private:
 	//更新メンバ関数ポインタ
 	void (TitleScene::* updateFunc_)(Input& input);
@@ -21,33 +30,28 @@ private:
 	void FadeDraw();	//フェード中描画
 	void NormalDraw();	//非フェード描画
 
-	void BackScroll(const int t_areaX, const int tD_graph, const int t_winWidth, const int t_winHeight);
-
-	int m_bgHandle;
-	int m_animHandle;
-	int m_titleHandle;
-	int m_shakeHandle;
-	int m_titleButton;	
-	int frame_;
-	int areaX;
-	int speed;
-	int m_bgPosX;
-	int m_shakeSize;
-	int AnimFrame;
-	int m_bgFrame;
-	int m_shakeFrame;
-	int m_loopFrame;
-	int m_bgm;
-	int CheckSE;
+	//グラフィックハンドル
+	int m_bgHandle;			//背景のハンドル
+	int m_titleHandle;		//タイトルのアイコンのハンドル
+	int m_shakeHandle;		//画面揺れのハンドル
+	int m_titleButton;		//STARTボタンのハンドル
+	int frame_;				//フェイドに関するフレーム
+	int m_bgPosX;			//背景の描画位置
+	int m_shakeSize;		//画面揺れのサイズ
+	int AnimFrame;			//アニメーションの再生時間
+	int m_bgFrame;			//背景が消えるまでの時間
+	int m_shakeFrame;		//画面揺れの時間
+	int m_loopFrame;		//画面揺れのループ時間
 	
-	bool m_isShake;
+	//サウンド
+	int m_bgm;				//BGM
+	int CheckSE;			//STARTボタンを押したときのサウンド
+	
+	//フラグ
+	bool m_isShake;			//画面揺れしているかどうか
 
-public:
-	TitleScene(SceneManager& manager);
-	~TitleScene();
-	void Init();
-	void Update(Input& input);
-	void Draw();
-	void ShakeScreen(int a, int b);
+	//変数
+	int m_AdjustmentWidth;	//X座標の細かい位置調整
+	int m_AdjustmentHeight;	//Y座標の細かい位置調整
 };
 

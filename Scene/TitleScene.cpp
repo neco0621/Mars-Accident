@@ -21,8 +21,12 @@ namespace
 	constexpr int kLine = 8;
 	// アニメーション数
 	constexpr int kAnimNum = 60;
-
+	//画面揺れのサイズ
 	constexpr int kShakeSize = 10;
+	//X座標の細かい位置調整
+	constexpr int kAdjustmentWidth = 225;
+	//Y座標の細かい位置調整
+	constexpr int kAdjustmentHeight = 125;
 }
 
 void TitleScene::FadeInUpdate(Input& input)
@@ -36,11 +40,17 @@ void TitleScene::FadeInUpdate(Input& input)
 
 void TitleScene::NormalUpdate(Input& input)
 {
+	//Enterが押されたとき
 	if (input.IsTriggered("OK"))
 	{
+		//決定時のサウンドを流す
 		PlaySoundMem(CheckSE,DX_PLAYTYPE_BACK);
+
+		//FadeUpdateとFadeDrawを呼ぶ
 		updateFunc_ = &TitleScene::FadeOutUpdate;
 		drawFunc_ = &TitleScene::FadeDraw;
+		
+		//アイコンと決定ボタンの削除
 		DeleteGraph(m_titleButton);
 		DeleteGraph(m_titleHandle);
 	}
@@ -64,48 +74,34 @@ void TitleScene::FadeOutUpdate(Input& input)
 {
 	frame_++;
 	if (frame_ >= 60) {
+		//次のシーンに移動する
 		manager_.ChangeScene(std::make_shared<TutorialScene>(manager_));
 	}
 }
 
 void TitleScene::FadeDraw()
 {
-	/*int index = AnimFrame / kAnimInterval;
-	int srcX = (index % kRow) * kAnimWidth;
-	int srcY = (index / kLine) * kAnimHeight;
-	DrawRectRotaGraph(static_cast<int>(Game::kScreenWidth / 2), static_cast<int>(Game::kScreenHeight / 2),
-		srcX, srcY, kAnimWidth, kAnimHeight,
-		1.0, 0.0,
-		m_animHandle, true, false);*/
 	//フェード暗幕
-	float alpha = 255 * (float)frame_ / 60.0f;
+	int alpha = 255 * (float)frame_ / 60.0f;
 	SetDrawBlendMode(DX_BLENDMODE_MULA, alpha);
 	DrawBox(0, 0, 1280, 720, 0x000000, true);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 	//通常描画
-	DrawGraph(Game::kScreenWidth / 2 - 225, Game::kScreenHeight * 0.25, m_titleHandle, true);
-	DrawGraph(Game::kScreenWidth / 2 - 225, Game::kScreenHeight * 0.75 - 125, m_titleButton, true);
-
+	DrawGraph(Game::kScreenWidth * 0.5f - m_AdjustmentWidth, Game::kScreenHeight * 0.25f, m_titleHandle, true);
+	DrawGraph(Game::kScreenWidth * 0.5f - m_AdjustmentWidth, Game::kScreenHeight * 0.75f - m_AdjustmentHeight, m_titleButton, true);
+	//画面揺れの処理
 	ShakeScreen(frame_, kShakeSize);
 }
 
 void TitleScene::NormalDraw()
 {	
-	/*int index = AnimFrame / kAnimInterval;
-	int srcX = (index % kRow) * kAnimWidth;
-	int srcY = (index / kLine) * kAnimHeight;
-	DrawRectRotaGraph(static_cast<int>(Game::kScreenWidth / 2), static_cast<int>(Game::kScreenHeight / 2),
-		srcX, srcY, kAnimWidth, kAnimHeight,
-		1.0, 0.0,
-		m_animHandle, true, false);*/
-	
 	if (m_isShake)
 	{
 		SetDrawScreen(m_shakeHandle);
 		ClearDrawScreen();
 	}
-	DrawGraph(Game::kScreenWidth / 2 - 225, Game::kScreenHeight * 0.25, m_titleHandle, true);
-	DrawGraph(Game::kScreenWidth / 2 - 225, Game::kScreenHeight * 0.75 - 125, m_titleButton, true);	
+	DrawGraph(Game::kScreenWidth * 0.5f - m_AdjustmentWidth, Game::kScreenHeight * 0.25f, m_titleHandle, true);
+	DrawGraph(Game::kScreenWidth * 0.5f - m_AdjustmentWidth, Game::kScreenHeight * 0.75f - m_AdjustmentHeight, m_titleButton, true);
 
 	if (m_isShake)
 	{
@@ -122,19 +118,11 @@ void TitleScene::NormalDraw()
 	}
 }
 
-void TitleScene::BackScroll(const int t_areaX, const int tD_graph, const int t_winWidth, const int t_winHeight)
-{
-	DrawRectGraph(0, 0, t_areaX, 0, t_winWidth, t_winHeight, tD_graph, false);
-	DrawRectGraph(t_winWidth - t_areaX, 0, 0, 0, t_areaX, t_winHeight, tD_graph, false);
-}
-
 TitleScene::TitleScene(SceneManager& manager) : Scene(manager),
+//初期化
 frame_(0),
 m_bgHandle(-1),
 m_titleHandle(-1),
-m_animHandle(-1),
-areaX(0),
-speed(20),
 AnimFrame(0),
 m_bgFrame(1),
 m_bgPosX(0),
@@ -144,13 +132,13 @@ m_shakeSize(kShakeSize),
 m_loopFrame(0),
 m_bgm(-1),
 CheckSE(-1),
-m_isShake(false)
+m_isShake(false),
+m_AdjustmentWidth(kAdjustmentWidth),
+m_AdjustmentHeight(kAdjustmentHeight)
 {
 	m_shakeHandle = MakeScreen(Game::kScreenWidth, Game::kScreenHeight);
 	m_bgHandle = LoadGraph(L"data/Title.png");
 	assert(m_bgHandle != -1);
-	m_animHandle = LoadGraph(L"data/Moon.png");
-	assert(m_animHandle != -1);
 	m_titleHandle = LoadGraph(L"data/Icon.png");
 	assert(m_bgHandle != -1);
 	m_titleButton = LoadGraph(L"data/StartButton.png");
@@ -168,8 +156,8 @@ m_isShake(false)
 
 TitleScene::~TitleScene()
 {
+	//メモリの開放
 	DeleteGraph(m_bgHandle);
-	DeleteGraph(m_animHandle);
 	DeleteGraph(m_titleHandle);
 	DeleteGraph(m_shakeHandle);
 	StopSoundMem(m_bgm);

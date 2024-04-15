@@ -49,12 +49,10 @@ private:
 	UpdateFunc_t updateFunc_ = nullptr;
 	DrawFunc_t drawFunc_ = nullptr;
 
-private:
 	//敵キャラクターの生成
 	void CreateEnemyLeft();
 	void CreateEnemyRight();
 
-private:
 	//グラフィックのハンドル
 	int m_gameScreenHandle;			//ゲーム画面
 	int m_playerHandle;				//プレイヤー
@@ -71,38 +69,44 @@ private:
 	int m_startTitle;				//スタートボタン
 
 	//アニメーションのハンドル
-	int m_AnimHandle;
-	int m_enemyEXP;
+	int m_AnimHandle;				//爆発アニメーション		
+	int m_enemyEXP;					//敵の爆発アニメーション
 
-	int m_downEnemyCount;
-	int m_lifeCount;
-	int m_shakeSize;
-	int m_shakeFrame;
-	int m_animFrame;
-	
 	//音声のハンドル
-	int m_bgm;
-	int m_hitHandle;
-	int m_damageHandle;
-	int m_gameover;
-	int m_destoryEnemy;
-	int m_clearSE;
-	int CheckSE;
-	int frame_ = 0;
+	int m_bgm;						//BGM
+	int m_hitHandle;				//UFOと弾の衝突時のSE
+	int m_damageHandle;				//宇宙船と敵の衝突時のSE
+	int m_gameover;					//ゲームオーバー時のSE
+	int m_destoryEnemy;				//敵撃破時のSE
+	int m_clearSE;					//ステージクリア時のSE
+	int CheckSE;					//決定ボタンを押したときのSE
 
+	//その他
+	int m_downEnemyCount;			//倒した敵の数
+	int m_lifeCount;				//宇宙船の体力
+	int m_shakeSize;				//画面の揺れ幅
+	int m_shakeFrame;				//画面が揺れている秒数
+	int m_animFrame;				//アニメーションの再生時間
+	int frame_ = 0;					//フェイドのフレーム
+	
+	//フラグ
 	bool m_damageFlag;
-	bool m_gameOverFlag;
-	bool IsGround;
-	bool m_isShake;
-	bool StartFlag;
-	bool AnimFlag;
+	bool m_gameOverFlag;			//ゲームオーバーになったかどうかのフラグ
+	bool IsGround;					//地面に接しているかのフラグ
+	bool m_isShake;					//画面揺れを実行するフラグ
+	bool StartFlag;					//ゲームの処理開始フラグ
+	bool AnimFlag;					//アニメーションを再生するフラグ
 
 	//プレイヤー
 	Player* m_pPlayer;
 
+	//UFO
 	UFO* m_pUfo;
+
+	//2ステージのみのUFO
 	S2UFO* m_pS2ufo;
 
+	//背景
 	Bg* m_pBg;
 
 	Rocket* m_pRocket;

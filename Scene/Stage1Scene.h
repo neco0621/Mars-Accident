@@ -50,12 +50,10 @@ private:
 	UpdateFunc_t updateFunc_ = nullptr;
 	DrawFunc_t drawFunc_ = nullptr;
 
-private:
 	//敵キャラクターの生成
 	void CreateEnemyLeft();
 	void CreateEnemyRight();
 
-private:
 	//グラフィックのハンドル
 	int m_gameScreenHandle;			//ゲーム画面
 
